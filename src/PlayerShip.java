@@ -28,7 +28,7 @@ public class PlayerShip extends Ship {
 	}
 	@Override
 	public void shoot() {		// Returns the projectile type and iterates to the next gun location (or the same one if only one)
-		Projectile newProj = new Projectile(true, getGunLocation()[getSelectedGun()], 1, 0, 14, getBulletColor(), 15);
+		Projectile newProj = new Projectile(true, getGunLocation()[0], 1, 0, 2, getBulletColor(), 15);
 		getGame().bullets.add(newProj);
 		getGame().add(newProj.getSprite());
 	}

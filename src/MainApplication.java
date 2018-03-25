@@ -48,6 +48,8 @@ public class MainApplication extends GraphicsApplication {
 				player.setCanShoot(false);
 				player.shoot();
 			}
+			moveBullets();
+			moveEnemies();
 		}
 	}
 
@@ -65,5 +67,32 @@ public class MainApplication extends GraphicsApplication {
 	private void playRandomSound() {
 		AudioPlayer audio = AudioPlayer.getInstance();
 		audio.playSound(MUSIC_FOLDER, SOUND_FILES[count % SOUND_FILES.length]);
+	}
+	
+	// This function moves all bullets, and then checks to see if any need to be removed because they are off-screen
+	void moveBullets() {
+		for(Projectile bullet : bullets) {
+			bullet.move();
+		}
+		for(Projectile bullet : bullets) {
+			if(bullet.getLocation().getX() > WINDOW_WIDTH || bullet.getLocation().getX() < -50) {
+				remove(bullet.getSprite());
+				bullets.remove(bullet);
+				break;
+			}
+		}
+	}
+	// This function moves all enemy ships, then removes them if they go too far off-screen
+	void moveEnemies() {
+		for(Ship ship : enemies) {
+			ship.move();
+		}
+		for(Ship ship : enemies) {
+			if(ship.getLocation().getX() <= -100) {
+				remove(ship.getSprite());
+				enemies.remove(ship);
+				break;
+			}
+		}
 	}
 }
