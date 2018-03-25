@@ -14,7 +14,7 @@ public class PlayerShip extends Ship {
 		setShipPoints(new GPoint[] {});
 		setLocation(new GPoint(0,0));
 		setGunLocation(new GPoint[] {new GPoint(50,17.5)});
-		setSprite(new GImage("images/auto.png", getLocation().getX(), getLocation().getY()));
+		setSprite(new GImage("auto.png", getLocation().getX(), getLocation().getY()));
 		setBulletColor(Color.BLUE);
 		getSprite().setSize(50, 50);
 	}
