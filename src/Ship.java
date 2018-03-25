@@ -5,6 +5,7 @@ import acm.graphics.*;
 import acm.program.*;
 
 public class Ship {
+	private MainApplication game;		// Reference to the pane the game runs on so that the ship is aware of other variables in the game
 	private GPoint[] shipPoints;		// The points on the ship that will be checked for collision
 	private GImage sprite;				// The image that will be displayed for the ship
 	private GPoint[] gunLocation;		// The points that will be used to fire projectiles, if any
@@ -26,9 +27,8 @@ public class Ship {
 	public void move() {
 		System.out.println("Needs to be accessed by child class");
 	}
-	public Projectile shoot() {
+	public void shoot() {
 		System.out.println("Needs to be accessed by child class");
-		return null;
 	}
 	// Getters and setters, nothing important down here
 	public GPoint[] getShipPoints() {
@@ -61,7 +61,7 @@ public class Ship {
 	public void setBulletColor(Color bulletColor) {
 		this.bulletColor = bulletColor;
 	}
-	public boolean isCanShoot() {
+	public boolean canShoot() {
 		return canShoot;
 	}
 	public void setCanShoot(boolean canShoot) {
@@ -120,5 +120,11 @@ public class Ship {
 	}
 	public void setSelectedGun(int selectedGun) {
 		this.selectedGun = selectedGun;
+	}
+	public MainApplication getGame() {
+		return game;
+	}
+	public void setGame(MainApplication game) {
+		this.game = game;
 	}
 }

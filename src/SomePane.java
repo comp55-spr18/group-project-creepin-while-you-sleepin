@@ -10,56 +10,46 @@ import acm.graphics.GPoint;
 public class SomePane extends GraphicsPane {
 	private MainApplication program; // you will use program to get access to
 										// all of the GraphicsProgram calls
-	private GImage img;
 	private GParagraph para;
-	// Variables for game loop
-	Random rgen = new Random();
-	ArrayList<Projectile> bullets = new ArrayList<Projectile>();
-	ArrayList<Ship> enemies = new ArrayList<Ship>();
-	ArrayList<Projectile> trail = new ArrayList<Projectile>();
-	PlayerShip player = new PlayerShip();
-	int score = 0;
-	GLabel scoreBoard = new GLabel("SCORE: " + score, 10, 25);
-	boolean isShooting = false;
-	int count = 0;
 
 	public SomePane(MainApplication app) {
 		this.program = app;
-		img = new GImage("robot head.jpg", 100, 100);
-		para = new GParagraph("welcome\nto my\nsecret room!", 150, 300);
-		para.setFont("Arial-24");
+		program.player.setGame(program);
+		program.scoreBoard.setFont("Arial-Bold-22");
 	}
 
 	@Override
 	public void showContents() {
-		program.add(player.getSprite());
+		program.add(program.player.getSprite());
+		program.add(program.scoreBoard);
 	}
 
 	@Override
 	public void hideContents() {
-		program.remove(player.getSprite());
+		program.remove(program.player.getSprite());
+		program.remove(program.scoreBoard);
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		player.setLocation(new GPoint(e.getX()-25, e.getY()-25));
-		player.move();
+		program.player.setLocation(new GPoint(e.getX()-25, e.getY()-25));
+		program.player.move();
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {
-		player.setLocation(new GPoint(e.getX()-25, e.getY()-25));
-		player.move();
-		isShooting = true;
+		program.player.setLocation(new GPoint(e.getX()-25, e.getY()-25));
+		program.player.move();
+		program.isShooting = true;
 	}
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		player.setLocation(new GPoint(e.getX()-25, e.getY()-25));
-		player.move();
+		program.player.setLocation(new GPoint(e.getX()-25, e.getY()-25));
+		program.player.move();
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		player.setLocation(new GPoint(e.getX()-25, e.getY()-25));
-		player.move();
-		isShooting = false;
+		program.player.setLocation(new GPoint(e.getX()-25, e.getY()-25));
+		program.player.move();
+		program.isShooting = false;
 	}
 }
