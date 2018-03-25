@@ -46,9 +46,25 @@ public class MainApplication extends GraphicsApplication {
 					player.setCanShoot(true);
 					player.setCooldown(0);
 				}
+				// If the player is clicking, and can shoot, call the player's shoot function
 				if(isShooting && player.canShoot()) {
 					player.setCanShoot(false);
 					player.shoot();
+				}
+				// If the player is invincible, increment their invincibility timer
+				if(player.isInvincible()) {
+					if(player.getIframe() == 0) {
+						player.getSprite().setImage("truck.png");
+						player.getSprite().setSize(50, 50);
+					}
+					player.setIframe(player.getIframe() + 1);
+				}
+				// If the player's iframe count hits 100, make them vulnerable again
+				if(player.getIframe() == 100) {
+					player.getSprite().setImage("auto.png");
+					player.getSprite().setSize(50, 50);
+					player.setInvincible(false);
+					player.setIframe(0);
 				}
 				moveBullets();
 				moveEnemies();
