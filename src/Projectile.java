@@ -16,6 +16,7 @@ public class Projectile {
 		setLocation(new GPoint(gunLoc));
 		setSprite(new GOval(15,15));
 		getSprite().setFillColor(bulletColor);
+		getSprite().setColor(bulletColor);
 		getSprite().setFilled(true);
 		setxDir(xD);
 		setyDir(yD);

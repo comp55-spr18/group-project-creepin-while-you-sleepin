@@ -1,9 +1,12 @@
 import java.awt.Color;
+import java.util.ArrayList;
 
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
 public class PlayerShip extends Ship {
+	ArrayList<Projectile> trail = new ArrayList<Projectile>();
+	
 	public PlayerShip() {
 		setInvincible(false);
 		setIframe(100);
@@ -28,8 +31,30 @@ public class PlayerShip extends Ship {
 	}
 	@Override
 	public void shoot() {		// Returns the projectile type and iterates to the next gun location (or the same one if only one)
-		Projectile newProj = new Projectile(true, getGunLocation()[0], 1, 0, 2, getBulletColor(), 15);
+		Projectile newProj = new Projectile(true, getGunLocation()[0], 1, 0, 14, getBulletColor(), 15);
 		getGame().bullets.add(newProj);
 		getGame().add(newProj.getSprite());
+	}
+	
+	public void fireTrail() {
+		Projectile trailProj = new Projectile(true, new GPoint(getLocation().getX()-10,getLocation().getY()+12.5), -1, 0, 4, Color.RED, 25);
+		trail.add(trailProj);
+		getGame().add(trailProj.getSprite());
+		for(Projectile tr : trail) {
+			tr.move();
+			tr.getSprite().setSize(tr.getSprite().getWidth()-0.4, tr.getSprite().getWidth()-0.4);
+			tr.getSprite().setLocation(tr.getSprite().getX(), tr.getSprite().getY()+0.2);
+			if(tr.getSprite().getColor().getGreen()+25 <= 255) {
+				tr.getSprite().setColor(new Color(tr.getSprite().getColor().getRed(), tr.getSprite().getColor().getGreen() + 10, tr.getSprite().getColor().getBlue()));
+				tr.getSprite().setFillColor(tr.getSprite().getColor());
+			}
+		}
+		for(Projectile tr : trail) {
+			if(tr.getSprite().getWidth() <= 1) {
+				getGame().remove(tr.getSprite());
+				trail.remove(tr);
+				break;
+			}
+		}
 	}
 }

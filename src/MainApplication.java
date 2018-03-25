@@ -13,10 +13,10 @@ public class MainApplication extends GraphicsApplication {
 	private MenuPane menu;
 	private int count;
 	// Variables for game loop
+	boolean runGame = false;
 	Random rgen = new Random();
 	ArrayList<Projectile> bullets = new ArrayList<Projectile>();
 	ArrayList<Ship> enemies = new ArrayList<Ship>();
-	ArrayList<Projectile> trail = new ArrayList<Projectile>();
 	PlayerShip player = new PlayerShip();
 	int score = 0;
 	GLabel scoreBoard = new GLabel("SCORE: " + score, 10, 25);
@@ -33,23 +33,26 @@ public class MainApplication extends GraphicsApplication {
 		switchToMenu();
 		int globalTimer = 0;
 		while(true) {
-			globalTimer++;
-			pause(1);
-			// If the player has shot, increment the cooldown
-			if(!player.canShoot()) {
-				player.setCooldown(player.getCooldown() + 1);
+			if(runGame) {
+				globalTimer++;
+				// If the player has shot, increment the cooldown
+				if(!player.canShoot()) {
+					player.setCooldown(player.getCooldown() + 1);
+				}
+				// If the cooldown matches the maxCooldown, reset cooldown and let the player be able to shoot again
+				if(player.getCooldown() == player.getMaxCooldown()) {
+					player.setCanShoot(true);
+					player.setCooldown(0);
+				}
+				if(isShooting && player.canShoot()) {
+					player.setCanShoot(false);
+					player.shoot();
+				}
+				moveBullets();
+				moveEnemies();
+				player.fireTrail();
 			}
-			// If the cooldown matches the maxCooldown, reset cooldown and let the player be able to shoot again
-			if(player.getCooldown() == player.getMaxCooldown()) {
-				player.setCanShoot(true);
-				player.setCooldown(0);
-			}
-			if(isShooting && player.canShoot()) {
-				player.setCanShoot(false);
-				player.shoot();
-			}
-			moveBullets();
-			moveEnemies();
+			pause(5);
 		}
 	}
 
@@ -62,6 +65,7 @@ public class MainApplication extends GraphicsApplication {
 	public void switchToSome() {
 		playRandomSound();
 		switchToScreen(somePane);
+		runGame = true;
 	}
 
 	private void playRandomSound() {
