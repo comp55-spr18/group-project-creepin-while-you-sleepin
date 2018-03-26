@@ -18,7 +18,7 @@ public class TestEnemy extends Ship {
 		getSprite().setSize(50, 50);
 		setxDir(-1);
 		setyDir(0);
-		setSpeed(2);
+		setSpeed(3);
 	}
 	@Override
 	public void move() {
@@ -32,7 +32,7 @@ public class TestEnemy extends Ship {
 	}
 	@Override
 	public void shoot() {
-		Projectile newProj = new Projectile(false, getGunLocation()[0], -1, 0, 4, getBulletColor(), 15);
+		Projectile newProj = new Projectile(false, getGunLocation()[0], -1, 0, 8, getBulletColor(), 15);
 		getGame().bullets.add(newProj);
 		getGame().add(newProj.getSprite());
 	}

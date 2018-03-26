@@ -15,6 +15,15 @@ public class MainApplication extends GraphicsApplication {
 	private MenuPane menu;
 	private int count;
 	// Variables for game loop
+	long startTime;
+	long URDTimeMillis;
+	long waitTime;
+	long totalTime;
+	
+	int frameCount = 0;
+	int maxFrameCount = 60;
+	long targetTime = 1000 / maxFrameCount;
+	double avgFPS;
 	boolean runGame = false;
 	Random rgen = new Random();
 	ArrayList<Projectile> bullets = new ArrayList<Projectile>();
@@ -22,6 +31,7 @@ public class MainApplication extends GraphicsApplication {
 	PlayerShip player = new PlayerShip();
 	int score = 0;
 	GLabel scoreBoard = new GLabel("SCORE: " + score, 10, 25);
+	GLabel framerate = new GLabel("FPS: " + avgFPS, 10, 50);
 	boolean isShooting = false;
 
 	public void init() {
@@ -36,6 +46,7 @@ public class MainApplication extends GraphicsApplication {
 		int globalTimer = 0;
 		while(true) {
 			if(runGame) {
+				startTime = System.nanoTime();
 				globalTimer++;
 				// If the player has shot, increment the cooldown
 				if(!player.canShoot()) {
@@ -78,9 +89,25 @@ public class MainApplication extends GraphicsApplication {
 					addEnemy.setLocation(new GPoint(WINDOW_WIDTH, WINDOW_HEIGHT/2));
 					add(addEnemy.getSprite());
 					enemies.add(addEnemy);
+				}				
+				// Framerate stuff
+				URDTimeMillis = (System.nanoTime() - startTime) / 1000000;
+				waitTime = targetTime - URDTimeMillis;
+				if(waitTime <= 0) {
+					waitTime = 1;
 				}
+				pause(waitTime);
+				totalTime += System.nanoTime() - startTime;
+				frameCount++;
+				if(frameCount == maxFrameCount) {
+					avgFPS = 1000.0/((totalTime / frameCount) / 1000000);
+					frameCount = 0;
+					totalTime = 0;
+					framerate.setLabel("FPS: " + avgFPS);
+				}
+			} else {
+				pause(5);
 			}
-			pause(2);
 		}
 	}
 
