@@ -12,7 +12,7 @@ public class PlayerShip extends Ship {
 		setIframe(100);
 		setHealth(5);
 		setCooldown(0);
-		setMaxCooldown(50);
+		setMaxCooldown(25);
 		setCanShoot(true);
 		setShipPoints(new GPoint[] {});
 		setLocation(new GPoint(0,0));
@@ -31,7 +31,7 @@ public class PlayerShip extends Ship {
 	}
 	@Override
 	public void shoot() {		// Returns the projectile type and iterates to the next gun location (or the same one if only one)
-		Projectile newProj = new Projectile(true, getGunLocation()[0], 1, 0, 14, getBulletColor(), 15);
+		Projectile newProj = new Projectile(true, getGunLocation()[0], 1, 0, 14, getBulletColor(), 20);
 		getGame().bullets.add(newProj);
 		getGame().add(newProj.getSprite());
 	}
@@ -50,7 +50,7 @@ public class PlayerShip extends Ship {
 			}
 		}
 		for(Projectile tr : trail) {
-			if(tr.getSprite().getWidth() <= 1) {
+			if(tr.getSprite().getWidth() <= 5) {
 				getGame().remove(tr.getSprite());
 				trail.remove(tr);
 				break;
