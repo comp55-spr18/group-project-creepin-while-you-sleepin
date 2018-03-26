@@ -20,9 +20,9 @@ public class Ship {
 	private int maxCooldown;			// The number of frames between each call of the Shoot() function
 	
 	// These attributes only apply to enemy ships
-	int xDir;			// Since each move() is different for each ship, these do whatever you make them do
-	int yDir;
-	int speed;
+	private int xDir;			// Since each move() is different for each ship, these do whatever you make them do
+	private int yDir;
+	private int speed;
 
 	public void move() {
 		System.out.println("Needs to be accessed by child class");

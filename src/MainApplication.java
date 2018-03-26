@@ -68,10 +68,19 @@ public class MainApplication extends GraphicsApplication {
 				}
 				moveBullets();
 				moveEnemies();
+				shootEnemies();
+				checkCollision();
 				player.fireTrail();
 				globalTimer++;
+				if(globalTimer % 1000 == 0) {
+					TestEnemy addEnemy = new TestEnemy();
+					addEnemy.setGame(this);
+					addEnemy.setLocation(new GPoint(WINDOW_WIDTH, WINDOW_HEIGHT/2));
+					add(addEnemy.getSprite());
+					enemies.add(addEnemy);
+				}
 			}
-			pause(5);
+			pause(2);
 		}
 	}
 
@@ -116,6 +125,21 @@ public class MainApplication extends GraphicsApplication {
 				remove(ship.getSprite());
 				enemies.remove(ship);
 				break;
+			}
+		}
+	}
+	
+	void shootEnemies() {
+		for(Ship ship : enemies) {
+			if(ship.canShoot()) {
+				ship.shoot();
+				ship.setCanShoot(false);
+			} else {
+				ship.setCooldown(ship.getCooldown() + 1);
+				if(ship.getCooldown() == ship.getMaxCooldown()) {
+					ship.setCooldown(0);
+					ship.setCanShoot(true);
+				}
 			}
 		}
 	}
