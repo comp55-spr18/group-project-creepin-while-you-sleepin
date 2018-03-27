@@ -36,7 +36,6 @@ public class MainApplication extends GraphicsApplication {
 	GLabel scoreBoard = new GLabel("SCORE: " + score, 10, 25);
 	GLabel framerate = new GLabel("FPS: " + avgFPS, 10, 50);
 	boolean isShooting = false;
-	Timer trailTimer = new Timer(1000/240, this);
 
 	public void init() {
 		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -50,7 +49,7 @@ public class MainApplication extends GraphicsApplication {
 		int globalTimer = 0;
 		while(true) {
 			if(runGame) {
-				trailTimer.start();
+				player.getTimer().start();
 				startTime = System.nanoTime();
 				globalTimer++;
 				// If the player has shot, increment the cooldown
@@ -235,8 +234,5 @@ public class MainApplication extends GraphicsApplication {
 				}
 			}
 		}
-	}
-	public void actionPerformed(ActionEvent e) {
-		player.fireTrail();
 	}
 }

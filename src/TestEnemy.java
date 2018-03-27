@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.event.ActionEvent;
 
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
@@ -38,5 +39,10 @@ public class TestEnemy extends Ship {
 		newProj.setyDir((getGame().player.getLocation().getY()+25) - newProj.getLocation().getY());
 		getGame().bullets.add(newProj);
 		getGame().add(newProj.getSprite());
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

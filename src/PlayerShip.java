@@ -1,13 +1,17 @@
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.Timer;
 
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
 public class PlayerShip extends Ship {
-	ArrayList<Projectile> trail = new ArrayList<Projectile>();
-	
+	private ArrayList<Projectile> trail = new ArrayList<Projectile>();
+
 	public PlayerShip(MainApplication game) {
+		setTimer(new Timer(5, this));
 		setGame(game);
 		setInvincible(false);
 		setIframe(100);
@@ -57,5 +61,9 @@ public class PlayerShip extends Ship {
 				break;
 			}
 		}
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		fireTrail();
 	}
 }

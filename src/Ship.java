@@ -1,10 +1,12 @@
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.util.*;
 import acm.graphics.*;
 import acm.program.*;
+import javax.swing.Timer;
 
-public class Ship {
+public abstract class Ship implements ActionListener {
 	private MainApplication game;		// Reference to the pane the game runs on so that the ship is aware of other variables in the game
 	private GPoint[] shipPoints;		// The points on the ship that will be checked for collision
 	private GImage sprite;				// The image that will be displayed for the ship
@@ -18,6 +20,7 @@ public class Ship {
 	private int health;					// The number of hits the ship can take before being destroyed
 	private int cooldown;				// The initial value of cooldown (Set to 0 if the ship can fire as soon as it spawns)
 	private int maxCooldown;			// The number of frames between each call of the Shoot() function
+	private Timer timer;
 	
 	// These attributes only apply to enemy ships
 	private int xDir;			// Since each move() is different for each ship, these do whatever you make them do
@@ -126,5 +129,11 @@ public class Ship {
 	}
 	public void setGame(MainApplication game) {
 		this.game = game;
+	}
+	public Timer getTimer() {
+		return timer;
+	}
+	public void setTimer(Timer timer) {
+		this.timer = timer;
 	}
 }
