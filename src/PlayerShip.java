@@ -51,7 +51,7 @@ public class PlayerShip extends Ship {
 			}
 		}
 		for(Projectile tr : trail) {
-			if(tr.getSprite().getWidth() <= 3) {
+			if(tr.getSprite().getWidth() <= getGame().rgen.nextInt()%26 || tr.getSprite().getWidth() <= 3) {
 				getGame().remove(tr.getSprite());
 				trail.remove(tr);
 				break;
