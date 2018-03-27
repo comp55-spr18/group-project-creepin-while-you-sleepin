@@ -11,7 +11,7 @@ public class MenuPane extends GraphicsPane {
 	public MenuPane(MainApplication app) {
 		super();
 		program = app;
-		rect = new GButton("Next", 200, 200, 200, 200);
+		rect = new GButton("Play", 200, 200, 200, 200);
 		rect.setFillColor(Color.RED);
 	}
 

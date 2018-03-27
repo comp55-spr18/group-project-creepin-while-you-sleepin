@@ -1,9 +1,12 @@
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
+import javax.swing.Timer;
 
 import acm.graphics.GLabel;
 import acm.graphics.GPoint;
+import acm.graphics.GRectangle;
 
 public class MainApplication extends GraphicsApplication {
 	public static final int WINDOW_WIDTH = 800;
@@ -33,6 +36,7 @@ public class MainApplication extends GraphicsApplication {
 	GLabel scoreBoard = new GLabel("SCORE: " + score, 10, 25);
 	GLabel framerate = new GLabel("FPS: " + avgFPS, 10, 50);
 	boolean isShooting = false;
+	Timer timer = new Timer(1000/60, this);
 
 	public void init() {
 		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -46,6 +50,7 @@ public class MainApplication extends GraphicsApplication {
 		int globalTimer = 0;
 		while(true) {
 			if(runGame) {
+				timer.start();
 				startTime = System.nanoTime();
 				globalTimer++;
 				// If the player has shot, increment the cooldown
@@ -77,10 +82,10 @@ public class MainApplication extends GraphicsApplication {
 					player.setInvincible(false);
 					player.setIframe(0);
 				}
+				checkCollision();
 				moveBullets();
 				moveEnemies();
 				shootEnemies();
-				checkCollision();
 				player.fireTrail();
 				globalTimer++;
 				if(globalTimer % 1000 == 0) {
@@ -186,17 +191,21 @@ public class MainApplication extends GraphicsApplication {
 			while(shipIter.hasNext()) {
 				Ship ship = shipIter.next();
 				// Check for collision player bullet -> enemies
-				for(GPoint point : ship.getShipPoints()) {
-					if(bullet.isPlayerProjectile() && bullet.getSprite().contains(point)) {
-						remove(bullet.getSprite());
-						bulletIter.remove();
-						ship.setHealth(ship.getHealth() - 1);
-						if(ship.getHealth() <= 0) {
-							remove(ship.getSprite());
-							shipIter.remove();
+				if(bullet.isPlayerProjectile()) {
+					GRectangle hitpath = bullet.getSprite().getBounds();
+					hitpath.setSize(hitpath.getWidth() + bullet.getSpeed(), hitpath.getHeight());
+					for(GPoint point : ship.getShipPoints()) {
+						if(hitpath.contains(point)) {
+							remove(bullet.getSprite());
+							bulletIter.remove();
+							ship.setHealth(ship.getHealth() - 1);
+							if(ship.getHealth() <= 0) {
+								remove(ship.getSprite());
+								shipIter.remove();
+							}
+							updateScoreBoard(100);
+							break;
 						}
-						updateScoreBoard(100);
-						break;
 					}
 				}
 				// Check for collision player ship -> enemies
@@ -227,5 +236,12 @@ public class MainApplication extends GraphicsApplication {
 				}
 			}
 		}
+	}
+	public void actionPerformed(ActionEvent e) {
+//		moveBullets();
+//		moveEnemies();
+//		shootEnemies();
+//		checkCollision();
+//		player.fireTrail();
 	}
 }

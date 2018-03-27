@@ -12,7 +12,7 @@ public class PlayerShip extends Ship {
 		setIframe(100);
 		setHealth(5);
 		setCooldown(0);
-		setMaxCooldown(25);
+		setMaxCooldown(10);
 		setCanShoot(true);
 		setShipPoints(new GPoint[] {});
 		setLocation(new GPoint(0,0));
@@ -31,7 +31,7 @@ public class PlayerShip extends Ship {
 	}
 	@Override
 	public void shoot() {		// Returns the projectile type and iterates to the next gun location (or the same one if only one)
-		Projectile newProj = new Projectile(true, getGunLocation()[0], 1, 0, 14, getBulletColor(), 20);
+		Projectile newProj = new Projectile(true, getGunLocation()[0], 1, 0, 25, getBulletColor(), 15);
 		getGame().bullets.add(newProj);
 		getGame().add(newProj.getSprite());
 	}
@@ -42,15 +42,15 @@ public class PlayerShip extends Ship {
 		getGame().add(trailProj.getSprite());
 		for(Projectile tr : trail) {
 			tr.move();
-			tr.getSprite().setSize(tr.getSprite().getWidth()-0.4, tr.getSprite().getWidth()-0.4);
-			tr.getSprite().setLocation(tr.getSprite().getX(), tr.getSprite().getY()+0.2);
+			tr.getSprite().setSize(tr.getSprite().getWidth()-0.5, tr.getSprite().getWidth()-0.5);
+			tr.getSprite().setLocation(tr.getSprite().getX(), tr.getSprite().getY()+0.25);
 			if(tr.getSprite().getColor().getGreen()+25 <= 255) {
 				tr.getSprite().setColor(new Color(tr.getSprite().getColor().getRed(), tr.getSprite().getColor().getGreen() + 10, tr.getSprite().getColor().getBlue()));
 				tr.getSprite().setFillColor(tr.getSprite().getColor());
 			}
 		}
 		for(Projectile tr : trail) {
-			if(tr.getSprite().getWidth() <= 5) {
+			if(tr.getSprite().getWidth() <= 3) {
 				getGame().remove(tr.getSprite());
 				trail.remove(tr);
 				break;
