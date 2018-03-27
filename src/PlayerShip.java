@@ -7,7 +7,8 @@ import acm.graphics.GPoint;
 public class PlayerShip extends Ship {
 	ArrayList<Projectile> trail = new ArrayList<Projectile>();
 	
-	public PlayerShip() {
+	public PlayerShip(MainApplication game) {
+		setGame(game);
 		setInvincible(false);
 		setIframe(100);
 		setHealth(5);

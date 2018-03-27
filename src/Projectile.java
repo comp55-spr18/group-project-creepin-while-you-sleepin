@@ -20,7 +20,7 @@ public class Projectile {
 		getSprite().setFilled(true);
 		setxDir(xD);
 		setyDir(yD);
-		getSprite().setSize(size,size);
+		getSprite().setSize(size, size);
 		setSpeed(spd);
 		getSprite().setLocation(gunLoc);
 	}

@@ -4,7 +4,8 @@ import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
 public class TestEnemy extends Ship {
-	public TestEnemy() {
+	public TestEnemy(MainApplication game) {
+		setGame(game);
 		setInvincible(false);
 		setHealth(3);
 		setCooldown(100);
@@ -18,7 +19,7 @@ public class TestEnemy extends Ship {
 		getSprite().setSize(50, 50);
 		setxDir(-1);
 		setyDir(0);
-		setSpeed(3);
+		setSpeed(6);
 	}
 	@Override
 	public void move() {
@@ -32,7 +33,7 @@ public class TestEnemy extends Ship {
 	}
 	@Override
 	public void shoot() {
-		Projectile newProj = new Projectile(false, getGunLocation()[0], -1, 0, 6, getBulletColor(), 20);
+		Projectile newProj = new Projectile(false, getGunLocation()[0], -1, 0, 14, getBulletColor(), 20);
 		newProj.setxDir((getGame().player.getLocation().getX()+25) - newProj.getLocation().getX());
 		newProj.setyDir((getGame().player.getLocation().getY()+25) - newProj.getLocation().getY());
 		getGame().bullets.add(newProj);

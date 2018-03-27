@@ -9,8 +9,8 @@ import acm.graphics.GPoint;
 import acm.graphics.GRectangle;
 
 public class MainApplication extends GraphicsApplication {
-	public static final int WINDOW_WIDTH = 800;
-	public static final int WINDOW_HEIGHT = 600;
+	public static final int WINDOW_WIDTH = 1920;
+	public static final int WINDOW_HEIGHT = 1080;
 	public static final String MUSIC_FOLDER = "sounds";
 	private static final String[] SOUND_FILES = { "r2d2.mp3", "somethinlikethis.mp3" };
 
@@ -31,12 +31,12 @@ public class MainApplication extends GraphicsApplication {
 	Random rgen = new Random();
 	ArrayList<Projectile> bullets = new ArrayList<Projectile>();
 	ArrayList<Ship> enemies = new ArrayList<Ship>();
-	PlayerShip player = new PlayerShip();
+	PlayerShip player = new PlayerShip(this);
 	int score = 0;
 	GLabel scoreBoard = new GLabel("SCORE: " + score, 10, 25);
 	GLabel framerate = new GLabel("FPS: " + avgFPS, 10, 50);
 	boolean isShooting = false;
-	Timer timer = new Timer(1000/60, this);
+	Timer timer = new Timer(1000/240, this);
 
 	public void init() {
 		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -86,12 +86,12 @@ public class MainApplication extends GraphicsApplication {
 				moveBullets();
 				moveEnemies();
 				shootEnemies();
-				player.fireTrail();
+//				player.fireTrail();
 				globalTimer++;
-				if(globalTimer % 1000 == 0) {
-					TestEnemy addEnemy = new TestEnemy();
-					addEnemy.setGame(this);
+				if(globalTimer % 500 == 0) {
+					TestEnemy addEnemy = new TestEnemy(this);
 					addEnemy.setLocation(new GPoint(WINDOW_WIDTH, WINDOW_HEIGHT/2));
+					addEnemy.getSprite().setLocation(WINDOW_WIDTH, WINDOW_HEIGHT/2);
 					add(addEnemy.getSprite());
 					enemies.add(addEnemy);
 				}				
@@ -242,6 +242,6 @@ public class MainApplication extends GraphicsApplication {
 //		moveEnemies();
 //		shootEnemies();
 //		checkCollision();
-//		player.fireTrail();
+		player.fireTrail();
 	}
 }
