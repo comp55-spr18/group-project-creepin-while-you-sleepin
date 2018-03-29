@@ -18,6 +18,7 @@ public class MainApplication extends GraphicsApplication {
 	private MenuPane menu;
 	private int count;
 	// Variables for game loop
+	int fps = 60;
 	boolean runGame = false;
 	Random rgen = new Random();
 	ArrayList<Ship> enemies = new ArrayList<Ship>();
@@ -26,7 +27,7 @@ public class MainApplication extends GraphicsApplication {
 	GLabel scoreBoard = new GLabel("SCORE: " + score, 10, 25);
 	boolean isShooting = false;
 	int globalTimer = 0;
-	Timer timer = new Timer(16, this);
+	Timer timer = new Timer(1000/fps, this);
 
 	public void init() {
 		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -49,6 +50,7 @@ public class MainApplication extends GraphicsApplication {
 		playRandomSound();
 		switchToScreen(somePane);
 		player.getTimer().start();
+		player.getTrail().getTimer().start();
 		runGame = true;
 		timer.start();
 	}

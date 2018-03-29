@@ -8,8 +8,8 @@ import acm.graphics.GPoint;
 
 public class Bullet extends Projectile {
 	public Bullet(MainApplication game, boolean isPlayerProj, GPoint gunLoc, double xD, double yD, int spd, Color bulletColor, int size) {
-		setTimer(new Timer(16, this));
 		setGame(game);
+		setTimer(new Timer(1000/game.fps, this));
 		setPlayerProjectile(isPlayerProj);
 		setLocation(new GPoint(gunLoc));
 		setSprite(new GOval(15,15));
