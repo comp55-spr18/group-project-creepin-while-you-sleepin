@@ -14,7 +14,7 @@ public class TestEnemy extends Ship {
 		setCooldown(100);
 		setMaxCooldown(175);
 		setCanShoot(false);
-		setLocation(new GPoint(1000,300));
+		setLocation(new GPoint(1900,300));
 		setGunLocation(new GPoint[] {new GPoint(50,15)});
 		setSprite(new GImage("enemy.jpg", getLocation().getX(), getLocation().getY()));
 		setBulletColor(Color.RED);
@@ -33,13 +33,13 @@ public class TestEnemy extends Ship {
 		getSprite().setLocation(getLocation());
 		if(getLocation().getX() < -50) {
 			getGame().remove(getSprite());
-			getGame().enemies.remove(this);
+			getTimer().stop();
 		}
 	}
 	@Override
 	public void shoot() {
 		if(canShoot()) {
-			Projectile newProj = new HomingBullet(getGame(), false, getGunLocation()[0], -1, 0, 14, getBulletColor(), 20);
+			Projectile newProj = new Bullet(getGame(), false, getGunLocation()[0], -1, 0, 14, getBulletColor(), 20);
 			newProj.setxDir((getGame().player.getLocation().getX()+25) - newProj.getLocation().getX());
 			newProj.setyDir((getGame().player.getLocation().getY()+25) - newProj.getLocation().getY());
 			getGame().add(newProj.getSprite());
@@ -58,7 +58,6 @@ public class TestEnemy extends Ship {
 		shoot();
 		if(getHealth() == 0) {
 			getGame().remove(getSprite());
-			getGame().enemies.remove(this);
 			getGame().updateScoreBoard(100);
 			getTimer().stop();
 		}

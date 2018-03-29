@@ -1,12 +1,9 @@
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
 import javax.swing.Timer;
 
 import acm.graphics.GLabel;
-import acm.graphics.GPoint;
-import acm.graphics.GRectangle;
 
 public class MainApplication extends GraphicsApplication {
 	public static final int WINDOW_WIDTH = 1920;
@@ -18,7 +15,7 @@ public class MainApplication extends GraphicsApplication {
 	private MenuPane menu;
 	private int count;
 	// Variables for game loop
-	int fps = 60;
+	int fps = 75;
 	boolean win = false;		// Notice that we have both win and lose booleans; default state is that both are false (the player hasn't won or lost but is playing)
 	boolean lose = false;		// this means we need to be explicit and can't assume that because win = false that the player lost
 	Random rgen = new Random();
@@ -31,6 +28,7 @@ public class MainApplication extends GraphicsApplication {
 	boolean isShooting = false;
 	int globalCounter = 0;
 	Timer timer = new Timer(1000/fps, this);
+	Wave wave;
 
 	public void init() {
 		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -52,6 +50,7 @@ public class MainApplication extends GraphicsApplication {
 	public void switchToSome() {
 //		playRandomSound();
 		player = new PlayerShip(this);			// Initiate the game with a new player ship
+		wave = new Wave(this);
 		globalCounter = 0;						// Reset the global counter
 		score = 0;								// Reset score
 		updateHealthBoard();					// Initialize health bar
@@ -85,24 +84,18 @@ public class MainApplication extends GraphicsApplication {
 	
 	// Main game loop
 	public void actionPerformed(ActionEvent e) {
-		globalCounter++;
-		if(globalCounter % 200 == 0) {
-			TestEnemy addEnemy = new TestEnemy(this);
-			addEnemy.setLocation(new GPoint(WINDOW_WIDTH, rgen.nextInt()%100+300));
-			addEnemy.getSprite().setLocation(addEnemy.getLocation());
-			add(addEnemy.getSprite());
-			enemies.add(addEnemy);
-			addEnemy.getTimer().start();
+		if(!wave.timer.isRunning()) {			// If the wave timer is not running
+			wave = new Wave(this);				// Generate a new wave
 		}
-		if(score >= 1000) {	// If you get 1000 or more points, you win (for now)
-			win = true;		// Set win to true so the game knows you won
+		if(score >= 1000) {						// If you get 1000 or more points, you win (for now)
+			win = true;							// Set win to true so the game knows you won
 		}
-		if(win) {			// If you won, print it at the menu screen
+		if(win) {								// If you won, print it at the menu screen
 			switchToMenu();
 			afterMessage.setLabel("You win!");
 			timer.stop();
 		}
-		if(lose) {			// If you lost, print it at the menu screen
+		if(lose) {								// If you lost, print it at the menu screen
 			switchToMenu();
 			afterMessage.setLabel("You lose!");
 			timer.stop();

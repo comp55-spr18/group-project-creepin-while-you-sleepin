@@ -61,7 +61,7 @@ public abstract class Projectile implements ActionListener {
 			GPoint[] testPoints = new GPoint[] {top, mid, bot};
 			for(GPoint point : testPoints) {
 				for(Ship enemy : game.enemies) {
-					if(enemy.getSprite().contains(point)) {
+					if(enemy.getSprite().contains(point) && enemy.getTimer().isRunning()) {
 						onCollision(enemy);
 						return;
 					}

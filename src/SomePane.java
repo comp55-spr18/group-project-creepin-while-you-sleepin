@@ -20,14 +20,12 @@ public class SomePane extends GraphicsPane {
 
 	@Override
 	public void showContents() {
-		program.add(program.player.getSprite());
 		program.add(program.scoreBoard);
 		program.add(program.healthBoard);
 	}
 
 	@Override
 	public void hideContents() {
-		program.remove(program.player.getSprite());
 		program.remove(program.scoreBoard);
 		program.remove(program.healthBoard);
 	}

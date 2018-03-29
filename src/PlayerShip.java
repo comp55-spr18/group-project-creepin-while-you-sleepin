@@ -24,6 +24,7 @@ public class PlayerShip extends Ship {
 		setSprite(new GImage("auto.png", getLocation().getX(), getLocation().getY()));
 		setBulletColor(Color.BLUE);
 		getSprite().setSize(50, 50);
+		getGame().add(getSprite());
 		trail.getTimer().start();
 	}
 	@Override
