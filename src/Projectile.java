@@ -6,7 +6,9 @@ import java.util.*;
 import javax.swing.Timer;
 import acm.graphics.*;
 import acm.program.*;
-
+// This is an abstract class so all functions declared in this class can be overwritten in a subclass if you'd like
+// If you want a new projectile to behave like this one but interact differently when it hits something, just
+// Make a constructor for the new class and define a new onCollision() since move() and checkCollision() will be inherited
 public abstract class Projectile implements ActionListener {
 	private Timer timer;
 	private MainApplication game;
