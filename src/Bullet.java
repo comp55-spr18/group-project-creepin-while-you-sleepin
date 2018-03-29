@@ -23,4 +23,6 @@ public class Bullet extends Projectile {
 		getSprite().setLocation(gunLoc);
 		getTimer().start();
 	}
+	
+	// Notice that I didn't redefine any functions here so it inherits move(), checkCollision(), and onCollision() from Projectile
 }

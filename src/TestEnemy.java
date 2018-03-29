@@ -54,16 +54,15 @@ public class TestEnemy extends Ship {
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(getGame().runGame) {
-			move();
-			shoot();
-			if(getHealth() == 0) {
-				getGame().remove(getSprite());
-				getGame().enemies.remove(this);
-				getGame().updateScoreBoard(100);
-				getTimer().stop();
-			}
-		} else if (getGame().lose || getGame().win) {
+		move();
+		shoot();
+		if(getHealth() == 0) {
+			getGame().remove(getSprite());
+			getGame().enemies.remove(this);
+			getGame().updateScoreBoard(100);
+			getTimer().stop();
+		}
+		if (getGame().lose || getGame().win) {
 			getGame().remove(getSprite());
 			getTimer().stop();
 		}

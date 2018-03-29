@@ -6,9 +6,11 @@ import java.util.*;
 import javax.swing.Timer;
 import acm.graphics.*;
 import acm.program.*;
+
 // This is an abstract class so all functions declared in this class can be overwritten in a subclass if you'd like
 // If you want a new projectile to behave like this one but interact differently when it hits something, just
 // Make a constructor for the new class and define a new onCollision() since move() and checkCollision() will be inherited
+
 public abstract class Projectile implements ActionListener {
 	private Timer timer;
 	private MainApplication game;
@@ -18,7 +20,8 @@ public abstract class Projectile implements ActionListener {
 	private double yDir;
 	private int speed;
 	private GOval sprite;						// The sprite that will be used for the projectile, currently just a circle for simplicity
-	
+
+	// The default function for move() moves the projectile in a straight line given an x and y direction and velocity
 	public void move() {
 		int dx = 1;
 		if(getxDir() < 0) dx = -1;
@@ -29,7 +32,9 @@ public abstract class Projectile implements ActionListener {
 			getTimer().stop();
 		}
 	}
-
+	
+	// The default function for onCollision checks to see if the projectile and the thing it collides with are enemies of eachother and makes sure it is not invincible
+	// Then it subtracts 1 health from whatever it hits and removes the projectile and stops its timer
 	public void onCollision(Ship target) {
 		if((isPlayerProjectile() && !(target instanceof PlayerShip)) || (!isPlayerProjectile() && target instanceof PlayerShip)) {
 			if(!target.isInvincible()) {
@@ -45,7 +50,9 @@ public abstract class Projectile implements ActionListener {
 			}
 		}
 	}
-
+	
+	// The default checkCollision creates three GPoints at the top, center, and bottom of the projectile
+	// If these points collide with an enemy or player, onCollision() is called
 	public void checkCollision() {
 		if(game != null) {
 			GPoint top = new GPoint(location.getX() + sprite.getWidth()/2, location.getY());
@@ -67,12 +74,12 @@ public abstract class Projectile implements ActionListener {
 		}
 	}
 
+	// The default timer loop calls move() and checkCollision() on each pass and removes the projectile and stops its timer if the game is over
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(getGame().runGame) {
-			move();
-			checkCollision();
-		} else if(getGame().lose || getGame().win) {
+		move();
+		checkCollision();
+		if(getGame().lose || getGame().win) {
 			getGame().remove(getSprite());
 			getTimer().stop();
 		}

@@ -23,6 +23,7 @@ public class Emitter extends Projectile {
 		getTimer().start();
 	}
 	
+	// I had to redefine checkCollision and onCollision here since this projectile type does nothing but add aesthetics
 	public void checkCollision() {
 	}
 	

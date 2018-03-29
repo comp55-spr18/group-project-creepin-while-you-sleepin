@@ -26,10 +26,10 @@ public abstract class Ship implements ActionListener {
 	private int yDir;
 	private int speed;
 
-	public void move() {
+	public void move() {		// Declare a new move() in each new Ship subclass
 		System.out.println("Needs to be accessed by child class");
 	}
-	public void shoot() {
+	public void shoot() {		// Declare a new shoot() in each new Ship subclass
 		System.out.println("Needs to be accessed by child class");
 	}
 	// Getters and setters, nothing important down here

@@ -27,6 +27,7 @@ public class HomingBullet extends Projectile {
 		getTimer().start();
 	}
 	
+	// Notice that I had to redefine how this projectile moves since it homes in on the target
 	public void move() {
 		int dx = 1;
 		if(getxDir() < 0) dx = -1;
@@ -44,6 +45,7 @@ public class HomingBullet extends Projectile {
 		}
 	}
 	
+	// I also had to redefine onCollision since this projectile type can hit any ship after it's launched - including the ship that fired it
 	public void onCollision(Ship target) {
 		if(!target.isInvincible()) {
 			if(target instanceof PlayerShip) {
@@ -63,13 +65,13 @@ public class HomingBullet extends Projectile {
 		}
 	}
 	
+	// I had to redefine the actionPerformed since I need to increment gracePeriod every time the timer is called
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(getGame().runGame) {
-			move();
-			checkCollision();
-			gracePeriod++;
-		} else if(getGame().lose || getGame().win) {
+		move();
+		checkCollision();
+		gracePeriod++;
+		if(getGame().lose || getGame().win) {
 			getGame().remove(getSprite());
 			getTimer().stop();
 		}
