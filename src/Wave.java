@@ -23,7 +23,7 @@ public class Wave implements ActionListener {
 		game.enemies.add(new TestEnemy(game));
 		game.enemies.add(new TestEnemy(game));
 		game.enemies.add(new TestEnemy(game));
-		game.enemies.add(new TestEnemy(game));
+		game.enemies.add(new TestHomingEnemy(game));
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {

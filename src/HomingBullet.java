@@ -8,7 +8,7 @@ import acm.graphics.GPoint;
 
 public class HomingBullet extends Projectile {
 	private int gracePeriod = 0;		// Initial timer on the bullet
-	private int maxGracePeriod = 5;	// After gracePeriod passes this value, the projectile can hit enemies
+	private int maxGracePeriod = 10;	// After gracePeriod passes this value, the projectile can hit enemies
 	private int disengage = 150;		// After gracePeriod passes this value, the missile will stop homing
 	public HomingBullet(MainApplication game, boolean isPlayerProj, GPoint gunLoc, double xD, double yD, int spd, Color bulletColor, int size) {
 		setGame(game);
