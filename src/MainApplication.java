@@ -20,10 +20,13 @@ public class MainApplication extends GraphicsApplication {
 	// Variables for game loop
 	int fps = 60;
 	boolean runGame = false;
+	boolean win = false;
+	boolean lose = false;
 	Random rgen = new Random();
 	ArrayList<Ship> enemies = new ArrayList<Ship>();
-	PlayerShip player = new PlayerShip(this);
+	PlayerShip player;
 	int score = 0;
+	GLabel afterMessage = new GLabel("", 10, 25);
 	GLabel scoreBoard = new GLabel("SCORE: " + score, 10, 25);
 	GLabel healthBoard = new GLabel("", 10, 50);
 	boolean isShooting = false;
@@ -42,19 +45,25 @@ public class MainApplication extends GraphicsApplication {
 	}
 
 	public void switchToMenu() {
-		playRandomSound();
+//		playRandomSound();
+		enemies.clear();
 		count++;
 		switchToScreen(menu);
 	}
 
 	public void switchToSome() {
-		playRandomSound();
-		switchToScreen(somePane);
+//		playRandomSound();
+		player = new PlayerShip(this);
+		score = 0;
 		updateHealthBoard();
+		updateScoreBoard(0);
 		player.getTimer().start();
 		player.getTrail().getTimer().start();
 		runGame = true;
+		lose = false;
+		win = false;
 		timer.start();
+		switchToScreen(somePane);
 	}
 
 	private void playRandomSound() {
@@ -87,6 +96,16 @@ public class MainApplication extends GraphicsApplication {
 				enemies.add(addEnemy);
 				addEnemy.getTimer().start();
 			}
+			if(score == 1000) {
+				runGame = false;
+				win = true;
+			}
+		} else if(win) {
+			switchToMenu();
+			afterMessage.setLabel("You win!");
+		} else if(lose) {
+			switchToMenu();
+			afterMessage.setLabel("You lose!");
 		}
 	}
 }

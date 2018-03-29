@@ -13,16 +13,19 @@ public class MenuPane extends GraphicsPane {
 		program = app;
 		rect = new GButton("Play", 200, 200, 200, 200);
 		rect.setFillColor(Color.RED);
+		program.afterMessage.setFont("Arial-Bold-22");
 	}
 
 	@Override
 	public void showContents() {
 		program.add(rect);
+		program.add(program.afterMessage);
 	}
 
 	@Override
 	public void hideContents() {
 		program.remove(rect);
+		program.remove(program.afterMessage);
 	}
 
 	@Override

@@ -56,35 +56,40 @@ public class PlayerShip extends Ship {
 	}
 	
 	public void onCollision() {
-		setHealth(getHealth() - 1);
-		if(getHealth() <= 0) {
-			getGame().runGame = false;
-			getGame().timer.stop();
+		if(!isInvincible()) {
+			setHealth(getHealth() - 1);
+			getGame().updateHealthBoard();
+			setInvincible(true);
 		}
-		setInvincible(true);
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		shoot();
-		checkCollision();
-		// If the player is invincible, increment their invincibility timer
-		if(isInvincible()) {
-			if(getIframe() == 0) {
-				getSprite().setImage("truck.png");
-				getSprite().setSize(50, 50);
+		if(getGame().runGame) {
+			shoot();
+			checkCollision();
+			// If the player is invincible, increment their invincibility timer
+			if(isInvincible()) {
+				if(getIframe() == 0) {
+					getSprite().setImage("truck.png");
+					getSprite().setSize(50, 50);
+				}
+				setIframe(getIframe() + 1);
 			}
-			setIframe(getIframe() + 1);
-		}
-		// If the player's iframe count hits 100, make them vulnerable again
-		if(getIframe() == 100) {
-			getSprite().setImage("auto.png");
-			getSprite().setSize(50, 50);
-			setInvincible(false);
-			setIframe(0);
-		}
-		if(getHealth() == 0) {
-			getGame().runGame = false;
+			// If the player's iframe count hits 100, make them vulnerable again
+			if(getIframe() == 100) {
+				getSprite().setImage("auto.png");
+				getSprite().setSize(50, 50);
+				setInvincible(false);
+				setIframe(0);
+			}
+			if(getHealth() == 0) {
+				getGame().runGame = false;
+				getGame().lose = true;
+			}
+		} else if (getGame().lose || getGame().win) {
+			getGame().remove(getSprite());
 			getTimer().stop();
+			trail.getTimer().stop();
 		}
 	}
 	// Getters and Setters

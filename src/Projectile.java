@@ -69,8 +69,13 @@ public abstract class Projectile implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		move();
-		checkCollision();
+		if(getGame().runGame) {
+			move();
+			checkCollision();
+		} else if(getGame().lose || getGame().win) {
+			getGame().remove(getSprite());
+			getTimer().stop();
+		}
 	}
 	
 	// Getters and setters

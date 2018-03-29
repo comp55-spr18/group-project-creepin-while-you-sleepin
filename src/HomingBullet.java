@@ -65,8 +65,13 @@ public class HomingBullet extends Projectile {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		move();
-		checkCollision();
-		gracePeriod++;
+		if(getGame().runGame) {
+			move();
+			checkCollision();
+			gracePeriod++;
+		} else if(getGame().lose || getGame().win) {
+			getGame().remove(getSprite());
+			getTimer().stop();
+		}
 	}
 }

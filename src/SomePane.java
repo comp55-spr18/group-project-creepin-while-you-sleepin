@@ -14,7 +14,6 @@ public class SomePane extends GraphicsPane {
 
 	public SomePane(MainApplication app) {
 		this.program = app;
-		program.player.setGame(program);
 		program.scoreBoard.setFont("Arial-Bold-22");
 		program.healthBoard.setFont("Arial-Bold-22");
 	}
