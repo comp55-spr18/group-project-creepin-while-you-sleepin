@@ -13,8 +13,10 @@ public class MenuPane extends GraphicsPane {
 	public MenuPane(MainApplication app) {
 		super();
 		program = app;
-		rect2 = new GButton("EASY", 250, 500, 200, 200);
-		rect = new GButton("HARD", 1050, 500, 200, 200);
+		double scaleX = (100.0/1366.0)*program.WINDOW_WIDTH;
+		double scaleY = (100.0/668.0)*program.WINDOW_HEIGHT;
+		rect2 = new GButton("EASY", 1.5*scaleX, 4*scaleY, 2*scaleX, 2.3*scaleY);
+		rect = new GButton("HARD", 9.5*scaleX, 4*scaleY, 2*scaleX, 2.3*scaleY);
 		rect.setFillColor(Color.RED);
 		rect2.setFillColor(Color.BLUE);
 		background = new GImage("mainmenu.jpg");

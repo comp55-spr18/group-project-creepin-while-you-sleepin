@@ -3,11 +3,15 @@ import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.Timer;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import acm.graphics.GLabel;
 
 public class MainApplication extends GraphicsApplication {
-	public static final int WINDOW_WIDTH = 1920;
-	public static final int WINDOW_HEIGHT = 1080;
+	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	public static final int WINDOW_WIDTH = (int) screenSize.getWidth();
+	public static final int WINDOW_HEIGHT = (int) screenSize.getHeight() - 100;
 	public static final String MUSIC_FOLDER = "sounds";
 	private static final String[] SOUND_FILES = { "r2d2.mp3", "somethinlikethis.mp3" };
 

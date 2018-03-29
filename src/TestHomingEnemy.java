@@ -2,6 +2,7 @@
 public class TestHomingEnemy extends TestEnemy {
 	public TestHomingEnemy(MainApplication game) {
 		super(game);
+		setHealth(4);
 		setSpeed(4);
 	}
 	

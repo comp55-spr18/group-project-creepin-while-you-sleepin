@@ -10,7 +10,7 @@ public class TestEnemy extends Ship {
 		setGame(game);
 		setTimer(new Timer(1000/game.fps, this));
 		setInvincible(false);
-		setHealth(3);
+		setHealth(2);
 		setCooldown(100);
 		setMaxCooldown(175);
 		setCanShoot(false);
