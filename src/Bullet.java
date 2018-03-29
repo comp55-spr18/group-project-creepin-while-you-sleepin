@@ -30,27 +30,7 @@ public class Bullet extends Projectile {
 		setLocation(getSprite().getLocation());
 		if(getGame() != null && (getLocation().getX() < -50 || getLocation().getX() > getGame().WINDOW_WIDTH)) {
 			getGame().remove(getSprite());
-			getGame().bullets.remove(this);
 			getTimer().stop();
-		}
-	}
-	public void onCollision(Ship target) {
-		if((isPlayerProjectile() && !(target instanceof PlayerShip)) || (!isPlayerProjectile() && target instanceof PlayerShip)) {
-			if(!target.isInvincible()) {
-				if(target instanceof PlayerShip) {
-					target.setInvincible(true);
-				}
-				getGame().remove(getSprite());
-				getGame().bullets.remove(this);
-				getTimer().stop();
-				target.setHealth(target.getHealth() - 1);
-				if(target.getHealth() <= 0) {
-					getGame().remove(target.getSprite());
-					getGame().enemies.remove(target);
-					getGame().updateScoreBoard(100);
-					target.getTimer().stop();
-				}
-			}
 		}
 	}
 	@Override

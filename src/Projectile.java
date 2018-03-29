@@ -20,17 +20,39 @@ public abstract class Projectile implements ActionListener {
 		System.out.println("Needs to be accessed by child class");
 	}
 	public void onCollision(Ship target) {
-		System.out.println("Needs to be accessed by child class");
+		if((isPlayerProjectile() && !(target instanceof PlayerShip)) || (!isPlayerProjectile() && target instanceof PlayerShip)) {
+			if(!target.isInvincible()) {
+				if(target instanceof PlayerShip) {
+					target.setInvincible(true);
+				}
+				getGame().remove(getSprite());
+				getTimer().stop();
+				target.setHealth(target.getHealth() - 1);
+				if(target.getHealth() <= 0) {
+					getGame().remove(target.getSprite());
+					getGame().enemies.remove(target);
+					getGame().updateScoreBoard(100);
+					target.getTimer().stop();
+				}
+			}
+		}
 	}
 	public void checkCollision() {
 		if(game != null) {
-			GPoint top = new GPoint(location.getX() + sprite.getWidth(), location.getY());
-			GPoint mid = new GPoint(location.getX() + sprite.getWidth(), location.getY() + sprite.getHeight()/2);
-			GPoint bot = new GPoint(location.getX() + sprite.getWidth(), location.getY() + sprite.getHeight());
+			GPoint top = new GPoint(location.getX() + sprite.getWidth()/2, location.getY());
+			GPoint mid = new GPoint(location.getX() + sprite.getWidth()/2, location.getY() + sprite.getHeight()/2);
+			GPoint bot = new GPoint(location.getX() + sprite.getWidth()/2, location.getY() + sprite.getHeight());
 			GPoint[] testPoints = new GPoint[] {top, mid, bot};
 			for(GPoint point : testPoints) {
-				if(game.getElementAt(point) != null) {
-					
+				for(Ship enemy : game.enemies) {
+					if(enemy.getSprite().contains(point)) {
+						onCollision(enemy);
+						return;
+					}
+				}
+				if(game.player.getSprite().contains(point)) {
+					onCollision(game.player);
+					return;
 				}
 			}
 		}

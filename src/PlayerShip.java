@@ -17,9 +17,8 @@ public class PlayerShip extends Ship {
 		setIframe(100);
 		setHealth(5);
 		setCooldown(0);
-		setMaxCooldown(10);
+		setMaxCooldown(25);
 		setCanShoot(true);
-		setShipPoints(new GPoint[] {});
 		setLocation(new GPoint(0,0));
 		setGunLocation(new GPoint[] {new GPoint(50,17.5)});
 		setSprite(new GImage("auto.png", getLocation().getX(), getLocation().getY()));
@@ -30,15 +29,22 @@ public class PlayerShip extends Ship {
 	public void move() {	// Moves the player's ship hitbox to the location of the ship
 		double x = getLocation().getX();
 		double y = getLocation().getY();
-		setShipPoints(new GPoint[]{new GPoint(x,y), new GPoint(x,y+10), new GPoint(x,y+20), new GPoint(x,y+30), new GPoint(x,y+40), new GPoint(x,y+50), new GPoint(x+10,y+50), new GPoint(x+20,y+50), new GPoint(x+30,y+50), new GPoint(x+40,y+50), new GPoint(x+50,y+50),new GPoint(x+50,y+40), new GPoint(x+50,y+30), new GPoint(x+50,y+20), new GPoint(x+50,y+10), new GPoint(x+50, y), new GPoint(x+40, y), new GPoint(x+30, y), new GPoint(x+20, y), new GPoint(x+10, y)});
 		setGunLocation(new GPoint[] {new GPoint(x+50,y+17.5)});
 		getSprite().setLocation(getLocation());
 	}
 	@Override
 	public void shoot() {		// Returns the projectile type and iterates to the next gun location (or the same one if only one)
-		Projectile newProj = new Bullet(getGame(), true, getGunLocation()[0], 1, 0, 25, getBulletColor(), 15);
-		getGame().bullets.add(newProj);
-		getGame().add(newProj.getSprite());
+		if(canShoot() && getGame().isShooting) {
+			Projectile newProj = new Bullet(getGame(), true, getGunLocation()[0], 1, 0, 25, getBulletColor(), 15);
+			getGame().add(newProj.getSprite());
+			setCanShoot(false);
+		} else {
+			setCooldown(getCooldown() + 1);
+			if(getCooldown() == getMaxCooldown()) {
+				setCooldown(0);
+				setCanShoot(true);
+			}
+		}
 	}
 	
 	public void onCollision() {
@@ -73,5 +79,21 @@ public class PlayerShip extends Ship {
 	
 	public void actionPerformed(ActionEvent e) {
 		fireTrail();
+		shoot();
+		// If the player is invincible, increment their invincibility timer
+		if(isInvincible()) {
+			if(getIframe() == 0) {
+				getSprite().setImage("truck.png");
+				getSprite().setSize(50, 50);
+			}
+			setIframe(getIframe() + 1);
+		}
+		// If the player's iframe count hits 100, make them vulnerable again
+		if(getIframe() == 100) {
+			getSprite().setImage("auto.png");
+			getSprite().setSize(50, 50);
+			setInvincible(false);
+			setIframe(0);
+		}
 	}
 }

@@ -8,7 +8,6 @@ import javax.swing.Timer;
 
 public abstract class Ship implements ActionListener {
 	private MainApplication game;		// Reference to the pane the game runs on so that the ship is aware of other variables in the game
-	private GPoint[] shipPoints;		// The points on the ship that will be checked for collision
 	private GImage sprite;				// The image that will be displayed for the ship
 	private GPoint[] gunLocation;		// The points that will be used to fire projectiles, if any
 	private int selectedGun;			// Integer switch that selects which point in gunLocation array to fire from
@@ -34,12 +33,6 @@ public abstract class Ship implements ActionListener {
 		System.out.println("Needs to be accessed by child class");
 	}
 	// Getters and setters, nothing important down here
-	public GPoint[] getShipPoints() {
-		return shipPoints;
-	}
-	public void setShipPoints(GPoint[] shipPoints) {
-		this.shipPoints = shipPoints;
-	}
 	public GImage getSprite() {
 		return sprite;
 	}

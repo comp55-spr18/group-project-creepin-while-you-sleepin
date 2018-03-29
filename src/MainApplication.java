@@ -18,26 +18,15 @@ public class MainApplication extends GraphicsApplication {
 	private MenuPane menu;
 	private int count;
 	// Variables for game loop
-	long startTime;
-	long URDTimeMillis;
-	long waitTime;
-	long totalTime;
-	
-	int frameCount = 0;
-	int maxFrameCount = 60;
-	long targetTime = 1000 / maxFrameCount;
-	double avgFPS;
 	boolean runGame = false;
 	Random rgen = new Random();
-	ArrayList<Projectile> bullets = new ArrayList<Projectile>();
 	ArrayList<Ship> enemies = new ArrayList<Ship>();
 	PlayerShip player = new PlayerShip(this);
 	int score = 0;
 	GLabel scoreBoard = new GLabel("SCORE: " + score, 10, 25);
-	GLabel framerate = new GLabel("FPS: " + avgFPS, 10, 50);
 	boolean isShooting = false;
-	Iterator<Projectile> projectileIter;
-	Iterator<Ship> shipIter;
+	int globalTimer = 0;
+	Timer timer = new Timer(16, this);
 
 	public void init() {
 		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -48,70 +37,6 @@ public class MainApplication extends GraphicsApplication {
 		somePane = new SomePane(this);
 		menu = new MenuPane(this);
 		switchToMenu();
-		int globalTimer = 0;
-		while(true) {
-			if(runGame) {
-				player.getTimer().start();
-				startTime = System.nanoTime();
-				globalTimer++;
-				// If the player has shot, increment the cooldown
-				if(!player.canShoot()) {
-					player.setCooldown(player.getCooldown() + 1);
-				}
-				// If the cooldown matches the maxCooldown, reset cooldown and let the player be able to shoot again
-				if(player.getCooldown() == player.getMaxCooldown()) {
-					player.setCanShoot(true);
-					player.setCooldown(0);
-				}
-				// If the player is clicking, and can shoot, call the player's shoot function
-				if(isShooting && player.canShoot()) {
-					player.setCanShoot(false);
-					player.shoot();
-				}
-				// If the player is invincible, increment their invincibility timer
-				if(player.isInvincible()) {
-					if(player.getIframe() == 0) {
-						player.getSprite().setImage("truck.png");
-						player.getSprite().setSize(50, 50);
-					}
-					player.setIframe(player.getIframe() + 1);
-				}
-				// If the player's iframe count hits 100, make them vulnerable again
-				if(player.getIframe() == 100) {
-					player.getSprite().setImage("auto.png");
-					player.getSprite().setSize(50, 50);
-					player.setInvincible(false);
-					player.setIframe(0);
-				}
-//				checkCollision();
-				globalTimer++;
-				if(globalTimer % 1000 == 0) {
-					TestEnemy addEnemy = new TestEnemy(this);
-					addEnemy.setLocation(new GPoint(WINDOW_WIDTH, WINDOW_HEIGHT/2));
-					addEnemy.getSprite().setLocation(WINDOW_WIDTH, WINDOW_HEIGHT/2);
-					add(addEnemy.getSprite());
-					enemies.add(addEnemy);
-					addEnemy.getTimer().start();
-				}				
-				// Framerate stuff
-				URDTimeMillis = (System.nanoTime() - startTime) / 1000000;
-				waitTime = targetTime - URDTimeMillis;
-				if(waitTime <= 0) {
-					waitTime = 1;
-				}
-				pause(waitTime);
-				totalTime += System.nanoTime() - startTime;
-				frameCount++;
-				if(frameCount == maxFrameCount) {
-					avgFPS = 1000.0/((totalTime / frameCount) / 1000000);
-					frameCount = 0;
-					totalTime = 0;
-					framerate.setLabel("FPS: " + avgFPS);
-				}
-			} else {
-				pause(5);
-			}
-		}
 	}
 
 	public void switchToMenu() {
@@ -123,7 +48,9 @@ public class MainApplication extends GraphicsApplication {
 	public void switchToSome() {
 		playRandomSound();
 		switchToScreen(somePane);
+		player.getTimer().start();
 		runGame = true;
+		timer.start();
 	}
 
 	private void playRandomSound() {
@@ -137,40 +64,16 @@ public class MainApplication extends GraphicsApplication {
 		scoreBoard.setLabel("SCORE: " + score);
 	}
 	
-	// Checks to see if any bullets have collided with the collision points on each ship
-	void checkCollision() {
-		projectileIter = bullets.iterator();
-		while(projectileIter.hasNext()) {
-			Projectile bullet = projectileIter.next();
-			shipIter = enemies.iterator();
-			if(!bullet.isPlayerProjectile()) {
-				for(GPoint point : player.getShipPoints()) {
-					if(bullet.getSprite().contains(point)) {
-						bullet.onCollision(player);
-						break;
-					}
-				}
-			}
-			while(shipIter.hasNext()) {
-				Ship ship = shipIter.next();
-				// Check for collision player bullet -> enemies
-				if(bullet.isPlayerProjectile()) {
-					GRectangle hitpath = bullet.getSprite().getBounds();
-					hitpath.setSize(hitpath.getWidth() + bullet.getSpeed(), hitpath.getHeight());
-					for(GPoint point : ship.getShipPoints()) {
-						if(hitpath.contains(point)) {
-							bullet.onCollision(ship);
-							break;
-						}
-					}
-				}
-				// Check for collision player ship -> enemies
-				for(GPoint point : player.getShipPoints()) {
-					if(ship.getSprite().contains(point) && !player.isInvincible()) {
-						player.onCollision();
-						break;
-					}
-				}
+	public void actionPerformed(ActionEvent e) {
+		if(runGame) {
+			globalTimer++;
+			if(globalTimer % 200 == 0) {
+				TestEnemy addEnemy = new TestEnemy(this);
+				addEnemy.setLocation(new GPoint(WINDOW_WIDTH, WINDOW_HEIGHT/2));
+				addEnemy.getSprite().setLocation(WINDOW_WIDTH, WINDOW_HEIGHT/2);
+				add(addEnemy.getSprite());
+				enemies.add(addEnemy);
+				addEnemy.getTimer().start();
 			}
 		}
 	}
