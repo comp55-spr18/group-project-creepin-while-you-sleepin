@@ -7,8 +7,9 @@ import acm.graphics.GOval;
 import acm.graphics.GPoint;
 
 public class HomingBullet extends Projectile {
-	private int gracePeriod = 0;
-	private int maxGracePeriod = 60;
+	private int gracePeriod = 0;		// Initial timer on the bullet
+	private int maxGracePeriod = 20;	// After gracePeriod passes this value, the projectile can hit enemies
+	private int disengage = 150;		// After gracePeriod passes this value, the missile will stop homing
 	public HomingBullet(MainApplication game, boolean isPlayerProj, GPoint gunLoc, double xD, double yD, int spd, Color bulletColor, int size) {
 		setGame(game);
 		setTimer(new Timer(1000/game.fps, this));
@@ -32,9 +33,11 @@ public class HomingBullet extends Projectile {
 		double angle = Math.atan(getyDir()/getxDir());
 		getSprite().move(Math.cos(angle)*getSpeed()*dx, Math.sin(angle)*getSpeed()*dx);
 		setLocation(getSprite().getLocation());
-		// The two lines below update the movement vector to point at the player
-		setxDir((getGame().player.getLocation().getX()+25) - getLocation().getX());
-		setyDir((getGame().player.getLocation().getY()+25) - getLocation().getY());
+		if(gracePeriod < disengage) {
+			// The two lines below update the movement vector to point at the player
+			setxDir((getGame().player.getLocation().getX()+25) - getLocation().getX());
+			setyDir((getGame().player.getLocation().getY()+25) - getLocation().getY());
+		}
 		if(getGame() != null && (getLocation().getX() < -50 || getLocation().getX() > getGame().WINDOW_WIDTH)) {
 			getGame().remove(getSprite());
 			getTimer().stop();
