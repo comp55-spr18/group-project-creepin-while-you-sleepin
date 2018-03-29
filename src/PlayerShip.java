@@ -59,6 +59,7 @@ public class PlayerShip extends Ship {
 		setHealth(getHealth() - 1);
 		if(getHealth() <= 0) {
 			getGame().runGame = false;
+			getGame().timer.stop();
 		}
 		setInvincible(true);
 	}
@@ -80,6 +81,10 @@ public class PlayerShip extends Ship {
 			getSprite().setSize(50, 50);
 			setInvincible(false);
 			setIframe(0);
+		}
+		if(getHealth() == 0) {
+			getGame().runGame = false;
+			getTimer().stop();
 		}
 	}
 	// Getters and Setters
