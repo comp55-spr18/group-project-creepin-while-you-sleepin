@@ -58,7 +58,9 @@ public abstract class Projectile implements ActionListener {
 			GPoint top = new GPoint(location.getX() + sprite.getWidth()/2, location.getY());
 			GPoint mid = new GPoint(location.getX() + sprite.getWidth()/2, location.getY() + sprite.getHeight()/2);
 			GPoint bot = new GPoint(location.getX() + sprite.getWidth()/2, location.getY() + sprite.getHeight());
-			GPoint[] testPoints = new GPoint[] {top, mid, bot};
+			GPoint left = new GPoint(location.getX(), location.getY() + sprite.getHeight()/2);
+			GPoint right = new GPoint(location.getX() + sprite.getWidth(), location.getY() + sprite.getHeight()/2);
+			GPoint[] testPoints = new GPoint[] {top, mid, bot, left, right};
 			for(GPoint point : testPoints) {
 				for(Ship enemy : game.enemies) {
 					if(enemy.getSprite().contains(point) && enemy.getTimer().isRunning()) {
