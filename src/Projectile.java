@@ -1,34 +1,39 @@
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.util.*;
+import javax.swing.Timer;
 import acm.graphics.*;
 import acm.program.*;
 
-public class Projectile {
-	private boolean isPlayerProjectile;	// Check if the projectile belongs to player
+public abstract class Projectile implements ActionListener {
+	private Timer timer;
+	private MainApplication game;
+	private boolean isPlayerProjectile;			// Check if the projectile belongs to player
 	private GPoint location;					// Top-left-most point of projectile
 	private double xDir;						// Using the x and y Dir variables creates a vector with speed as its magnitude, indicating the movement of the projectile
 	private double yDir;
 	private int speed;
 	private GOval sprite;						// The sprite that will be used for the projectile, currently just a circle for simplicity
-	public Projectile(boolean isPlayerProj, GPoint gunLoc, double xD, double yD, int spd, Color bulletColor, int size) {
-		setPlayerProjectile(isPlayerProj);
-		setLocation(new GPoint(gunLoc));
-		setSprite(new GOval(15,15));
-		getSprite().setFillColor(bulletColor);
-		getSprite().setColor(bulletColor);
-		getSprite().setFilled(true);
-		setxDir(xD);
-		setyDir(yD);
-		getSprite().setSize(size, size);
-		setSpeed(spd);
-		getSprite().setLocation(gunLoc);
-	}
+	
 	public void move() {
-		int dx = 1;
-		if(xDir < 0) dx = -1;
-		sprite.move(Math.cos(Math.atan(yDir/xDir))*speed*dx, Math.sin(Math.atan(yDir/xDir))*speed*dx);
-		location.setLocation(sprite.getLocation());
+		System.out.println("Needs to be accessed by child class");
+	}
+	public void onCollision(Ship target) {
+		System.out.println("Needs to be accessed by child class");
+	}
+	public void checkCollision() {
+		if(game != null) {
+			GPoint top = new GPoint(location.getX() + sprite.getWidth(), location.getY());
+			GPoint mid = new GPoint(location.getX() + sprite.getWidth(), location.getY() + sprite.getHeight()/2);
+			GPoint bot = new GPoint(location.getX() + sprite.getWidth(), location.getY() + sprite.getHeight());
+			GPoint[] testPoints = new GPoint[] {top, mid, bot};
+			for(GPoint point : testPoints) {
+				if(game.getElementAt(point) != null) {
+					
+				}
+			}
+		}
 	}
 	// Getters and setters
 	public boolean isPlayerProjectile() {
@@ -66,5 +71,17 @@ public class Projectile {
 	}
 	public void setSprite(GOval sprite) {
 		this.sprite = sprite;
+	}
+	public MainApplication getGame() {
+		return game;
+	}
+	public void setGame(MainApplication game) {
+		this.game = game;
+	}
+	public Timer getTimer() {
+		return timer;
+	}
+	public void setTimer(Timer timer) {
+		this.timer = timer;
 	}
 }

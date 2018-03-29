@@ -36,6 +36,8 @@ public class MainApplication extends GraphicsApplication {
 	GLabel scoreBoard = new GLabel("SCORE: " + score, 10, 25);
 	GLabel framerate = new GLabel("FPS: " + avgFPS, 10, 50);
 	boolean isShooting = false;
+	Iterator<Projectile> projectileIter;
+	Iterator<Ship> shipIter;
 
 	public void init() {
 		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -81,17 +83,15 @@ public class MainApplication extends GraphicsApplication {
 					player.setInvincible(false);
 					player.setIframe(0);
 				}
-				checkCollision();
-				moveBullets();
-				moveEnemies();
-				shootEnemies();
+//				checkCollision();
 				globalTimer++;
-				if(globalTimer % 500 == 0) {
+				if(globalTimer % 1000 == 0) {
 					TestEnemy addEnemy = new TestEnemy(this);
 					addEnemy.setLocation(new GPoint(WINDOW_WIDTH, WINDOW_HEIGHT/2));
 					addEnemy.getSprite().setLocation(WINDOW_WIDTH, WINDOW_HEIGHT/2);
 					add(addEnemy.getSprite());
 					enemies.add(addEnemy);
+					addEnemy.getTimer().start();
 				}				
 				// Framerate stuff
 				URDTimeMillis = (System.nanoTime() - startTime) / 1000000;
@@ -131,49 +131,6 @@ public class MainApplication extends GraphicsApplication {
 		audio.playSound(MUSIC_FOLDER, SOUND_FILES[count % SOUND_FILES.length]);
 	}
 	
-	// This function moves all bullets, and then checks to see if any need to be removed because they are off-screen
-	void moveBullets() {
-		for(Projectile bullet : bullets) {
-			bullet.move();
-		}
-		for(Projectile bullet : bullets) {
-			if(bullet.getLocation().getX() > WINDOW_WIDTH || bullet.getLocation().getX() < -50) {
-				remove(bullet.getSprite());
-				bullets.remove(bullet);
-				break;
-			}
-		}
-	}
-	
-	// This function moves all enemy ships, then removes them if they go too far off-screen
-	void moveEnemies() {
-		for(Ship ship : enemies) {
-			ship.move();
-		}
-		for(Ship ship : enemies) {
-			if(ship.getLocation().getX() <= -100) {
-				remove(ship.getSprite());
-				enemies.remove(ship);
-				break;
-			}
-		}
-	}
-	
-	void shootEnemies() {
-		for(Ship ship : enemies) {
-			if(ship.canShoot()) {
-				ship.shoot();
-				ship.setCanShoot(false);
-			} else {
-				ship.setCooldown(ship.getCooldown() + 1);
-				if(ship.getCooldown() == ship.getMaxCooldown()) {
-					ship.setCooldown(0);
-					ship.setCanShoot(true);
-				}
-			}
-		}
-	}
-	
 	// Adds points to the scoreboard
 	void updateScoreBoard(int toAdd) {
 		score += toAdd;
@@ -182,10 +139,18 @@ public class MainApplication extends GraphicsApplication {
 	
 	// Checks to see if any bullets have collided with the collision points on each ship
 	void checkCollision() {
-		Iterator<Projectile> bulletIter = bullets.iterator();
-		while(bulletIter.hasNext()) {
-			Projectile bullet = bulletIter.next();
-			Iterator<Ship> shipIter = enemies.iterator();
+		projectileIter = bullets.iterator();
+		while(projectileIter.hasNext()) {
+			Projectile bullet = projectileIter.next();
+			shipIter = enemies.iterator();
+			if(!bullet.isPlayerProjectile()) {
+				for(GPoint point : player.getShipPoints()) {
+					if(bullet.getSprite().contains(point)) {
+						bullet.onCollision(player);
+						break;
+					}
+				}
+			}
 			while(shipIter.hasNext()) {
 				Ship ship = shipIter.next();
 				// Check for collision player bullet -> enemies
@@ -194,14 +159,7 @@ public class MainApplication extends GraphicsApplication {
 					hitpath.setSize(hitpath.getWidth() + bullet.getSpeed(), hitpath.getHeight());
 					for(GPoint point : ship.getShipPoints()) {
 						if(hitpath.contains(point)) {
-							remove(bullet.getSprite());
-							bulletIter.remove();
-							ship.setHealth(ship.getHealth() - 1);
-							if(ship.getHealth() <= 0) {
-								remove(ship.getSprite());
-								shipIter.remove();
-							}
-							updateScoreBoard(100);
+							bullet.onCollision(ship);
 							break;
 						}
 					}
@@ -209,26 +167,7 @@ public class MainApplication extends GraphicsApplication {
 				// Check for collision player ship -> enemies
 				for(GPoint point : player.getShipPoints()) {
 					if(ship.getSprite().contains(point) && !player.isInvincible()) {
-						player.setHealth(player.getHealth() - 1);
-						if(player.getHealth() <= 0) {
-							runGame = false;
-						}
-						player.setInvincible(true);
-						break;
-					}
-				}
-			}
-			// Check for collision enemy bullets -> player
-			if(!bullet.isPlayerProjectile()) {
-				for(GPoint point : player.getShipPoints()) {
-					if(bullet.getSprite().contains(point) && !player.isInvincible()) {
-						remove(bullet.getSprite());
-						bulletIter.remove();
-						player.setHealth(player.getHealth() - 1);
-						if(player.getHealth() <= 0) {
-							runGame = false;
-						}
-						player.setInvincible(true);
+						player.onCollision();
 						break;
 					}
 				}
