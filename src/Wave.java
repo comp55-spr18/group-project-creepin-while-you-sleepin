@@ -10,8 +10,8 @@ public class Wave implements ActionListener {
 	int counter;
 	int enemyToSpawn;
 	public Wave(MainApplication g) {
-		System.out.println("new wave");
 		game = g;
+		game.enemies = new ArrayList<Ship>();
 		timer = new Timer(1000/game.fps, this);
 		counter = 0;
 		enemyToSpawn = 0;
@@ -19,7 +19,6 @@ public class Wave implements ActionListener {
 		timer.start();
 	}
 	public void easy1() {												// Generates a basic easy wave
-		game.enemies = new ArrayList<Ship>();
 		game.enemies.add(new TestEnemy(game));
 		game.enemies.add(new TestEnemy(game));
 		game.enemies.add(new TestEnemy(game));
