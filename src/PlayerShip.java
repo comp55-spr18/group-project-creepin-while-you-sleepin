@@ -8,7 +8,7 @@ import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
 public class PlayerShip extends Ship {
-	private FireTrail trail = new FireTrail(this);
+	private FireTrail trail;
 
 	public PlayerShip(MainApplication game) {
 		setGame(game);
@@ -27,7 +27,7 @@ public class PlayerShip extends Ship {
 		setDestroyed(false);
 		setDestroyedCounter(0);
 		getGame().add(getSprite());
-		trail.getTimer().start();
+		setTrail(new FireTrail(this));
 	}
 	@Override
 	public void move() {	// Moves the player's ship hitbox to the location of the ship
@@ -87,7 +87,6 @@ public class PlayerShip extends Ship {
 			}
 			if(getHealth() == 0) {
 				setDestroyed(true);
-				trail.getTimer().stop();
 			}
 		} else {
 			getSprite().setImage("explosion.png");
@@ -100,7 +99,6 @@ public class PlayerShip extends Ship {
 		if (getGame().lose || getGame().win) {
 			getGame().remove(getSprite());
 			getTimer().stop();
-			trail.getTimer().stop();
 		}
 	}
 	// Getters and Setters

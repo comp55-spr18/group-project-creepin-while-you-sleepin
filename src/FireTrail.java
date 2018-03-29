@@ -12,20 +12,31 @@ public class FireTrail implements ActionListener {
 	private ArrayList<Projectile> trail;
 	private Ship ship;
 	private int xDir;
+	private int size;
+	private GPoint location;
+	private double length;
 	FireTrail(Ship s) {
 		ship = s;
+		size = 25;
 		trail = new ArrayList<Projectile>();
 		timer = new Timer(5, this);
+		timer.start();
 	}
 	public void move() {
 		if(ship instanceof PlayerShip) {
 			xDir = -1;
+			location = new GPoint(ship.getLocation().getX() - ship.getSprite().getWidth()/4, ship.getLocation().getY()+ship.getSprite().getHeight()/2-size/2);
+			length = 4;
 		} else {
 			xDir = 1;
+			length = 0.2;
+			location = new GPoint(ship.getLocation().getX()+ship.getSprite().getWidth() - ship.getSprite().getWidth()/3, ship.getLocation().getY()+ship.getSprite().getHeight()/2-size/2);
 		}
-		Projectile trailProj = new Emitter(ship.getGame(), true, new GPoint(ship.getLocation().getX()-10,ship.getLocation().getY()+12.5), xDir, 0, 4, Color.RED, 25);
-		trail.add(trailProj);
-		ship.getGame().add(trailProj.getSprite());
+		if(!ship.isDestroyed()) {
+			Projectile trailProj = new Emitter(ship.getGame(), true, location, xDir, 0, length, Color.RED, size);
+			trail.add(trailProj);
+			ship.getGame().add(trailProj.getSprite());
+		}
 		for(Projectile tr : trail) {
 			tr.move();
 			tr.getSprite().setSize(tr.getSprite().getWidth()-0.5, tr.getSprite().getWidth()-0.5);
@@ -46,6 +57,9 @@ public class FireTrail implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		move();
+		if(trail.isEmpty()) {
+			timer.stop();
+		}
 	}
 	// Getters and setters
 	public Timer getTimer() {

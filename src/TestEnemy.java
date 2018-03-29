@@ -6,6 +6,8 @@ import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
 public class TestEnemy extends Ship {
+	private FireTrail trail;
+	
 	public TestEnemy(MainApplication game) {
 		setGame(game);
 		setTimer(new Timer(1000/game.fps, this));
@@ -24,6 +26,7 @@ public class TestEnemy extends Ship {
 		setxDir(-1);
 		setyDir(0);
 		setSpeed(6);
+		setTrail(new FireTrail(this));
 	}
 	@Override
 	public void move() {
@@ -32,7 +35,6 @@ public class TestEnemy extends Ship {
 		double x = getLocation().getX();
 		double y = getLocation().getY();
 		setGunLocation(new GPoint[] {new GPoint(x,y+17.5)});
-		getSprite().setLocation(getLocation());
 		if(getLocation().getX() < -50) {
 			getGame().remove(getSprite());
 			getTimer().stop();
@@ -76,5 +78,11 @@ public class TestEnemy extends Ship {
 				getTimer().stop();
 			}
 		}
+	}
+	public FireTrail getTrail() {
+		return trail;
+	}
+	public void setTrail(FireTrail trail) {
+		this.trail = trail;
 	}
 }

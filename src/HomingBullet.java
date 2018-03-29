@@ -11,20 +11,7 @@ public class HomingBullet extends Projectile {
 	private int maxGracePeriod = 10;	// After gracePeriod passes this value, the projectile can hit enemies
 	private int disengage = 150;		// After gracePeriod passes this value, the missile will stop homing
 	public HomingBullet(MainApplication game, boolean isPlayerProj, GPoint gunLoc, double xD, double yD, int spd, Color bulletColor, int size) {
-		setGame(game);
-		setTimer(new Timer(1000/game.fps, this));
-		setPlayerProjectile(isPlayerProj);
-		setLocation(new GPoint(gunLoc));
-		setSprite(new GOval(15,15));
-		getSprite().setFillColor(bulletColor);
-		getSprite().setColor(bulletColor);
-		getSprite().setFilled(true);
-		setxDir(xD);
-		setyDir(yD);
-		getSprite().setSize(size, size);
-		setSpeed(spd);
-		getSprite().setLocation(gunLoc);
-		getTimer().start();
+		super(game, isPlayerProj, gunLoc, xD, yD, spd, bulletColor, size);
 	}
 	
 	// Notice that I had to redefine how this projectile moves since it homes in on the target

@@ -18,9 +18,26 @@ public abstract class Projectile implements ActionListener {
 	private GPoint location;					// Top-left-most point of projectile
 	private double xDir;						// Using the x and y Dir variables creates a vector with speed as its magnitude, indicating the movement of the projectile
 	private double yDir;
-	private int speed;
+	private double speed;
 	private GOval sprite;						// The sprite that will be used for the projectile, currently just a circle for simplicity
 
+	public Projectile(MainApplication game, boolean isPlayerProj, GPoint gunLoc, double xD, double yD, double spd, Color bulletColor, int size) {
+		setGame(game);
+		setTimer(new Timer(1000/game.fps, this));
+		setPlayerProjectile(isPlayerProj);
+		setLocation(new GPoint(gunLoc));
+		setSprite(new GOval(15,15));
+		getSprite().setFillColor(bulletColor);
+		getSprite().setColor(bulletColor);
+		getSprite().setFilled(true);
+		setxDir(xD);
+		setyDir(yD);
+		getSprite().setSize(size, size);
+		setSpeed(spd);
+		getSprite().setLocation(gunLoc);
+		getTimer().start();
+	}
+	
 	// The default function for move() moves the projectile in a straight line given an x and y direction and velocity
 	public void move() {
 		int dx = 1;
@@ -109,10 +126,10 @@ public abstract class Projectile implements ActionListener {
 	public void setyDir(double yDir) {
 		this.yDir = yDir;
 	}
-	public int getSpeed() {
+	public double getSpeed() {
 		return speed;
 	}
-	public void setSpeed(int speed) {
+	public void setSpeed(double speed) {
 		this.speed = speed;
 	}
 	public GOval getSprite() {
