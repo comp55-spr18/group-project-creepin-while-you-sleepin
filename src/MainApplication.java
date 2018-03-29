@@ -25,6 +25,7 @@ public class MainApplication extends GraphicsApplication {
 	PlayerShip player = new PlayerShip(this);
 	int score = 0;
 	GLabel scoreBoard = new GLabel("SCORE: " + score, 10, 25);
+	GLabel healthBoard = new GLabel("", 10, 50);
 	boolean isShooting = false;
 	int globalTimer = 0;
 	Timer timer = new Timer(1000/fps, this);
@@ -49,6 +50,7 @@ public class MainApplication extends GraphicsApplication {
 	public void switchToSome() {
 		playRandomSound();
 		switchToScreen(somePane);
+		updateHealthBoard();
 		player.getTimer().start();
 		player.getTrail().getTimer().start();
 		runGame = true;
@@ -64,6 +66,14 @@ public class MainApplication extends GraphicsApplication {
 	void updateScoreBoard(int toAdd) {
 		score += toAdd;
 		scoreBoard.setLabel("SCORE: " + score);
+	}
+	
+	void updateHealthBoard() {
+		String health = "";
+		for(int i = 0;i < player.getHealth();i++) {
+			health += "X";
+		}
+		healthBoard.setLabel(health);
 	}
 	
 	public void actionPerformed(ActionEvent e) {

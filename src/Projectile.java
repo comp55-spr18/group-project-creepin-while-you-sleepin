@@ -37,11 +37,8 @@ public abstract class Projectile implements ActionListener {
 				getGame().remove(getSprite());
 				getTimer().stop();
 				target.setHealth(target.getHealth() - 1);
-				if(target.getHealth() <= 0 && !(target instanceof PlayerShip)) {
-					getGame().remove(target.getSprite());
-					getGame().enemies.remove(target);
-					getGame().updateScoreBoard(100);
-					target.getTimer().stop();
+				if(target instanceof PlayerShip) {
+					getGame().updateHealthBoard();
 				}
 			}
 		}

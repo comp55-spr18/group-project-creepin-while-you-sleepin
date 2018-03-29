@@ -16,18 +16,21 @@ public class SomePane extends GraphicsPane {
 		this.program = app;
 		program.player.setGame(program);
 		program.scoreBoard.setFont("Arial-Bold-22");
+		program.healthBoard.setFont("Arial-Bold-22");
 	}
 
 	@Override
 	public void showContents() {
 		program.add(program.player.getSprite());
 		program.add(program.scoreBoard);
+		program.add(program.healthBoard);
 	}
 
 	@Override
 	public void hideContents() {
 		program.remove(program.player.getSprite());
 		program.remove(program.scoreBoard);
+		program.remove(program.healthBoard);
 	}
 
 	@Override

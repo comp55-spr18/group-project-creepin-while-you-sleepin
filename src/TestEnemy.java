@@ -56,5 +56,11 @@ public class TestEnemy extends Ship {
 	public void actionPerformed(ActionEvent e) {
 		move();
 		shoot();
+		if(getHealth() == 0) {
+			getGame().remove(getSprite());
+			getGame().enemies.remove(this);
+			getGame().updateScoreBoard(100);
+			getTimer().stop();
+		}
 	}
 }
