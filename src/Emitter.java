@@ -1,13 +1,12 @@
 import java.awt.Color;
-import java.awt.event.ActionEvent;
 
 import javax.swing.Timer;
 
 import acm.graphics.GOval;
 import acm.graphics.GPoint;
-
-public class Bullet extends Projectile {
-	public Bullet(MainApplication game, boolean isPlayerProj, GPoint gunLoc, double xD, double yD, int spd, Color bulletColor, int size) {
+// This class exists just for fancy effects, it is a bullet that does no damage
+public class Emitter extends Projectile {
+	public Emitter(MainApplication game, boolean isPlayerProj, GPoint gunLoc, double xD, double yD, int spd, Color bulletColor, int size) {
 		setGame(game);
 		setTimer(new Timer(1000/game.fps, this));
 		setPlayerProjectile(isPlayerProj);
@@ -22,5 +21,11 @@ public class Bullet extends Projectile {
 		setSpeed(spd);
 		getSprite().setLocation(gunLoc);
 		getTimer().start();
+	}
+	
+	public void checkCollision() {
+	}
+	
+	public void onCollision(Ship target) {
 	}
 }

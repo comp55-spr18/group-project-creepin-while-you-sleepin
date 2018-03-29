@@ -47,6 +47,14 @@ public class PlayerShip extends Ship {
 		}
 	}
 	
+	public void checkCollision() {
+		for(Ship enemy : getGame().enemies) {
+			if(getSprite().getBounds().intersects(enemy.getSprite().getBounds())) {
+				onCollision();
+			}
+		}
+	}
+	
 	public void onCollision() {
 		setHealth(getHealth() - 1);
 		if(getHealth() <= 0) {
@@ -57,6 +65,7 @@ public class PlayerShip extends Ship {
 	
 	public void actionPerformed(ActionEvent e) {
 		shoot();
+		checkCollision();
 		// If the player is invincible, increment their invincibility timer
 		if(isInvincible()) {
 			if(getIframe() == 0) {

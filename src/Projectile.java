@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.util.*;
@@ -17,8 +18,16 @@ public abstract class Projectile implements ActionListener {
 	private GOval sprite;						// The sprite that will be used for the projectile, currently just a circle for simplicity
 	
 	public void move() {
-		System.out.println("Needs to be accessed by child class");
+		int dx = 1;
+		if(getxDir() < 0) dx = -1;
+		getSprite().move(Math.cos(Math.atan(getyDir()/getxDir()))*getSpeed()*dx, Math.sin(Math.atan(getyDir()/getxDir()))*getSpeed()*dx);
+		setLocation(getSprite().getLocation());
+		if(getGame() != null && (getLocation().getX() < -50 || getLocation().getX() > getGame().WINDOW_WIDTH)) {
+			getGame().remove(getSprite());
+			getTimer().stop();
+		}
 	}
+
 	public void onCollision(Ship target) {
 		if((isPlayerProjectile() && !(target instanceof PlayerShip)) || (!isPlayerProjectile() && target instanceof PlayerShip)) {
 			if(!target.isInvincible()) {
@@ -37,6 +46,7 @@ public abstract class Projectile implements ActionListener {
 			}
 		}
 	}
+
 	public void checkCollision() {
 		if(game != null) {
 			GPoint top = new GPoint(location.getX() + sprite.getWidth()/2, location.getY());
@@ -57,6 +67,13 @@ public abstract class Projectile implements ActionListener {
 			}
 		}
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		move();
+		checkCollision();
+	}
+	
 	// Getters and setters
 	public boolean isPlayerProjectile() {
 		return isPlayerProjectile;

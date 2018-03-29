@@ -23,7 +23,7 @@ public class FireTrail implements ActionListener {
 		} else {
 			xDir = 1;
 		}
-		Projectile trailProj = new Bullet(ship.getGame(), true, new GPoint(ship.getLocation().getX()-10,ship.getLocation().getY()+12.5), xDir, 0, 4, Color.RED, 25);
+		Projectile trailProj = new Emitter(ship.getGame(), true, new GPoint(ship.getLocation().getX()-10,ship.getLocation().getY()+12.5), xDir, 0, 4, Color.RED, 25);
 		trail.add(trailProj);
 		ship.getGame().add(trailProj.getSprite());
 		for(Projectile tr : trail) {
