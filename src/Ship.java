@@ -20,6 +20,8 @@ public abstract class Ship implements ActionListener {
 	private int cooldown;				// The initial value of cooldown (Set to 0 if the ship can fire as soon as it spawns)
 	private int maxCooldown;			// The number of frames between each call of the Shoot() function
 	private Timer timer;
+	private boolean isDestroyed;
+	private int destroyedCounter;
 	
 	// These attributes only apply to enemy ships
 	private int xDir;			// Since each move() is different for each ship, these do whatever you make them do
@@ -128,5 +130,17 @@ public abstract class Ship implements ActionListener {
 	}
 	public void setTimer(Timer timer) {
 		this.timer = timer;
+	}
+	public boolean isDestroyed() {
+		return isDestroyed;
+	}
+	public int getDestroyedCounter() {
+		return destroyedCounter;
+	}
+	public void setDestroyed(boolean isDestroyed) {
+		this.isDestroyed = isDestroyed;
+	}
+	public void setDestroyedCounter(int destroyedCounter) {
+		this.destroyedCounter = destroyedCounter;
 	}
 }

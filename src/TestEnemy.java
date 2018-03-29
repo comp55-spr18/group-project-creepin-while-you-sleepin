@@ -19,6 +19,8 @@ public class TestEnemy extends Ship {
 		setSprite(new GImage("enemy.jpg", getLocation().getX(), getLocation().getY()));
 		setBulletColor(Color.RED);
 		getSprite().setSize(50, 50);
+		setDestroyed(false);
+		setDestroyedCounter(0);
 		setxDir(-1);
 		setyDir(0);
 		setSpeed(6);
@@ -54,16 +56,25 @@ public class TestEnemy extends Ship {
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		move();
-		shoot();
-		if(getHealth() == 0) {
-			getGame().remove(getSprite());
-			getGame().updateScoreBoard(100);
-			getTimer().stop();
-		}
-		if (getGame().lose || getGame().win) {
-			getGame().remove(getSprite());
-			getTimer().stop();
+		if(!isDestroyed()) {
+			move();
+			shoot();
+			if(getHealth() == 0) {
+				getGame().updateScoreBoard(100);
+				setDestroyed(true);
+			}
+			if (getGame().lose || getGame().win) {
+				getGame().remove(getSprite());
+				getTimer().stop();
+			}
+		} else {
+			getSprite().setImage("explosion.png");
+			getSprite().setSize(50,50);
+			setDestroyedCounter(getDestroyedCounter() + 1);
+			if(getDestroyedCounter() == 50) {
+				getGame().remove(getSprite());
+				getTimer().stop();
+			}
 		}
 	}
 }

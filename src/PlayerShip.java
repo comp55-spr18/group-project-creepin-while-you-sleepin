@@ -24,6 +24,8 @@ public class PlayerShip extends Ship {
 		setSprite(new GImage("auto.png", getLocation().getX(), getLocation().getY()));
 		setBulletColor(Color.BLUE);
 		getSprite().setSize(50, 50);
+		setDestroyed(false);
+		setDestroyedCounter(0);
 		getGame().add(getSprite());
 		trail.getTimer().start();
 	}
@@ -56,7 +58,7 @@ public class PlayerShip extends Ship {
 			}
 		}
 	}
-	
+
 	public void onCollision() {
 		if(!isInvincible()) {
 			setHealth(getHealth() - 1);
@@ -64,27 +66,37 @@ public class PlayerShip extends Ship {
 			setInvincible(true);
 		}
 	}
-	
+
 	public void actionPerformed(ActionEvent e) {
-		shoot();
-		checkCollision();
-		// If the player is invincible, increment their invincibility timer
-		if(isInvincible()) {
-			if(getIframe() == 0) {
-				getSprite().setImage("truck.png");
-				getSprite().setSize(50, 50);
+		if(!isDestroyed()) {
+			shoot();
+			checkCollision();
+			// If the player is invincible, increment their invincibility timer
+			if(isInvincible()) {
+				if(getIframe() == 0) {
+					getSprite().setImage("truck.png");
+					getSprite().setSize(50, 50);
+				}
+				setIframe(getIframe() + 1);
 			}
-			setIframe(getIframe() + 1);
-		}
-		// If the player's iframe count hits 100, make them vulnerable again
-		if(getIframe() == 100) {
-			getSprite().setImage("auto.png");
-			getSprite().setSize(50, 50);
-			setInvincible(false);
-			setIframe(0);
-		}
-		if(getHealth() == 0) {
-			getGame().lose = true;
+			// If the player's iframe count hits 100, make them vulnerable again
+			if(getIframe() == 100) {
+				getSprite().setImage("auto.png");
+				getSprite().setSize(50, 50);
+				setInvincible(false);
+				setIframe(0);
+			}
+			if(getHealth() == 0) {
+				setDestroyed(true);
+				trail.getTimer().stop();
+			}
+		} else {
+			getSprite().setImage("explosion.png");
+			getSprite().setSize(50,50);
+			setDestroyedCounter(getDestroyedCounter() + 1);
+			if(getDestroyedCounter() == 50) {
+				getGame().lose = true;
+			}
 		}
 		if (getGame().lose || getGame().win) {
 			getGame().remove(getSprite());
