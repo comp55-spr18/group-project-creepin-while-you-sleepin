@@ -96,7 +96,7 @@ public class MainApplication extends GraphicsApplication {
 				enemies.add(addEnemy);
 				addEnemy.getTimer().start();
 			}
-			if(score == 1000) {
+			if(score >= 1000) {
 				runGame = false;
 				win = true;
 			}
