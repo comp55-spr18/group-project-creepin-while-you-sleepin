@@ -43,9 +43,11 @@ public class MenuPane extends GraphicsPane {
 	public void mousePressed(MouseEvent e) {
 		GObject obj = program.getElementAt(e.getX(), e.getY());
 		if (obj == rect) {
+			program.easy = false;
 			program.switchToSome();
 		}
 		if (obj == rect2) {
+			program.easy = true;
 			program.switchToSome();
 		}
 	}

@@ -9,20 +9,41 @@ public class Wave implements ActionListener {
 	Timer timer;
 	int counter;
 	int enemyToSpawn;
+	int delay;
 	public Wave(MainApplication g) {
 		game = g;
 		game.enemies = new ArrayList<Ship>();
 		timer = new Timer(1000/game.fps, this);
 		counter = 0;
 		enemyToSpawn = 0;
-		easy1();
+		int weight;
+		if(game.easy) {
+			weight = 100;
+		} else {
+			weight = 25;
+		}
+		if(game.rgen.nextInt()%weight < 20) {
+			hard1();
+		} else {
+			easy1();
+		}
 		timer.start();
 	}
-	public void easy1() {												// Generates a basic easy wave
+	public void easy1() {			// Generates a basic easy wave
+		delay = 100;
 		game.enemies.add(new TestEnemy(game));
 		game.enemies.add(new TestEnemy(game));
 		game.enemies.add(new TestEnemy(game));
 		game.enemies.add(new TestEnemy(game));
+		game.enemies.add(new TestHomingEnemy(game));
+	}
+	
+	public void hard1() {			// Generates a basic hard wave
+		delay = 200;
+		game.enemies.add(new TestHomingEnemy(game));
+		game.enemies.add(new TestHomingEnemy(game));
+		game.enemies.add(new TestHomingEnemy(game));
+		game.enemies.add(new TestHomingEnemy(game));
 		game.enemies.add(new TestHomingEnemy(game));
 	}
 	@Override
@@ -31,7 +52,7 @@ public class Wave implements ActionListener {
 			timer.stop();
 		}
 		counter++;														// Increment counter
-		if(counter%150 == 0 && enemyToSpawn < game.enemies.size()) {	// On a 150 frame interval, spawn next enemy
+		if(counter%delay == 0 && enemyToSpawn < game.enemies.size()) {	// On a 150 frame interval, spawn next enemy
 			game.add(game.enemies.get(enemyToSpawn).getSprite());		// Add the sprite of the enemy
 			game.enemies.get(enemyToSpawn++).getTimer().start();		// Start the timer of the enemy
 		} else if (enemyToSpawn >= game.enemies.size()) {				// If all enemies have been spawned

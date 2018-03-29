@@ -18,6 +18,7 @@ public class MainApplication extends GraphicsApplication {
 	int fps = 75;
 	boolean win = false;		// Notice that we have both win and lose booleans; default state is that both are false (the player hasn't won or lost but is playing)
 	boolean lose = false;		// this means we need to be explicit and can't assume that because win = false that the player lost
+	boolean easy = false;
 	Random rgen = new Random();
 	ArrayList<Ship> enemies = new ArrayList<Ship>();
 	PlayerShip player;
@@ -26,7 +27,6 @@ public class MainApplication extends GraphicsApplication {
 	GLabel scoreBoard = new GLabel("SCORE: " + score, 10, 25);
 	GLabel healthBoard = new GLabel("", 10, 50);
 	boolean isShooting = false;
-	int globalCounter = 0;
 	Timer timer = new Timer(1000/fps, this);
 	Wave wave;
 
@@ -51,7 +51,6 @@ public class MainApplication extends GraphicsApplication {
 //		playRandomSound();
 		player = new PlayerShip(this);			// Initiate the game with a new player ship
 		wave = new Wave(this);
-		globalCounter = 0;						// Reset the global counter
 		score = 0;								// Reset score
 		updateHealthBoard();					// Initialize health bar
 		updateScoreBoard(0);					// Initialize score board
