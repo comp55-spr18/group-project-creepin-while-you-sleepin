@@ -88,8 +88,8 @@ public class MainApplication extends GraphicsApplication {
 		globalCounter++;
 		if(globalCounter % 200 == 0) {
 			TestEnemy addEnemy = new TestEnemy(this);
-			addEnemy.setLocation(new GPoint(WINDOW_WIDTH, WINDOW_HEIGHT/2));
-			addEnemy.getSprite().setLocation(WINDOW_WIDTH, WINDOW_HEIGHT/2);
+			addEnemy.setLocation(new GPoint(WINDOW_WIDTH, rgen.nextInt()%100+300));
+			addEnemy.getSprite().setLocation(addEnemy.getLocation());
 			add(addEnemy.getSprite());
 			enemies.add(addEnemy);
 			addEnemy.getTimer().start();
