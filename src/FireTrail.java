@@ -30,7 +30,7 @@ public class FireTrail implements ActionListener {
 			tr.move();
 			tr.getSprite().setSize(tr.getSprite().getWidth()-0.5, tr.getSprite().getWidth()-0.5);
 			tr.getSprite().setLocation(tr.getSprite().getX(), tr.getSprite().getY()+0.25);
-			if(tr.getSprite().getColor().getGreen()+25 <= 255) {
+			if(tr.getSprite().getColor().getGreen()+15 <= 255) {
 				tr.getSprite().setColor(new Color(tr.getSprite().getColor().getRed(), tr.getSprite().getColor().getGreen() + 10, tr.getSprite().getColor().getBlue()));
 				tr.getSprite().setFillColor(tr.getSprite().getColor());
 			}

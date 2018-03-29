@@ -58,8 +58,6 @@ public class HomingBullet extends Projectile {
 				if(!(target instanceof PlayerShip)) {
 					target.setHealth(0);
 					getGame().updateScoreBoard(500);
-				} else {
-					getGame().updateHealthBoard();
 				}
 			}
 		}

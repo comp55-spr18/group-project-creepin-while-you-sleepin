@@ -82,6 +82,18 @@ public abstract class Ship implements ActionListener {
 	}
 	public void setHealth(int health) {
 		this.health = health;
+		if(this instanceof PlayerShip) {
+			for(int i = 0;i < game.healthBar.size();i++) {
+				game.remove(game.healthBar.get(i));
+			}
+			game.healthBar.clear();
+			for(int i = 0;i < health;i++) {
+				GImage toAdd = new GImage("heart.png", 10 + 25*i, 30);
+				toAdd.setSize(20, 20);
+				game.healthBar.add(toAdd);
+				game.add(toAdd);
+			}
+		}
 	}
 	public int getCooldown() {
 		return cooldown;

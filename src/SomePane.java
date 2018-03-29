@@ -15,19 +15,16 @@ public class SomePane extends GraphicsPane {
 	public SomePane(MainApplication app) {
 		this.program = app;
 		program.scoreBoard.setFont("Arial-Bold-22");
-		program.healthBoard.setFont("Arial-Bold-22");
 	}
 
 	@Override
 	public void showContents() {
 		program.add(program.scoreBoard);
-		program.add(program.healthBoard);
 	}
 
 	@Override
 	public void hideContents() {
 		program.remove(program.scoreBoard);
-		program.remove(program.healthBoard);
 	}
 
 	@Override

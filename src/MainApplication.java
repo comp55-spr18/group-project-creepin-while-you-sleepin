@@ -6,6 +6,7 @@ import javax.swing.Timer;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
+import acm.graphics.GImage;
 import acm.graphics.GLabel;
 
 public class MainApplication extends GraphicsApplication {
@@ -29,7 +30,7 @@ public class MainApplication extends GraphicsApplication {
 	int score = 0;
 	GLabel afterMessage = new GLabel("", 10, 25);
 	GLabel scoreBoard = new GLabel("SCORE: " + score, 10, 25);
-	GLabel healthBoard = new GLabel("", 10, 50);
+	ArrayList<GImage> healthBar = new ArrayList<GImage>();
 	boolean isShooting = false;
 	Timer timer = new Timer(1000/fps, this);
 	Wave wave;
@@ -56,7 +57,6 @@ public class MainApplication extends GraphicsApplication {
 		player = new PlayerShip(this);			// Initiate the game with a new player ship
 		wave = new Wave(this);
 		score = 0;								// Reset score
-		updateHealthBoard();					// Initialize health bar
 		updateScoreBoard(0);					// Initialize score board
 		player.getTimer().start();				// Start the player timer
 		lose = false;							// Reset the lose/win booleans
@@ -74,15 +74,6 @@ public class MainApplication extends GraphicsApplication {
 	void updateScoreBoard(int toAdd) {
 		score += toAdd;
 		scoreBoard.setLabel("SCORE: " + score);
-	}
-	
-	// Update the health bar
-	void updateHealthBoard() {
-		String health = "";
-		for(int i = 0;i < player.getHealth();i++) {
-			health += "X";
-		}
-		healthBoard.setLabel(health);
 	}
 	
 	// Main game loop
