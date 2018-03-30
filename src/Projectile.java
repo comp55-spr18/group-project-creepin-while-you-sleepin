@@ -11,8 +11,7 @@ import acm.program.*;
 // If you want a new projectile to behave like this one but interact differently when it hits something, just
 // Make a constructor for the new class and define a new onCollision() since move() and checkCollision() will be inherited
 
-public abstract class Projectile implements ActionListener {
-	private Timer timer;
+public abstract class Projectile {
 	private MainApplication game;
 	private boolean isPlayerProjectile;			// Check if the projectile belongs to player
 	private GPoint location;					// Top-left-most point of projectile
@@ -20,10 +19,11 @@ public abstract class Projectile implements ActionListener {
 	private double yDir;
 	private double speed;
 	private GOval sprite;						// The sprite that will be used for the projectile, currently just a circle for simplicity
+	private boolean isDestroyed;
 
 	public Projectile(MainApplication game, boolean isPlayerProj, GPoint gunLoc, double xD, double yD, double spd, Color bulletColor, int size) {
 		setGame(game);
-		setTimer(new Timer(1000/game.fps, this));
+		setDestroyed(false);
 		setPlayerProjectile(isPlayerProj);
 		setLocation(new GPoint(gunLoc));
 		setSprite(new GOval(15,15));
@@ -35,9 +35,17 @@ public abstract class Projectile implements ActionListener {
 		getSprite().setSize(size, size);
 		setSpeed(spd);
 		getSprite().setLocation(gunLoc);
-		getTimer().start();
+		getGame().projectiles.add(this);
 	}
 	
+	public boolean isDestroyed() {
+		return isDestroyed;
+	}
+
+	public void setDestroyed(boolean isDestroyed) {
+		this.isDestroyed = isDestroyed;
+	}
+
 	// The default function for move() moves the projectile in a straight line given an x and y direction and velocity
 	public void move() {
 		int dx = 1;
@@ -46,7 +54,6 @@ public abstract class Projectile implements ActionListener {
 		setLocation(getSprite().getLocation());
 		if(getGame() != null && (getLocation().getX() < -50 || getLocation().getX() > getGame().WINDOW_WIDTH)) {
 			getGame().remove(getSprite());
-			getTimer().stop();
 		}
 	}
 	
@@ -58,8 +65,8 @@ public abstract class Projectile implements ActionListener {
 				if(target instanceof PlayerShip) {
 					target.setInvincible(true);
 				}
+				setDestroyed(true);
 				getGame().remove(getSprite());
-				getTimer().stop();
 				target.setHealth(target.getHealth() - 1);
 			}
 		}
@@ -91,13 +98,12 @@ public abstract class Projectile implements ActionListener {
 	}
 
 	// The default timer loop calls move() and checkCollision() on each pass and removes the projectile and stops its timer if the game is over
-	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void update() {
 		move();
 		checkCollision();
 		if(getGame().lose || getGame().win) {
 			getGame().remove(getSprite());
-			getTimer().stop();
+			setDestroyed(true);
 		}
 	}
 	
@@ -143,11 +149,5 @@ public abstract class Projectile implements ActionListener {
 	}
 	public void setGame(MainApplication game) {
 		this.game = game;
-	}
-	public Timer getTimer() {
-		return timer;
-	}
-	public void setTimer(Timer timer) {
-		this.timer = timer;
 	}
 }

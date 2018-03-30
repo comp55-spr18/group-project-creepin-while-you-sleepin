@@ -34,7 +34,7 @@ public class FireTrail implements ActionListener {
 		size = 25;
 		trail = new ArrayList<Projectile>();
 		timer = new Timer(5, this);
-		timer.start();
+//		timer.start();
 	}
 	// This function moves all the projectiles in the arraylist as well as updates the color and size each time
 	public void move() {
@@ -56,7 +56,7 @@ public class FireTrail implements ActionListener {
 		for(Projectile tr : trail) {						// For each projectile in the arraylist
 			if(tr.getSprite().getWidth() <= 3) {			// If the sprite's size is small enough
 				ship.getGame().remove(tr.getSprite());		// Remove the sprite
-				tr.getTimer().stop();
+				tr.setDestroyed(true);
 				trail.remove(tr);							// Remove the projectile from the arraylist
 				break;
 			}

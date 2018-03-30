@@ -20,12 +20,13 @@ public class MainApplication extends GraphicsApplication {
 	private MenuPane menu;
 	private int count;
 	// Variables for game loop
-	int fps = 75;
+	int fps = 90;
 	boolean win = false;		// Notice that we have both win and lose booleans; default state is that both are false (the player hasn't won or lost but is playing)
 	boolean lose = false;		// this means we need to be explicit and can't assume that because win = false that the player lost
 	boolean easy = false;
 	Random rgen = new Random();
 	ArrayList<Ship> enemies = new ArrayList<Ship>();
+	ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	PlayerShip player;
 	int score = 0;
 	GLabel afterMessage = new GLabel("", 10, 25);
@@ -58,7 +59,7 @@ public class MainApplication extends GraphicsApplication {
 		wave = new Wave(this);
 		score = 0;								// Reset score
 		updateScoreBoard(0);					// Initialize score board
-		player.getTimer().start();				// Start the player timer
+		timer.start();
 		lose = false;							// Reset the lose/win booleans
 		win = false;
 		timer.start();							// Start the game
@@ -78,7 +79,20 @@ public class MainApplication extends GraphicsApplication {
 	
 	// Main game loop
 	public void actionPerformed(ActionEvent e) {
-		if(!wave.timer.isRunning()) {			// If the wave timer is not running
+		player.update();
+		for(Ship enemy : enemies) {
+			enemy.update();
+		}
+		for(Projectile proj : projectiles) {
+			proj.update();
+		}
+		for(int i = projectiles.size() - 1;i >= 0;i--) {
+			if(projectiles.get(i).isDestroyed()) {
+				projectiles.remove(i);
+			}
+		}
+		wave.update();
+		if(wave.finished) {			// If the wave timer is not running
 			wave = new Wave(this);				// Generate a new wave
 		}
 		if(score >= 1000) {						// If you get 1000 or more points, you win (for now)

@@ -10,7 +10,6 @@ public class TestEnemy extends Ship {
 	
 	public TestEnemy(MainApplication game, double y) {
 		setGame(game);
-		setTimer(new Timer(1000/game.fps, this));
 		setInvincible(false);
 		setHealth(2);
 		setCooldown(100);

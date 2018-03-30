@@ -7,7 +7,7 @@ import acm.graphics.*;
 import acm.program.*;
 import javax.swing.Timer;
 
-public abstract class Ship implements ActionListener {
+public abstract class Ship {
 	private MainApplication game;		// Reference to the pane the game runs on so that the ship is aware of other variables in the game
 	private GImage sprite;				// The image that will be displayed for the ship
 	private GPoint[] gunLocation;		// The points that will be used to fire projectiles, if any
@@ -20,7 +20,6 @@ public abstract class Ship implements ActionListener {
 	private int health;					// The number of hits the ship can take before being destroyed
 	private int cooldown;				// The initial value of cooldown (Set to 0 if the ship can fire as soon as it spawns)
 	private int maxCooldown;			// The number of frames between each call of the Shoot() function
-	private Timer timer;				// The timer the ship is animated by
 	private boolean isDestroyed;		// Toggles the destruction sequence of the ship
 	private int destroyedCounter;		// Counter for how long the death sprite lasts
 	private int points;					// The points the ship is worth
@@ -39,8 +38,7 @@ public abstract class Ship implements ActionListener {
 		System.out.println("Needs to be accessed by child class");
 	}
 	
-	@Override
-	public void actionPerformed(ActionEvent e) {	// This is the default loop that a ship will use
+	public void update() {	// This is the default loop that a ship will use
 		if(!isDestroyed()) {						// If the ship is not destroyed
 			move();									// Move the ship
 			shoot();								// Tell the ship to shoot
@@ -50,7 +48,7 @@ public abstract class Ship implements ActionListener {
 			}
 			if (getGame().lose || getGame().win) {	// If the game is over
 				getGame().remove(getSprite());		// Remove the ship sprite
-				getTimer().stop();					// Stop the ship timer
+				setDestroyed(true);
 			}
 		} else {									// If the ship is destroyed
 			getSprite().setImage("explosion.png");	// Change the sprite to an explosion
@@ -58,7 +56,6 @@ public abstract class Ship implements ActionListener {
 			setDestroyedCounter(getDestroyedCounter() + 1);		// Increment the destroyed counter
 			if(getDestroyedCounter() == 50) {		// When the counter hits 50
 				getGame().remove(getSprite());		// Remove the ship sprite
-				getTimer().stop();					// Stop the ship timer
 			}
 		}
 	}
@@ -165,12 +162,6 @@ public abstract class Ship implements ActionListener {
 	}
 	public void setGame(MainApplication game) {
 		this.game = game;
-	}
-	public Timer getTimer() {
-		return timer;
-	}
-	public void setTimer(Timer timer) {
-		this.timer = timer;
 	}
 	public boolean isDestroyed() {
 		return isDestroyed;

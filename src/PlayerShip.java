@@ -12,12 +12,11 @@ public class PlayerShip extends Ship {
 
 	public PlayerShip(MainApplication game) {
 		setGame(game);
-		setTimer(new Timer(1000/game.fps, this));
 		setInvincible(false);
 		setIframe(100);
 		setHealth(5);
 		setCooldown(0);
-		setMaxCooldown(20);
+		setMaxCooldown(50);
 		setCanShoot(true);
 		setLocation(new GPoint(0,0));
 		setGunLocation(new GPoint[] {new GPoint(50,17.5)});
@@ -66,7 +65,7 @@ public class PlayerShip extends Ship {
 		}
 	}
 
-	public void actionPerformed(ActionEvent e) {
+	public void update() {
 		if(!isDestroyed()) {
 			shoot();
 			checkCollision();
@@ -98,7 +97,6 @@ public class PlayerShip extends Ship {
 		}
 		if (getGame().lose || getGame().win) {
 			getGame().remove(getSprite());
-			getTimer().stop();
 		}
 	}
 	// Getters and Setters

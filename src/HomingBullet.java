@@ -28,7 +28,7 @@ public class HomingBullet extends Projectile {
 		}
 		if(getGame() != null && (getLocation().getX() < -50 || getLocation().getX() > getGame().WINDOW_WIDTH)) {
 			getGame().remove(getSprite());
-			getTimer().stop();
+			setDestroyed(true);
 		}
 	}
 	
@@ -40,7 +40,7 @@ public class HomingBullet extends Projectile {
 			}
 			if(target instanceof PlayerShip || gracePeriod >= maxGracePeriod) {
 				getGame().remove(getSprite());
-				getTimer().stop();
+				setDestroyed(true);
 				target.setHealth(target.getHealth() - 1);
 				if(!(target instanceof PlayerShip)) {
 					target.setHealth(0);
@@ -52,13 +52,13 @@ public class HomingBullet extends Projectile {
 	
 	// I had to redefine the actionPerformed since I need to increment gracePeriod every time the timer is called
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void update() {
 		move();
 		checkCollision();
 		gracePeriod++;
 		if(getGame().lose || getGame().win) {
 			getGame().remove(getSprite());
-			getTimer().stop();
+			setDestroyed(true);
 		}
 	}
 }

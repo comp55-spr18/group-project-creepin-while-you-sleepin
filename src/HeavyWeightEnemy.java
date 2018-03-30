@@ -9,11 +9,10 @@ public class HeavyWeightEnemy extends Ship {
 	
 	public HeavyWeightEnemy(MainApplication game, double y) {
 		setGame(game);
-		setTimer(new Timer(1000/game.fps, this));
 		setInvincible(false);
 		setHealth(5);
-		setCooldown(100);
-		setMaxCooldown(175);
+		setCooldown(325);
+		setMaxCooldown(400);
 		setCanShoot(false);
 		setLocation(new GPoint(getGame().WINDOW_WIDTH, y));
 		setGunLocation(new GPoint[] {new GPoint(50,15)});
@@ -37,7 +36,7 @@ public class HeavyWeightEnemy extends Ship {
 		double x = getLocation().getX();
 		double y = getLocation().getY();
 		setGunLocation(new GPoint[] {new GPoint(x,y+17.5)});
-		if(getLocation().getX() < -100) {
+		if(getLocation().getX() < -300) {
 			setDestroyed(true);
 		}
 	}
@@ -45,8 +44,8 @@ public class HeavyWeightEnemy extends Ship {
 	public void shoot() {
 		if(canShoot()) {
 			Projectile newProj = new Bullet(getGame(), false, getGunLocation()[0], -1, 0, 14, getBulletColor(), 300);
-			newProj.setxDir((getGame().player.getLocation().getX()+25) - newProj.getLocation().getX());
-			newProj.setyDir((getGame().player.getLocation().getY()+25) - newProj.getLocation().getY());
+			newProj.setxDir((getGame().player.getLocation().getX()+25) - newProj.getLocation().getX()-newProj.getSprite().getWidth()/2);
+			newProj.setyDir((getGame().player.getLocation().getY()+25) - newProj.getLocation().getY()-newProj.getSprite().getWidth()/2);
 			getGame().add(newProj.getSprite());
 			setCanShoot(false);
 		} else {
