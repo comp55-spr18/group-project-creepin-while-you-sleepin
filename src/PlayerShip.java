@@ -53,7 +53,7 @@ public class PlayerShip extends Ship {
 	
 	public void checkCollision() {
 		for(Ship enemy : getGame().enemies) {
-			if(getSprite().getBounds().intersects(enemy.getSprite().getBounds())) {
+			if(getSprite().getBounds().intersects(enemy.getSprite().getBounds()) && !enemy.isDestroyed()) {
 				onCollision();
 			}
 		}

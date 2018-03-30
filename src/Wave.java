@@ -31,20 +31,20 @@ public class Wave implements ActionListener {
 	}
 	public void easy1() {			// Generates a basic easy wave
 		delay = 100;
-		game.enemies.add(new TestEnemy(game));
-		game.enemies.add(new TestEnemy(game));
-		game.enemies.add(new TestEnemy(game));
-		game.enemies.add(new TestEnemy(game));
-		game.enemies.add(new TestHomingEnemy(game));
+		game.enemies.add(new TestEnemy(game, 100));
+		game.enemies.add(new TestEnemy(game, 200));
+		game.enemies.add(new TestEnemy(game, 300));
+		game.enemies.add(new TestEnemy(game, 400));
+		game.enemies.add(new TestHomingEnemy(game, 500));
 	}
 	
 	public void hard1() {			// Generates a basic hard wave
 		delay = 200;
-		game.enemies.add(new TestHomingEnemy(game));
-		game.enemies.add(new TestHomingEnemy(game));
-		game.enemies.add(new TestHomingEnemy(game));
-		game.enemies.add(new TestHomingEnemy(game));
-		game.enemies.add(new TestHomingEnemy(game));
+		game.enemies.add(new TestHomingEnemy(game, 500));
+		game.enemies.add(new TestHomingEnemy(game, 100));
+		game.enemies.add(new TestHomingEnemy(game, 300));
+		game.enemies.add(new TestHomingEnemy(game, 500));
+		game.enemies.add(new TestHomingEnemy(game, 100));
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {

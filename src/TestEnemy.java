@@ -8,7 +8,7 @@ import acm.graphics.GPoint;
 public class TestEnemy extends Ship {
 	private FireTrail trail;
 	
-	public TestEnemy(MainApplication game) {
+	public TestEnemy(MainApplication game, double y) {
 		setGame(game);
 		setTimer(new Timer(1000/game.fps, this));
 		setInvincible(false);
@@ -16,7 +16,7 @@ public class TestEnemy extends Ship {
 		setCooldown(100);
 		setMaxCooldown(175);
 		setCanShoot(false);
-		setLocation(new GPoint(game.WINDOW_WIDTH, 300));
+		setLocation(new GPoint(getGame().WINDOW_WIDTH, y));
 		setGunLocation(new GPoint[] {new GPoint(50,15)});
 		setSprite(new GImage("sprites/enemy1.png", getLocation().getX(), getLocation().getY()));
 		setBulletColor(Color.RED);
