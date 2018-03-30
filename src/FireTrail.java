@@ -15,16 +15,17 @@ public class FireTrail implements ActionListener {
 	private int size;
 	private GPoint location;
 	private double length;
+	private double xOffset;
 	FireTrail(Ship s) {
 		ship = s;
 		if(ship instanceof PlayerShip) {
 			xDir = -1;
-			location = new GPoint(ship.getLocation().getX() - ship.getSprite().getWidth()/4, ship.getLocation().getY()+ship.getSprite().getHeight()/2-size/2);
+			xOffset = ship.getSprite().getWidth()/4;
 			length = 4;
 		} else {
 			xDir = 1;
 			length = 0.2;
-			location = new GPoint(ship.getLocation().getX()+ship.getSprite().getWidth() - ship.getSprite().getWidth()/3, ship.getLocation().getY()+ship.getSprite().getHeight()/2-size/2);
+			xOffset = ship.getSprite().getWidth()/3 - ship.getSprite().getWidth();
 		}
 		size = 25;
 		trail = new ArrayList<Projectile>();
@@ -33,6 +34,7 @@ public class FireTrail implements ActionListener {
 	}
 	public void move() {
 		if(!ship.isDestroyed()) {
+			location = new GPoint(ship.getLocation().getX() - xOffset, ship.getLocation().getY()+ship.getSprite().getHeight()/2-size/2);
 			Projectile trailProj = new Emitter(ship.getGame(), true, location, xDir, 0, length, Color.RED, size);
 			trail.add(trailProj);
 			ship.getGame().add(trailProj.getSprite());
