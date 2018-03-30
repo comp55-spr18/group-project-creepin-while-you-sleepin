@@ -25,8 +25,8 @@ public abstract class Ship implements ActionListener {
 	private int destroyedCounter;
 	
 	// These attributes only apply to enemy ships
-	private int xDir;			// Since each move() is different for each ship, these do whatever you make them do
-	private int yDir;
+	private double xDir;			// Since each move() is different for each ship, these do whatever you make them do
+	private double yDir;
 	private int speed;
 
 	public void move() {		// Declare a new move() in each new Ship subclass
@@ -133,16 +133,16 @@ public abstract class Ship implements ActionListener {
 	public void setMaxCooldown(int maxCooldown) {
 		this.maxCooldown = maxCooldown;
 	}
-	public int getxDir() {
+	public double getxDir() {
 		return xDir;
 	}
-	public void setxDir(int xDir) {
+	public void setxDir(double xDir) {
 		this.xDir = xDir;
 	}
-	public int getyDir() {
+	public double getyDir() {
 		return yDir;
 	}
-	public void setyDir(int yDir) {
+	public void setyDir(double yDir) {
 		this.yDir = yDir;
 	}
 	public int getSpeed() {
