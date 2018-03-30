@@ -26,6 +26,7 @@ public class TestEnemy extends Ship {
 		setxDir(-1);
 		setyDir(0);
 		setSpeed(6);
+		setPoints(100);
 		setTrail(new FireTrail(this));
 	}
 	@Override

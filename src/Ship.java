@@ -20,9 +20,10 @@ public abstract class Ship implements ActionListener {
 	private int health;					// The number of hits the ship can take before being destroyed
 	private int cooldown;				// The initial value of cooldown (Set to 0 if the ship can fire as soon as it spawns)
 	private int maxCooldown;			// The number of frames between each call of the Shoot() function
-	private Timer timer;
-	private boolean isDestroyed;
-	private int destroyedCounter;
+	private Timer timer;				// The timer the ship is animated by
+	private boolean isDestroyed;		// Toggles the destruction sequence of the ship
+	private int destroyedCounter;		// Counter for how long the death sprite lasts
+	private int points;					// The points the ship is worth
 	
 	// These attributes only apply to enemy ships
 	private double xDir;			// Since each move() is different for each ship, these do whatever you make them do
@@ -42,7 +43,7 @@ public abstract class Ship implements ActionListener {
 			move();									// Move the ship
 			shoot();								// Tell the ship to shoot
 			if(getHealth() <= 0) {					// If the ship's health is below 0
-				getGame().updateScoreBoard(100);	// Add points to the score board
+				getGame().updateScoreBoard(points);	// Add points to the score board
 				setDestroyed(true);					// Destroy the ship
 			}
 			if (getGame().lose || getGame().win) {	// If the game is over
@@ -180,5 +181,11 @@ public abstract class Ship implements ActionListener {
 	}
 	public void setDestroyedCounter(int destroyedCounter) {
 		this.destroyedCounter = destroyedCounter;
+	}
+	public int getPoints() {
+		return points;
+	}
+	public void setPoints(int points) {
+		this.points = points;
 	}
 }

@@ -4,6 +4,7 @@ public class TestHomingEnemy extends TestEnemy {
 		super(game, y);
 		setHealth(4);
 		setSpeed(4);
+		setPoints(200);
 	}
 	
 	@Override
