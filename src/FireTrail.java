@@ -57,7 +57,7 @@ public class FireTrail implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		move();
-		if(trail.isEmpty()) {
+		if(trail.isEmpty() || ship.getGame().win) {
 			timer.stop();
 		}
 	}
