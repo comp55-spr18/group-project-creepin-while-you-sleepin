@@ -32,11 +32,11 @@ public class Wave implements ActionListener {
 	public void easy1() {			// Generates a basic easy wave
 		
 		delay = 100;
-		game.enemies.add(new TestDroneEnemy(game, 100));
-		game.enemies.add(new TestDroneEnemy(game, 200));
-		game.enemies.add(new TestDroneEnemy(game, 300));
-		game.enemies.add(new TestDroneEnemy(game, 400));
-		game.enemies.add(new TestDroneEnemy(game, 500));
+		game.enemies.add(new Drone(game, 100));
+		game.enemies.add(new Drone(game, 200));
+		game.enemies.add(new Drone(game, 300));
+		game.enemies.add(new Drone(game, 400));
+		game.enemies.add(new Drone(game, 500));
 		
 	}
 	
@@ -52,26 +52,26 @@ public class Wave implements ActionListener {
 	
 	public void drone() {			// Generates a drone wave
 		delay = 5;
-		game.enemies.add(new TestDroneEnemy(game, game.WINDOW_HEIGHT - 200));		
-		game.enemies.add(new TestDroneEnemy(game, 100));
-		game.enemies.add(new TestDroneEnemy(game, game.WINDOW_HEIGHT - 200));
-		game.enemies.add(new TestDroneEnemy(game, 100));
-		game.enemies.add(new TestDroneEnemy(game, game.WINDOW_HEIGHT - 200));
-		game.enemies.add(new TestDroneEnemy(game, 100));
-		game.enemies.add(new TestDroneEnemy(game, game.WINDOW_HEIGHT - 200));
-		game.enemies.add(new TestDroneEnemy(game, 100));
-		game.enemies.add(new TestDroneEnemy(game, game.WINDOW_HEIGHT - 200));
-		game.enemies.add(new TestDroneEnemy(game, 100)); 
-		game.enemies.add(new TestDroneEnemy(game, game.WINDOW_HEIGHT - 200));		
-		game.enemies.add(new TestDroneEnemy(game, 100));
-		game.enemies.add(new TestDroneEnemy(game, game.WINDOW_HEIGHT - 200));
-		game.enemies.add(new TestDroneEnemy(game, 100));
-		game.enemies.add(new TestDroneEnemy(game, game.WINDOW_HEIGHT - 200));
-		game.enemies.add(new TestDroneEnemy(game, 100));
-		game.enemies.add(new TestDroneEnemy(game, game.WINDOW_HEIGHT - 200));
-		game.enemies.add(new TestDroneEnemy(game, 100));
-		game.enemies.add(new TestDroneEnemy(game, game.WINDOW_HEIGHT - 200));
-		game.enemies.add(new TestDroneEnemy(game, 100)); 
+		game.enemies.add(new Drone(game, game.WINDOW_HEIGHT - 200));		
+		game.enemies.add(new Drone(game, 100));
+		game.enemies.add(new Drone(game, game.WINDOW_HEIGHT - 200));
+		game.enemies.add(new Drone(game, 100));
+		game.enemies.add(new Drone(game, game.WINDOW_HEIGHT - 200));
+		game.enemies.add(new Drone(game, 100));
+		game.enemies.add(new Drone(game, game.WINDOW_HEIGHT - 200));
+		game.enemies.add(new Drone(game, 100));
+		game.enemies.add(new Drone(game, game.WINDOW_HEIGHT - 200));
+		game.enemies.add(new Drone(game, 100)); 
+		game.enemies.add(new Drone(game, game.WINDOW_HEIGHT - 200));		
+		game.enemies.add(new Drone(game, 100));
+		game.enemies.add(new Drone(game, game.WINDOW_HEIGHT - 200));
+		game.enemies.add(new Drone(game, 100));
+		game.enemies.add(new Drone(game, game.WINDOW_HEIGHT - 200));
+		game.enemies.add(new Drone(game, 100));
+		game.enemies.add(new Drone(game, game.WINDOW_HEIGHT - 200));
+		game.enemies.add(new Drone(game, 100));
+		game.enemies.add(new Drone(game, game.WINDOW_HEIGHT - 200));
+		game.enemies.add(new Drone(game, 100)); 
 		
 	}
 	
