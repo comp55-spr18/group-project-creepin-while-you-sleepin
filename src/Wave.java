@@ -51,17 +51,28 @@ public class Wave implements ActionListener {
 	}
 	
 	public void drone() {			// Generates a drone wave
-		delay = 10;
+		delay = 5;
+		game.enemies.add(new TestDroneEnemy(game, game.WINDOW_HEIGHT - 200));		
 		game.enemies.add(new TestDroneEnemy(game, 100));
+		game.enemies.add(new TestDroneEnemy(game, game.WINDOW_HEIGHT - 200));
 		game.enemies.add(new TestDroneEnemy(game, 100));
+		game.enemies.add(new TestDroneEnemy(game, game.WINDOW_HEIGHT - 200));
 		game.enemies.add(new TestDroneEnemy(game, 100));
+		game.enemies.add(new TestDroneEnemy(game, game.WINDOW_HEIGHT - 200));
 		game.enemies.add(new TestDroneEnemy(game, 100));
+		game.enemies.add(new TestDroneEnemy(game, game.WINDOW_HEIGHT - 200));
+		game.enemies.add(new TestDroneEnemy(game, 100)); 
+		game.enemies.add(new TestDroneEnemy(game, game.WINDOW_HEIGHT - 200));		
 		game.enemies.add(new TestDroneEnemy(game, 100));
+		game.enemies.add(new TestDroneEnemy(game, game.WINDOW_HEIGHT - 200));
 		game.enemies.add(new TestDroneEnemy(game, 100));
+		game.enemies.add(new TestDroneEnemy(game, game.WINDOW_HEIGHT - 200));
 		game.enemies.add(new TestDroneEnemy(game, 100));
+		game.enemies.add(new TestDroneEnemy(game, game.WINDOW_HEIGHT - 200));
 		game.enemies.add(new TestDroneEnemy(game, 100));
-		game.enemies.add(new TestDroneEnemy(game, 100));
-		game.enemies.add(new TestDroneEnemy(game, 100));
+		game.enemies.add(new TestDroneEnemy(game, game.WINDOW_HEIGHT - 200));
+		game.enemies.add(new TestDroneEnemy(game, 100)); 
+		
 	}
 	
 	@Override
