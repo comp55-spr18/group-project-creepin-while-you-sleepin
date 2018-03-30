@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.util.*;
@@ -34,6 +35,31 @@ public abstract class Ship implements ActionListener {
 	public void shoot() {		// Declare a new shoot() in each new Ship subclass
 		System.out.println("Needs to be accessed by child class");
 	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(!isDestroyed()) {
+			move();
+			shoot();
+			if(getHealth() <= 0) {
+				getGame().updateScoreBoard(100);
+				setDestroyed(true);
+			}
+			if (getGame().lose || getGame().win) {
+				getGame().remove(getSprite());
+				getTimer().stop();
+			}
+		} else {
+			getSprite().setImage("explosion.png");
+			getSprite().setSize(50,50);
+			setDestroyedCounter(getDestroyedCounter() + 1);
+			if(getDestroyedCounter() == 50) {
+				getGame().remove(getSprite());
+				getTimer().stop();
+			}
+		}
+	}
+	
 	// Getters and setters, nothing important down here
 	public GImage getSprite() {
 		return sprite;

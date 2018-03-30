@@ -85,7 +85,7 @@ public class PlayerShip extends Ship {
 				setInvincible(false);
 				setIframe(0);
 			}
-			if(getHealth() == 0) {
+			if(getHealth() <= 0) {
 				setDestroyed(true);
 			}
 		} else {
