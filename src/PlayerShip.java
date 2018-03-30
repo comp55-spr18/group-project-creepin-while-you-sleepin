@@ -30,7 +30,7 @@ public class PlayerShip extends Ship {
 		setTrail(new FireTrail(this));
 	}
 	@Override
-	public void move() {	// Moves the player's ship hitbox to the location of the ship
+	public void move() {		// Moves the player's ship hitbox to the location of the ship
 		double x = getLocation().getX();
 		double y = getLocation().getY();
 		setGunLocation(new GPoint[] {new GPoint(x+50,y+17.5)});

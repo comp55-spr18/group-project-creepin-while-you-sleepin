@@ -37,25 +37,25 @@ public abstract class Ship implements ActionListener {
 	}
 	
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(!isDestroyed()) {
-			move();
-			shoot();
-			if(getHealth() <= 0) {
-				getGame().updateScoreBoard(100);
-				setDestroyed(true);
+	public void actionPerformed(ActionEvent e) {	// This is the default loop that a ship will use
+		if(!isDestroyed()) {						// If the ship is not destroyed
+			move();									// Move the ship
+			shoot();								// Tell the ship to shoot
+			if(getHealth() <= 0) {					// If the ship's health is below 0
+				getGame().updateScoreBoard(100);	// Add points to the score board
+				setDestroyed(true);					// Destroy the ship
 			}
-			if (getGame().lose || getGame().win) {
-				getGame().remove(getSprite());
-				getTimer().stop();
+			if (getGame().lose || getGame().win) {	// If the game is over
+				getGame().remove(getSprite());		// Remove the ship sprite
+				getTimer().stop();					// Stop the ship timer
 			}
-		} else {
-			getSprite().setImage("explosion.png");
-			getSprite().setSize(50,50);
-			setDestroyedCounter(getDestroyedCounter() + 1);
-			if(getDestroyedCounter() == 50) {
-				getGame().remove(getSprite());
-				getTimer().stop();
+		} else {									// If the ship is destroyed
+			getSprite().setImage("explosion.png");	// Change the sprite to an explosion
+			getSprite().setSize(50,50);				// Set the image size
+			setDestroyedCounter(getDestroyedCounter() + 1);		// Increment the destroyed counter
+			if(getDestroyedCounter() == 50) {		// When the counter hits 50
+				getGame().remove(getSprite());		// Remove the ship sprite
+				getTimer().stop();					// Stop the ship timer
 			}
 		}
 	}
