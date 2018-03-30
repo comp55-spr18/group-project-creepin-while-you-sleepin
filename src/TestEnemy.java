@@ -35,9 +35,8 @@ public class TestEnemy extends Ship {
 		double x = getLocation().getX();
 		double y = getLocation().getY();
 		setGunLocation(new GPoint[] {new GPoint(x,y+17.5)});
-		if(getLocation().getX() < -50) {
-			getGame().remove(getSprite());
-			getTimer().stop();
+		if(getLocation().getX() < -100) {
+			setDestroyed(true);
 		}
 	}
 	@Override
