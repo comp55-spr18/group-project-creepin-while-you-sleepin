@@ -3,11 +3,11 @@ import java.awt.event.ActionEvent;
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
-public class TestDroneEnemy extends TestEnemy {
+public class Drone extends TestEnemy {
 	private int lifetime = 0;
 	private double topBot;
 	
-	public TestDroneEnemy(MainApplication game, double y) {
+	public Drone(MainApplication game, double y) {
 		super(game, y);
 		setHealth(1);				//They're weak enemies
 		setCooldown(915);			//I want them to fire once then never again, dealt with by long cd
