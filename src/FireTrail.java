@@ -22,8 +22,8 @@ public class FireTrail implements ActionListener {
 		if(ship instanceof PlayerShip) {
 			xDir = -1;
 			xOffset = ship.getSprite().getWidth()/4;
-			length = 1.5;
-			speed = 1.5;
+			length = 1;
+			speed = 2;
 		} else {
 			xDir = 1;
 			length = 0.25;
