@@ -1,28 +1,45 @@
+import java.awt.Color;
 import java.awt.event.ActionEvent;
+
+import javax.swing.Timer;
 
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
-public class Drone extends TestEnemy {
+public class Drone extends Ship {
 	private int lifetime = 0;
 	private double topBot;
+	private FireTrail trail;
 	
 	public Drone(MainApplication game, double y) {
-		super(game, y);
+		setGame(game);
+		setTimer(new Timer(1000/game.fps, this));
+		setInvincible(false);
 		setHealth(1);				//They're weak enemies
 		setCooldown(915);			//I want them to fire once then never again, dealt with by long cd
 		setMaxCooldown(1000);
 		setPoints(25);
+		setCanShoot(false);
+		setLocation(new GPoint(getGame().WINDOW_WIDTH, y));
+		setGunLocation(new GPoint[] {new GPoint(50,15)});
+		setSprite(new GImage("sprites/enemy1.png", getLocation().getX(), getLocation().getY()));
+		setBulletColor(Color.RED);
+		getSprite().setSize(50, 50);
+		setDestroyed(false);
+		setDestroyedCounter(0);
+		setxDir(-1);
 		if (y <= getGame().WINDOW_HEIGHT/2) {
 			setyDir(.3);
 		}
 		else {
 			setyDir(-.3);
 		}
+		setSpeed(6);
+		setTrail(new FireTrail(this));
 		//setLocation(new GPoint(getGame().WINDOW_WIDTH/1.1, y));
 		topBot = y;
-		//setSprite(new GImage("sprites/enemy1.png", getLocation().getX(), getLocation().getY()));		
-		
+		//setSprite(new GImage("sprites/enemy1.png", getLocation().getX(), getLocation().getY()));																			
+											
 	}
 	// tweaked bullet speed
 	@Override
@@ -78,5 +95,11 @@ public class Drone extends TestEnemy {
 			setDestroyed(true);
 		}
 		
+	}
+	public FireTrail getTrail() {
+		return trail;
+	}
+	public void setTrail(FireTrail trail) {
+		this.trail = trail;
 	}
 }
