@@ -72,6 +72,7 @@ public class Wave implements ActionListener {
 		game.enemies.add(new TestDroneEnemy(game, 100));
 		game.enemies.add(new TestDroneEnemy(game, game.WINDOW_HEIGHT - 200));
 		game.enemies.add(new TestDroneEnemy(game, 100)); 
+		game.enemies.add(new HeavyWeightEnemy(game, 400));
 		
 	}
 	

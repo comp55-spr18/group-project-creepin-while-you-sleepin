@@ -24,6 +24,8 @@ public abstract class Ship implements ActionListener {
 	private boolean isDestroyed;		// Toggles the destruction sequence of the ship
 	private int destroyedCounter;		// Counter for how long the death sprite lasts
 	private int points;					// The points the ship is worth
+	private int sizeX;
+	private int sizeY;
 	
 	// These attributes only apply to enemy ships
 	private double xDir;			// Since each move() is different for each ship, these do whatever you make them do
@@ -52,7 +54,7 @@ public abstract class Ship implements ActionListener {
 			}
 		} else {									// If the ship is destroyed
 			getSprite().setImage("explosion.png");	// Change the sprite to an explosion
-			getSprite().setSize(50,50);				// Set the image size
+			getSprite().setSize(sizeX,sizeY);				// Set the image size
 			setDestroyedCounter(getDestroyedCounter() + 1);		// Increment the destroyed counter
 			if(getDestroyedCounter() == 50) {		// When the counter hits 50
 				getGame().remove(getSprite());		// Remove the ship sprite
@@ -187,5 +189,17 @@ public abstract class Ship implements ActionListener {
 	}
 	public void setPoints(int points) {
 		this.points = points;
+	}
+	public void setSizeX(int sizeX) { //added getters and setters to set ship explosion size instead of having a static size.
+		this.sizeX = sizeX;
+	}
+	public int getSizeX() {
+		return sizeX;
+	}
+	public void setSizeY(int sizeY) {
+		this.sizeY = sizeY;
+	}
+	public int getSizeY() {
+		return sizeY;
 	}
 }
