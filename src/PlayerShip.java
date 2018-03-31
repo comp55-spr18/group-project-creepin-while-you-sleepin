@@ -16,7 +16,6 @@ public class PlayerShip extends Ship {
 		setCooldown(0);
 		setMaxCooldown(10);
 		setCanShoot(true);
-		setGunLocation(new GPoint[] {new GPoint(50,17.5)});
 		setSprite(new GImage("auto.png", 0, 0));
 		setBulletColor(Color.BLUE);
 		setSize(50, 50);
@@ -29,7 +28,7 @@ public class PlayerShip extends Ship {
 	public void move() {		// Moves the player's ship hitbox to the location of the ship
 		double x = getSprite().getLocation().getX();
 		double y = getSprite().getLocation().getY();
-		setGunLocation(new GPoint[] {new GPoint(x+50,y+17.5)});
+		setGunLocation(new GPoint[] {new GPoint(x + getSprite().getWidth(), y + getSprite().getHeight()/2)});
 	}
 	@Override
 	public void shoot() {		// Returns the projectile type and iterates to the next gun location (or the same one if only one)

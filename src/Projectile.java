@@ -30,19 +30,12 @@ public abstract class Projectile {
 		getSprite().setFilled(true);
 		setxDir(xD);
 		setyDir(yD);
-		getSprite().setSize(size, size);
+		setSize(size, size);
 		setSpeed(spd);
-		getSprite().setLocation(gunLoc);
+		getSprite().setLocation(gunLoc.getX(), gunLoc.getY() - getSprite().getHeight()/2);
 		getGame().projectiles.add(this);
 	}
 	
-	public boolean isDestroyed() {
-		return isDestroyed;
-	}
-
-	public void setDestroyed(boolean isDestroyed) {
-		this.isDestroyed = isDestroyed;
-	}
 
 	// The default function for move() moves the projectile in a straight line given an x and y direction and velocity
 	public void move() {
@@ -79,8 +72,10 @@ public abstract class Projectile {
 	// If these points collide with an enemy or player, onCollision() is called
 	public void checkCollision() {
 		if(game != null) {
+			GRectangle hitbox = getSprite().getBounds();
+			hitbox.setSize(hitbox.getWidth() + getSpeed(), hitbox.getHeight());
 			for(Ship enemy : game.enemies) {
-				if(isColliding(getSprite(), enemy.getSprite()) && !enemy.isDestroyed()) {
+				if(enemy.getSprite().getBounds().intersects(hitbox) && !enemy.isDestroyed()) {
 					onCollision(enemy);
 					return;
 				}
@@ -119,6 +114,9 @@ public abstract class Projectile {
 	}
 	
 	// Getters and setters
+	public void setSize(double x, double y) {
+		getSprite().setSize(getGame().WINDOW_WIDTH/(1920/x), getGame().WINDOW_HEIGHT/(1080/y));
+	}
 	public boolean isPlayerProjectile() {
 		return isPlayerProjectile;
 	}
@@ -141,7 +139,7 @@ public abstract class Projectile {
 		return speed;
 	}
 	public void setSpeed(double speed) {
-		this.speed = speed;
+		this.speed = getGame().WINDOW_WIDTH/(1920/speed);
 	}
 	public GOval getSprite() {
 		return sprite;
@@ -154,5 +152,11 @@ public abstract class Projectile {
 	}
 	public void setGame(MainApplication game) {
 		this.game = game;
+	}
+	public boolean isDestroyed() {
+		return isDestroyed;
+	}
+	public void setDestroyed(boolean isDestroyed) {
+		this.isDestroyed = isDestroyed;
 	}
 }
