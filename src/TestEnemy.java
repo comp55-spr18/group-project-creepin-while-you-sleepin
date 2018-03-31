@@ -14,7 +14,7 @@ public class TestEnemy extends Ship {
 		setMaxCooldown(175);
 		setCanShoot(false);
 		setGunLocation(new GPoint[] {new GPoint(50,15)});
-		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, y));
+		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
 		setBulletColor(Color.RED);
 		setSize(50, 50);
 		setExplosion(new GImage("explosion.png"));

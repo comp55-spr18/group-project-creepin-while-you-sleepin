@@ -54,7 +54,7 @@ public class FireTrail implements ActionListener {
 			}
 		}
 		for(Projectile tr : trail) {						// For each projectile in the arraylist
-			if(tr.getSprite().getWidth() <= 3) {			// If the sprite's size is small enough
+			if(tr.getSprite().getWidth() <= tr.getGame().WINDOW_WIDTH/(1920/3)) {			// If the sprite's size is small enough
 				ship.getGame().remove(tr.getSprite());		// Remove the sprite
 				tr.setDestroyed(true);
 				trail.remove(tr);							// Remove the projectile from the arraylist

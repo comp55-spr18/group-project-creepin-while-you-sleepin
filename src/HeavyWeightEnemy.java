@@ -13,7 +13,7 @@ public class HeavyWeightEnemy extends Ship {
 		setMaxCooldown(400);
 		setCanShoot(false);
 		setGunLocation(new GPoint[] {new GPoint(50,15)});
-		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, y));
+		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
 		setExplosion(new GImage("explosion.png"));
 		setBulletColor(Color.yellow);
 		setSize(200, 200);
