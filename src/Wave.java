@@ -29,7 +29,7 @@ public class Wave {
 		}
 		game.enemies = new ArrayList<Ship>();	// Make enemies a new arraylist
 		counter = 0;				// Reset the counter
-		enemyToSpawn = 0;			// Reset the enemy to spawn
+		enemyToSpawn = 0;			// Reset the enemy to spawn (we set it to -1 so that it reads the delay and size of the wave but doesn't spawn anything)
 		selectedDifficulty = Math.abs(game.rgen.nextInt()%weight);	// Select the difficulty of the new wave
 		if(selectedDifficulty < 20) {								// If the difficulty of the new wave is hard
 			selectedWave = Math.abs(game.rgen.nextInt()%2);			// Randomly select one of the hard waves (currently hard1() and Drone())
@@ -58,49 +58,55 @@ public class Wave {
 					break;
 			}
 		}
-		game.add(game.enemies.get(game.enemies.size() - 1).getSprite());	// Add the sprite of the latest enemy added to enemies
+		if(enemyToSpawn > 0) {				// If an enemy was created
+			game.add(game.enemies.get(game.enemies.size() - 1).getSprite());	// Add the sprite of the latest enemy added to enemies
+		}
 		enemyToSpawn++;						// Increment the enemyToSpawn
 	}
 	
 	public void easy1() {			// Generates a basic easy wave
-		size = 5;
-		delay = 100;
 		switch(enemyToSpawn) {
 			case 0:
+				size = 5;
+				delay = 100;
+				break;
+			case 1:
 			game.enemies.add(new TestEnemy(game, 500));		// This is the first enemy it spawns
 			break;
-			case 1:
+			case 2:
 			game.enemies.add(new TestEnemy(game, 100));		// The second and so on
 			break;
-			case 2:
+			case 3:
 			game.enemies.add(new TestEnemy(game, 300));
 			break;
-			case 3:
+			case 4:
 			game.enemies.add(new TestEnemy(game, 500));
 			break;
-			case 4:
+			case 5:
 			game.enemies.add(new TestEnemy(game, 100));
 			break;
 		}
 	}
 	
 	public void hard1() {			// Generates a basic hard wave
-		size = 5;
-		delay = 200;
 		switch(enemyToSpawn) {
 			case 0:
-			game.enemies.add(new TestHomingEnemy(game, 500));
-			break;
+				size = 5;
+				delay = 200;
+				break;
 			case 1:
-			game.enemies.add(new TestHomingEnemy(game, 100));
+			game.enemies.add(new TestHomingEnemy(game, 500));
 			break;
 			case 2:
-			game.enemies.add(new TestHomingEnemy(game, 300));
+			game.enemies.add(new TestHomingEnemy(game, 100));
 			break;
 			case 3:
-			game.enemies.add(new TestHomingEnemy(game, 500));
+			game.enemies.add(new TestHomingEnemy(game, 300));
 			break;
 			case 4:
+			game.enemies.add(new TestHomingEnemy(game, 500));
+			break;
+			case 5:
 			game.enemies.add(new TestHomingEnemy(game, 100));
 			break;
 		}
@@ -108,25 +114,28 @@ public class Wave {
 	}
 	
 	public void Drone() {			// Generates a drone wave
-		size = 20;
-		switch(enemyToSpawn%2) {	// This mods the enemyToSpawn variable by 2 so we get either a 0 or 1
-			case 0:					// If enemyToSpawn is even, spawn this one
+		switch(enemyToSpawn) {	// This mods the enemyToSpawn variable by 2 so we get either a 0 or 1
+			case 0:					// Initiate the wave
+				size = 20;
 				delay = 5;
-				game.enemies.add(new Drone(game, game.WINDOW_HEIGHT - 200));
 				break;
-			case 1:					// Otherwise spawn this one
-				delay = 50;
-				game.enemies.add(new Drone(game, 100));
-				break;
+			default:				// This means that if enemyToSpawn is anything other than 0, this will trigger
+				switch(enemyToSpawn%2) {	// Mod enemyToSpawn by 2 to turn it into a 0 or 1
+					case 0:					// If enemyToSpawn is even, spawn this one
+							game.enemies.add(new Drone(game, game.WINDOW_HEIGHT - 200));
+							break;
+					case 1:					// Otherwise spawn this one
+						game.enemies.add(new Drone(game, 100));
+						break;
+				}
 		}
 	}
 	
 	public void update() {
 		counter++;														// Increment counter
-		if(counter%delay == 0 && enemyToSpawn < size) {	// On a 150 frame interval, spawn next enemy
+		if(counter%delay == 0 && enemyToSpawn <= size) {	// On a 150 frame interval, spawn next enemy
 			getNextEnemy();
-			
-		} else if (enemyToSpawn >= size) {				// If all enemies have been spawned
+		} else if (enemyToSpawn > size) {				// If all enemies have been spawned
 			for(Ship enemy : game.enemies) {							// Check to see if any enemy timers are running
 				if(enemy.getBlownup().isVisible()) {						// If an enemy timer is still running (still alive)
 					counter = 1;										// Decrement the counter (effectively freezing it)
