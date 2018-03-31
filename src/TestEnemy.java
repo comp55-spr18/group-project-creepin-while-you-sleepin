@@ -6,8 +6,6 @@ import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
 public class TestEnemy extends Ship {
-	private FireTrail trail;
-	
 	public TestEnemy(MainApplication game, double y) {
 		setGame(game);
 		setInvincible(false);
@@ -20,6 +18,7 @@ public class TestEnemy extends Ship {
 		setSprite(new GImage("sprites/enemy1.png", getLocation().getX(), getLocation().getY()));
 		setBulletColor(Color.RED);
 		getSprite().setSize(50, 50);
+		setExplosion(new GImage("explosion.png"));
 		setDestroyed(false);
 		setDestroyedCounter(0);
 		setxDir(-1);
@@ -27,8 +26,6 @@ public class TestEnemy extends Ship {
 		setSpeed(6);
 		setPoints(100);
 		setTrail(new FireTrail(this));
-		setSizeX(50);
-		setSizeY(50);
 	}
 	@Override
 	public void move() {
@@ -56,12 +53,5 @@ public class TestEnemy extends Ship {
 				setCanShoot(true);
 			}
 		}
-	}
-
-	public FireTrail getTrail() {
-		return trail;
-	}
-	public void setTrail(FireTrail trail) {
-		this.trail = trail;
 	}
 }

@@ -71,7 +71,7 @@ public class Wave {
 				delay = 100;
 				break;
 			case 1:
-			game.enemies.add(new TestEnemy(game, 500));		// This is the first enemy it spawns
+			game.enemies.add(new HeavyWeightEnemy(game, 500));		// This is the first enemy it spawns
 			break;
 			case 2:
 			game.enemies.add(new TestEnemy(game, 100));		// The second and so on
@@ -122,8 +122,8 @@ public class Wave {
 			default:				// This means that if enemyToSpawn is anything other than 0, this will trigger
 				switch(enemyToSpawn%2) {	// Mod enemyToSpawn by 2 to turn it into a 0 or 1
 					case 0:					// If enemyToSpawn is even, spawn this one
-							game.enemies.add(new Drone(game, game.WINDOW_HEIGHT - 200));
-							break;
+						game.enemies.add(new Drone(game, game.WINDOW_HEIGHT - 200));
+						break;
 					case 1:					// Otherwise spawn this one
 						game.enemies.add(new Drone(game, 100));
 						break;
@@ -137,7 +137,7 @@ public class Wave {
 			getNextEnemy();
 		} else if (enemyToSpawn > size) {				// If all enemies have been spawned
 			for(Ship enemy : game.enemies) {							// Check to see if any enemy timers are running
-				if(enemy.getBlownup().isVisible()) {						// If an enemy timer is still running (still alive)
+				if(enemy.getExplosion().isVisible()) {						// If an enemy timer is still running (still alive)
 					counter = 1;										// Decrement the counter (effectively freezing it)
 					return;												// Exit the function
 				}

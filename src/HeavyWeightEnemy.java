@@ -5,8 +5,6 @@ import javax.swing.Timer;
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 public class HeavyWeightEnemy extends Ship {
-	private FireTrail trail;
-	
 	public HeavyWeightEnemy(MainApplication game, double y) {
 		setGame(game);
 		setInvincible(false);
@@ -26,8 +24,6 @@ public class HeavyWeightEnemy extends Ship {
 		setSpeed(6);
 		setPoints(100);
 		setTrail(new FireTrail(this));
-		setSizeX(300);
-		setSizeY(300);
 	}
 	@Override
 	public void move() {
@@ -55,13 +51,6 @@ public class HeavyWeightEnemy extends Ship {
 				setCanShoot(true);
 			}
 		}
-	}
-
-	public FireTrail getTrail() {
-		return trail;
-	}
-	public void setTrail(FireTrail trail) {
-		this.trail = trail;
 	}
 }
 

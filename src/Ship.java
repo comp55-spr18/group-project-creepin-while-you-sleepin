@@ -23,9 +23,8 @@ public abstract class Ship {
 	private boolean isDestroyed;		// Toggles the destruction sequence of the ship
 	private int destroyedCounter;		// Counter for how long the death sprite lasts
 	private int points;					// The points the ship is worth
-	private int sizeX;
-	private int sizeY;
-	private GImage blownup = new GImage("explosion.png");
+	private GImage explosion;
+	private FireTrail trail;
 	
 	// These attributes only apply to enemy ships
 	private double xDir;			// Since each move() is different for each ship, these do whatever you make them do
@@ -55,14 +54,13 @@ public abstract class Ship {
 		if(isDestroyed()) {									// If the ship is destroyed
 //			getSprite().setImage("explosion.png");	// Change the sprite to an explosion
 //			getSprite().setSize(sizeX,sizeY);				// Set the image size
-			blownup.setLocation(getSprite().getLocation());
-			blownup.setSize(sizeX, sizeY);
-			game.add(blownup);
+			explosion.setLocation(getSprite().getLocation());
+			game.add(explosion);
 			setDestroyedCounter(getDestroyedCounter() + 1);		// Increment the destroyed counter
 			if(getDestroyedCounter() == 50) {		// When the counter hits 50
 				getGame().remove(getSprite());		// Remove the ship sprite
-				getGame().remove(blownup);
-				blownup.setVisible(false);
+				getGame().remove(explosion);
+				explosion.setVisible(false);
 			}
 		}
 	}
@@ -188,22 +186,17 @@ public abstract class Ship {
 	public void setPoints(int points) {
 		this.points = points;
 	}
-	public void setSizeX(int sizeX) { //added getters and setters to set ship explosion size instead of having a static size.
-		this.sizeX = sizeX;
+	public GImage getExplosion() {
+		return explosion;
 	}
-	public int getSizeX() {
-		return sizeX;
+	public void setExplosion(GImage explosion) {
+		this.explosion = explosion;
+		this.explosion.setSize(sprite.getSize());
 	}
-	public void setSizeY(int sizeY) {
-		this.sizeY = sizeY;
+	public FireTrail getTrail() {
+		return trail;
 	}
-	public int getSizeY() {
-		return sizeY;
-	}
-	public GImage getBlownup() {
-		return blownup;
-	}
-	public void setBlownup(GImage blownup) {
-		this.blownup = blownup;
+	public void setTrail(FireTrail trail) {
+		this.trail = trail;
 	}
 }

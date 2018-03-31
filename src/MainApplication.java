@@ -98,7 +98,7 @@ public class MainApplication extends GraphicsApplication {
 		if(win || lose) {
 			for(Ship enemy : enemies) {
 				remove(enemy.getSprite());
-				remove(enemy.getBlownup());
+				remove(enemy.getExplosion());
 			}
 			for(Projectile proj : projectiles) {
 				remove(proj.getSprite());

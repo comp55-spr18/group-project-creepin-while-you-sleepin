@@ -8,8 +8,6 @@ import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
 public class PlayerShip extends Ship {
-	private FireTrail trail;
-
 	public PlayerShip(MainApplication game) {
 		setGame(game);
 		setInvincible(false);
@@ -98,12 +96,5 @@ public class PlayerShip extends Ship {
 		if (getGame().lose || getGame().win) {
 			getGame().remove(getSprite());
 		}
-	}
-	// Getters and Setters
-	public FireTrail getTrail() {
-		return trail;
-	}
-	public void setTrail(FireTrail trail) {
-		this.trail = trail;
 	}
 }
