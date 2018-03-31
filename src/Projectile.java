@@ -82,7 +82,7 @@ public abstract class Projectile {
 	public void checkCollision() {
 		if(game != null) {
 			GRectangle hitbox = getSprite().getBounds();
-			hitbox.setSize(hitbox.getWidth() + getSpeed(), hitbox.getHeight());
+			hitbox.setSize(getSpeed(), hitbox.getHeight());
 			for(Ship enemy : game.enemies) {
 				if(enemy.getSprite().getBounds().intersects(hitbox) && !enemy.isDestroyed()) {
 					onCollision(enemy);
