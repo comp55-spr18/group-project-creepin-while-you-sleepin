@@ -66,6 +66,10 @@ public class FireTrail implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		move();
 		if(trail.isEmpty() || ship.getGame().win) {
+			for(Projectile proj : trail) {
+				ship.getGame().remove(proj.getSprite());
+			}
+			trail.clear();
 			timer.stop();
 		}
 	}
