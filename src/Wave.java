@@ -4,30 +4,21 @@ import java.util.ArrayList;
 
 import javax.swing.Timer;
 
-public class Wave implements ActionListener{
+public class Wave {
 	MainApplication game;
-	ArrayList<Ship> currentWave;
-	Timer timer;
-	int counter;
-	int enemyToSpawn;
-	int delay;
-	int size;
-	boolean finished;
-	int weight;
-	int selected;
+	int counter;				// Counter to keep track of time between waves
+	int enemyToSpawn;			// The next enemy the wave wants to spawn
+	int delay;					// The delay before the next enemy spawns
+	int size;					// The size of the current wave
+	int weight;					// The odds of getting an easy or hard wave
+	int selectedDifficulty;		// The difficulty of the current wave
+	int selectedWave;			// The rgen value of the current wave
 	public Wave(MainApplication g) {
 		game = g;
-		finished = false;
-		timer = new Timer(1000/game.fps, this);
 		getNewWave();
-		timer.start();
 	}
 	
 	public void getNewWave() {
-		if(currentWave != null) {
-			currentWave.clear();
-		}
-		currentWave = new ArrayList<Ship>();
 		if(game.enemies != null) {
 			game.enemies.clear();
 		}
@@ -39,15 +30,33 @@ public class Wave implements ActionListener{
 		} else {
 			weight = 25;
 		}
-		selected = game.rgen.nextInt()%weight;
-		getWave();
+		selectedDifficulty = Math.abs(game.rgen.nextInt()%weight);
+		if(selectedDifficulty < 20) {
+			selectedWave = Math.abs(game.rgen.nextInt()%2);
+		} else {
+			selectedWave = Math.abs(game.rgen.nextInt()%1);
+		}
+//		System.out.println(selectedDifficulty);
+//		System.out.println(selectedWave);
+		getNextEnemy();
 	}
 	
-	public void getWave() {
-		if(selected < 20) {
-			Drone();
+	public void getNextEnemy() {
+		if(selectedDifficulty < 20) {
+			switch(selectedWave) {
+				case 0:
+					hard1();
+					break;
+				case 1:
+					Drone();
+					break;
+			}
 		} else {
-			Drone();
+			switch(selectedWave) {
+				case 0:
+					easy1();
+					break;
+			}
 		}
 		game.add(game.enemies.get(game.enemies.size() - 1).getSprite());
 		enemyToSpawn++;
@@ -56,21 +65,45 @@ public class Wave implements ActionListener{
 	public void easy1() {			// Generates a basic easy wave
 		size = 5;
 		delay = 100;
-		currentWave.add(new Drone(game, 100));
-		currentWave.add(new Drone(game, 200));
-		currentWave.add(new Drone(game, 300));
-		currentWave.add(new Drone(game, 400));
-		currentWave.add(new Drone(game, 500));
+		switch(enemyToSpawn) {
+			case 0:
+			game.enemies.add(new TestEnemy(game, 500));
+			break;
+			case 1:
+			game.enemies.add(new TestEnemy(game, 100));
+			break;
+			case 2:
+			game.enemies.add(new TestEnemy(game, 300));
+			break;
+			case 3:
+			game.enemies.add(new TestEnemy(game, 500));
+			break;
+			case 4:
+			game.enemies.add(new TestEnemy(game, 100));
+			break;
+		}
 	}
 	
 	public void hard1() {			// Generates a basic hard wave
 		size = 5;
-		delay = 2;
-		currentWave.add(new TestHomingEnemy(game, 500));
-		currentWave.add(new TestHomingEnemy(game, 100));
-		currentWave.add(new TestHomingEnemy(game, 300));
-		currentWave.add(new TestHomingEnemy(game, 500));
-		currentWave.add(new TestHomingEnemy(game, 100));
+		delay = 200;
+		switch(enemyToSpawn) {
+			case 0:
+			game.enemies.add(new TestHomingEnemy(game, 500));
+			break;
+			case 1:
+			game.enemies.add(new TestHomingEnemy(game, 100));
+			break;
+			case 2:
+			game.enemies.add(new TestHomingEnemy(game, 300));
+			break;
+			case 3:
+			game.enemies.add(new TestHomingEnemy(game, 500));
+			break;
+			case 4:
+			game.enemies.add(new TestHomingEnemy(game, 100));
+			break;
+		}
 		
 	}
 	
@@ -89,12 +122,9 @@ public class Wave implements ActionListener{
 	}
 	
 	public void update() {
-		if(game.lose || game.win) {
-			timer.stop();
-		}
 		counter++;														// Increment counter
 		if(counter%delay == 0 && enemyToSpawn < size) {	// On a 150 frame interval, spawn next enemy
-			getWave();
+			getNextEnemy();
 			
 		} else if (enemyToSpawn >= size) {				// If all enemies have been spawned
 			for(Ship enemy : game.enemies) {							// Check to see if any enemy timers are running
@@ -105,9 +135,5 @@ public class Wave implements ActionListener{
 			}
 			getNewWave();												// Reaching this point means all enemies are dead, stop wave timer
 		}
-	}
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		update();
 	}
 }

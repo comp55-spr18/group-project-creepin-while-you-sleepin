@@ -91,6 +91,7 @@ public class MainApplication extends GraphicsApplication {
 				projectiles.remove(i);
 			}
 		}
+		wave.update();
 		if(score >= 1000) {						// If you get 1000 or more points, you win (for now)
 			win = true;							// Set win to true so the game knows you won
 		}
