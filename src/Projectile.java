@@ -62,6 +62,15 @@ public abstract class Projectile {
 		}
 	}
 	
+	public void onCollision(Projectile missile) {
+		if(isPlayerProjectile() && !missile.isPlayerProjectile()) {
+			setDestroyed(true);
+			missile.setDestroyed(true);
+			getGame().remove(getSprite());
+			getGame().remove(missile.getSprite());
+		}
+	}
+	
 	public void aimAtPlayer() {
 		GObject shipSprite = getGame().player.getSprite();
 		setxDir((shipSprite.getX()+shipSprite.getWidth()/2) - getSprite().getX() - getSprite().getWidth()/2);
@@ -83,6 +92,11 @@ public abstract class Projectile {
 			if(isColliding(getSprite(), game.player.getSprite())) {
 				onCollision(game.player);
 				return;
+			}
+			for(Projectile proj : game.projectiles) {
+				if(proj instanceof HomingBullet && proj.getSprite().getBounds().intersects(hitbox)) {
+					onCollision(proj);
+				}
 			}
 		}
 	}
