@@ -19,7 +19,7 @@ public class PlayerShip extends Ship {
 		setGunLocation(new GPoint[] {new GPoint(50,17.5)});
 		setSprite(new GImage("auto.png", 0, 0));
 		setBulletColor(Color.BLUE);
-		getSprite().setSize(50, 50);
+		setSize(50, 50);
 		setDestroyed(false);
 		setDestroyedCounter(0);
 		getGame().add(getSprite());
@@ -69,14 +69,14 @@ public class PlayerShip extends Ship {
 			if(isInvincible()) {
 				if(getIframe() == 0) {
 					getSprite().setImage("truck.png");
-					getSprite().setSize(50, 50);
+					setSize(50, 50);
 				}
 				setIframe(getIframe() + 1);
 			}
 			// If the player's iframe count hits 100, make them vulnerable again
 			if(getIframe() == 50) {
 				getSprite().setImage("auto.png");
-				getSprite().setSize(50, 50);
+				setSize(50, 50);
 				setInvincible(false);
 				setIframe(0);
 			}

@@ -12,7 +12,7 @@ import acm.graphics.GLabel;
 public class MainApplication extends GraphicsApplication {
 	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	public static final int WINDOW_WIDTH = (int) screenSize.getWidth();
-	public static final int WINDOW_HEIGHT = (int) screenSize.getHeight() - 100;
+	public static final int WINDOW_HEIGHT = (int) screenSize.getHeight();
 	public static final String MUSIC_FOLDER = "sounds";
 	private static final String[] SOUND_FILES = { "r2d2.mp3", "somethinlikethis.mp3" };
 
@@ -37,7 +37,7 @@ public class MainApplication extends GraphicsApplication {
 	Wave wave;
 
 	public void init() {
-		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+		setSize(WINDOW_WIDTH, WINDOW_HEIGHT - 100);
 	}
 
 	public void run() {

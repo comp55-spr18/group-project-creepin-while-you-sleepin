@@ -63,6 +63,9 @@ public abstract class Ship {
 	}
 	
 	// Getters and setters, nothing important down here
+	public void setSize(double x, double y) {
+		getSprite().setSize(getGame().WINDOW_WIDTH/(1920/x), getGame().WINDOW_HEIGHT/(1080/y));
+	}
 	public GImage getSprite() {
 		return sprite;
 	}

@@ -13,7 +13,7 @@ public class Drone extends TestEnemy {
 		setHealth(1);				// They're weak enemies
 		setCooldown(915);			// I want them to fire once then never again, dealt with by long cd
 		setSprite(new GImage("sprites/enemy2.png", getGame().WINDOW_WIDTH, y));
-		getSprite().setSize(25, 25);
+		setSize(40, 40);
 		setTrail(new FireTrail(this));
 		setMaxCooldown(1000);
 		setPoints(25);

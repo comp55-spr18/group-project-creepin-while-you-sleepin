@@ -14,7 +14,7 @@ public class MenuPane extends GraphicsPane {
 		super();
 		program = app;
 		double scaleX = (100.0/1366.0)*program.WINDOW_WIDTH;
-		double scaleY = (100.0/668.0)*program.WINDOW_HEIGHT;
+		double scaleY = (100.0/768.0)*program.WINDOW_HEIGHT;
 		rect2 = new GButton("EASY", 2*scaleX, 4*scaleY, 2*scaleX, 2*scaleY);
 		rect = new GButton("HARD", 9.5*scaleX, 4*scaleY, 2*scaleX, 2*scaleY);
 		rect.setFillColor(Color.RED);

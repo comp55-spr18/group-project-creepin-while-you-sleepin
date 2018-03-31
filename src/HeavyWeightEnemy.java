@@ -16,7 +16,7 @@ public class HeavyWeightEnemy extends Ship {
 		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, y));
 		setExplosion(new GImage("explosion.png"));
 		setBulletColor(Color.yellow);
-		getSprite().setSize(200, 200);
+		setSize(200, 200);
 		setDestroyed(false);
 		setDestroyedCounter(0);
 		setxDir(-1);
