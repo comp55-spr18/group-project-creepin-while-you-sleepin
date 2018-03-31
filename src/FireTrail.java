@@ -22,14 +22,14 @@ public class FireTrail implements ActionListener {
 		ship = s;
 		if(ship instanceof PlayerShip) {
 			xDir = -1;
-			xOffset = ship.getSprite().getWidth()/4;
+			xOffset = ship.getSprite().getWidth()/5;
 			length = 1;
 			speed = 2;
 		} else {
 			xDir = 1;
 			length = 0.25;
 			speed = 1;
-			xOffset = ship.getSprite().getWidth()/3 - ship.getSprite().getWidth();
+			xOffset = ship.getSprite().getWidth()/4 - ship.getSprite().getWidth();
 		}
 		size = (int) ship.getSprite().getWidth()/2;
 		trail = new ArrayList<Projectile>();

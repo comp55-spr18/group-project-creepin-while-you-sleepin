@@ -148,7 +148,7 @@ public abstract class Ship {
 		return speed;
 	}
 	public void setSpeed(int speed) {
-		this.speed = speed;
+		this.speed = getGame().WINDOW_WIDTH/(1920/speed);
 	}
 	public int getSelectedGun() {
 		return selectedGun;
