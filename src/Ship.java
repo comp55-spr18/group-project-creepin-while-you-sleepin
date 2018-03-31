@@ -12,7 +12,6 @@ public abstract class Ship {
 	private GImage sprite;				// The image that will be displayed for the ship
 	private GPoint[] gunLocation;		// The points that will be used to fire projectiles, if any
 	private int selectedGun;			// Integer switch that selects which point in gunLocation array to fire from
-	private GPoint location;			// The top-left most point of the ship (like a GRectangle's location)
 	private Color bulletColor;			// The color of the projectiles fired by this ship
 	private boolean canShoot;			// Trigger that toggles on/off on cooldown in the main loop
 	private boolean invincible;			// Trigger that toggles on/off on cooldown in the main loop
@@ -52,8 +51,6 @@ public abstract class Ship {
 			}
 		}
 		if(isDestroyed()) {									// If the ship is destroyed
-//			getSprite().setImage("explosion.png");	// Change the sprite to an explosion
-//			getSprite().setSize(sizeX,sizeY);				// Set the image size
 			explosion.setLocation(getSprite().getLocation());
 			game.add(explosion);
 			setDestroyedCounter(getDestroyedCounter() + 1);		// Increment the destroyed counter
@@ -77,12 +74,6 @@ public abstract class Ship {
 	}
 	public void setGunLocation(GPoint[] gunLocation) {
 		this.gunLocation = gunLocation;
-	}
-	public GPoint getLocation() {
-		return location;
-	}
-	public void setLocation(GPoint location) {
-		this.location = location;
 	}
 	public Color getBulletColor() {
 		return bulletColor;

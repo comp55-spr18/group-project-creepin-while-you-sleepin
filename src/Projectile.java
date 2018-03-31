@@ -14,7 +14,6 @@ import acm.program.*;
 public abstract class Projectile {
 	private MainApplication game;
 	private boolean isPlayerProjectile;			// Check if the projectile belongs to player
-	private GPoint location;					// Top-left-most point of projectile
 	private double xDir;						// Using the x and y Dir variables creates a vector with speed as its magnitude, indicating the movement of the projectile
 	private double yDir;
 	private double speed;
@@ -25,7 +24,6 @@ public abstract class Projectile {
 		setGame(game);
 		setDestroyed(false);
 		setPlayerProjectile(isPlayerProj);
-		setLocation(new GPoint(gunLoc));
 		setSprite(new GOval(15,15));
 		getSprite().setFillColor(bulletColor);
 		getSprite().setColor(bulletColor);
@@ -51,8 +49,7 @@ public abstract class Projectile {
 		int dx = 1;
 		if(getxDir() < 0) dx = -1;
 		getSprite().move(Math.cos(Math.atan(getyDir()/getxDir()))*getSpeed()*dx, Math.sin(Math.atan(getyDir()/getxDir()))*getSpeed()*dx);
-		setLocation(getSprite().getLocation());
-		if(getGame() != null && (getLocation().getX() < -50 || getLocation().getX() > getGame().WINDOW_WIDTH)) {
+		if(getGame() != null && (getSprite().getLocation().getX() < -50 || getSprite().getLocation().getX() > getGame().WINDOW_WIDTH)) {
 			getGame().remove(getSprite());
 		}
 	}
@@ -76,11 +73,11 @@ public abstract class Projectile {
 	// If these points collide with an enemy or player, onCollision() is called
 	public void checkCollision() {
 		if(game != null) {
-			GPoint top = new GPoint(location.getX() + sprite.getWidth()/2, location.getY());
-			GPoint mid = new GPoint(location.getX() + sprite.getWidth()/2, location.getY() + sprite.getHeight()/2);
-			GPoint bot = new GPoint(location.getX() + sprite.getWidth()/2, location.getY() + sprite.getHeight());
-			GPoint left = new GPoint(location.getX(), location.getY() + sprite.getHeight()/2);
-			GPoint right = new GPoint(location.getX() + sprite.getWidth(), location.getY() + sprite.getHeight()/2);
+			GPoint top = new GPoint(getSprite().getLocation().getX() + getSprite().getWidth()/2, getSprite().getLocation().getY());
+			GPoint mid = new GPoint(getSprite().getLocation().getX() + getSprite().getWidth()/2, getSprite().getLocation().getY() + getSprite().getHeight()/2);
+			GPoint bot = new GPoint(getSprite().getLocation().getX() + getSprite().getWidth()/2, getSprite().getLocation().getY() + getSprite().getHeight());
+			GPoint left = new GPoint(getSprite().getLocation().getX(), getSprite().getLocation().getY() + getSprite().getHeight()/2);
+			GPoint right = new GPoint(getSprite().getLocation().getX() + getSprite().getWidth(), getSprite().getLocation().getY() + getSprite().getHeight()/2);
 			GPoint[] testPoints = new GPoint[] {top, mid, bot, left, right};
 			for(GPoint point : testPoints) {
 				for(Ship enemy : game.enemies) {
@@ -113,12 +110,6 @@ public abstract class Projectile {
 	}
 	public void setPlayerProjectile(boolean isPlayerProjectile) {
 		this.isPlayerProjectile = isPlayerProjectile;
-	}
-	public GPoint getLocation() {
-		return location;
-	}
-	public void setLocation(GPoint location) {
-		this.location = location;
 	}
 	public double getxDir() {
 		return xDir;

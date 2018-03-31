@@ -20,13 +20,12 @@ public class HomingBullet extends Projectile {
 		if(getxDir() < 0) dx = -1;
 		double angle = Math.atan(getyDir()/getxDir());
 		getSprite().move(Math.cos(angle)*getSpeed()*dx, Math.sin(angle)*getSpeed()*dx);
-		setLocation(getSprite().getLocation());
 		if(gracePeriod < disengage) {
 			// The two lines below update the movement vector to point at the player
-			setxDir((getGame().player.getLocation().getX()+25) - getLocation().getX());
-			setyDir((getGame().player.getLocation().getY()+25) - getLocation().getY());
+			setxDir((getGame().player.getSprite().getLocation().getX()+25) - getSprite().getLocation().getX());
+			setyDir((getGame().player.getSprite().getLocation().getY()+25) - getSprite().getLocation().getY());
 		}
-		if(getGame() != null && (getLocation().getX() < -50 || getLocation().getX() > getGame().WINDOW_WIDTH)) {
+		if(getGame() != null && (getSprite().getLocation().getX() < -50 || getSprite().getLocation().getX() > getGame().WINDOW_WIDTH)) {
 			getGame().remove(getSprite());
 			setDestroyed(true);
 		}

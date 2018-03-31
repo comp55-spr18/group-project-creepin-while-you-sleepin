@@ -34,12 +34,12 @@ public class FireTrail implements ActionListener {
 		size = 25;
 		trail = new ArrayList<Projectile>();
 		timer = new Timer(5, this);
-//		timer.start();
+		timer.start();
 	}
 	// This function moves all the projectiles in the arraylist as well as updates the color and size each time
 	public void move() {
 		if(!ship.isDestroyed()) {	// If the ship is not destroyed
-			location = new GPoint(ship.getLocation().getX() - xOffset, ship.getLocation().getY()+ship.getSprite().getHeight()/2-size/2);	// Set the location relative to the ship
+			location = new GPoint(ship.getSprite().getLocation().getX() - xOffset, ship.getSprite().getLocation().getY()+ship.getSprite().getHeight()/2-size/2);	// Set the location relative to the ship
 			Projectile trailProj = new Emitter(ship.getGame(), true, location, xDir, 0, speed, Color.RED, size);	// Create an emitter with the proper values
 			trail.add(trailProj);							// Add the new emitter to the arraylist
 			ship.getGame().add(trailProj.getSprite());		// Add the emitter's sprite to the game

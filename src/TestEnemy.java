@@ -13,9 +13,8 @@ public class TestEnemy extends Ship {
 		setCooldown(100);
 		setMaxCooldown(175);
 		setCanShoot(false);
-		setLocation(new GPoint(getGame().WINDOW_WIDTH, y));
 		setGunLocation(new GPoint[] {new GPoint(50,15)});
-		setSprite(new GImage("sprites/enemy1.png", getLocation().getX(), getLocation().getY()));
+		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, y));
 		setBulletColor(Color.RED);
 		getSprite().setSize(50, 50);
 		setExplosion(new GImage("explosion.png"));
@@ -30,11 +29,10 @@ public class TestEnemy extends Ship {
 	@Override
 	public void move() {
 		getSprite().move(getxDir()*getSpeed(), getyDir()*getSpeed());
-		setLocation(getSprite().getLocation());
-		double x = getLocation().getX();
-		double y = getLocation().getY();
+		double x = getSprite().getLocation().getX();
+		double y = getSprite().getLocation().getY();
 		setGunLocation(new GPoint[] {new GPoint(x,y+17.5)});
-		if(getLocation().getX() < -100) {
+		if(getSprite().getLocation().getX() < -100) {
 			setDestroyed(true);
 		}
 	}
@@ -42,8 +40,8 @@ public class TestEnemy extends Ship {
 	public void shoot() {
 		if(canShoot()) {
 			Projectile newProj = new Bullet(getGame(), false, getGunLocation()[0], -1, 0, 14, getBulletColor(), 20);
-			newProj.setxDir((getGame().player.getLocation().getX()+25) - newProj.getLocation().getX());
-			newProj.setyDir((getGame().player.getLocation().getY()+25) - newProj.getLocation().getY());
+			newProj.setxDir((getGame().player.getSprite().getLocation().getX()+25) - newProj.getSprite().getLocation().getX());
+			newProj.setyDir((getGame().player.getSprite().getLocation().getY()+25) - newProj.getSprite().getLocation().getY());
 			getGame().add(newProj.getSprite());
 			setCanShoot(false);
 		} else {

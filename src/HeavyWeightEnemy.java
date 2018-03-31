@@ -12,9 +12,9 @@ public class HeavyWeightEnemy extends Ship {
 		setCooldown(325);
 		setMaxCooldown(400);
 		setCanShoot(false);
-		setLocation(new GPoint(getGame().WINDOW_WIDTH, y));
 		setGunLocation(new GPoint[] {new GPoint(50,15)});
-		setSprite(new GImage("sprites/enemy1.png", getLocation().getX(), getLocation().getY()));
+		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, y));
+		setExplosion(new GImage("explosion.png"));
 		setBulletColor(Color.yellow);
 		getSprite().setSize(200, 200);
 		setDestroyed(false);
@@ -28,11 +28,10 @@ public class HeavyWeightEnemy extends Ship {
 	@Override
 	public void move() {
 		getSprite().move(getxDir()*getSpeed(), getyDir()*getSpeed());
-		setLocation(getSprite().getLocation());
-		double x = getLocation().getX();
-		double y = getLocation().getY();
+		double x = getSprite().getLocation().getX();
+		double y = getSprite().getLocation().getY();
 		setGunLocation(new GPoint[] {new GPoint(x,y+17.5)});
-		if(getLocation().getX() < -300) {
+		if(getSprite().getLocation().getX() < -300) {
 			setDestroyed(true);
 		}
 	}
@@ -40,8 +39,8 @@ public class HeavyWeightEnemy extends Ship {
 	public void shoot() {
 		if(canShoot()) {
 			Projectile newProj = new Bullet(getGame(), false, getGunLocation()[0], -1, 0, 14, getBulletColor(), 300);
-			newProj.setxDir((getGame().player.getLocation().getX()+25) - newProj.getLocation().getX()-newProj.getSprite().getWidth()/2);
-			newProj.setyDir((getGame().player.getLocation().getY()+25) - newProj.getLocation().getY()-newProj.getSprite().getWidth()/2);
+			newProj.setxDir((getGame().player.getSprite().getLocation().getX()+25) - newProj.getSprite().getLocation().getX()-newProj.getSprite().getWidth()/2);
+			newProj.setyDir((getGame().player.getSprite().getLocation().getY()+25) - newProj.getSprite().getLocation().getY()-newProj.getSprite().getWidth()/2);
 			getGame().add(newProj.getSprite());
 			setCanShoot(false);
 		} else {
