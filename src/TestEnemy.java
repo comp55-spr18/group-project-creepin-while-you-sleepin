@@ -40,8 +40,7 @@ public class TestEnemy extends Ship {
 	public void shoot() {
 		if(canShoot()) {
 			Projectile newProj = new Bullet(getGame(), false, getGunLocation()[0], -1, 0, 14, getBulletColor(), 20);
-			newProj.setxDir((getGame().player.getSprite().getLocation().getX()+25) - newProj.getSprite().getLocation().getX());
-			newProj.setyDir((getGame().player.getSprite().getLocation().getY()+25) - newProj.getSprite().getLocation().getY());
+			newProj.aimAtPlayer();
 			getGame().add(newProj.getSprite());
 			setCanShoot(false);
 		} else {

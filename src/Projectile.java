@@ -69,6 +69,12 @@ public abstract class Projectile {
 		}
 	}
 	
+	public void aimAtPlayer() {
+		GObject shipSprite = getGame().player.getSprite();
+		setxDir((shipSprite.getX()+shipSprite.getWidth()/2) - getSprite().getX() - getSprite().getWidth()/2);
+		setyDir((shipSprite.getY()+shipSprite.getHeight()/2) - getSprite().getY() - getSprite().getHeight()/2);
+	}
+	
 	// The default checkCollision creates three GPoints at the top, center, and bottom of the projectile
 	// If these points collide with an enemy or player, onCollision() is called
 	public void checkCollision() {

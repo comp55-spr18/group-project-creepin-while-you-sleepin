@@ -31,7 +31,7 @@ public class FireTrail implements ActionListener {
 			speed = 1;
 			xOffset = ship.getSprite().getWidth()/3 - ship.getSprite().getWidth();
 		}
-		size = 25;
+		size = (int) ship.getSprite().getWidth()/2;
 		trail = new ArrayList<Projectile>();
 		timer = new Timer(5, this);
 		timer.start();
