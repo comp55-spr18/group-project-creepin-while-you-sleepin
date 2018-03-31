@@ -91,22 +91,30 @@ public class MainApplication extends GraphicsApplication {
 				projectiles.remove(i);
 			}
 		}
-		wave.update();
-		if(wave.finished) {			// If the wave timer is not running
-			wave = new Wave(this);				// Generate a new wave
-		}
 		if(score >= 1000) {						// If you get 1000 or more points, you win (for now)
 			win = true;							// Set win to true so the game knows you won
 		}
-		if(win) {								// If you won, print it at the menu screen
-			switchToMenu();
-			afterMessage.setLabel("You win!");
-			timer.stop();
-		}
-		if(lose) {								// If you lost, print it at the menu screen
-			switchToMenu();
-			afterMessage.setLabel("You lose!");
-			timer.stop();
+		if(win || lose) {
+			for(Ship enemy : enemies) {
+				remove(enemy.getSprite());
+				remove(enemy.getBlownup());
+			}
+			for(Projectile proj : projectiles) {
+				remove(proj.getSprite());
+			}
+			remove(player.getSprite());
+			enemies.clear();
+			projectiles.clear();
+			if(win) {								// If you won, print it at the menu screen
+				switchToMenu();
+				afterMessage.setLabel("You win!");
+				timer.stop();
+			}
+			if(lose) {								// If you lost, print it at the menu screen
+				switchToMenu();
+				afterMessage.setLabel("You lose!");
+				timer.stop();
+			}
 		}
 	}
 }

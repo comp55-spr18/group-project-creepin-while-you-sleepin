@@ -16,7 +16,7 @@ public class PlayerShip extends Ship {
 		setIframe(100);
 		setHealth(5);
 		setCooldown(0);
-		setMaxCooldown(50);
+		setMaxCooldown(10);
 		setCanShoot(true);
 		setLocation(new GPoint(0,0));
 		setGunLocation(new GPoint[] {new GPoint(50,17.5)});

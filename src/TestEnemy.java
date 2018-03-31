@@ -27,8 +27,8 @@ public class TestEnemy extends Ship {
 		setSpeed(6);
 		setPoints(100);
 		setTrail(new FireTrail(this));
-		setSizeX(100);
-		setSizeY(100);
+		setSizeX(50);
+		setSizeY(50);
 	}
 	@Override
 	public void move() {

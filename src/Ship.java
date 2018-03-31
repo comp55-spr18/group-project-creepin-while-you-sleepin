@@ -25,6 +25,7 @@ public abstract class Ship {
 	private int points;					// The points the ship is worth
 	private int sizeX;
 	private int sizeY;
+	private GImage blownup = new GImage("explosion.png");
 	
 	// These attributes only apply to enemy ships
 	private double xDir;			// Since each move() is different for each ship, these do whatever you make them do
@@ -39,7 +40,7 @@ public abstract class Ship {
 	}
 	
 	public void update() {	// This is the default loop that a ship will use
-		if(!isDestroyed()) {						// If the ship is not destroyed
+		if(!isDestroyed()) {
 			move();									// Move the ship
 			shoot();								// Tell the ship to shoot
 			if(getHealth() <= 0) {					// If the ship's health is below 0
@@ -50,12 +51,18 @@ public abstract class Ship {
 				getGame().remove(getSprite());		// Remove the ship sprite
 				setDestroyed(true);
 			}
-		} else {									// If the ship is destroyed
-			getSprite().setImage("explosion.png");	// Change the sprite to an explosion
-			getSprite().setSize(sizeX,sizeY);				// Set the image size
+		}
+		if(isDestroyed()) {									// If the ship is destroyed
+//			getSprite().setImage("explosion.png");	// Change the sprite to an explosion
+//			getSprite().setSize(sizeX,sizeY);				// Set the image size
+			blownup.setLocation(getSprite().getLocation());
+			blownup.setSize(sizeX, sizeY);
+			game.add(blownup);
 			setDestroyedCounter(getDestroyedCounter() + 1);		// Increment the destroyed counter
 			if(getDestroyedCounter() == 50) {		// When the counter hits 50
 				getGame().remove(getSprite());		// Remove the ship sprite
+				getGame().remove(blownup);
+				blownup.setVisible(false);
 			}
 		}
 	}
@@ -192,5 +199,11 @@ public abstract class Ship {
 	}
 	public int getSizeY() {
 		return sizeY;
+	}
+	public GImage getBlownup() {
+		return blownup;
+	}
+	public void setBlownup(GImage blownup) {
+		this.blownup = blownup;
 	}
 }
