@@ -68,10 +68,11 @@ public class Wave {
 		switch(enemyToSpawn) {
 			case 0:
 				size = 5;
-				delay = 100;
+				delay = 50;
 				break;
 			case 1:
 			game.enemies.add(new HeavyWeightEnemy(game, 500));		// This is the first enemy it spawns
+			delay = 100;											// Sets the new delay between enemy spawns to be 100
 			break;
 			case 2:
 			game.enemies.add(new TestEnemy(game, 100));		// The second and so on

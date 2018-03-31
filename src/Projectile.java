@@ -73,25 +73,33 @@ public abstract class Projectile {
 	// If these points collide with an enemy or player, onCollision() is called
 	public void checkCollision() {
 		if(game != null) {
-			GPoint top = new GPoint(getSprite().getLocation().getX() + getSprite().getWidth()/2, getSprite().getLocation().getY());
-			GPoint mid = new GPoint(getSprite().getLocation().getX() + getSprite().getWidth()/2, getSprite().getLocation().getY() + getSprite().getHeight()/2);
-			GPoint bot = new GPoint(getSprite().getLocation().getX() + getSprite().getWidth()/2, getSprite().getLocation().getY() + getSprite().getHeight());
-			GPoint left = new GPoint(getSprite().getLocation().getX(), getSprite().getLocation().getY() + getSprite().getHeight()/2);
-			GPoint right = new GPoint(getSprite().getLocation().getX() + getSprite().getWidth(), getSprite().getLocation().getY() + getSprite().getHeight()/2);
-			GPoint[] testPoints = new GPoint[] {top, mid, bot, left, right};
-			for(GPoint point : testPoints) {
-				for(Ship enemy : game.enemies) {
-					if(enemy.getSprite().contains(point) && !enemy.isDestroyed()) {
-						onCollision(enemy);
-						return;
-					}
-				}
-				if(game.player.getSprite().contains(point)) {
-					onCollision(game.player);
+			for(Ship enemy : game.enemies) {
+				if(isColliding(getSprite(), enemy.getSprite()) && !enemy.isDestroyed()) {
+					onCollision(enemy);
 					return;
 				}
 			}
+			if(isColliding(getSprite(), game.player.getSprite())) {
+				onCollision(game.player);
+				return;
+			}
 		}
+	}
+	
+	// This is a helper function that returns true if the circular sprite of the projectile collides with the rectangular sprite of the ship
+	public boolean isColliding(GObject projectile, GObject ship) {
+		double circleDistanceX = Math.abs(projectile.getX() + projectile.getWidth()/2 - ship.getX());
+		double circleDistanceY = Math.abs(projectile.getY() + projectile.getHeight()/2 - ship.getY());
+
+		if (circleDistanceX > (ship.getWidth()/2 + projectile.getWidth()/2)) { return false; }
+		if (circleDistanceY > (ship.getHeight()/2 + projectile.getWidth()/2)) { return false; }
+
+		if (circleDistanceX <= (ship.getWidth()/2)) { return true; } 
+		if (circleDistanceY <= (ship.getHeight()/2)) { return true; }
+
+		double cornerDistance_sq = Math.pow(circleDistanceX - ship.getWidth()/2, 2) +
+				Math.pow(circleDistanceY - ship.getHeight()/2, 2);
+		return (cornerDistance_sq <= Math.pow(projectile.getWidth()/2, 2));
 	}
 
 	// The default timer loop calls move() and checkCollision() on each pass and removes the projectile and stops its timer if the game is over
