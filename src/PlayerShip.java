@@ -16,7 +16,7 @@ public class PlayerShip extends Ship {
 		setCooldown(0);
 		setMaxCooldown(10);
 		setCanShoot(false);
-		setSprite(new GImage("auto.png", 0, 0));
+		setSprite(new GImage("sprites/playermodel.png", 0, 0));
 		setBulletColor(Color.BLUE);
 		setSize(50, 50);
 		setDestroyed(false);

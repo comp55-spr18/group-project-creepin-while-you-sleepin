@@ -118,7 +118,7 @@ public class Wave {
 		switch(enemyToSpawn) {	// This mods the enemyToSpawn variable by 2 so we get either a 0 or 1
 			case 0:					// Initiate the wave
 				size = 20;
-				delay = 5;
+				delay = 10;
 				break;
 			default:				// This means that if enemyToSpawn is anything other than 0, this will trigger
 				switch(enemyToSpawn%2) {	// Mod enemyToSpawn by 2 to turn it into a 0 or 1

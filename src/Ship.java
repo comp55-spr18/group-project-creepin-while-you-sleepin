@@ -52,10 +52,10 @@ public abstract class Ship {
 		}
 		if(isDestroyed()) {									// If the ship is destroyed
 			explosion.setLocation(getSprite().getLocation());
+			getGame().remove(getSprite());		// Remove the ship sprite
 			game.add(explosion);
 			setDestroyedCounter(getDestroyedCounter() + 1);		// Increment the destroyed counter
 			if(getDestroyedCounter() == 50) {		// When the counter hits 50
-				getGame().remove(getSprite());		// Remove the ship sprite
 				getGame().remove(explosion);
 				explosion.setVisible(false);
 			}
