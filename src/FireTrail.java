@@ -7,7 +7,8 @@ import javax.swing.Timer;
 
 import acm.graphics.GPoint;
 
-public class FireTrail {
+public class FireTrail implements ActionListener {
+	private Timer timer;					// The timer used by the fire trail
 	private ArrayList<Projectile> trail;	// The ArrayList the projectiles are stored in
 	private Ship ship;						// The ship the trail belongs to
 	private int xDir;						// The x direction of the trail
@@ -32,6 +33,8 @@ public class FireTrail {
 		}
 		size = (int) ship.getSprite().getWidth()/2;
 		trail = new ArrayList<Projectile>();
+		timer = new Timer(5, this);
+		timer.start();
 	}
 	// This function moves all the projectiles in the arraylist as well as updates the color and size each time
 	public void move() {
@@ -59,17 +62,24 @@ public class FireTrail {
 			}
 		}
 	}
-	
-	public void update() {
+	@Override
+	public void actionPerformed(ActionEvent e) {
 		move();
 		if(trail.isEmpty() || ship.getGame().win) {
 			for(Projectile proj : trail) {
 				ship.getGame().remove(proj.getSprite());
 			}
 			trail.clear();
+			timer.stop();
 		}
 	}
 	// Getters and setters
+	public Timer getTimer() {
+		return timer;
+	}
+	public void setTimer(Timer timer) {
+		this.timer = timer;
+	}
 	public ArrayList<Projectile> getTrail() {
 		return trail;
 	}

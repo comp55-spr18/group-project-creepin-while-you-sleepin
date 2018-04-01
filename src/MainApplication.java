@@ -20,7 +20,7 @@ public class MainApplication extends GraphicsApplication {
 	private MenuPane menu;
 	private int count;
 	// Variables for game loop
-	int fps = 3*60;
+	int fps = 75;
 	boolean win = false;		// Notice that we have both win and lose booleans; default state is that both are false (the player hasn't won or lost but is playing)
 	boolean lose = false;		// this means we need to be explicit and can't assume that because win = false that the player lost
 	boolean easy = false;
@@ -34,7 +34,6 @@ public class MainApplication extends GraphicsApplication {
 	ArrayList<GImage> healthBar = new ArrayList<GImage>();
 	boolean isShooting = false;
 	Timer timer = new Timer(1000/fps, this);
-	int counter = 0;
 	Wave wave;
 
 	public void init() {
@@ -58,7 +57,6 @@ public class MainApplication extends GraphicsApplication {
 //		playRandomSound();
 		player = new PlayerShip(this);			// Initiate the game with a new player ship
 		wave = new Wave(this);
-		counter = 0;
 		score = 0;								// Reset score
 		updateScoreBoard(0);					// Initialize score board
 		timer.start();
@@ -81,50 +79,43 @@ public class MainApplication extends GraphicsApplication {
 	
 	// Main game loop
 	public void actionPerformed(ActionEvent e) {
-		if(counter%2 == 0) {
-			player.update();
+		player.update();
+		for(Ship enemy : enemies) {
+			enemy.update();
+		}
+		for(Projectile proj : projectiles) {
+			proj.update();
+		}
+		for(int i = projectiles.size() - 1;i >= 0;i--) {
+			if(projectiles.get(i).isDestroyed()) {
+				projectiles.remove(i);
+			}
+		}
+		wave.update();
+		if(score >= 1000) {						// If you get 1000 or more points, you win (for now)
+			win = true;							// Set win to true so the game knows you won
+		}
+		if(win || lose) {
 			for(Ship enemy : enemies) {
-				enemy.update();
+				remove(enemy.getSprite());
+				remove(enemy.getExplosion());
 			}
 			for(Projectile proj : projectiles) {
-				proj.update();
+				remove(proj.getSprite());
 			}
-			for(int i = projectiles.size() - 1;i >= 0;i--) {
-				if(projectiles.get(i).isDestroyed()) {
-					projectiles.remove(i);
-				}
+			remove(player.getSprite());
+			enemies.clear();
+			projectiles.clear();
+			if(win) {								// If you won, print it at the menu screen
+				switchToMenu();
+				afterMessage.setLabel("You win!");
+				timer.stop();
 			}
-			wave.update();
-			if(score >= 1000) {						// If you get 1000 or more points, you win (for now)
-				win = true;							// Set win to true so the game knows you won
-			}
-			if(win || lose) {
-				for(Ship enemy : enemies) {
-					remove(enemy.getSprite());
-					remove(enemy.getExplosion());
-				}
-				for(Projectile proj : projectiles) {
-					remove(proj.getSprite());
-				}
-				remove(player.getSprite());
-				enemies.clear();
-				projectiles.clear();
-				if(win) {								// If you won, print it at the menu screen
-					switchToMenu();
-					afterMessage.setLabel("You win!");
-					timer.stop();
-				}
-				if(lose) {								// If you lost, print it at the menu screen
-					switchToMenu();
-					afterMessage.setLabel("You lose!");
-					timer.stop();
-				}
+			if(lose) {								// If you lost, print it at the menu screen
+				switchToMenu();
+				afterMessage.setLabel("You lose!");
+				timer.stop();
 			}
 		}
-		player.getTrail().update();
-		for(Ship enemy : enemies) {
-			enemy.getTrail().update();
-		}
-		counter++;
 	}
 }
