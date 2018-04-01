@@ -12,6 +12,7 @@ public class HomingBullet extends Projectile {
 	private int disengage = 150;		// After gracePeriod passes this value, the missile will stop homing
 	public HomingBullet(MainApplication game, boolean isPlayerProj, GPoint gunLoc, double xD, double yD, int spd, Color bulletColor, int size) {
 		super(game, isPlayerProj, gunLoc, xD, yD, spd, bulletColor, size);
+		setDestructable(true);
 	}
 	
 	// Notice that I had to redefine how this projectile moves since it homes in on the target

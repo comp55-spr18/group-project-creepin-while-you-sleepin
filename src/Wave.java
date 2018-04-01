@@ -115,17 +115,17 @@ public class Wave {
 	}
 	
 	public void Drone() {			// Generates a drone wave
-		switch(enemyToSpawn) {	// This mods the enemyToSpawn variable by 2 so we get either a 0 or 1
+		switch(enemyToSpawn) {		// Creates a switch for enemyToSpawn, using 0 (the first call) as the initiator for the wave
 			case 0:					// Initiate the wave
 				size = 20;
 				delay = 10;
 				break;
-			default:				// This means that if enemyToSpawn is anything other than 0, this will trigger
+			default:						// This means that if enemyToSpawn is anything other than 0, this will trigger
 				switch(enemyToSpawn%2) {	// Mod enemyToSpawn by 2 to turn it into a 0 or 1
 					case 0:					// If enemyToSpawn is even, spawn this one
 						game.enemies.add(new Drone(game, game.WINDOW_HEIGHT - 200));
 						break;
-					case 1:					// Otherwise spawn this one
+					case 1:					// Otherwise spawn this one (note that this one gets called first)
 						game.enemies.add(new Drone(game, 100));
 						break;
 				}
@@ -133,17 +133,17 @@ public class Wave {
 	}
 	
 	public void update() {
-		counter++;														// Increment counter
-		if(counter%delay == 0 && enemyToSpawn <= size) {	// On a 150 frame interval, spawn next enemy
-			getNextEnemy();
-		} else if (enemyToSpawn > size) {				// If all enemies have been spawned
-			for(Ship enemy : game.enemies) {							// Check to see if any enemy timers are running
-				if(enemy.getExplosion().isVisible()) {						// If an enemy timer is still running (still alive)
-					counter = 1;										// Decrement the counter (effectively freezing it)
-					return;												// Exit the function
+		counter++;												// Increment counter
+		if(counter%delay == 0 && enemyToSpawn <= size) {		// After counter advances 'delay' number of frames, and if there are more enemies to spawn
+			getNextEnemy();										// call getNextEnemy() to add the next enemy to game.enemies
+		} else if (enemyToSpawn > size) {						// If all enemies have been spawned
+			for(Ship enemy : game.enemies) {					// Check to see if any enemy explosions are still visible (they are hidden when the ship is destroyed)
+				if(enemy.getExplosion().isVisible()) {			// If an enemy explosion is not hidden (still alive)
+					counter = 1;								// Set the counter to 1 to freeze it
+					return;										// Exit the function
 				}
 			}
-			getNewWave();												// Reaching this point means all enemies are dead, stop wave timer
+			getNewWave();										// Reaching this point means all enemies are dead, so get a new wave to spawn
 		}
 	}
 }

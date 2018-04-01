@@ -19,10 +19,12 @@ public abstract class Projectile {
 	private double speed;
 	private GOval sprite;						// The sprite that will be used for the projectile, currently just a circle for simplicity
 	private boolean isDestroyed;
+	private boolean isDestructable;				// Check if this projectile can be destroyed by the player's projectile
 
 	public Projectile(MainApplication game, boolean isPlayerProj, GPoint gunLoc, double xD, double yD, double spd, Color bulletColor, int size) {
 		setGame(game);
 		setDestroyed(false);
+		setDestructable(false);
 		setPlayerProjectile(isPlayerProj);
 		setSprite(new GOval(15,15));
 		getSprite().setFillColor(bulletColor);
@@ -62,6 +64,7 @@ public abstract class Projectile {
 		}
 	}
 	
+	// This function is called when a bullet hits another bullet with collision on
 	public void onCollision(Projectile missile) {
 		if(isPlayerProjectile() && !missile.isPlayerProjectile()) {
 			setDestroyed(true);
@@ -71,6 +74,7 @@ public abstract class Projectile {
 		}
 	}
 	
+	// This can be called by any projectile subclass, it just tells the projectile to set it's move vector towards the player
 	public void aimAtPlayer() {
 		GObject shipSprite = getGame().player.getSprite();
 		setxDir((shipSprite.getX()+shipSprite.getWidth()/2) - getSprite().getX() - getSprite().getWidth()/2);
@@ -94,7 +98,7 @@ public abstract class Projectile {
 				return;
 			}
 			for(Projectile proj : game.projectiles) {
-				if(proj instanceof HomingBullet && proj.getSprite().getBounds().intersects(hitbox)) {
+				if(proj.isDestructable() && proj.getSprite().getBounds().intersects(hitbox)) {
 					onCollision(proj);
 				}
 			}
@@ -172,5 +176,15 @@ public abstract class Projectile {
 	}
 	public void setDestroyed(boolean isDestroyed) {
 		this.isDestroyed = isDestroyed;
+	}
+
+
+	public boolean isDestructable() {
+		return isDestructable;
+	}
+
+
+	public void setDestructable(boolean isDestructable) {
+		this.isDestructable = isDestructable;
 	}
 }
