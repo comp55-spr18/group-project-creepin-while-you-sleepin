@@ -8,22 +8,17 @@ import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
 public class PlayerShip extends Ship {
-	private FireTrail trail;
-
 	public PlayerShip(MainApplication game) {
 		setGame(game);
-		setTimer(new Timer(1000/game.fps, this));
 		setInvincible(false);
-		setIframe(100);
+		setIframe(0);
 		setHealth(5);
 		setCooldown(0);
-		setMaxCooldown(20);
-		setCanShoot(true);
-		setLocation(new GPoint(0,0));
-		setGunLocation(new GPoint[] {new GPoint(50,17.5)});
-		setSprite(new GImage("auto.png", getLocation().getX(), getLocation().getY()));
+		setMaxCooldown(10);
+		setCanShoot(false);
+		setSprite(new GImage("auto.png", 0, 0));
 		setBulletColor(Color.BLUE);
-		getSprite().setSize(50, 50);
+		setSize(50, 50);
 		setDestroyed(false);
 		setDestroyedCounter(0);
 		getGame().add(getSprite());
@@ -31,10 +26,9 @@ public class PlayerShip extends Ship {
 	}
 	@Override
 	public void move() {		// Moves the player's ship hitbox to the location of the ship
-		double x = getLocation().getX();
-		double y = getLocation().getY();
-		setGunLocation(new GPoint[] {new GPoint(x+50,y+17.5)});
-		getSprite().setLocation(getLocation());
+		double x = getSprite().getLocation().getX();
+		double y = getSprite().getLocation().getY();
+		setGunLocation(new GPoint[] {new GPoint(x + getSprite().getWidth(), y + getSprite().getHeight()/2)});
 	}
 	@Override
 	public void shoot() {		// Returns the projectile type and iterates to the next gun location (or the same one if only one)
@@ -66,7 +60,7 @@ public class PlayerShip extends Ship {
 		}
 	}
 
-	public void actionPerformed(ActionEvent e) {
+	public void update() {
 		if(!isDestroyed()) {
 			shoot();
 			checkCollision();
@@ -74,14 +68,14 @@ public class PlayerShip extends Ship {
 			if(isInvincible()) {
 				if(getIframe() == 0) {
 					getSprite().setImage("truck.png");
-					getSprite().setSize(50, 50);
+					setSize(50, 50);
 				}
 				setIframe(getIframe() + 1);
 			}
 			// If the player's iframe count hits 100, make them vulnerable again
-			if(getIframe() == 100) {
+			if(getIframe() == 50) {
 				getSprite().setImage("auto.png");
-				getSprite().setSize(50, 50);
+				setSize(50, 50);
 				setInvincible(false);
 				setIframe(0);
 			}
@@ -98,14 +92,6 @@ public class PlayerShip extends Ship {
 		}
 		if (getGame().lose || getGame().win) {
 			getGame().remove(getSprite());
-			getTimer().stop();
 		}
-	}
-	// Getters and Setters
-	public FireTrail getTrail() {
-		return trail;
-	}
-	public void setTrail(FireTrail trail) {
-		this.trail = trail;
 	}
 }

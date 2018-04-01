@@ -7,8 +7,7 @@ import javax.swing.Timer;
 
 import acm.graphics.GPoint;
 
-public class FireTrail implements ActionListener {
-	private Timer timer;					// The timer used by the fire trail
+public class FireTrail {
 	private ArrayList<Projectile> trail;	// The ArrayList the projectiles are stored in
 	private Ship ship;						// The ship the trail belongs to
 	private int xDir;						// The x direction of the trail
@@ -22,24 +21,22 @@ public class FireTrail implements ActionListener {
 		ship = s;
 		if(ship instanceof PlayerShip) {
 			xDir = -1;
-			xOffset = ship.getSprite().getWidth()/4;
+			xOffset = ship.getSprite().getWidth()/5;
 			length = 1;
 			speed = 2;
 		} else {
 			xDir = 1;
 			length = 0.25;
 			speed = 1;
-			xOffset = ship.getSprite().getWidth()/3 - ship.getSprite().getWidth();
+			xOffset = ship.getSprite().getWidth()/4 - ship.getSprite().getWidth();
 		}
-		size = 25;
+		size = (int) ship.getSprite().getWidth()/2;
 		trail = new ArrayList<Projectile>();
-		timer = new Timer(5, this);
-		timer.start();
 	}
 	// This function moves all the projectiles in the arraylist as well as updates the color and size each time
 	public void move() {
 		if(!ship.isDestroyed()) {	// If the ship is not destroyed
-			location = new GPoint(ship.getLocation().getX() - xOffset, ship.getLocation().getY()+ship.getSprite().getHeight()/2-size/2);	// Set the location relative to the ship
+			location = new GPoint(ship.getSprite().getLocation().getX() - xOffset, ship.getSprite().getLocation().getY()+ship.getSprite().getHeight()/2);	// Set the location relative to the ship
 			Projectile trailProj = new Emitter(ship.getGame(), true, location, xDir, 0, speed, Color.RED, size);	// Create an emitter with the proper values
 			trail.add(trailProj);							// Add the new emitter to the arraylist
 			ship.getGame().add(trailProj.getSprite());		// Add the emitter's sprite to the game
@@ -54,28 +51,25 @@ public class FireTrail implements ActionListener {
 			}
 		}
 		for(Projectile tr : trail) {						// For each projectile in the arraylist
-			if(tr.getSprite().getWidth() <= 3) {			// If the sprite's size is small enough
+			if(tr.getSprite().getWidth() <= tr.getGame().WINDOW_WIDTH/(1920/3)) {			// If the sprite's size is small enough
 				ship.getGame().remove(tr.getSprite());		// Remove the sprite
-				tr.getTimer().stop();
+				tr.setDestroyed(true);
 				trail.remove(tr);							// Remove the projectile from the arraylist
 				break;
 			}
 		}
 	}
-	@Override
-	public void actionPerformed(ActionEvent e) {
+	
+	public void update() {
 		move();
 		if(trail.isEmpty() || ship.getGame().win) {
-			timer.stop();
+			for(Projectile proj : trail) {
+				ship.getGame().remove(proj.getSprite());
+			}
+			trail.clear();
 		}
 	}
 	// Getters and setters
-	public Timer getTimer() {
-		return timer;
-	}
-	public void setTimer(Timer timer) {
-		this.timer = timer;
-	}
 	public ArrayList<Projectile> getTrail() {
 		return trail;
 	}

@@ -6,21 +6,18 @@ import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
 public class TestEnemy extends Ship {
-	private FireTrail trail;
-	
 	public TestEnemy(MainApplication game, double y) {
 		setGame(game);
-		setTimer(new Timer(1000/game.fps, this));
 		setInvincible(false);
 		setHealth(2);
 		setCooldown(100);
 		setMaxCooldown(175);
 		setCanShoot(false);
-		setLocation(new GPoint(getGame().WINDOW_WIDTH, y));
 		setGunLocation(new GPoint[] {new GPoint(50,15)});
-		setSprite(new GImage("sprites/enemy1.png", getLocation().getX(), getLocation().getY()));
+		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
 		setBulletColor(Color.RED);
-		getSprite().setSize(50, 50);
+		setSize(50, 50);
+		setExplosion(new GImage("explosion.png"));
 		setDestroyed(false);
 		setDestroyedCounter(0);
 		setxDir(-1);
@@ -32,11 +29,10 @@ public class TestEnemy extends Ship {
 	@Override
 	public void move() {
 		getSprite().move(getxDir()*getSpeed(), getyDir()*getSpeed());
-		setLocation(getSprite().getLocation());
-		double x = getLocation().getX();
-		double y = getLocation().getY();
+		double x = getSprite().getLocation().getX();
+		double y = getSprite().getLocation().getY();
 		setGunLocation(new GPoint[] {new GPoint(x,y+17.5)});
-		if(getLocation().getX() < -100) {
+		if(getSprite().getLocation().getX() < -100) {
 			setDestroyed(true);
 		}
 	}
@@ -44,8 +40,7 @@ public class TestEnemy extends Ship {
 	public void shoot() {
 		if(canShoot()) {
 			Projectile newProj = new Bullet(getGame(), false, getGunLocation()[0], -1, 0, 14, getBulletColor(), 20);
-			newProj.setxDir((getGame().player.getLocation().getX()+25) - newProj.getLocation().getX());
-			newProj.setyDir((getGame().player.getLocation().getY()+25) - newProj.getLocation().getY());
+			newProj.aimAtPlayer();
 			getGame().add(newProj.getSprite());
 			setCanShoot(false);
 		} else {
@@ -55,12 +50,5 @@ public class TestEnemy extends Ship {
 				setCanShoot(true);
 			}
 		}
-	}
-
-	public FireTrail getTrail() {
-		return trail;
-	}
-	public void setTrail(FireTrail trail) {
-		this.trail = trail;
 	}
 }

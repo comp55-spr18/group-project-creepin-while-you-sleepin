@@ -36,14 +36,14 @@ public class SomePane extends GraphicsPane {
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		if(!program.player.isDestroyed()) {
-			program.player.setLocation(new GPoint(e.getX()-25, e.getY()-25));
+			program.player.getSprite().setLocation(new GPoint(e.getX() - program.player.getSprite().getWidth()/2, e.getY() - program.player.getSprite().getHeight()/2));
 			program.player.move();
 		}
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {
 		if(!program.player.isDestroyed()) {
-			program.player.setLocation(new GPoint(e.getX()-25, e.getY()-25));
+			program.player.getSprite().setLocation(new GPoint(e.getX() - program.player.getSprite().getWidth()/2, e.getY() - program.player.getSprite().getHeight()/2));
 			program.player.move();
 			program.isShooting = true;
 		}
@@ -51,14 +51,14 @@ public class SomePane extends GraphicsPane {
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		if(!program.player.isDestroyed()) {
-			program.player.setLocation(new GPoint(e.getX()-25, e.getY()-25));
+			program.player.getSprite().setLocation(new GPoint(e.getX() - program.player.getSprite().getWidth()/2, e.getY() - program.player.getSprite().getHeight()/2));
 			program.player.move();
 		}
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		if(!program.player.isDestroyed()) {
-			program.player.setLocation(new GPoint(e.getX()-25, e.getY()-25));
+			program.player.getSprite().setLocation(new GPoint(e.getX() - program.player.getSprite().getWidth()/2, e.getY() - program.player.getSprite().getHeight()/2));
 			program.player.move();
 			program.isShooting = false;
 		}

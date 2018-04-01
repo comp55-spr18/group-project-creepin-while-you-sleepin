@@ -7,12 +7,11 @@ import acm.graphics.*;
 import acm.program.*;
 import javax.swing.Timer;
 
-public abstract class Ship implements ActionListener {
+public abstract class Ship {
 	private MainApplication game;		// Reference to the pane the game runs on so that the ship is aware of other variables in the game
 	private GImage sprite;				// The image that will be displayed for the ship
 	private GPoint[] gunLocation;		// The points that will be used to fire projectiles, if any
 	private int selectedGun;			// Integer switch that selects which point in gunLocation array to fire from
-	private GPoint location;			// The top-left most point of the ship (like a GRectangle's location)
 	private Color bulletColor;			// The color of the projectiles fired by this ship
 	private boolean canShoot;			// Trigger that toggles on/off on cooldown in the main loop
 	private boolean invincible;			// Trigger that toggles on/off on cooldown in the main loop
@@ -20,10 +19,11 @@ public abstract class Ship implements ActionListener {
 	private int health;					// The number of hits the ship can take before being destroyed
 	private int cooldown;				// The initial value of cooldown (Set to 0 if the ship can fire as soon as it spawns)
 	private int maxCooldown;			// The number of frames between each call of the Shoot() function
-	private Timer timer;				// The timer the ship is animated by
 	private boolean isDestroyed;		// Toggles the destruction sequence of the ship
 	private int destroyedCounter;		// Counter for how long the death sprite lasts
 	private int points;					// The points the ship is worth
+	private GImage explosion;
+	private FireTrail trail;
 	
 	// These attributes only apply to enemy ships
 	private double xDir;			// Since each move() is different for each ship, these do whatever you make them do
@@ -37,9 +37,8 @@ public abstract class Ship implements ActionListener {
 		System.out.println("Needs to be accessed by child class");
 	}
 	
-	@Override
-	public void actionPerformed(ActionEvent e) {	// This is the default loop that a ship will use
-		if(!isDestroyed()) {						// If the ship is not destroyed
+	public void update() {	// This is the default loop that a ship will use
+		if(!isDestroyed()) {
 			move();									// Move the ship
 			shoot();								// Tell the ship to shoot
 			if(getHealth() <= 0) {					// If the ship's health is below 0
@@ -48,20 +47,25 @@ public abstract class Ship implements ActionListener {
 			}
 			if (getGame().lose || getGame().win) {	// If the game is over
 				getGame().remove(getSprite());		// Remove the ship sprite
-				getTimer().stop();					// Stop the ship timer
+				setDestroyed(true);
 			}
-		} else {									// If the ship is destroyed
-			getSprite().setImage("explosion.png");	// Change the sprite to an explosion
-			getSprite().setSize(50,50);				// Set the image size
+		}
+		if(isDestroyed()) {									// If the ship is destroyed
+			explosion.setLocation(getSprite().getLocation());
+			game.add(explosion);
 			setDestroyedCounter(getDestroyedCounter() + 1);		// Increment the destroyed counter
 			if(getDestroyedCounter() == 50) {		// When the counter hits 50
 				getGame().remove(getSprite());		// Remove the ship sprite
-				getTimer().stop();					// Stop the ship timer
+				getGame().remove(explosion);
+				explosion.setVisible(false);
 			}
 		}
 	}
 	
 	// Getters and setters, nothing important down here
+	public void setSize(double x, double y) {
+		getSprite().setSize(getGame().WINDOW_WIDTH/(1920/x), getGame().WINDOW_HEIGHT/(1080/y));
+	}
 	public GImage getSprite() {
 		return sprite;
 	}
@@ -73,12 +77,6 @@ public abstract class Ship implements ActionListener {
 	}
 	public void setGunLocation(GPoint[] gunLocation) {
 		this.gunLocation = gunLocation;
-	}
-	public GPoint getLocation() {
-		return location;
-	}
-	public void setLocation(GPoint location) {
-		this.location = location;
 	}
 	public Color getBulletColor() {
 		return bulletColor;
@@ -150,7 +148,7 @@ public abstract class Ship implements ActionListener {
 		return speed;
 	}
 	public void setSpeed(int speed) {
-		this.speed = speed;
+		this.speed = getGame().WINDOW_WIDTH/(1920/speed);
 	}
 	public int getSelectedGun() {
 		return selectedGun;
@@ -163,12 +161,6 @@ public abstract class Ship implements ActionListener {
 	}
 	public void setGame(MainApplication game) {
 		this.game = game;
-	}
-	public Timer getTimer() {
-		return timer;
-	}
-	public void setTimer(Timer timer) {
-		this.timer = timer;
 	}
 	public boolean isDestroyed() {
 		return isDestroyed;
@@ -187,5 +179,18 @@ public abstract class Ship implements ActionListener {
 	}
 	public void setPoints(int points) {
 		this.points = points;
+	}
+	public GImage getExplosion() {
+		return explosion;
+	}
+	public void setExplosion(GImage explosion) {
+		this.explosion = explosion;
+		this.explosion.setSize(sprite.getSize());
+	}
+	public FireTrail getTrail() {
+		return trail;
+	}
+	public void setTrail(FireTrail trail) {
+		this.trail = trail;
 	}
 }
