@@ -74,7 +74,7 @@ public class PlayerShip extends Ship {
 			}
 			// If the player's iframe count hits 100, make them vulnerable again
 			if(getIframe() == 50) {
-				getSprite().setImage("auto.png");
+				getSprite().setImage("sprites/playermodel.png");
 				setSize(50, 50);
 				setInvincible(false);
 				setIframe(0);
