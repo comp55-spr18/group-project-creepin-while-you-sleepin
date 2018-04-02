@@ -1,15 +1,11 @@
-import java.awt.Color;
 import java.awt.event.ActionEvent;
-
-import javax.swing.Timer;
 
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
-public class Drone extends Ship {
+public class Drone extends TestEnemy {
 	private int lifetime = 0;
 	private double topBot;
-	private FireTrail trail;
 	
 	public Drone(MainApplication game, double y) {
 		super(game, y);
@@ -22,31 +18,15 @@ public class Drone extends Ship {
 		setTrail(new FireTrail(this));
 		setMaxCooldown(1000);
 		setPoints(25);
-		setCanShoot(false);
-		setLocation(new GPoint(getGame().WINDOW_WIDTH, y));
-		setGunLocation(new GPoint[] {new GPoint(50,15)});
-		setSprite(new GImage("sprites/enemy1.png", getLocation().getX(), getLocation().getY()));
-		setBulletColor(Color.RED);
-		getSprite().setSize(50, 50);
-		setDestroyed(false);
-		setDestroyedCounter(0);
-		setxDir(-1);
 		if (y <= getGame().WINDOW_HEIGHT/2) {
 			setyDir(.3);
 		}
 		else {
 			setyDir(-.3);
 		}
-		setSpeed(6);
-		setTrail(new FireTrail(this));
 		//setLocation(new GPoint(getGame().WINDOW_WIDTH/1.1, y));
 		topBot = y;
-<<<<<<< HEAD
-		//setSprite(new GImage("sprites/enemy1.png", getLocation().getX(), getLocation().getY()));																			
-											
-=======
 		//setSprite(new GImage("sprites/enemy1.png", getLocation().getX(), getLocation().getY()));		
->>>>>>> branch 'master' of https://github.com/comp55-spr18/group-project-creepin-while-you-sleepin.git
 	}
 	// tweaked bullet speed
 	@Override
@@ -102,11 +82,5 @@ public class Drone extends Ship {
 			setDestroyed(true);
 		}
 		
-	}
-	public FireTrail getTrail() {
-		return trail;
-	}
-	public void setTrail(FireTrail trail) {
-		this.trail = trail;
 	}
 }
