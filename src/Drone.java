@@ -12,11 +12,14 @@ public class Drone extends Ship {
 	private FireTrail trail;
 	
 	public Drone(MainApplication game, double y) {
-		setGame(game);
-		setTimer(new Timer(1000/game.fps, this));
-		setInvincible(false);
-		setHealth(1);				//They're weak enemies
-		setCooldown(915);			//I want them to fire once then never again, dealt with by long cd
+		super(game, y);
+		getTrail().getTimer().stop();
+		setHealth(1);				// They're weak enemies
+		setCooldown(920);			// I want them to fire once then never again, dealt with by long cd
+		setSprite(new GImage("sprites/enemy2.png", getGame().WINDOW_WIDTH, y));
+		setSize(40, 40);
+		setSpeed(10);
+		setTrail(new FireTrail(this));
 		setMaxCooldown(1000);
 		setPoints(25);
 		setCanShoot(false);
@@ -38,18 +41,22 @@ public class Drone extends Ship {
 		setTrail(new FireTrail(this));
 		//setLocation(new GPoint(getGame().WINDOW_WIDTH/1.1, y));
 		topBot = y;
+<<<<<<< HEAD
 		//setSprite(new GImage("sprites/enemy1.png", getLocation().getX(), getLocation().getY()));																			
 											
+=======
+		//setSprite(new GImage("sprites/enemy1.png", getLocation().getX(), getLocation().getY()));		
+>>>>>>> branch 'master' of https://github.com/comp55-spr18/group-project-creepin-while-you-sleepin.git
 	}
 	// tweaked bullet speed
 	@Override
 	public void shoot() {
 		if(canShoot()) {
-			Projectile newProj = new Bullet(getGame(), false, getGunLocation()[0], -1, 0, 12, getBulletColor(), 20);
-			newProj.setxDir((getGame().player.getLocation().getX()+25) - newProj.getLocation().getX());
-			newProj.setyDir((getGame().player.getLocation().getY()+25) - newProj.getLocation().getY());
-			getGame().add(newProj.getSprite());
 			setCanShoot(false);
+			Projectile newProj = new Bullet(getGame(), false, getGunLocation()[0], -1, 0, 12, getBulletColor(), 20);
+			newProj.aimAtPlayer();
+			getGame().add(newProj.getSprite());
+			getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);
 		} else {
 			setCooldown(getCooldown() + 1);
 			if(getCooldown() == getMaxCooldown()) {
@@ -58,10 +65,11 @@ public class Drone extends Ship {
 			}
 		}
 	}
+
 	//moves the drone until part-way down the screen, where it curves back the way it came
 	@Override
 	public void move() {
-		if(getLocation().getX() < (getGame().WINDOW_WIDTH) / 1.5) {
+		if(getSprite().getLocation().getX() < (getGame().WINDOW_WIDTH) / 1.5) {
 			if (getxDir() != 1) {
 				
 				if(topBot <= getGame().WINDOW_HEIGHT/2) {
@@ -87,11 +95,10 @@ public class Drone extends Ship {
 		}
 		lifetime++;
 		getSprite().move(getxDir()*getSpeed(), getyDir()*getSpeed());
-		setLocation(getSprite().getLocation());
-		double x = getLocation().getX();
-		double y = getLocation().getY();
+		double x = getSprite().getLocation().getX();
+		double y = getSprite().getLocation().getY();
 		setGunLocation(new GPoint[] {new GPoint(x,y+17.5)});
-		if(lifetime > 500) {
+		if(lifetime > 200) {
 			setDestroyed(true);
 		}
 		

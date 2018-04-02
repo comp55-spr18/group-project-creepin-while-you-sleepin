@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Random;
@@ -16,7 +17,8 @@ public class SomePane extends GraphicsPane {
 	public SomePane(MainApplication app) {
 		this.program = app;
 		program.scoreBoard.setFont("Arial-Bold-22");
-		background = new GImage("level1.png");
+		program.scoreBoard.setColor(Color.WHITE);
+		background = new GImage("levels/testspacelevel.jpg");
 		background.setSize(program.getWidth()+ 500, program.getHeight());
 	}
 
@@ -36,14 +38,14 @@ public class SomePane extends GraphicsPane {
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		if(!program.player.isDestroyed()) {
-			program.player.setLocation(new GPoint(e.getX()-25, e.getY()-25));
+			program.player.getSprite().setLocation(new GPoint(e.getX() - program.player.getSprite().getWidth()/2, e.getY() - program.player.getSprite().getHeight()/2));
 			program.player.move();
 		}
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {
 		if(!program.player.isDestroyed()) {
-			program.player.setLocation(new GPoint(e.getX()-25, e.getY()-25));
+			program.player.getSprite().setLocation(new GPoint(e.getX() - program.player.getSprite().getWidth()/2, e.getY() - program.player.getSprite().getHeight()/2));
 			program.player.move();
 			program.isShooting = true;
 		}
@@ -51,14 +53,14 @@ public class SomePane extends GraphicsPane {
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		if(!program.player.isDestroyed()) {
-			program.player.setLocation(new GPoint(e.getX()-25, e.getY()-25));
+			program.player.getSprite().setLocation(new GPoint(e.getX() - program.player.getSprite().getWidth()/2, e.getY() - program.player.getSprite().getHeight()/2));
 			program.player.move();
 		}
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		if(!program.player.isDestroyed()) {
-			program.player.setLocation(new GPoint(e.getX()-25, e.getY()-25));
+			program.player.getSprite().setLocation(new GPoint(e.getX() - program.player.getSprite().getWidth()/2, e.getY() - program.player.getSprite().getHeight()/2));
 			program.player.move();
 			program.isShooting = false;
 		}

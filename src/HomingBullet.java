@@ -12,6 +12,7 @@ public class HomingBullet extends Projectile {
 	private int disengage = 150;		// After gracePeriod passes this value, the missile will stop homing
 	public HomingBullet(MainApplication game, boolean isPlayerProj, GPoint gunLoc, double xD, double yD, int spd, Color bulletColor, int size) {
 		super(game, isPlayerProj, gunLoc, xD, yD, spd, bulletColor, size);
+		setDestructable(true);
 	}
 	
 	// Notice that I had to redefine how this projectile moves since it homes in on the target
@@ -20,15 +21,12 @@ public class HomingBullet extends Projectile {
 		if(getxDir() < 0) dx = -1;
 		double angle = Math.atan(getyDir()/getxDir());
 		getSprite().move(Math.cos(angle)*getSpeed()*dx, Math.sin(angle)*getSpeed()*dx);
-		setLocation(getSprite().getLocation());
 		if(gracePeriod < disengage) {
-			// The two lines below update the movement vector to point at the player
-			setxDir((getGame().player.getLocation().getX()+25) - getLocation().getX());
-			setyDir((getGame().player.getLocation().getY()+25) - getLocation().getY());
+			aimAtPlayer();
 		}
-		if(getGame() != null && (getLocation().getX() < -50 || getLocation().getX() > getGame().WINDOW_WIDTH)) {
+		if(getGame() != null && (getSprite().getLocation().getX() < -50 || getSprite().getLocation().getX() > getGame().WINDOW_WIDTH)) {
 			getGame().remove(getSprite());
-			getTimer().stop();
+			setDestroyed(true);
 		}
 	}
 	
@@ -40,7 +38,7 @@ public class HomingBullet extends Projectile {
 			}
 			if(target instanceof PlayerShip || gracePeriod >= maxGracePeriod) {
 				getGame().remove(getSprite());
-				getTimer().stop();
+				setDestroyed(true);
 				target.setHealth(target.getHealth() - 1);
 				if(!(target instanceof PlayerShip)) {
 					target.setHealth(0);
@@ -52,13 +50,13 @@ public class HomingBullet extends Projectile {
 	
 	// I had to redefine the actionPerformed since I need to increment gracePeriod every time the timer is called
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void update() {
 		move();
 		checkCollision();
 		gracePeriod++;
 		if(getGame().lose || getGame().win) {
 			getGame().remove(getSprite());
-			getTimer().stop();
+			setDestroyed(true);
 		}
 	}
 }
