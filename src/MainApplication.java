@@ -79,39 +79,39 @@ public class MainApplication extends GraphicsApplication {
 	
 	// Main game loop
 	public void actionPerformed(ActionEvent e) {
-		player.update();
-		for(Ship enemy : enemies) {
+		player.update();									// These lines just call the update function of the player
+		for(Ship enemy : enemies) {							// and all of the enemy ships and projectiles
 			enemy.update();
 		}
 		for(Projectile proj : projectiles) {
 			proj.update();
 		}
-		for(int i = projectiles.size() - 1;i >= 0;i--) {
-			if(projectiles.get(i).isDestroyed()) {
-				projectiles.remove(i);
+		for(int i = projectiles.size() - 1;i >= 0;i--) {	// This for loop iterates backwards thru the projectiles arraylist to avoid exceptions
+			if(projectiles.get(i).isDestroyed()) {			// If the projectile is destroyed
+				projectiles.remove(i);						// Remove it from the arraylist
 			}
 		}
-		wave.update();
-		if(score >= 1000) {						// If you get 1000 or more points, you win (for now)
-			win = true;							// Set win to true so the game knows you won
+		wave.update();										// Update the wave
+		if(score >= 1000) {									// If you get 1000 or more points, you win (for now)
+			win = true;										// Set win to true so the game knows you won
 		}
-		if(win || lose) {
-			for(Ship enemy : enemies) {
+		if(win || lose) {									// If the game is over
+			for(Ship enemy : enemies) {						// Remove all enemy sprites
 				remove(enemy.getSprite());
 				remove(enemy.getExplosion());
 			}
-			for(Projectile proj : projectiles) {
+			for(Projectile proj : projectiles) {			// Remove all projectile sprites
 				remove(proj.getSprite());
 			}
-			remove(player.getSprite());
-			enemies.clear();
-			projectiles.clear();
-			if(win) {								// If you won, print it at the menu screen
+			remove(player.getSprite());						// Remove the playership sprite
+			enemies.clear();								// Clear the enemies arraylist
+			projectiles.clear();							// Clear the projectiles arraylist
+			if(win) {										// If you won, print it at the menu screen and stop the game timer
 				switchToMenu();
 				afterMessage.setLabel("You win!");
 				timer.stop();
 			}
-			if(lose) {								// If you lost, print it at the menu screen
+			if(lose) {										// If you lost, print it at the menu screen and stop the game timer
 				switchToMenu();
 				afterMessage.setLabel("You lose!");
 				timer.stop();
