@@ -56,10 +56,12 @@ public abstract class Ship {
 				explosion.setLocation(getSprite().getLocation());
 				getGame().remove(getSprite());		// Remove the ship sprite
 				game.add(explosion);
-				getAudio().playSound("sounds/ship", "shipdeath" + getGame().count + ".mp3");
-				getGame().count++;
-				if(getGame().count == 5) {
-					getGame().count = 0;
+				if(explosion.getX() > 0 && explosion.getX() < getGame().WINDOW_WIDTH) {
+					getAudio().playSound("sounds/ship", "shipdeath" + getGame().count + ".mp3");
+					getGame().count++;
+					if(getGame().count == 5) {
+						getGame().count = 0;
+					}
 				}
 			}
 			setDestroyedCounter(getDestroyedCounter() + 1);		// Increment the destroyed counter
