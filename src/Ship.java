@@ -31,10 +31,10 @@ public abstract class Ship {
 	private int speed;
 
 	public void move() {		// Declare a new move() in each new Ship subclass
-		System.out.println("Needs to be accessed by child class");
+//		System.out.println("Needs to be accessed by child class");
 	}
 	public void shoot() {		// Declare a new shoot() in each new Ship subclass
-		System.out.println("Needs to be accessed by child class");
+//		System.out.println("Needs to be accessed by child class");
 	}
 	
 	public void update() {	// This is the default loop that a ship will use
