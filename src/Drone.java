@@ -77,7 +77,7 @@ public class Drone extends TestEnemy {
 		getSprite().move(getxDir()*getSpeed(), getyDir()*getSpeed());
 		double x = getSprite().getLocation().getX();
 		double y = getSprite().getLocation().getY();
-		setGunLocation(new GPoint[] {new GPoint(x,y+17.5)});
+		setGunLocation(new GPoint[] {new GPoint(x,y+getSprite().getHeight()/2)});
 		if(lifetime > 200) {
 			setDestroyed(true);
 		}
