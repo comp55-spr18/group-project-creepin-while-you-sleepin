@@ -24,6 +24,7 @@ public class HeavyWeightEnemy extends Ship {
 		setSpeed(6);
 		setPoints(100);
 		setTrail(new FireTrail(this));
+		setAudio(AudioPlayer.getInstance());
 	}
 	@Override
 	public void move() {
