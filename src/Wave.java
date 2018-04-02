@@ -85,6 +85,9 @@ public class Wave {
 			case 5:
 			game.enemies.add(new TestEnemy(game, 100));
 			break;
+			//case 6:
+			//game.enemies.add(new Kamikazi(game,100));
+			//break;
 		}
 	}
 	

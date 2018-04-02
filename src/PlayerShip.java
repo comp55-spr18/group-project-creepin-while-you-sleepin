@@ -12,7 +12,7 @@ public class PlayerShip extends Ship {
 	public PlayerShip(MainApplication game) {
 		count = 0;
 		setGame(game);
-		setInvincible(false);
+		setInvincible(true);
 		setIframe(0);
 		setHealth(5);
 		setCooldown(0);
