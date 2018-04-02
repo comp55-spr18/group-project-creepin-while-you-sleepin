@@ -15,10 +15,10 @@ public class MainApplication extends GraphicsApplication {
 	public static final int WINDOW_HEIGHT = (int) screenSize.getHeight();
 	public static final String MUSIC_FOLDER = "sounds";
 	private static final String[] SOUND_FILES = { "r2d2.mp3", "somethinlikethis.mp3" };
-
 	private SomePane somePane;
 	private MenuPane menu;
 	private int count;
+	
 	// Variables for game loop
 	int fps = 75;
 	boolean win = false;		// Notice that we have both win and lose booleans; default state is that both are false (the player hasn't won or lost but is playing)
