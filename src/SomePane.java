@@ -16,7 +16,7 @@ public class SomePane extends GraphicsPane {
 	public SomePane(MainApplication app) {
 		this.program = app;
 		program.scoreBoard.setFont("Arial-Bold-22");
-		background = new GImage("level1.png");
+		background = new GImage("levels/testspacelevel.jpg");
 		background.setSize(program.getWidth()+ 500, program.getHeight());
 	}
 

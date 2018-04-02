@@ -107,16 +107,16 @@ public abstract class Ship {
 	}
 	public void setHealth(int health) {
 		this.health = health;
-		if(this instanceof PlayerShip) {
-			for(int i = 0;i < game.healthBar.size();i++) {
+		if(this instanceof PlayerShip) {					// If the player's health is being updated, the healthbar should reflect it
+			for(int i = 0;i < game.healthBar.size();i++) {	// Remove the current hearts from the screen
 				game.remove(game.healthBar.get(i));
 			}
-			game.healthBar.clear();
-			for(int i = 0;i < health;i++) {
-				GImage toAdd = new GImage("heart.png", 10 + 25*i, 30);
-				toAdd.setSize(20, 20);
-				game.healthBar.add(toAdd);
-				game.add(toAdd);
+			game.healthBar.clear();							// Clear the arraylist containing the heart images
+			for(int i = 0;i < health;i++) {					// For each point of health the player's ship has
+				GImage toAdd = new GImage("heart.png", 10 + 25*i, 30);	// Add a heart to the arraylist
+				toAdd.setSize(20, 20);						// Set the size
+				game.healthBar.add(toAdd);					// Add the heart to the arraylist
+				game.add(toAdd);							// Add the heart to the screen
 			}
 		}
 	}
@@ -185,7 +185,7 @@ public abstract class Ship {
 	}
 	public void setExplosion(GImage explosion) {
 		this.explosion = explosion;
-		this.explosion.setSize(sprite.getSize());
+		this.explosion.setSize(sprite.getSize());		// Set the size of the explosion sprite to the size of the ship's sprite
 	}
 	public FireTrail getTrail() {
 		return trail;

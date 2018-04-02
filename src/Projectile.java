@@ -177,13 +177,9 @@ public abstract class Projectile {
 	public void setDestroyed(boolean isDestroyed) {
 		this.isDestroyed = isDestroyed;
 	}
-
-
 	public boolean isDestructable() {
 		return isDestructable;
 	}
-
-
 	public void setDestructable(boolean isDestructable) {
 		this.isDestructable = isDestructable;
 	}
