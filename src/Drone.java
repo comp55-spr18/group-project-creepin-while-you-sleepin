@@ -32,10 +32,11 @@ public class Drone extends TestEnemy {
 	@Override
 	public void shoot() {
 		if(canShoot()) {
+			setCanShoot(false);
 			Projectile newProj = new Bullet(getGame(), false, getGunLocation()[0], -1, 0, 12, getBulletColor(), 20);
 			newProj.aimAtPlayer();
 			getGame().add(newProj.getSprite());
-			setCanShoot(false);
+			getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);
 		} else {
 			setCooldown(getCooldown() + 1);
 			if(getCooldown() == getMaxCooldown()) {

@@ -78,7 +78,11 @@ public class MainApplication extends GraphicsApplication {
 	public int playSound(String sound, int count) {
 		audio.playSound("sounds", sound + count + ".mp3");
 		count++;
-		if(count == 5) {
+		if(sound != "lowshoot") {
+			if(count == 5) {
+				count = 0;
+			}
+		} else if(count == 10) {
 			count = 0;
 		}
 		return count;
