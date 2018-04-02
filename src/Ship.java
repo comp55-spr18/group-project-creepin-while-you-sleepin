@@ -29,6 +29,20 @@ public abstract class Ship {
 	private double xDir;			// Since each move() is different for each ship, these do whatever you make them do
 	private double yDir;
 	private int speed;
+	
+	//vector move does the angle math for you.
+	public void vectorMove () {
+		int dx = 1;
+		if(getxDir() < 0) dx = -1;
+		getSprite().move(Math.cos(Math.atan(getyDir()/getxDir()))*getSpeed()*dx, Math.sin(Math.atan(getyDir()/getxDir()))*getSpeed()*dx);
+	}
+
+	// Use this if you want to aim at the player with your ship path.
+	public void aimAtPlayer() {
+		GObject shipSprite = getGame().player.getSprite();
+		setxDir((shipSprite.getX()+shipSprite.getWidth()/2) - getSprite().getX() - getSprite().getWidth()/2);
+		setyDir((shipSprite.getY()+shipSprite.getHeight()/2) - getSprite().getY() - getSprite().getHeight()/2);
+	}
 
 	public void move() {		// Declare a new move() in each new Ship subclass
 //		System.out.println("Needs to be accessed by child class");

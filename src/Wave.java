@@ -66,7 +66,7 @@ public class Wave {
 	public void easy1() {			// Generates a basic easy wave
 		switch(enemyToSpawn) {
 			case 0:
-				size = 5;
+				size = 6;
 				delay = 50;
 				break;
 			case 1:
@@ -85,9 +85,9 @@ public class Wave {
 			case 5:
 			game.enemies.add(new TestEnemy(game, 100));
 			break;
-			//case 6:
-			//game.enemies.add(new Kamikazi(game,100));
-			//break;
+			case 6:
+			game.enemies.add(new Kamikazi(game,100));
+			break;
 		}
 	}
 	
