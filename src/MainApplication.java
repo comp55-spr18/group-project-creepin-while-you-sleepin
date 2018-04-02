@@ -16,14 +16,17 @@ public class MainApplication extends GraphicsApplication {
 	private static final String[] SOUND_FILES = { "r2d2.mp3", "somethinlikethis.mp3" };
 	private SomePane somePane;
 	private MenuPane menu;
-	private int count;
 	
 	// Variables for game loop
+	public int lowShootCount = 0;
+	public int playerShootCount = 0;
+	public int shipDeathCount = 0;
 	int fps = 75;
 	boolean win = false;		// Notice that we have both win and lose booleans; default state is that both are false (the player hasn't won or lost but is playing)
 	boolean lose = false;		// this means we need to be explicit and can't assume that because win = false that the player lost
 	boolean easy = false;
 	Random rgen = new Random();
+	AudioPlayer audio;
 	ArrayList<Ship> enemies = new ArrayList<Ship>();
 	ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	PlayerShip player;
@@ -42,13 +45,16 @@ public class MainApplication extends GraphicsApplication {
 	public void run() {
 		somePane = new SomePane(this);
 		menu = new MenuPane(this);
-		switchToMenu();
+		audio = AudioPlayer.getInstance();
+		playRandomSound();					// The audio player needs time to "wake up" when it gets used the first time
+		pause(2500);						// Give the audio player time to wake up
+		switchToMenu();						// Then switch to the menu screen
 	}
 
 	public void switchToMenu() {
 //		playRandomSound();
 		enemies.clear();
-		count++;
+		shipDeathCount++;
 		switchToScreen(menu);
 	}
 
@@ -66,8 +72,16 @@ public class MainApplication extends GraphicsApplication {
 	}
 
 	private void playRandomSound() {
-		AudioPlayer audio = AudioPlayer.getInstance();
-		audio.playSound("sounds", "shoot.mp3");
+		audio.playSound("sounds", "r2d2.mp3");
+	}
+	
+	public int playSound(String sound, int count) {
+		audio.playSound("sounds", sound + count + ".mp3");
+		count++;
+		if(count == 5) {
+			count = 0;
+		}
+		return count;
 	}
 	
 	// Adds points to the scoreboard

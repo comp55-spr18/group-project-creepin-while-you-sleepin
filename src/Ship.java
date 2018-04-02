@@ -24,7 +24,6 @@ public abstract class Ship {
 	private int points;					// The points the ship is worth
 	private GImage explosion;
 	private FireTrail trail;
-	private AudioPlayer audio;
 	
 	// These attributes only apply to enemy ships
 	private double xDir;			// Since each move() is different for each ship, these do whatever you make them do
@@ -52,9 +51,14 @@ public abstract class Ship {
 			}
 		}
 		if(isDestroyed()) {									// If the ship is destroyed
-			explosion.setLocation(getSprite().getLocation());
-			getGame().remove(getSprite());		// Remove the ship sprite
-			game.add(explosion);
+			if(getDestroyedCounter() == 0) {
+				explosion.setLocation(getSprite().getLocation());
+				getGame().remove(getSprite());		// Remove the ship sprite
+				game.add(explosion);
+				if(explosion.getX() > 0 && explosion.getX() < getGame().WINDOW_WIDTH) {
+					getGame().shipDeathCount = getGame().playSound("shipdeath", getGame().shipDeathCount);
+				}
+			}
 			setDestroyedCounter(getDestroyedCounter() + 1);		// Increment the destroyed counter
 			if(getDestroyedCounter() == 50) {		// When the counter hits 50
 				getGame().remove(explosion);
@@ -193,11 +197,5 @@ public abstract class Ship {
 	}
 	public void setTrail(FireTrail trail) {
 		this.trail = trail;
-	}
-	public AudioPlayer getAudio() {
-		return audio;
-	}
-	public void setAudio(AudioPlayer audio) {
-		this.audio = audio;
 	}
 }

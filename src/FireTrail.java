@@ -17,6 +17,8 @@ public class FireTrail implements ActionListener {
 	private double length;					// The length of the trail
 	private double speed;					// The speed of the projectiles in the trail
 	private double xOffset;					// The offset of the trail relative to the ship
+	private int projCount;
+	private int colorScale;
 	
 	FireTrail(Ship s) {
 		ship = s;
@@ -27,11 +29,13 @@ public class FireTrail implements ActionListener {
 			speed = 2;
 		} else {
 			xDir = 1;
-			length = 0.25;
+			length = 0.35;
 			speed = 1;
 			xOffset = ship.getSprite().getWidth()/4 - ship.getSprite().getWidth();
 		}
 		size = (int) ship.getSprite().getWidth()/2;
+		projCount = (int) (((size/0.5)*length) - 3/(0.5/length));
+		colorScale = 255/(projCount/2);
 		trail = new ArrayList<Projectile>();
 		timer = new Timer(5, this);
 		timer.start();
@@ -48,8 +52,8 @@ public class FireTrail implements ActionListener {
 			tr.move();					// Move it
 			tr.getSprite().setSize(tr.getSprite().getWidth()-(0.5/length), tr.getSprite().getWidth()-(0.5/length));		// Set the size to be smaller
 			tr.getSprite().setLocation(tr.getSprite().getX(), tr.getSprite().getY()+(0.25/length));						// Set the position to be a little lower so it's centered
-			if(tr.getSprite().getColor().getGreen()+(10/length) <= 255) {												// If more green can be added to the sprite
-				tr.getSprite().setColor(new Color(tr.getSprite().getColor().getRed(), (int) (tr.getSprite().getColor().getGreen() + (10/length)), tr.getSprite().getColor().getBlue()));
+			if(tr.getSprite().getColor().getGreen() + colorScale <= 255) {												// If more green can be added to the sprite
+				tr.getSprite().setColor(new Color(tr.getSprite().getColor().getRed(), (int) (tr.getSprite().getColor().getGreen() + colorScale), tr.getSprite().getColor().getBlue()));
 				tr.getSprite().setFillColor(tr.getSprite().getColor()); // Add green to the sprite (turning it from red to yellow gradually)
 			}
 		}

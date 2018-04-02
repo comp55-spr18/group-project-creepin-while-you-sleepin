@@ -27,7 +27,6 @@ public class Drone extends TestEnemy {
 		//setLocation(new GPoint(getGame().WINDOW_WIDTH/1.1, y));
 		topBot = y;
 		//setSprite(new GImage("sprites/enemy1.png", getLocation().getX(), getLocation().getY()));		
-		setAudio(AudioPlayer.getInstance());
 	}
 	// tweaked bullet speed
 	@Override
@@ -37,8 +36,6 @@ public class Drone extends TestEnemy {
 			newProj.aimAtPlayer();
 			getGame().add(newProj.getSprite());
 			setCanShoot(false);
-//			getAudio().stopSound("sounds", "shipdeath.mp3");
-//			getAudio().playSound("sounds", "shipdeath.mp3");
 		} else {
 			setCooldown(getCooldown() + 1);
 			if(getCooldown() == getMaxCooldown()) {
@@ -47,6 +44,7 @@ public class Drone extends TestEnemy {
 			}
 		}
 	}
+
 	//moves the drone until part-way down the screen, where it curves back the way it came
 	@Override
 	public void move() {
