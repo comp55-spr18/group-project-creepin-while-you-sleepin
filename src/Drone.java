@@ -27,7 +27,6 @@ public class Drone extends TestEnemy {
 		//setLocation(new GPoint(getGame().WINDOW_WIDTH/1.1, y));
 		topBot = y;
 		//setSprite(new GImage("sprites/enemy1.png", getLocation().getX(), getLocation().getY()));		
-		setAudio(AudioPlayer.getInstance());
 	}
 	// tweaked bullet speed
 	@Override
