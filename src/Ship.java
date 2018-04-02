@@ -24,6 +24,7 @@ public abstract class Ship {
 	private int points;					// The points the ship is worth
 	private GImage explosion;
 	private FireTrail trail;
+	private AudioPlayer audio;
 	
 	// These attributes only apply to enemy ships
 	private double xDir;			// Since each move() is different for each ship, these do whatever you make them do
@@ -192,5 +193,11 @@ public abstract class Ship {
 	}
 	public void setTrail(FireTrail trail) {
 		this.trail = trail;
+	}
+	public AudioPlayer getAudio() {
+		return audio;
+	}
+	public void setAudio(AudioPlayer audio) {
+		this.audio = audio;
 	}
 }

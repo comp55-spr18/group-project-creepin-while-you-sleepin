@@ -8,13 +8,15 @@ import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
 public class PlayerShip extends Ship {
+	private int count;
 	public PlayerShip(MainApplication game) {
+		count = 0;
 		setGame(game);
 		setInvincible(false);
 		setIframe(0);
 		setHealth(5);
 		setCooldown(0);
-		setMaxCooldown(10);
+		setMaxCooldown(20);
 		setCanShoot(false);
 		setSprite(new GImage("sprites/playermodel.png", 0, 0));
 		setBulletColor(Color.BLUE);
@@ -23,6 +25,7 @@ public class PlayerShip extends Ship {
 		setDestroyedCounter(0);
 		getGame().add(getSprite());
 		setTrail(new FireTrail(this));
+		setAudio(AudioPlayer.getInstance());
 	}
 	@Override
 	public void move() {		// Moves the player's ship hitbox to the location of the ship
@@ -36,6 +39,12 @@ public class PlayerShip extends Ship {
 			setCanShoot(false);
 			Projectile newProj = new Bullet(getGame(), true, getGunLocation()[0], 1, 0, 25, getBulletColor(), 15);
 			getGame().add(newProj.getSprite());
+			getAudio().playSound("sounds/player", "shoot" + count + ".mp3");
+			count++;
+			if(count == 5) {
+				count = 0;
+			}
+			
 		} else if (!canShoot()) {
 			setCooldown(getCooldown() + 1);
 			if(getCooldown() == getMaxCooldown()) {

@@ -25,6 +25,7 @@ public class TestEnemy extends Ship {
 		setSpeed(6);
 		setPoints(100);
 		setTrail(new FireTrail(this));
+		setAudio(AudioPlayer.getInstance());
 	}
 	@Override
 	public void move() {
@@ -43,6 +44,8 @@ public class TestEnemy extends Ship {
 			newProj.aimAtPlayer();
 			getGame().add(newProj.getSprite());
 			setCanShoot(false);
+//			getAudio().stopSound("sounds", "shipdeath.mp3");
+//			getAudio().playSound("sounds", "shipdeath.mp3");
 		} else {
 			setCooldown(getCooldown() + 1);
 			if(getCooldown() == getMaxCooldown()) {

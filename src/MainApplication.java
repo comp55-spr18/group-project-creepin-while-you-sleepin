@@ -13,7 +13,6 @@ public class MainApplication extends GraphicsApplication {
 	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	public static final int WINDOW_WIDTH = (int) screenSize.getWidth();
 	public static final int WINDOW_HEIGHT = (int) screenSize.getHeight();
-	public static final String MUSIC_FOLDER = "sounds";
 	private static final String[] SOUND_FILES = { "r2d2.mp3", "somethinlikethis.mp3" };
 	private SomePane somePane;
 	private MenuPane menu;
@@ -68,7 +67,7 @@ public class MainApplication extends GraphicsApplication {
 
 	private void playRandomSound() {
 		AudioPlayer audio = AudioPlayer.getInstance();
-		audio.playSound(MUSIC_FOLDER, SOUND_FILES[count % SOUND_FILES.length]);
+		audio.playSound("sounds", "shoot.mp3");
 	}
 	
 	// Adds points to the scoreboard
