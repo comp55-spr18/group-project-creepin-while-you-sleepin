@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Random;
@@ -16,6 +17,7 @@ public class SomePane extends GraphicsPane {
 	public SomePane(MainApplication app) {
 		this.program = app;
 		program.scoreBoard.setFont("Arial-Bold-22");
+		program.scoreBoard.setColor(Color.WHITE);
 		background = new GImage("levels/testspacelevel.jpg");
 		background.setSize(program.getWidth()+ 500, program.getHeight());
 	}
