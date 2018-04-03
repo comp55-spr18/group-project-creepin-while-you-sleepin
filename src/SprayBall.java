@@ -12,7 +12,7 @@ public class SprayBall extends TestEnemy {
 		getTrail().getTimer().stop();
 		setHealth(999);				// Effectively invincible
 		setCooldown(700);			// 
-		setSprite(new GImage("sprites/enemy2.png", getGame().WINDOW_WIDTH, y));
+		setSprite(new GImage("sprites/enemy4.png", getGame().WINDOW_WIDTH, y));
 		//pretty sure this line is pointless
 		setGunLocation(new GPoint[] {new GPoint(50,15), new GPoint(49, 15), new GPoint(48, 15), new GPoint(47, 15)}); 
 		setSize(120, 120);
