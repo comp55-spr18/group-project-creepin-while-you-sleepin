@@ -32,6 +32,7 @@ public abstract class Projectile {
 		getSprite().setLocation(gunLoc.getX(), gunLoc.getY() - getSprite().getHeight()/2);
 		setDamage(1);
 		getGame().projectiles.add(this);
+		getGame().add(getSprite());
 	}
 	
 

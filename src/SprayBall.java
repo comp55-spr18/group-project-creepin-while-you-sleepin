@@ -50,10 +50,6 @@ public class SprayBall extends TestEnemy {
 				newProj3.setxDir(-2+firing*(.1));
 				newProj3.setyDir(1-firing*(.1));
 			}
-			getGame().add(newProj.getSprite());
-			getGame().add(newProj1.getSprite());
-			getGame().add(newProj2.getSprite());
-			getGame().add(newProj3.getSprite());
 			getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);
 			firing++;
 			if (firing == 21) {

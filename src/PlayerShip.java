@@ -30,8 +30,7 @@ public class PlayerShip extends Ship {
 	public void shoot() {		// Returns the projectile type and iterates to the next gun location (or the same one if only one)
 		if(canShoot() && getGame().isShooting) {
 			setCanShoot(false);
-			Projectile newProj = new Bullet(getGame(), true, getGunLocation()[0], 1, 0, 25, getBulletColor(), 15);
-			getGame().add(newProj.getSprite());
+			new Bullet(getGame(), true, getGunLocation()[0], 1, 0, 25, getBulletColor(), 15);
 			getGame().playerShootCount = getGame().playSound("playershoot", getGame().playerShootCount);
 		} else if (!canShoot()) {
 			setCooldown(getCooldown() + 1);

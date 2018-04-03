@@ -11,8 +11,7 @@ public class TestHomingEnemy extends TestEnemy {
 	public void shoot() {
 		if(canShoot()) {
 			setCanShoot(false);
-			Projectile newProj = new HomingBullet(getGame(), false, getGunLocation()[0], -1, 0, 8, getBulletColor(), 40);
-			getGame().add(newProj.getSprite());
+			new HomingBullet(getGame(), false, getGunLocation()[0], -1, 0, 8, getBulletColor(), 40);
 			getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);
 		} else {
 			setCooldown(getCooldown() + 1);
