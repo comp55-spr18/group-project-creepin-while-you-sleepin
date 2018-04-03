@@ -1,11 +1,5 @@
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.util.*;
-import javax.swing.Timer;
 import acm.graphics.*;
-import acm.program.*;
 
 // This is an abstract class so all functions declared in this class can be overwritten in a subclass if you'd like
 // If you want a new projectile to behave like this one but interact differently when it hits something, just

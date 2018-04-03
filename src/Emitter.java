@@ -1,10 +1,4 @@
-
 import java.awt.Color;
-
-import javax.swing.Timer;
-
-
-import acm.graphics.GOval;
 import acm.graphics.GPoint;
 // This class exists just for fancy effects, it is a bullet that does no damage
 public class Emitter extends Projectile {

@@ -13,7 +13,6 @@ public class MainApplication extends GraphicsApplication {
 	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	public static final int WINDOW_WIDTH = (int) screenSize.getWidth();
 	public static final int WINDOW_HEIGHT = (int) screenSize.getHeight();
-	private static final String[] SOUND_FILES = { "r2d2.mp3", "somethinlikethis.mp3" };
 	private GamePane somePane;
 	private MenuPane menu;
 	private EndPane endPane;

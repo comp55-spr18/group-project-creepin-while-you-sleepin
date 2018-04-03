@@ -1,5 +1,3 @@
-import java.awt.event.ActionEvent;
-
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 

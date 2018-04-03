@@ -1,7 +1,4 @@
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import javax.swing.Timer;
-
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 

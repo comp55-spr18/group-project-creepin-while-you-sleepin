@@ -1,11 +1,5 @@
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.util.*;
 import acm.graphics.*;
-import acm.program.*;
-import javax.swing.Timer;
 
 public abstract class Ship {
 	private MainApplication game;		// Reference to the pane the game runs on so that the ship is aware of other variables in the game
