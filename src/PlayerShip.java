@@ -49,14 +49,14 @@ public class PlayerShip extends Ship {
 	public void checkCollision() {
 		for(Ship enemy : getGame().enemies) {
 			if(getSprite().getBounds().intersects(enemy.getSprite().getBounds()) && !enemy.isDestroyed()) {
-				onCollision();
+				onCollision(enemy);
 			}
 		}
 	}
 
-	public void onCollision() {
+	public void onCollision(Ship enemy) {
 		if(!isInvincible()) {
-			setHealth(getHealth() - 1);
+			setHealth(getHealth() - enemy.getCollisionDamage());
 			setInvincible(true);
 		}
 	}

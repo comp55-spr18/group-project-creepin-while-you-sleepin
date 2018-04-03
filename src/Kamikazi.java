@@ -22,6 +22,7 @@ public class Kamikazi extends Ship {
 		setyDir(0);
 		setSpeed(8);
 		setPoints(100);
+		setCollisionDamage(2);
 		setTrail(new FireTrail(this));
 	}
 	@Override

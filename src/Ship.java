@@ -24,6 +24,7 @@ public abstract class Ship {
 	private int points;					// The points the ship is worth
 	private GImage explosion;
 	private FireTrail trail;
+	private int collisionDamage;
 	
 	// These attributes only apply to enemy ships
 	private double xDir;			// Since each move() is different for each ship, these do whatever you make them do
@@ -211,5 +212,13 @@ public abstract class Ship {
 	}
 	public void setTrail(FireTrail trail) {
 		this.trail = trail;
+	}
+
+	public int getCollisionDamage() {
+		return collisionDamage;
+	}
+
+	public void setCollisionDamage(int collisionDamage) {
+		this.collisionDamage = collisionDamage;
 	}
 }

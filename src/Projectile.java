@@ -20,6 +20,7 @@ public abstract class Projectile {
 	private GOval sprite;						// The sprite that will be used for the projectile, currently just a circle for simplicity
 	private boolean isDestroyed;
 	private boolean isDestructable;				// Check if this projectile can be destroyed by the player's projectile
+	private int damage;
 
 	public Projectile(MainApplication game, boolean isPlayerProj, GPoint gunLoc, double xD, double yD, double spd, Color bulletColor, int size) {
 		setGame(game);
@@ -35,6 +36,7 @@ public abstract class Projectile {
 		setSize(size, size);
 		setSpeed(spd);
 		getSprite().setLocation(gunLoc.getX(), gunLoc.getY() - getSprite().getHeight()/2);
+		setDamage(1);
 		getGame().projectiles.add(this);
 	}
 	
@@ -59,7 +61,7 @@ public abstract class Projectile {
 				}
 				setDestroyed(true);
 				getGame().remove(getSprite());
-				target.setHealth(target.getHealth() - 1);
+				target.setHealth(target.getHealth() - getDamage());
 			}
 		}
 	}
@@ -182,5 +184,11 @@ public abstract class Projectile {
 	}
 	public void setDestructable(boolean isDestructable) {
 		this.isDestructable = isDestructable;
+	}
+	public int getDamage() {
+		return damage;
+	}
+	public void setDamage(int damage) {
+		this.damage = damage;
 	}
 }
