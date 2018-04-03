@@ -47,6 +47,7 @@ public abstract class Projectile {
 		if(getxDir() < 0) dx = -1;
 		getSprite().move(Math.cos(Math.atan(getyDir()/getxDir()))*getSpeed()*dx, Math.sin(Math.atan(getyDir()/getxDir()))*getSpeed()*dx);
 		if(getGame() != null && (getSprite().getLocation().getX() < -50 || getSprite().getLocation().getX() > getGame().WINDOW_WIDTH)) {
+			setDestroyed(true);
 			getGame().remove(getSprite());
 		}
 	}
@@ -62,6 +63,7 @@ public abstract class Projectile {
 				setDestroyed(true);
 				getGame().remove(getSprite());
 				target.setHealth(target.getHealth() - getDamage());
+				getGame().projectileDeathCount = getGame().playSound("projectiledeath", getGame().projectileDeathCount);
 			}
 		}
 	}
@@ -73,6 +75,7 @@ public abstract class Projectile {
 			missile.setDestroyed(true);
 			getGame().remove(getSprite());
 			getGame().remove(missile.getSprite());
+			getGame().projectileDeathCount = getGame().playSound("projectiledeath", getGame().projectileDeathCount);
 		}
 	}
 	

@@ -21,6 +21,7 @@ public class MainApplication extends GraphicsApplication {
 	public int lowShootCount = 0;
 	public int playerShootCount = 0;
 	public int shipDeathCount = 0;
+	public int projectileDeathCount = 0;
 	int fps = 75;
 	boolean win = false;		// Notice that we have both win and lose booleans; default state is that both are false (the player hasn't won or lost but is playing)
 	boolean lose = false;		// this means we need to be explicit and can't assume that because win = false that the player lost
@@ -78,11 +79,15 @@ public class MainApplication extends GraphicsApplication {
 	public int playSound(String sound, int count) {
 		audio.playSound("sounds", sound + count + ".mp3");
 		count++;
-		if(sound != "lowshoot") {
-			if(count == 5) {
+		if(sound == "lowshoot") {
+			if(count == 10) {
 				count = 0;
 			}
-		} else if(count == 10) {
+		} else if(sound == "projectiledeath") {
+			if(count == 6) {
+				count = 0;
+			}
+		} else if(count == 5) {
 			count = 0;
 		}
 		return count;

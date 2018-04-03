@@ -39,10 +39,11 @@ public class HomingBullet extends Projectile {
 			if(target instanceof PlayerShip || gracePeriod >= maxGracePeriod) {
 				getGame().remove(getSprite());
 				setDestroyed(true);
-				target.setHealth(target.getHealth() - 1);
+				target.setHealth(target.getHealth() - getDamage());
+				getGame().projectileDeathCount = getGame().playSound("projectiledeath", getGame().projectileDeathCount);
 				if(!(target instanceof PlayerShip)) {
 					target.setHealth(0);
-					getGame().updateScoreBoard(500);
+					getGame().updateScoreBoard(300);
 				}
 			}
 		}
