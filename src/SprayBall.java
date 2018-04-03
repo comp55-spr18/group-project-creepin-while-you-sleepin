@@ -11,7 +11,7 @@ public class SprayBall extends TestEnemy {
 	public SprayBall(MainApplication game, double y, double detonation) {
 		super(game, y);
 		getTrail().getTimer().stop();
-		setHealth(999);				// Effectively invincible
+		setHealth(999);				// Effectively invincible 
 		setCooldown(700);			// 
 		setSprite(new GImage("sprites/enemy2.png", getGame().WINDOW_WIDTH, y));
 		//pretty sure this line is pointless
