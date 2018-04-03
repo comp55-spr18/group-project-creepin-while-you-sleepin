@@ -75,7 +75,7 @@ public class Wave {
 			game.enemies.add(new TestEnemy(game, 100));		// The second and so on
 			break;
 			case 3:
-			game.enemies.add(new Seeker(game, 300));
+			game.enemies.add(new TestEnemy(game, 300));
 			break;
 			case 4:
 			game.enemies.add(new TestEnemy(game, 500));
@@ -84,7 +84,7 @@ public class Wave {
 			game.enemies.add(new TestEnemy(game, 100));
 			break;
 			case 6:
-			game.enemies.add(new Kamikazi(game,100));
+			game.enemies.add(new SprayBall(game, 450));
 			break;
 		}
 	}
