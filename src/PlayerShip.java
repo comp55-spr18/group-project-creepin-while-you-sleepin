@@ -52,8 +52,7 @@ public class PlayerShip extends Ship {
 
 	public void onCollision(Ship enemy) {
 		if(!isInvincible()) {
-			setHealth(getHealth() - enemy.getCollisionDamage());
-			setInvincible(true);
+			dealDamage(enemy.getCollisionDamage());
 		}
 	}
 

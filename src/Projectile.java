@@ -51,13 +51,9 @@ public abstract class Projectile {
 	public void onCollision(Ship target) {
 		if((isPlayerProjectile() && !(target instanceof PlayerShip)) || (!isPlayerProjectile() && target instanceof PlayerShip)) {
 			if(!target.isInvincible()) {
-				if(target instanceof PlayerShip) {
-					target.setInvincible(true);
-				}
 				setDestroyed(true);
 				getGame().remove(getSprite());
-				target.setHealth(target.getHealth() - getDamage());
-				getGame().projectileDeathCount = getGame().playSound("projectiledeath", getGame().projectileDeathCount);
+				target.dealDamage(getDamage());
 			}
 		}
 	}
@@ -69,7 +65,7 @@ public abstract class Projectile {
 			missile.setDestroyed(true);
 			getGame().remove(getSprite());
 			getGame().remove(missile.getSprite());
-			getGame().projectileDeathCount = getGame().playSound("projectiledeath", getGame().projectileDeathCount);
+			getGame().enemyHitCount = getGame().playSound("enemyhit", getGame().enemyHitCount);
 		}
 	}
 	

@@ -20,8 +20,9 @@ public class MainApplication extends GraphicsApplication {
 	// Variables for game loop
 	public int lowShootCount;
 	public int playerShootCount;
-	public int shipDeathCount ;
-	public int projectileDeathCount ;
+	public int shipDeathCount;
+	public int enemyHitCount;
+	public int playerHitCount;
 	int fps = 75;
 	boolean win = false;		// Notice that we have both win and lose booleans; default state is that both are false (the player hasn't won or lost but is playing)
 	boolean lose = false;		// this means we need to be explicit and can't assume that because win = false that the player lost
@@ -66,7 +67,7 @@ public class MainApplication extends GraphicsApplication {
 		lowShootCount = 0;
 		playerShootCount = 0;
 		shipDeathCount = 0;
-		projectileDeathCount = 0;
+		enemyHitCount = 0;
 		lose = false;							// Reset the lose/win booleans
 		win = false;
 		timer.start();							// Start the game
@@ -82,10 +83,6 @@ public class MainApplication extends GraphicsApplication {
 		count++;
 		if(sound == "lowshoot") {
 			if(count == 20) {
-				count = 0;
-			}
-		} else if(sound == "projectiledeath") {
-			if(count == 6) {
 				count = 0;
 			}
 		} else if(count == 5) {
