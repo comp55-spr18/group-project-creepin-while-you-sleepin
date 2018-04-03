@@ -82,7 +82,7 @@ public class MainApplication extends GraphicsApplication {
 		audio.playSound("sounds", sound + count + ".mp3");
 		count++;
 		if(sound == "lowshoot") {
-			if(count == 10) {
+			if(count == 20) {
 				count = 0;
 			}
 		} else if(sound == "projectiledeath") {
