@@ -8,6 +8,7 @@ public class MenuPane extends GraphicsPane {
 	// all of the GraphicsProgram calls
 	private GButton rect;
 	private GButton rect2;
+	private GButton rect3;
 	private GImage background;
 
 	public MenuPane(MainApplication app) {
@@ -16,9 +17,11 @@ public class MenuPane extends GraphicsPane {
 		double scaleX = program.WINDOW_WIDTH/(1920/100.0);
 		double scaleY = program.WINDOW_HEIGHT/(1080/100.0);
 		rect = new GButton("EASY", 4*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
+		rect3 = new GButton("QUIT", 9*scaleX, 8.5*scaleY, scaleX, scaleY);
 		rect2 = new GButton("HARD", 13*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
 		rect.setFillColor(Color.RED);
 		rect2.setFillColor(Color.RED);
+		rect3.setFillColor(Color.RED);
 		background = new GImage("mainmenu.jpg");
 		background.setSize(program.getWidth(), program.getHeight());
 	}
@@ -28,6 +31,7 @@ public class MenuPane extends GraphicsPane {
 		program.add(background);
 		program.add(rect);
 		program.add(rect2);
+		program.add(rect3);
 	}
 
 	@Override
@@ -35,6 +39,7 @@ public class MenuPane extends GraphicsPane {
 		program.remove(background);
 		program.remove(rect);
 		program.remove(rect2);
+		program.remove(rect3);
 	}
 	
 	@Override
@@ -47,6 +52,9 @@ public class MenuPane extends GraphicsPane {
 		if (obj == rect2) {
 			program.easy = false;
 			program.switchToGame();
+		}
+		if (obj == rect3) {
+			System.exit(0);
 		}
 	}
 }
