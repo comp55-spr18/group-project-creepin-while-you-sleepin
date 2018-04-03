@@ -16,6 +16,7 @@ public class Seeker extends TestEnemy {
 		setSprite(new GImage("sprites/enemy2.png", getGame().WINDOW_WIDTH, y));
 		setSize(100, 100);
 		setSpeed(12);
+		setExplosion(new GImage("explosion.png"));
 		setTrail(new FireTrail(this));
 		setPoints(200);
 		setxDir(0);
@@ -41,7 +42,7 @@ public class Seeker extends TestEnemy {
 			seek = 100;	
 		}
 		//checks if seeker is within one move(speed) of target coordinates. If it is, stops seeker
-		if ( (((java.lang.Math.abs(playerx - getSprite().getX() + getSprite().getWidth()/2)) <= getSpeed()) && (seek < 99)) || (((java.lang.Math.abs(playery - getSprite().getY() + getSprite().getHeight()/2) <= getSpeed())) && (seek < 99)) ) {
+		if ((((Math.abs(playerx - getSprite().getX() + getSprite().getWidth()/2)) <= getSpeed()) && (seek < 99)) || (((Math.abs(playery - getSprite().getY() + getSprite().getHeight()/2) <= getSpeed())) && (seek < 99)) ) {
 			setxDir(0);
 			setyDir(0);
 		}
