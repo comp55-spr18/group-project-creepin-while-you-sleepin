@@ -73,7 +73,7 @@ public class Wave {
 	public void easy1() {			// Generates a basic easy wave
 		switch(enemyToSpawn) {
 			case 0:
-				size = 1;
+				size = 6;
 				delay = 50;
 				break;
 			case 1:
