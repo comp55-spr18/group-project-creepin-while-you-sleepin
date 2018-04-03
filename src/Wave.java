@@ -10,16 +10,15 @@ public class Wave {
 	int enemyToSpawn;			// The next enemy the wave wants to spawn
 	int delay;					// The delay before the next enemy spawns
 	int size;					// The size of the current wave
-	int weight;					// The odds of getting an easy or hard wave
 	int selectedDifficulty;		// The difficulty of the current wave
 	int selectedWave;			// The rgen value of the current wave
 	
 	public Wave(MainApplication g) {
 		game = g;
-		if(game.easy) {				// If the game is on easy, set the weight to 100
-			weight = 100;
-		} else {					// Otherwise, set it to 25
-			weight = 25;
+		if(game.easy) {				// If the game is on easy, set selectedDifficulty to 0
+			selectedDifficulty = 0;
+		} else {					// If the game is on hard, set selectedDifficulty to 1
+			selectedDifficulty = 1;
 		}
 		getNewWave();				// Start the first wave
 	}
@@ -31,30 +30,29 @@ public class Wave {
 		game.enemies = new ArrayList<Ship>();	// Make enemies a new arraylist
 		counter = 0;							// Reset the counter
 		enemyToSpawn = 0;						// Reset the enemy to spawn (we set it to -1 so that it reads the delay and size of the wave but doesn't spawn anything)
-		selectedDifficulty = Math.abs(game.rgen.nextInt()%weight);	// Select the difficulty of the new wave
-		if(selectedDifficulty < 20) {								// If the difficulty of the new wave is hard
-			selectedWave = Math.abs(game.rgen.nextInt()%2);			// Randomly select one of the hard waves (currently hard1() and Drone())
+		if(selectedDifficulty == 0) {								// If the difficulty of the new wave is hard
+			selectedWave = Math.abs(game.rgen.nextInt()%1);			// Randomly select one of the easy waves (currently hard1() and Drone())
 		} else {													// If the wave is easy
-			selectedWave = Math.abs(game.rgen.nextInt()%1);			// Randomly select one of the easy waves (currently only easy1())
+			selectedWave = Math.abs(game.rgen.nextInt()%2);			// Randomly select one of the hard waves (currently only easy1())
 		}
 		getNextEnemy();												// Get the next enemy (must be called here to initialize delay and size)
 	}
 	
 	public void getNextEnemy() {			// Generates the next enemy in the wave
-		if(selectedDifficulty < 20) {		// If the wave difficulty is hard
-			switch(selectedWave) {			// Switch statement for all the hard waves
-				case 0:
-					hard1();
-					break;
-				case 1:
-					Drone();
-					break;
-			}
-		} else {							// If the wave difficulty is easy
+		if(selectedDifficulty == 0) {		// If the wave difficulty is easy
 			switch(selectedWave) {			// Switch statement for all the easy waves
-				case 0:
-					easy1();
-					break;
+			case 0:
+				easy1();
+				break;
+			}
+		} else {							// If the wave difficulty is hard
+			switch(selectedWave) {			// Switch statement for all the hard waves
+			case 0:
+				hard1();
+				break;
+			case 1:
+				Drone();
+				break;
 			}
 		}
 		if(enemyToSpawn > 0) {				// If an enemy was created
