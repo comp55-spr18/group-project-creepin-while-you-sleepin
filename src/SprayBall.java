@@ -15,7 +15,7 @@ public class SprayBall extends TestEnemy {
 		setCooldown(700);			// 
 		setSprite(new GImage("sprites/enemy4.png", getGame().WINDOW_WIDTH, y));
 		//pretty sure this line is pointless
-		setGunLocation(new GPoint[] {new GPoint(50,15), new GPoint(49, 15), new GPoint(48, 15), new GPoint(47, 15)}); 
+		setGunLocation(new GPoint[] {}); 
 		setSize(120, 120);
 		setSpeed(6);
 		setTrail(new FireTrail(this));

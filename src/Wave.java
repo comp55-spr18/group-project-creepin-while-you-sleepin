@@ -77,24 +77,24 @@ public class Wave {
 				delay = 50;
 				break;
 			case 1:
-			game.enemies.add(new HeavyWeightEnemy(game, 500));		// This is the first enemy it spawns
-			delay = 100;											// Sets the new delay between enemy spawns to be 100
-			break;
+				game.enemies.add(new HeavyWeightEnemy(game, 500));		// This is the first enemy it spawns
+				delay = 100;											// Sets the new delay between enemy spawns to be 100
+				break;
 			case 2:
-			game.enemies.add(new TestEnemy(game, 100));		// The second and so on
-			break;
+				game.enemies.add(new TestEnemy(game, 100));		// The second and so on
+				break;
 			case 3:
-			game.enemies.add(new TestEnemy(game, 300));
-			break;
+				game.enemies.add(new TestEnemy(game, 300));
+				break;
 			case 4:
-			game.enemies.add(new TestEnemy(game, 500));
-			break;
+				game.enemies.add(new TestEnemy(game, 500));
+				break;
 			case 5:
-			game.enemies.add(new TestEnemy(game, 100));
-			break;
+				game.enemies.add(new TestEnemy(game, 100));
+				break;
 			case 6:
-			game.enemies.add(new SprayBall(game, 450, game.WINDOW_WIDTH/3));
-			break;
+				game.enemies.add(new SprayBall(game, 450, game.WINDOW_WIDTH/3));
+				break;
 		}
 	}
 	
@@ -105,20 +105,20 @@ public class Wave {
 				delay = 200;
 				break;
 			case 1:
-			game.enemies.add(new TestHomingEnemy(game, 500));
-			break;
+				game.enemies.add(new TestHomingEnemy(game, 500));
+				break;
 			case 2:
-			game.enemies.add(new TestHomingEnemy(game, 100));
-			break;
+				game.enemies.add(new TestHomingEnemy(game, 100));
+				break;
 			case 3:
-			game.enemies.add(new TestHomingEnemy(game, 300));
-			break;
+				game.enemies.add(new TestHomingEnemy(game, 300));
+				break;
 			case 4:
-			game.enemies.add(new TestHomingEnemy(game, 500));
-			break;
+				game.enemies.add(new TestHomingEnemy(game, 500));
+				break;
 			case 5:
-			game.enemies.add(new TestHomingEnemy(game, 100));
-			break;
+				game.enemies.add(new TestHomingEnemy(game, 100));
+				break;
 		}
 		
 	}
