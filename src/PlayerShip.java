@@ -10,7 +10,7 @@ import acm.graphics.GPoint;
 public class PlayerShip extends Ship {
 	public PlayerShip(MainApplication game) {
 		setGame(game);
-		setInvincible(true);
+		setInvincible(false);
 		setIframe(0);
 		setHealth(5);
 		setCooldown(0);
