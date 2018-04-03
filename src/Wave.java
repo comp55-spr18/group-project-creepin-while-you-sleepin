@@ -12,9 +12,13 @@ public class Wave {
 	int size;					// The size of the current wave
 	int selectedDifficulty;		// The difficulty of the current wave
 	int selectedWave;			// The rgen value of the current wave
+	int totalWaves;				// The total number of waves the player must fight (including the boss wave)
+	int waveCount;				// The current wave the player is on
 	
 	public Wave(MainApplication g) {
 		game = g;
+		waveCount = 0;
+		totalWaves = 3;				// For now there are only 2 regular waves and 1 boss wave
 		if(game.easy) {				// If the game is on easy, set selectedDifficulty to 0
 			selectedDifficulty = 0;
 		} else {					// If the game is on hard, set selectedDifficulty to 1
@@ -35,27 +39,32 @@ public class Wave {
 		} else {													// If the wave is easy
 			selectedWave = Math.abs(game.rgen.nextInt()%2);			// Randomly select one of the hard waves (currently only easy1())
 		}
+		waveCount++;												// Increment wave count
 		getNextEnemy();												// Get the next enemy (must be called here to initialize delay and size)
 	}
 	
 	public void getNextEnemy() {			// Generates the next enemy in the wave
-		if(selectedDifficulty == 0) {		// If the wave difficulty is easy
-			switch(selectedWave) {			// Switch statement for all the easy waves
-			case 0:
-				easy1();
-				break;
+		if(waveCount < totalWaves) {			// If it is not the final wave
+			if(selectedDifficulty == 0) {		// If the wave difficulty is easy
+				switch(selectedWave) {			// Switch statement for all the easy waves
+				case 0:
+					easy1();
+					break;
+				}
+			} else {							// If the wave difficulty is hard
+				switch(selectedWave) {			// Switch statement for all the hard waves
+				case 0:
+					hard1();
+					break;
+				case 1:
+					Drone();
+					break;
+				}
 			}
-		} else {							// If the wave difficulty is hard
-			switch(selectedWave) {			// Switch statement for all the hard waves
-			case 0:
-				hard1();
-				break;
-			case 1:
-				Drone();
-				break;
-			}
+		} else {								// If it is the final wave
+			fakeBossWave();						// Call the boss wave
 		}
-		if(enemyToSpawn > 0) {				// If an enemy was created
+		if(enemyToSpawn > 0) {					// If an enemy was created
 			game.add(game.enemies.get(game.enemies.size() - 1).getSprite());	// Add the sprite of the latest enemy added to enemies
 		}
 		enemyToSpawn++;						// Increment the enemyToSpawn
@@ -64,7 +73,7 @@ public class Wave {
 	public void easy1() {			// Generates a basic easy wave
 		switch(enemyToSpawn) {
 			case 0:
-				size = 6;
+				size = 1;
 				delay = 50;
 				break;
 			case 1:
@@ -132,6 +141,18 @@ public class Wave {
 		}
 	}
 	
+	public void fakeBossWave() {			// Just a pseudo-boss wave until we have a boss
+		switch(enemyToSpawn) {
+			case 0:
+				size = 10;
+				delay = 5;
+				break;
+			default:
+				game.enemies.add(new SprayBall(game, 50*enemyToSpawn, enemyToSpawn*(1920/10)));
+				break;
+		}
+	}
+	
 	public void update() {
 		counter++;												// Increment counter
 		if(counter%delay == 0 && enemyToSpawn <= size) {		// After counter advances 'delay' number of frames, and if there are more enemies to spawn
@@ -143,7 +164,11 @@ public class Wave {
 					return;										// Exit the function
 				}
 			}
-			getNewWave();										// Reaching this point means all enemies are dead, so get a new wave to spawn
+			if(waveCount == totalWaves) {
+				game.win = true;
+			} else {
+				getNewWave();										// Reaching this point means all enemies are dead, so get a new wave to spawn
+			}
 		}
 	}
 }

@@ -116,20 +116,10 @@ public class MainApplication extends GraphicsApplication {
 			}
 		}
 		wave.update();										// Update the wave
-		if(score >= 1000) {									// If you get 1000 or more points, you win (for now)
-			win = true;										// Set win to true so the game knows you won
-		}
+//		if(score >= 1000) {									// If you get 1000 or more points, you win (for now)
+//			win = true;										// Set win to true so the game knows you won
+//		}
 		if(win || lose) {									// If the game is over
-			for(Ship enemy : enemies) {						// Remove all enemy sprites
-				remove(enemy.getSprite());
-				remove(enemy.getExplosion());
-			}
-			for(Projectile proj : projectiles) {			// Remove all projectile sprites
-				remove(proj.getSprite());
-			}
-			remove(player.getSprite());						// Remove the playership sprite
-			enemies.clear();								// Clear the enemies arraylist
-			projectiles.clear();							// Clear the projectiles arraylist
 			if(win) {										// If you won, print it at the menu screen and stop the game timer
 				switchToScreen(endPane);
 				timer.stop();

@@ -21,7 +21,7 @@ public class SprayBall extends TestEnemy {
 		setTrail(new FireTrail(this));
 		setMaxCooldown(1000);
 		setPoints(1000);
-		ballDet = detonation;
+		ballDet = game.WINDOW_WIDTH/(1920/detonation);
 	}
 	// Once the ship has paused, fires bullets from 4 cannons turning 180 degrees (hopefully)
 	@Override
