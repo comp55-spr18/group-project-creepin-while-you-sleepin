@@ -70,7 +70,7 @@ public abstract class Ship {
 				explosion.setLocation(getSprite().getLocation());
 				getGame().remove(getSprite());		// Remove the ship sprite
 				game.add(explosion);
-				if(explosion.getX() > 0 && explosion.getX() < getGame().WINDOW_WIDTH) {
+				if(explosion.getX() > 0 && explosion.getX() < getGame().WINDOW_WIDTH && !getGame().lose && !getGame().win) {
 					getGame().shipDeathCount = getGame().playSound("shipdeath", getGame().shipDeathCount);
 				}
 			}

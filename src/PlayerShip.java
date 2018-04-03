@@ -19,6 +19,7 @@ public class PlayerShip extends Ship {
 		setSprite(new GImage("sprites/playermodel.png", 0, 0));
 		setBulletColor(Color.GREEN);
 		setSize(50, 50);
+		setExplosion(new GImage("explosion.png"));
 		setDestroyed(false);
 		setDestroyedCounter(0);
 		getGame().add(getSprite());
@@ -84,10 +85,18 @@ public class PlayerShip extends Ship {
 				setDestroyed(true);
 			}
 		} else {
-			getSprite().setImage("explosion.png");
-			getSprite().setSize(50,50);
+			if(getDestroyedCounter() == 0) {
+				getExplosion().setLocation(getSprite().getLocation());
+				getGame().remove(getSprite());		// Remove the ship sprite
+				getGame().add(getExplosion());
+				if(getExplosion().getX() > 0 && getExplosion().getX() < getGame().WINDOW_WIDTH) {
+					getGame().shipDeathCount = getGame().playSound("shipdeath", getGame().shipDeathCount);
+				}
+			}
 			setDestroyedCounter(getDestroyedCounter() + 1);
 			if(getDestroyedCounter() == 50) {
+				getGame().remove(getExplosion());
+				getExplosion().setVisible(false);
 				getGame().lose = true;
 			}
 		}

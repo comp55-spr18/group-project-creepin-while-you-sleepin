@@ -14,8 +14,9 @@ public class MainApplication extends GraphicsApplication {
 	public static final int WINDOW_WIDTH = (int) screenSize.getWidth();
 	public static final int WINDOW_HEIGHT = (int) screenSize.getHeight();
 	private static final String[] SOUND_FILES = { "r2d2.mp3", "somethinlikethis.mp3" };
-	private SomePane somePane;
+	private GamePane somePane;
 	private MenuPane menu;
+	private EndPane endPane;
 	
 	// Variables for game loop
 	public int lowShootCount;
@@ -32,7 +33,6 @@ public class MainApplication extends GraphicsApplication {
 	ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	PlayerShip player;
 	int score = 0;
-	GLabel afterMessage = new GLabel("", 10, 25);
 	GLabel scoreBoard = new GLabel("SCORE: " + score, 10, 25);
 	ArrayList<GImage> healthBar = new ArrayList<GImage>();
 	boolean isShooting = false;
@@ -44,8 +44,9 @@ public class MainApplication extends GraphicsApplication {
 	}
 
 	public void run() {
-		somePane = new SomePane(this);
+		somePane = new GamePane(this);
 		menu = new MenuPane(this);
+		endPane = new EndPane(this);
 		audio = AudioPlayer.getInstance();
 		playRandomSound();					// The audio player needs time to "wake up" when it gets used the first time
 		pause(2500);						// Give the audio player time to wake up
@@ -54,12 +55,10 @@ public class MainApplication extends GraphicsApplication {
 
 	public void switchToMenu() {
 //		playRandomSound();
-		enemies.clear();
-		shipDeathCount++;
 		switchToScreen(menu);
 	}
 
-	public void switchToSome() {
+	public void switchToGame() {
 //		playRandomSound();
 		player = new PlayerShip(this);			// Initiate the game with a new player ship
 		wave = new Wave(this);
@@ -69,7 +68,6 @@ public class MainApplication extends GraphicsApplication {
 		playerShootCount = 0;
 		shipDeathCount = 0;
 		projectileDeathCount = 0;
-		timer.start();
 		lose = false;							// Reset the lose/win booleans
 		win = false;
 		timer.start();							// Start the game
@@ -133,13 +131,11 @@ public class MainApplication extends GraphicsApplication {
 			enemies.clear();								// Clear the enemies arraylist
 			projectiles.clear();							// Clear the projectiles arraylist
 			if(win) {										// If you won, print it at the menu screen and stop the game timer
-				switchToMenu();
-				afterMessage.setLabel("You win!");
+				switchToScreen(endPane);
 				timer.stop();
 			}
 			if(lose) {										// If you lost, print it at the menu screen and stop the game timer
-				switchToMenu();
-				afterMessage.setLabel("You lose!");
+				switchToScreen(endPane);
 				timer.stop();
 			}
 		}

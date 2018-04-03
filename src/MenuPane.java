@@ -15,14 +15,12 @@ public class MenuPane extends GraphicsPane {
 		program = app;
 		double scaleX = program.WINDOW_WIDTH/(1920/100.0);
 		double scaleY = program.WINDOW_HEIGHT/(1080/100.0);
-		rect2 = new GButton("EASY", 4*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
-		rect = new GButton("HARD", 13*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
+		rect = new GButton("EASY", 4*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
+		rect2 = new GButton("HARD", 13*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
 		rect.setFillColor(Color.RED);
-		rect2.setFillColor(Color.BLUE);
+		rect2.setFillColor(Color.RED);
 		background = new GImage("mainmenu.jpg");
 		background.setSize(program.getWidth(), program.getHeight());
-		program.afterMessage.setFont("Arial-Bold-22");
-		program.afterMessage.setColor(Color.WHITE);
 	}
 
 	@Override
@@ -30,7 +28,6 @@ public class MenuPane extends GraphicsPane {
 		program.add(background);
 		program.add(rect);
 		program.add(rect2);
-		program.add(program.afterMessage);
 	}
 
 	@Override
@@ -38,19 +35,18 @@ public class MenuPane extends GraphicsPane {
 		program.remove(background);
 		program.remove(rect);
 		program.remove(rect2);
-		program.remove(program.afterMessage);
 	}
 	
 	@Override
 	public void mousePressed(MouseEvent e) {
 		GObject obj = program.getElementAt(e.getX(), e.getY());
 		if (obj == rect) {
-			program.easy = false;
-			program.switchToSome();
+			program.easy = true;
+			program.switchToGame();
 		}
 		if (obj == rect2) {
-			program.easy = true;
-			program.switchToSome();
+			program.easy = false;
+			program.switchToGame();
 		}
 	}
 }

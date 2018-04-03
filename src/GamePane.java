@@ -8,13 +8,13 @@ import acm.graphics.GLabel;
 import acm.graphics.GObject;
 import acm.graphics.GPoint;
 
-public class SomePane extends GraphicsPane {
+public class GamePane extends GraphicsPane {
 	private MainApplication program; // you will use program to get access to
 										// all of the GraphicsProgram calls
 	private GParagraph para;
 	private GImage background;
 
-	public SomePane(MainApplication app) {
+	public GamePane(MainApplication app) {
 		this.program = app;
 		program.scoreBoard.setFont("Arial-Bold-22");
 		program.scoreBoard.setColor(Color.WHITE);
