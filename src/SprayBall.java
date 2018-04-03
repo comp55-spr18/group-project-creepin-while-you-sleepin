@@ -6,8 +6,9 @@ import acm.graphics.GPoint;
 public class SprayBall extends TestEnemy {
 	private int firing = 0;
 	private int delay = 0;
+	private double ballDet = getGame().WINDOW_WIDTH/3; //recommended detonation point
 	
-	public SprayBall(MainApplication game, double y) {
+	public SprayBall(MainApplication game, double y, double detonation) {
 		super(game, y);
 		getTrail().getTimer().stop();
 		setHealth(999);				// Effectively invincible
@@ -19,7 +20,8 @@ public class SprayBall extends TestEnemy {
 		setSpeed(6);
 		setTrail(new FireTrail(this));
 		setMaxCooldown(1000);
-		setPoints(1000);	
+		setPoints(1000);
+		ballDet = detonation;
 	}
 	// Once the ship has paused, fires bullets from 4 cannons turning 180 degrees (hopefully)
 	@Override
@@ -72,7 +74,7 @@ public class SprayBall extends TestEnemy {
 	//moves 2/3 of map, pauses for firing, then leaves
 	@Override
 	public void move() {
-		if (getSprite().getLocation().getX() < getGame().WINDOW_WIDTH/3 && (firing != 21)) {
+		if (getSprite().getLocation().getX() < ballDet && (firing != 21)) {
 			delay++;
 			if (delay == 50) {
 				setCanShoot(true);

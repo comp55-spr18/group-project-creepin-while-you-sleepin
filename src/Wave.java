@@ -84,7 +84,7 @@ public class Wave {
 			game.enemies.add(new TestEnemy(game, 100));
 			break;
 			case 6:
-			game.enemies.add(new SprayBall(game, 450));
+			game.enemies.add(new SprayBall(game, 450, game.WINDOW_WIDTH/3));
 			break;
 		}
 	}
