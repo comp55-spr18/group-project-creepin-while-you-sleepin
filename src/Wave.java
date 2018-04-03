@@ -98,7 +98,7 @@ public class Wave {
 		switch(enemyToSpawn) {
 			case 0:
 				size = 5;
-				delay = 200;
+				delay = 20;
 				break;
 			case 1:
 				game.enemies.add(new TestHomingEnemy(game, 500));
@@ -122,8 +122,8 @@ public class Wave {
 	public void Drone() {			// Generates a drone wave
 		switch(enemyToSpawn) {		// Creates a switch for enemyToSpawn, using 0 (the first call) as the initiator for the wave
 			case 0:					// Initiate the wave
-				size = 20;
-				delay = 10;
+				size = 50;
+				delay = 5;
 				break;
 			default:						// This means that if enemyToSpawn is anything other than 0, this will trigger
 				switch(enemyToSpawn%2) {	// Mod enemyToSpawn by 2 to turn it into a 0 or 1
