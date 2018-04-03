@@ -6,14 +6,14 @@ public class boss extends Ship {
 	public boss(MainApplication game, double y) {
 		setGame(game);
 		setInvincible(false);
-		setHealth(2);
+		setHealth(50);
 		setCooldown(100);
 		setMaxCooldown(175);
 		setCanShoot(false);
 		setGunLocation(new GPoint[] {new GPoint(50,15)});
 		setSprite(new GImage("boss 1.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
-		setBulletColor(Color.RED);
-		setSize(50, 50);
+		setBulletColor(Color.white);
+		setSize(500, 500);
 		setExplosion(new GImage("explosion.png"));
 		setDestroyed(false);
 		setDestroyedCounter(0);
@@ -24,3 +24,6 @@ public class boss extends Ship {
 		setCollisionDamage(1);
 		setTrail(new FireTrail(this));
 	}
+	
+}
+
