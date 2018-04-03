@@ -37,7 +37,7 @@ public class FireTrail implements ActionListener {
 			xOffset = size;
 		}
 		projCount = (int) (((size/shrinkScale)*length) - 3/(shrinkScale/length));
-		colorScale = 255/(projCount/2);
+		colorScale = (int) ((int) 255/(projCount/2.0));
 		trail = new ArrayList<Projectile>();
 		timer = new Timer(5, this);
 		timer.start();

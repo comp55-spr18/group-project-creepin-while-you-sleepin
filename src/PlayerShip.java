@@ -9,7 +9,7 @@ public class PlayerShip extends Ship {
 		setIframe(0);
 		setHealth(5);
 		setCooldown(0);
-		setMaxCooldown(20);
+		setMaxCooldown(10);
 		setCanShoot(false);
 		setSprite(new GImage("sprites/playermodel.png", 0, 0));
 		setBulletColor(Color.GREEN);
