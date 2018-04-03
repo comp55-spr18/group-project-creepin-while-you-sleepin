@@ -69,15 +69,15 @@ public class Wave {
 	public void easy1() {			// Generates a basic easy wave
 		switch(enemyToSpawn) {
 			case 0:
-				size = 6;
+				size = 2;
 				delay = 50;
 				break;
 			case 1:
-				game.enemies.add(new HeavyWeightEnemy(game, 500));		// This is the first enemy it spawns
+				game.enemies.add(new Seeker(game, 500));		// This is the first enemy it spawns
 				delay = 100;											// Sets the new delay between enemy spawns to be 100
 				break;
 			case 2:
-				game.enemies.add(new TestEnemy(game, 100));		// The second and so on
+				game.enemies.add(new Kamikazi(game, 100));		// The second and so on
 				break;
 			case 3:
 				game.enemies.add(new TestEnemy(game, 300));
