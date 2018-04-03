@@ -18,10 +18,10 @@ public class MainApplication extends GraphicsApplication {
 	private MenuPane menu;
 	
 	// Variables for game loop
-	public int lowShootCount = 0;
-	public int playerShootCount = 0;
-	public int shipDeathCount = 0;
-	public int projectileDeathCount = 0;
+	public int lowShootCount;
+	public int playerShootCount;
+	public int shipDeathCount ;
+	public int projectileDeathCount ;
 	int fps = 75;
 	boolean win = false;		// Notice that we have both win and lose booleans; default state is that both are false (the player hasn't won or lost but is playing)
 	boolean lose = false;		// this means we need to be explicit and can't assume that because win = false that the player lost
@@ -65,6 +65,10 @@ public class MainApplication extends GraphicsApplication {
 		wave = new Wave(this);
 		score = 0;								// Reset score
 		updateScoreBoard(0);					// Initialize score board
+		lowShootCount = 0;
+		playerShootCount = 0;
+		shipDeathCount = 0;
+		projectileDeathCount = 0;
 		timer.start();
 		lose = false;							// Reset the lose/win booleans
 		win = false;
