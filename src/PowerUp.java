@@ -107,6 +107,42 @@ class BulletDamageUp extends PowerUp {
 	}
 	
 	public void onCollision() {
-		getGame().player.setBulletSpeed(getGame().player.getBulletSpeed() + 1);
+		getGame().player.setBulletDamage(getGame().player.getBulletDamage() + 1);
+	}
+}
+
+class SpreadShot extends PowerUp {
+	SpreadShot(MainApplication game, double x, double y) {
+		setGame(game);
+		double xPos = game.WINDOW_WIDTH/(1920/x);
+		double yPos = game.WINDOW_HEIGHT/(1080/y);
+		double scaleX = game.WINDOW_WIDTH/(1920/100);
+		double scaleY = game.WINDOW_HEIGHT/(1080/100);
+		setSprite(new GButton("Bullet Damage Up", xPos, yPos, scaleX, scaleY));
+		getSprite().setFillColor(Color.YELLOW);
+		getGame().powers.add(this);
+		getGame().add(getSprite());
+	}
+	
+	public void onCollision() {
+		getGame().player.setShots(3);
+	}
+}
+
+class DoubleShot extends PowerUp {
+	DoubleShot(MainApplication game, double x, double y) {
+		setGame(game);
+		double xPos = game.WINDOW_WIDTH/(1920/x);
+		double yPos = game.WINDOW_HEIGHT/(1080/y);
+		double scaleX = game.WINDOW_WIDTH/(1920/100);
+		double scaleY = game.WINDOW_HEIGHT/(1080/100);
+		setSprite(new GButton("Bullet Damage Up", xPos, yPos, scaleX, scaleY));
+		getSprite().setFillColor(Color.YELLOW);
+		getGame().powers.add(this);
+		getGame().add(getSprite());
+	}
+	
+	public void onCollision() {
+		getGame().player.setShots(2);
 	}
 }
