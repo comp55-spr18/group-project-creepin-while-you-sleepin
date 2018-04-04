@@ -47,7 +47,7 @@ class FireRateUp extends PowerUp {
 		double yPos = game.WINDOW_HEIGHT/(1080/y);
 		double scaleX = game.WINDOW_WIDTH/(1920/100);
 		double scaleY = game.WINDOW_HEIGHT/(1080/100);
-		setSprite(new GButton("Fire Rate Up", xPos, yPos, scaleX, scaleY));
+		setSprite(new GButton("Fire Rate", xPos, yPos, scaleX, scaleY));
 		getSprite().setFillColor(Color.RED);
 		getGame().powers.add(this);
 		getGame().add(getSprite());
@@ -70,7 +70,7 @@ class BulletSizeUp extends PowerUp {
 		double yPos = game.WINDOW_HEIGHT/(1080/y);
 		double scaleX = game.WINDOW_WIDTH/(1920/100);
 		double scaleY = game.WINDOW_HEIGHT/(1080/100);
-		setSprite(new GButton("Bullet Size Up", xPos, yPos, scaleX, scaleY));
+		setSprite(new GButton("Bullet Size", xPos, yPos, scaleX, scaleY));
 		getSprite().setFillColor(Color.BLUE);
 		getGame().powers.add(this);
 		getGame().add(getSprite());
@@ -106,7 +106,7 @@ class BulletDamageUp extends PowerUp {
 		double yPos = game.WINDOW_HEIGHT/(1080/y);
 		double scaleX = game.WINDOW_WIDTH/(1920/100);
 		double scaleY = game.WINDOW_HEIGHT/(1080/100);
-		setSprite(new GButton("Bullet Damage Up", xPos, yPos, scaleX, scaleY));
+		setSprite(new GButton("Bullet Damage", xPos, yPos, scaleX, scaleY));
 		getSprite().setFillColor(Color.YELLOW);
 		getGame().powers.add(this);
 		getGame().add(getSprite());
