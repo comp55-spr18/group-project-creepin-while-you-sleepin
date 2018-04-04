@@ -26,6 +26,7 @@ public class GamePane extends GraphicsPane {
 	public void showContents() {
 		program.add(program.scoreBoard);
 		program.add(background);
+		new AttackSpeedUp(program, 500, 500);
 		background.sendToBack();
 	}
 
