@@ -6,15 +6,18 @@ public class PowerUp {
 	MainApplication game;
 	GButton sprite;
 	
-	public void checkCollision() {
+	public boolean checkCollision() {
 		if(game != null) {
 			if(game.player.getSprite().getBounds().intersects(getSprite().getBounds())) {
 				onCollision();
-				getGame().remove(getSprite());
-				getSprite().setVisible(false);
-				return;
+				for(PowerUp power : getGame().powers) {
+					getGame().remove(power.getSprite());
+				}
+				getGame().powers.clear();
+				return true;
 			}
 		}
+		return false;
 	}
 	
 	public void onCollision() {
@@ -118,7 +121,7 @@ class SpreadShot extends PowerUp {
 		double yPos = game.WINDOW_HEIGHT/(1080/y);
 		double scaleX = game.WINDOW_WIDTH/(1920/100);
 		double scaleY = game.WINDOW_HEIGHT/(1080/100);
-		setSprite(new GButton("Bullet Damage Up", xPos, yPos, scaleX, scaleY));
+		setSprite(new GButton("SpreadShot", xPos, yPos, scaleX, scaleY));
 		getSprite().setFillColor(Color.YELLOW);
 		getGame().powers.add(this);
 		getGame().add(getSprite());
@@ -136,7 +139,7 @@ class DoubleShot extends PowerUp {
 		double yPos = game.WINDOW_HEIGHT/(1080/y);
 		double scaleX = game.WINDOW_WIDTH/(1920/100);
 		double scaleY = game.WINDOW_HEIGHT/(1080/100);
-		setSprite(new GButton("Bullet Damage Up", xPos, yPos, scaleX, scaleY));
+		setSprite(new GButton("DoubleShot", xPos, yPos, scaleX, scaleY));
 		getSprite().setFillColor(Color.YELLOW);
 		getGame().powers.add(this);
 		getGame().add(getSprite());

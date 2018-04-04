@@ -10,11 +10,13 @@ public class Wave {
 	int selectedWave;			// The rgen value of the current wave
 	int totalWaves;				// The total number of waves the player must fight (including the boss wave)
 	int waveCount;				// The current wave the player is on
+	int upgradeMod;
 	
 	public Wave(MainApplication g) {
 		game = g;
 		waveCount = 0;
-		totalWaves = 3;				// For now there are only 2 regular waves and 1 boss wave
+		upgradeMod = 3;
+		totalWaves = 5;				// For now there are only 2 regular waves and 1 boss wave
 		if(game.easy) {				// If the game is on easy, set selectedDifficulty to 0
 			selectedDifficulty = 0;
 		} else {					// If the game is on hard, set selectedDifficulty to 1
@@ -40,7 +42,7 @@ public class Wave {
 	}
 	
 	public void getNextEnemy() {			// Generates the next enemy in the wave
-		if(waveCount < totalWaves) {			// If it is not the final wave
+		if(waveCount < totalWaves && waveCount%upgradeMod != 0) {			// If it is not the final wave
 			if(selectedDifficulty == 0) {		// If the wave difficulty is easy
 				switch(selectedWave) {			// Switch statement for all the easy waves
 				case 0:
@@ -57,8 +59,10 @@ public class Wave {
 					break;
 				}
 			}
-		} else {								// If it is the final wave
+		} else if(waveCount%upgradeMod != 0) {								// If it is the final wave
 			fakeBossWave();						// Call the boss wave
+		} else {
+			upgradeWave();
 		}
 		if(enemyToSpawn > 0) {					// If an enemy was created
 			game.add(game.enemies.get(game.enemies.size() - 1).getSprite());	// Add the sprite of the latest enemy added to enemies
@@ -148,6 +152,17 @@ public class Wave {
 				break;
 		}
 	}
+
+	public void upgradeWave() {
+		delay = 2;
+		size = 0;
+		game.powers.add(new AttackSpeedUp(game, 800, 10));
+		game.powers.add(new BulletDamageUp(game, 800, 110));
+		game.powers.add(new BulletSpeedUp(game, 800, 210));
+		game.powers.add(new SpreadShot(game, 800, 310));
+		game.powers.add(new DoubleShot(game, 800, 410));
+		game.powers.add(new BulletSizeUp(game, 800, 510));
+	}
 	
 	public void update() {
 		counter++;												// Increment counter
@@ -159,6 +174,10 @@ public class Wave {
 					counter = 1;								// Set the counter to 1 to freeze it
 					return;										// Exit the function
 				}
+			}
+			if(!game.powers.isEmpty()) {
+				counter = 1;
+				return;
 			}
 			if(waveCount == totalWaves) {
 				game.win = true;

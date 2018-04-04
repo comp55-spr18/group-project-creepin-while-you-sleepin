@@ -105,11 +105,8 @@ public class MainApplication extends GraphicsApplication {
 			enemy.update();
 		}
 		for(PowerUp power : powers) {
-			power.checkCollision();
-		}
-		for(int i = powers.size() - 1;i >= 0;i--) {
-			if(!powers.get(i).getSprite().isVisible()) {
-				powers.remove(i);
+			if(power.checkCollision()) {
+				break;
 			}
 		}
 		for(Projectile proj : projectiles) {
