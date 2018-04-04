@@ -23,7 +23,7 @@ public class TestEnemy extends Ship {
 		setPoints(100);
 		setCollisionDamage(1);
 		setBulletDamage(1);
-		setBulletSpeed(6);
+		setBulletSpeed(14);
 		setBulletSize(15);
 		setTrail(new FireTrail(this));
 	}
