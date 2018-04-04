@@ -9,11 +9,18 @@ public class PowerUp {
 	public boolean checkCollision() {
 		if(game != null) {
 			if(game.player.getSprite().getBounds().intersects(getSprite().getBounds())) {
+				if(this instanceof SpreadShot && game.player.getShots() == 3) {
+					return false;
+				}
+				if(this instanceof DoubleShot && game.player.getShots() == 2) {
+					return false;
+				}
 				onCollision();
 				for(PowerUp power : getGame().powers) {
 					getGame().remove(power.getSprite());
 				}
 				getGame().powers.clear();
+				getGame().audio.playSound("sounds", "pickup.mp3");
 				return true;
 			}
 		}
