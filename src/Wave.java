@@ -21,7 +21,7 @@ public class Wave {
 		game = g;
 		waveCount = 0;
 		upgradeMod = 3;
-		totalWaves = 10;			// For now there are 6 regular waves, 3 upgrade and 1 boss wave
+		totalWaves = 20;			// For now there are 6 regular waves, 3 upgrade and 1 boss wave
 		upgradeLine = new GLine(game.WINDOW_WIDTH/(1920/1000.0), 0, game.WINDOW_WIDTH/(1920/1000.0), game.WINDOW_HEIGHT);
 		upgradeLine.setColor(Color.RED);
 		upgradeLabel = new GLabel("Fly behind this line to see the upgrades");
@@ -44,7 +44,7 @@ public class Wave {
 		counter = 0;							// Reset the counter
 		enemyToSpawn = 0;						// Reset the enemy to spawn (we set it to -1 so that it reads the delay and size of the wave but doesn't spawn anything)
 		if(selectedDifficulty == 0) {								// If the difficulty of the new wave is hard
-			selectedWave = Math.abs(game.rgen.nextInt()%1);			// Randomly select one of the easy waves (currently hard1() and Drone())
+			selectedWave = Math.abs(game.rgen.nextInt()%5);			// Randomly select one of the easy waves (currently hard1() and Drone())
 		} else {													// If the wave is easy
 			selectedWave = Math.abs(game.rgen.nextInt()%2);			// Randomly select one of the hard waves (currently only easy1())
 		}
@@ -58,6 +58,18 @@ public class Wave {
 				switch(selectedWave) {			// Switch statement for all the easy waves
 				case 0:
 					easy1();
+					break;
+				case 1:
+					easy2();
+					break;
+				case 2:
+					easy3();
+					break;
+				case 3:
+					easy4();
+					break;
+				case 4:
+					easy5();
 					break;
 				}
 			} else {							// If the wave difficulty is hard
@@ -81,6 +93,30 @@ public class Wave {
 		enemyToSpawn++;						// Increment the enemyToSpawn
 	}
 	
+	public void update() {
+		counter++;												// Increment counter
+		if(counter%delay == 0 && enemyToSpawn <= size) {		// After counter advances 'delay' number of frames, and if there are more enemies to spawn
+			getNextEnemy();										// call getNextEnemy() to add the next enemy to game.enemies
+		} else if (enemyToSpawn > size) {						// If all enemies have been spawned
+			for(Ship enemy : game.enemies) {					// Check to see if any enemy explosions are still visible (they are hidden when the ship is destroyed)
+				if(enemy.getExplosion().isVisible()) {			// If an enemy explosion is not hidden (still alive)
+					counter = 1;								// Set the counter to 1 to freeze it
+					return;										// Exit the function
+				}
+			}
+			if(!game.powers.isEmpty()) {
+				counter = 1;
+				return;
+			}
+			game.remove(upgradeLine);
+			if(waveCount == totalWaves) {
+				game.win = true;
+			} else {
+				getNewWave();										// Reaching this point means all enemies are dead, so get a new wave to spawn
+			}
+		}
+	}
+	
 	public void easy1() {			// Generates a basic easy wave
 		switch(enemyToSpawn) {
 			case 0:
@@ -88,11 +124,11 @@ public class Wave {
 				delay = 50;
 				break;
 			case 1:
-				game.enemies.add(new Seeker(game, 500));		// This is the first enemy it spawns
+				game.enemies.add(new TestEnemy(game, 500));		// This is the first enemy it spawns
 				delay = 100;											// Sets the new delay between enemy spawns to be 100
 				break;
 			case 2:
-				game.enemies.add(new Kamikazi(game, 100));		// The second and so on
+				game.enemies.add(new TestEnemy(game, 100));		// The second and so on
 				break;
 			case 3:
 				game.enemies.add(new TestEnemy(game, 300));
@@ -109,6 +145,115 @@ public class Wave {
 		}
 	}
 	
+	public void easy2() {
+		switch(enemyToSpawn) {
+			case 0:
+				size = 6;
+				delay = 50;
+				break;
+			case 1:
+				game.enemies.add(new TestEnemy(game, 500));
+				delay = 100;
+				break;
+			case 2:
+				game.enemies.add(new Kamikazi(game, 900));
+				break;
+			case 3:
+				game.enemies.add(new SprayBall(game, 300, 1000));
+				delay = 300;
+				break;
+			case 4:
+				game.enemies.add(new TestHomingEnemy(game, 500));
+				delay = 100;
+				break;
+			case 5:
+				game.enemies.add(new TestHomingEnemy(game, 200));
+				break;
+			case 6:
+				game.enemies.add(new SprayBall(game, 450, game.WINDOW_WIDTH/3));
+				break;
+		}
+	}
+	
+	public void easy3() {
+		switch(enemyToSpawn) {
+			case 0:
+				size = 25;
+				delay = 20;
+				break;
+			case 21:
+				game.enemies.add(new TestEnemy(game, 500));
+				delay = 50;
+				break;
+			case 22:
+				game.enemies.add(new TestEnemy(game, 450));
+				break;
+			case 23:
+				game.enemies.add(new TestEnemy(game, 500));
+				break;
+			case 24:
+				game.enemies.add(new TestEnemy(game, 550));
+				break;
+			case 25:
+				game.enemies.add(new TestEnemy(game, 500));
+				break;
+			default:
+				switch(enemyToSpawn%2) {
+					case 0:
+						game.enemies.add(new Drone(game, game.WINDOW_HEIGHT - 200));
+						if(enemyToSpawn == 20) {
+							delay = 200;
+						}
+						break;
+					case 1:
+						game.enemies.add(new Drone(game, 100));
+						break;
+				}
+		}
+	}
+
+	public void easy4() {
+		switch(enemyToSpawn) {
+			case 0:
+				size = 20;
+				delay = 25;
+				break;
+			default:
+				switch(enemyToSpawn%2) {
+				case 0:
+					game.enemies.add(new TestEnemy(game, game.WINDOW_HEIGHT - 200));
+					if(enemyToSpawn == 20) {
+						delay = 200;
+					}
+					break;
+				case 1:
+					game.enemies.add(new TestEnemy(game, 100));
+					break;
+			}
+		}
+	}
+
+	public void easy5() {
+		switch(enemyToSpawn) {
+		case 0:
+			size = 60;
+			delay = 25;
+			break;
+		default:
+			switch(enemyToSpawn%3) {
+			case 0:
+				game.enemies.add(new Drone(game, game.WINDOW_HEIGHT - 200));
+				break;
+			case 1:
+				game.enemies.add(new Drone(game, 100));
+				break;
+			case 2:
+				game.enemies.add(new TestEnemy(game, 500));
+				break;
+		}
+	}
+	}
+
 	public void hard1() {			// Generates a basic hard wave
 		switch(enemyToSpawn) {
 			case 0:
@@ -155,11 +300,11 @@ public class Wave {
 	public void fakeBossWave() {			// Just a pseudo-boss wave until we have a boss
 		switch(enemyToSpawn) {
 			case 0:
-				size = 10;
+				size = 5;
 				delay = 5;
 				break;
 			default:
-				game.enemies.add(new SprayBall(game, 50*enemyToSpawn, enemyToSpawn*(1920/10)));
+				game.enemies.add(new SprayBall(game, 100*enemyToSpawn, enemyToSpawn*(1920/5)));
 				break;
 		}
 	}
@@ -168,7 +313,7 @@ public class Wave {
 		delay = 1;
 		size = 0;
 		if(game.player.getSprite().getX() < game.WINDOW_WIDTH/(1920/1000.0)) {
-			game.powers.add(new AttackSpeedUp(game, 1500, 50));
+			game.powers.add(new FireRateUp(game, 1500, 50));
 			game.powers.add(new BulletDamageUp(game, 1500, 200));
 			game.powers.add(new BulletSpeedUp(game, 1500, 350));
 			game.powers.add(new SpreadShot(game, 1500, 500));
@@ -181,30 +326,6 @@ public class Wave {
 			enemyToSpawn = -2;
 			game.add(upgradeLine);
 			game.add(upgradeLabel);
-		}
-	}
-	
-	public void update() {
-		counter++;												// Increment counter
-		if(counter%delay == 0 && enemyToSpawn <= size) {		// After counter advances 'delay' number of frames, and if there are more enemies to spawn
-			getNextEnemy();										// call getNextEnemy() to add the next enemy to game.enemies
-		} else if (enemyToSpawn > size) {						// If all enemies have been spawned
-			for(Ship enemy : game.enemies) {					// Check to see if any enemy explosions are still visible (they are hidden when the ship is destroyed)
-				if(enemy.getExplosion().isVisible()) {			// If an enemy explosion is not hidden (still alive)
-					counter = 1;								// Set the counter to 1 to freeze it
-					return;										// Exit the function
-				}
-			}
-			if(!game.powers.isEmpty()) {
-				counter = 1;
-				return;
-			}
-			game.remove(upgradeLine);
-			if(waveCount == totalWaves) {
-				game.win = true;
-			} else {
-				getNewWave();										// Reaching this point means all enemies are dead, so get a new wave to spawn
-			}
 		}
 	}
 }

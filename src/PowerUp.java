@@ -40,14 +40,14 @@ public class PowerUp {
 	}
 }
 
-class AttackSpeedUp extends PowerUp {
-	AttackSpeedUp(MainApplication game, double x, double y) {
+class FireRateUp extends PowerUp {
+	FireRateUp(MainApplication game, double x, double y) {
 		setGame(game);
 		double xPos = game.WINDOW_WIDTH/(1920/x);
 		double yPos = game.WINDOW_HEIGHT/(1080/y);
 		double scaleX = game.WINDOW_WIDTH/(1920/100);
 		double scaleY = game.WINDOW_HEIGHT/(1080/100);
-		setSprite(new GButton("Attack Speed Up", xPos, yPos, scaleX, scaleY));
+		setSprite(new GButton("Fire Rate Up", xPos, yPos, scaleX, scaleY));
 		getSprite().setFillColor(Color.RED);
 		getGame().powers.add(this);
 		getGame().add(getSprite());

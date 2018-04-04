@@ -4,6 +4,7 @@ public class TestHomingEnemy extends TestEnemy {
 		super(game, y);
 		setBulletSize(40);
 		setBulletDamage(2);
+		setBulletSpeed(8);
 		setHealth(4);
 		setSpeed(4);
 		setPoints(200);
