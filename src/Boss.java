@@ -2,8 +2,8 @@ import java.awt.Color;
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
-public class boss extends Ship {
-	public boss(MainApplication game, double y) {
+public class Boss extends Ship {
+	public Boss(MainApplication game, double y) {
 		setGame(game);
 		setInvincible(false);
 		setHealth(2);
