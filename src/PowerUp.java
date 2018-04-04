@@ -88,7 +88,7 @@ class BulletSpeedUp extends PowerUp {
 		double yPos = game.WINDOW_HEIGHT/(1080/y);
 		double scaleX = game.WINDOW_WIDTH/(1920/100);
 		double scaleY = game.WINDOW_HEIGHT/(1080/100);
-		setSprite(new GButton("Bullet Speed Up", xPos, yPos, scaleX, scaleY));
+		setSprite(new GButton("Bullet Speed", xPos, yPos, scaleX, scaleY));
 		getSprite().setFillColor(Color.GREEN);
 		getGame().powers.add(this);
 		getGame().add(getSprite());
