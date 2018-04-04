@@ -17,7 +17,7 @@ public class EndPane extends GraphicsPane {
 		program = app;
 		double scaleX = program.WINDOW_WIDTH/(1920/100.0);
 		double scaleY = program.WINDOW_HEIGHT/(1080/100.0);
-		rect = new GButton("REPLAY", 4*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
+		rect = new GButton("MENU", 4*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
 		rect2 = new GButton("QUIT", 13*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
 		rect.setFillColor(Color.RED);
 		rect2.setFillColor(Color.RED);

@@ -1,5 +1,3 @@
-import java.awt.event.ActionEvent;
-
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
@@ -35,7 +33,6 @@ public class Drone extends TestEnemy {
 			setCanShoot(false);
 			Projectile newProj = new Bullet(getGame(), false, getGunLocation()[0], -1, 0, 12, getBulletColor(), 20);
 			newProj.aimAtPlayer();
-			getGame().add(newProj.getSprite());
 			getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);
 		} else {
 			setCooldown(getCooldown() + 1);

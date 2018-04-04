@@ -1,9 +1,4 @@
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-
-import javax.swing.Timer;
-
-import acm.graphics.GOval;
 import acm.graphics.GPoint;
 
 public class HomingBullet extends Projectile {
@@ -33,16 +28,13 @@ public class HomingBullet extends Projectile {
 	// I also had to redefine onCollision since this projectile type can hit any ship after it's launched - including the ship that fired it
 	public void onCollision(Ship target) {
 		if(!target.isInvincible()) {
-			if(target instanceof PlayerShip) {
-				target.setInvincible(true);
-			}
 			if(target instanceof PlayerShip || gracePeriod >= maxGracePeriod) {
 				getGame().remove(getSprite());
 				setDestroyed(true);
-				target.setHealth(target.getHealth() - getDamage());
-				getGame().projectileDeathCount = getGame().playSound("projectiledeath", getGame().projectileDeathCount);
-				if(!(target instanceof PlayerShip)) {
-					target.setHealth(0);
+				if(target instanceof PlayerShip) {
+					target.dealDamage(getDamage());
+				} else {
+					target.dealDamage(10);
 					getGame().updateScoreBoard(300);
 				}
 			}

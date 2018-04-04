@@ -1,11 +1,5 @@
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.util.*;
 import acm.graphics.*;
-import acm.program.*;
-import javax.swing.Timer;
 
 public abstract class Ship {
 	private MainApplication game;		// Reference to the pane the game runs on so that the ship is aware of other variables in the game
@@ -127,17 +121,30 @@ public abstract class Ship {
 	}
 	public void setHealth(int health) {
 		this.health = health;
+		if(this instanceof PlayerShip) {
+			updateHealthBar();
+		}
+	}
+	public void dealDamage(int damage) {
+		health -= damage;
 		if(this instanceof PlayerShip) {					// If the player's health is being updated, the healthbar should reflect it
-			for(int i = 0;i < game.healthBar.size();i++) {	// Remove the current hearts from the screen
-				game.remove(game.healthBar.get(i));
-			}
-			game.healthBar.clear();							// Clear the arraylist containing the heart images
-			for(int i = 0;i < health;i++) {					// For each point of health the player's ship has
-				GImage toAdd = new GImage("heart.png", 10 + 25*i, 30);	// Add a heart to the arraylist
-				toAdd.setSize(20, 20);						// Set the size
-				game.healthBar.add(toAdd);					// Add the heart to the arraylist
-				game.add(toAdd);							// Add the heart to the screen
-			}
+			setInvincible(true);
+			updateHealthBar();
+			getGame().playerHitCount = getGame().playSound("playerhit", getGame().playerHitCount);
+		} else {
+			getGame().enemyHitCount = getGame().playSound("enemyhit",  getGame().enemyHitCount);
+		}
+	}
+	private void updateHealthBar() {
+		for(int i = 0;i < game.healthBar.size();i++) {	// Remove the current hearts from the screen
+			game.remove(game.healthBar.get(i));
+		}
+		game.healthBar.clear();							// Clear the arraylist containing the heart images
+		for(int i = 0;i < health;i++) {					// For each point of health the player's ship has
+			GImage toAdd = new GImage("heart.png", 10 + 25*i, 30);	// Add a heart to the arraylist
+			toAdd.setSize(20, 20);						// Set the size
+			game.healthBar.add(toAdd);					// Add the heart to the arraylist
+			game.add(toAdd);							// Add the heart to the screen
 		}
 	}
 	public int getCooldown() {

@@ -1,17 +1,10 @@
 import java.awt.Color;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Random;
-
 import acm.graphics.GImage;
-import acm.graphics.GLabel;
-import acm.graphics.GObject;
 import acm.graphics.GPoint;
 
 public class GamePane extends GraphicsPane {
-	private MainApplication program; // you will use program to get access to
-										// all of the GraphicsProgram calls
-	private GParagraph para;
+	private MainApplication program;
 	private GImage background;
 
 	public GamePane(MainApplication app) {
@@ -34,6 +27,18 @@ public class GamePane extends GraphicsPane {
 	public void hideContents() {
 		program.remove(program.scoreBoard);
 		program.remove(background);
+		for(Ship enemy : program.enemies) {						// Remove all enemy sprites
+			program.remove(enemy.getSprite());
+			program.remove(enemy.getExplosion());
+		}
+		for(Projectile proj : program.projectiles) {			// Remove all projectile sprites
+			program.remove(proj.getSprite());
+		}
+		program.remove(program.player.getSprite());						// Remove the playership sprite
+		program.remove(program.scoreBoard);
+		program.enemies.clear();								// Clear the enemies arraylist
+		program.projectiles.clear();							// Clear the projectiles arraylist
+		program.player.setHealth(0);
 	}
 
 	@Override

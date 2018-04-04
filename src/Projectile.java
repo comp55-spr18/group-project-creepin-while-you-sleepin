@@ -1,11 +1,5 @@
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.util.*;
-import javax.swing.Timer;
 import acm.graphics.*;
-import acm.program.*;
 
 // This is an abstract class so all functions declared in this class can be overwritten in a subclass if you'd like
 // If you want a new projectile to behave like this one but interact differently when it hits something, just
@@ -38,6 +32,7 @@ public abstract class Projectile {
 		getSprite().setLocation(gunLoc.getX(), gunLoc.getY() - getSprite().getHeight()/2);
 		setDamage(1);
 		getGame().projectiles.add(this);
+		getGame().add(getSprite());
 	}
 	
 
@@ -57,13 +52,9 @@ public abstract class Projectile {
 	public void onCollision(Ship target) {
 		if((isPlayerProjectile() && !(target instanceof PlayerShip)) || (!isPlayerProjectile() && target instanceof PlayerShip)) {
 			if(!target.isInvincible()) {
-				if(target instanceof PlayerShip) {
-					target.setInvincible(true);
-				}
 				setDestroyed(true);
 				getGame().remove(getSprite());
-				target.setHealth(target.getHealth() - getDamage());
-				getGame().projectileDeathCount = getGame().playSound("projectiledeath", getGame().projectileDeathCount);
+				target.dealDamage(getDamage());
 			}
 		}
 	}
@@ -75,7 +66,7 @@ public abstract class Projectile {
 			missile.setDestroyed(true);
 			getGame().remove(getSprite());
 			getGame().remove(missile.getSprite());
-			getGame().projectileDeathCount = getGame().playSound("projectiledeath", getGame().projectileDeathCount);
+			getGame().enemyHitCount = getGame().playSound("enemyhit", getGame().enemyHitCount);
 		}
 	}
 	

@@ -1,25 +1,25 @@
-import java.awt.event.ActionEvent;
-
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
 public class SprayBall extends TestEnemy {
 	private int firing = 0;
 	private int delay = 0;
+	private double ballDet = getGame().WINDOW_WIDTH/3; //recommended detonation point
 	
-	public SprayBall(MainApplication game, double y) {
+	public SprayBall(MainApplication game, double y, double detonation) {
 		super(game, y);
 		getTrail().getTimer().stop();
-		setHealth(999);				// Effectively invincible
+		setHealth(999);				// Effectively invincible 
 		setCooldown(700);			// 
 		setSprite(new GImage("sprites/enemy4.png", getGame().WINDOW_WIDTH, y));
 		//pretty sure this line is pointless
-		setGunLocation(new GPoint[] {new GPoint(50,15), new GPoint(49, 15), new GPoint(48, 15), new GPoint(47, 15)}); 
+		setGunLocation(new GPoint[] {}); 
 		setSize(120, 120);
 		setSpeed(6);
 		setTrail(new FireTrail(this));
 		setMaxCooldown(1000);
-		setPoints(1000);	
+		setPoints(1000);
+		ballDet = game.WINDOW_WIDTH/(1920/detonation);
 	}
 	// Once the ship has paused, fires bullets from 4 cannons turning 180 degrees (hopefully)
 	@Override
@@ -50,10 +50,6 @@ public class SprayBall extends TestEnemy {
 				newProj3.setxDir(-2+firing*(.1));
 				newProj3.setyDir(1-firing*(.1));
 			}
-			getGame().add(newProj.getSprite());
-			getGame().add(newProj1.getSprite());
-			getGame().add(newProj2.getSprite());
-			getGame().add(newProj3.getSprite());
 			getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);
 			firing++;
 			if (firing == 21) {
@@ -72,7 +68,7 @@ public class SprayBall extends TestEnemy {
 	//moves 2/3 of map, pauses for firing, then leaves
 	@Override
 	public void move() {
-		if (getSprite().getLocation().getX() < getGame().WINDOW_WIDTH/3 && (firing != 21)) {
+		if (getSprite().getLocation().getX() < ballDet && (firing != 21)) {
 			delay++;
 			if (delay == 50) {
 				setCanShoot(true);

@@ -1,9 +1,4 @@
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import javax.swing.Timer;
-
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
@@ -14,7 +9,7 @@ public class PlayerShip extends Ship {
 		setIframe(0);
 		setHealth(5);
 		setCooldown(0);
-		setMaxCooldown(20);
+		setMaxCooldown(10);
 		setCanShoot(false);
 		setSprite(new GImage("sprites/playermodel.png", 0, 0));
 		setBulletColor(Color.GREEN);
@@ -35,8 +30,7 @@ public class PlayerShip extends Ship {
 	public void shoot() {		// Returns the projectile type and iterates to the next gun location (or the same one if only one)
 		if(canShoot() && getGame().isShooting) {
 			setCanShoot(false);
-			Projectile newProj = new Bullet(getGame(), true, getGunLocation()[0], 1, 0, 25, getBulletColor(), 15);
-			getGame().add(newProj.getSprite());
+			new Bullet(getGame(), true, getGunLocation()[0], 1, 0, 25, getBulletColor(), 15);
 			getGame().playerShootCount = getGame().playSound("playershoot", getGame().playerShootCount);
 		} else if (!canShoot()) {
 			setCooldown(getCooldown() + 1);
@@ -57,8 +51,11 @@ public class PlayerShip extends Ship {
 
 	public void onCollision(Ship enemy) {
 		if(!isInvincible()) {
-			setHealth(getHealth() - enemy.getCollisionDamage());
-			setInvincible(true);
+			dealDamage(enemy.getCollisionDamage());
+			if(enemy instanceof Kamikazi) {
+				enemy.setDestroyed(true);
+				getGame().remove(enemy.getSprite());
+			}
 		}
 	}
 

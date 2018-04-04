@@ -1,9 +1,4 @@
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-
-import javax.swing.Timer;
-
-import acm.graphics.GOval;
 import acm.graphics.GPoint;
 
 public class Bullet extends Projectile {
