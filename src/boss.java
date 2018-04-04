@@ -24,3 +24,4 @@ public class boss extends Ship {
 		setCollisionDamage(1);
 		setTrail(new FireTrail(this));
 	}
+}

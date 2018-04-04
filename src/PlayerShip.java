@@ -52,6 +52,10 @@ public class PlayerShip extends Ship {
 	public void onCollision(Ship enemy) {
 		if(!isInvincible()) {
 			dealDamage(enemy.getCollisionDamage());
+			if(enemy instanceof Kamikazi) {
+				enemy.setDestroyed(true);
+				getGame().remove(enemy.getSprite());
+			}
 		}
 	}
 
