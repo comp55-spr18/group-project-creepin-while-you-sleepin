@@ -31,6 +31,7 @@ public class MainApplication extends GraphicsApplication {
 	AudioPlayer audio;
 	ArrayList<Ship> enemies = new ArrayList<Ship>();
 	ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+	ArrayList<PowerUp> powers = new ArrayList<PowerUp>();
 	PlayerShip player;
 	int score = 0;
 	GLabel scoreBoard = new GLabel("SCORE: " + score, 10, 25);
@@ -102,6 +103,14 @@ public class MainApplication extends GraphicsApplication {
 		player.update();									// These lines just call the update function of the player
 		for(Ship enemy : enemies) {							// and all of the enemy ships and projectiles
 			enemy.update();
+		}
+		for(PowerUp power : powers) {
+			power.checkCollision();
+		}
+		for(int i = powers.size() - 1;i >= 0;i--) {
+			if(!powers.get(i).getSprite().isVisible()) {
+				powers.remove(i);
+			}
 		}
 		for(Projectile proj : projectiles) {
 			proj.update();
