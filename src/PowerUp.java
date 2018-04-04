@@ -56,7 +56,10 @@ class AttackSpeedUp extends PowerUp {
 	public void onCollision() {
 		getGame().player.setCanShoot(true);
 		getGame().player.setCooldown(0);
-		getGame().player.setMaxCooldown(getGame().player.getMaxCooldown() - 5);
+		getGame().player.setMaxCooldown(getGame().player.getMaxCooldown() - getGame().player.getMaxCooldown()/4);
+		if(getGame().player.getMaxCooldown() <= 0) {
+			getGame().player.setMaxCooldown(1);
+		}
 	}
 }
 

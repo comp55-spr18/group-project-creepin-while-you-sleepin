@@ -1,22 +1,33 @@
+import java.awt.Color;
 import java.util.ArrayList;
+import acm.graphics.GLabel;
+import acm.graphics.GLine;
 
 public class Wave {
 	MainApplication game;
-	int counter;				// Counter to keep track of time between waves
-	int enemyToSpawn;			// The next enemy the wave wants to spawn
-	int delay;					// The delay before the next enemy spawns
-	int size;					// The size of the current wave
-	int selectedDifficulty;		// The difficulty of the current wave
-	int selectedWave;			// The rgen value of the current wave
-	int totalWaves;				// The total number of waves the player must fight (including the boss wave)
-	int waveCount;				// The current wave the player is on
+	int counter;					// Counter to keep track of time between waves
+	int enemyToSpawn;				// The next enemy the wave wants to spawn
+	int delay;						// The delay before the next enemy spawns
+	int size;						// The size of the current wave
+	int selectedDifficulty;			// The difficulty of the current wave
+	int selectedWave;				// The rgen value of the current wave
+	int totalWaves;					// The total number of waves the player must fight (including the boss wave)
+	int waveCount;					// The current wave the player is on
 	int upgradeMod;
+	GLine upgradeLine;
+	GLabel upgradeLabel;
 	
 	public Wave(MainApplication g) {
 		game = g;
 		waveCount = 0;
 		upgradeMod = 3;
-		totalWaves = 5;				// For now there are only 2 regular waves and 1 boss wave
+		totalWaves = 10;			// For now there are 6 regular waves, 3 upgrade and 1 boss wave
+		upgradeLine = new GLine(game.WINDOW_WIDTH/(1920/1000.0), 0, game.WINDOW_WIDTH/(1920/1000.0), game.WINDOW_HEIGHT);
+		upgradeLine.setColor(Color.RED);
+		upgradeLabel = new GLabel("Fly behind this line to see the upgrades");
+		upgradeLabel.setFont("arial-22-bold");
+		upgradeLabel.setLocation(game.WINDOW_WIDTH/(1920/1050.0), game.WINDOW_HEIGHT/2 - upgradeLabel.getHeight()/2);
+		upgradeLabel.setColor(Color.RED);
 		if(game.easy) {				// If the game is on easy, set selectedDifficulty to 0
 			selectedDifficulty = 0;
 		} else {					// If the game is on hard, set selectedDifficulty to 1
@@ -59,10 +70,10 @@ public class Wave {
 					break;
 				}
 			}
-		} else if(waveCount%upgradeMod != 0) {								// If it is the final wave
+		} else if(waveCount%upgradeMod == 0 && waveCount != totalWaves) {
+			upgradeWave();						// Call the upgrade wave
+		} else {								// If it is the final wave
 			fakeBossWave();						// Call the boss wave
-		} else {
-			upgradeWave();
 		}
 		if(enemyToSpawn > 0) {					// If an enemy was created
 			game.add(game.enemies.get(game.enemies.size() - 1).getSprite());	// Add the sprite of the latest enemy added to enemies
@@ -73,7 +84,7 @@ public class Wave {
 	public void easy1() {			// Generates a basic easy wave
 		switch(enemyToSpawn) {
 			case 0:
-				size = 2;
+				size = 6;
 				delay = 50;
 				break;
 			case 1:
@@ -154,14 +165,23 @@ public class Wave {
 	}
 
 	public void upgradeWave() {
-		delay = 2;
+		delay = 1;
 		size = 0;
-		game.powers.add(new AttackSpeedUp(game, 800, 10));
-		game.powers.add(new BulletDamageUp(game, 800, 110));
-		game.powers.add(new BulletSpeedUp(game, 800, 210));
-		game.powers.add(new SpreadShot(game, 800, 310));
-		game.powers.add(new DoubleShot(game, 800, 410));
-		game.powers.add(new BulletSizeUp(game, 800, 510));
+		if(game.player.getSprite().getX() < game.WINDOW_WIDTH/(1920/1000.0)) {
+			game.powers.add(new AttackSpeedUp(game, 1500, 50));
+			game.powers.add(new BulletDamageUp(game, 1500, 200));
+			game.powers.add(new BulletSpeedUp(game, 1500, 350));
+			game.powers.add(new SpreadShot(game, 1500, 500));
+			game.powers.add(new DoubleShot(game, 1500, 650));
+			game.powers.add(new BulletSizeUp(game, 1500, 800));
+			game.remove(upgradeLine);
+			game.remove(upgradeLabel);
+			enemyToSpawn = 0;
+		} else {
+			enemyToSpawn = -2;
+			game.add(upgradeLine);
+			game.add(upgradeLabel);
+		}
 	}
 	
 	public void update() {
@@ -179,6 +199,7 @@ public class Wave {
 				counter = 1;
 				return;
 			}
+			game.remove(upgradeLine);
 			if(waveCount == totalWaves) {
 				game.win = true;
 			} else {
