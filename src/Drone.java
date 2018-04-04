@@ -16,6 +16,9 @@ public class Drone extends TestEnemy {
 		setTrail(new FireTrail(this));
 		setMaxCooldown(1000);
 		setPoints(25);
+		setBulletSize(20);
+		setBulletSpeed(12);
+		setBulletDamage(1);
 		if (y <= getGame().WINDOW_HEIGHT/2) {
 			setyDir(.3);
 		}
@@ -31,7 +34,7 @@ public class Drone extends TestEnemy {
 	public void shoot() {
 		if(canShoot()) {
 			setCanShoot(false);
-			Projectile newProj = new Bullet(getGame(), false, getGunLocation()[0], -1, 0, 12, getBulletColor(), 20);
+			Projectile newProj = new Bullet(this, getGunLocation()[0], -1, 0);
 			newProj.aimAtPlayer();
 			getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);
 		} else {

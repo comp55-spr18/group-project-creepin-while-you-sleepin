@@ -25,6 +25,9 @@ public class boss extends Ship {
 		setSpeed(7);
 		setPoints(100);
 		setCollisionDamage(2);
+		setBulletDamage(2);
+		setBulletSize(20);
+		setBulletSpeed(8);
 		setTrail(new FireTrail(this));
 	}
 	
@@ -41,7 +44,7 @@ public class boss extends Ship {
 	public void shoot() {
 		if(canShoot()) {
 			setCanShoot(false);
-			Projectile newProj = new Bullet(getGame(), false, getGunLocation()[0], -1, 0, 14, getBulletColor(), 350);
+			Projectile newProj = new Bullet(this, getGunLocation()[0], -1, 0);
 			newProj.setxDir((getGame().player.getSprite().getLocation().getX()+25) - newProj.getSprite().getLocation().getX()-newProj.getSprite().getWidth()/2);
 			newProj.setyDir((getGame().player.getSprite().getLocation().getY()+25) - newProj.getSprite().getLocation().getY()-newProj.getSprite().getWidth()/2);
 			getGame().add(newProj.getSprite());

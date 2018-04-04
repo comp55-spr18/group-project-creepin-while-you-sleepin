@@ -17,6 +17,9 @@ public class PlayerShip extends Ship {
 		setExplosion(new GImage("explosion.png"));
 		setDestroyed(false);
 		setDestroyedCounter(0);
+		setBulletSize(15);
+		setBulletSpeed(25);
+		setBulletDamage(1);
 		getGame().add(getSprite());
 		setTrail(new FireTrail(this));
 	}
@@ -30,7 +33,7 @@ public class PlayerShip extends Ship {
 	public void shoot() {		// Returns the projectile type and iterates to the next gun location (or the same one if only one)
 		if(canShoot() && getGame().isShooting) {
 			setCanShoot(false);
-			new Bullet(getGame(), true, getGunLocation()[0], 1, 0, 25, getBulletColor(), 15);
+			new Bullet(this, getGunLocation()[0], 1, 0);
 			getGame().playerShootCount = getGame().playSound("playershoot", getGame().playerShootCount);
 		} else if (!canShoot()) {
 			setCooldown(getCooldown() + 1);

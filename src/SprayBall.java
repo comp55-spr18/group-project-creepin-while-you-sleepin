@@ -17,6 +17,9 @@ public class SprayBall extends TestEnemy {
 		setSize(120, 120);
 		setSpeed(6);
 		setTrail(new FireTrail(this));
+		setBulletSpeed(12);
+		setBulletSize(20);
+		setBulletDamage(1);
 		setMaxCooldown(1000);
 		setPoints(1000);
 		ballDet = game.WINDOW_WIDTH/(1920/detonation);
@@ -26,10 +29,10 @@ public class SprayBall extends TestEnemy {
 	public void shoot() {
 		if(canShoot()) {
 			setCanShoot(false);
-			Projectile newProj = new Bullet(getGame(), false, getGunLocation()[0], -1, 0, 12, getBulletColor(), 20);
-			Projectile newProj1 = new Bullet(getGame(), false, getGunLocation()[1], 0, -1, 12, getBulletColor(), 20);
-			Projectile newProj2 = new Bullet(getGame(), false, getGunLocation()[2], 1, 0, 12, getBulletColor(), 20);
-			Projectile newProj3 = new Bullet(getGame(), false, getGunLocation()[3], 0, 1, 12, getBulletColor(), 20);			
+			Projectile newProj = new Bullet(this, getGunLocation()[0], -1, 0);
+			Projectile newProj1 = new Bullet(this, getGunLocation()[1], 0, -1);
+			Projectile newProj2 = new Bullet(this, getGunLocation()[2], 1, 0);
+			Projectile newProj3 = new Bullet(this, getGunLocation()[3], 0, 1);			
 			if (firing < 10) {
 				newProj.setxDir(-1+firing*(.1));
 				newProj.setyDir(0-firing*(.1));

@@ -19,6 +19,9 @@ public abstract class Ship {
 	private GImage explosion;
 	private FireTrail trail;
 	private int collisionDamage;
+	private double bulletSize;
+	private double bulletSpeed;
+	private int bulletDamage;
 	
 	// These attributes only apply to enemy ships
 	private double xDir;			// Since each move() is different for each ship, these do whatever you make them do
@@ -75,56 +78,71 @@ public abstract class Ship {
 			}
 		}
 	}
-	
+
 	// Getters and setters, nothing important down here
 	public void setSize(double x, double y) {
 		getSprite().setSize(getGame().WINDOW_WIDTH/(1920/x), getGame().WINDOW_HEIGHT/(1080/y));
 	}
+
 	public GImage getSprite() {
 		return sprite;
 	}
+
 	public void setSprite(GImage sprite) {
 		this.sprite = sprite;
 	}
+
 	public GPoint[] getGunLocation() {
 		return gunLocation;
 	}
+
 	public void setGunLocation(GPoint[] gunLocation) {
 		this.gunLocation = gunLocation;
 	}
+
 	public Color getBulletColor() {
 		return bulletColor;
 	}
+
 	public void setBulletColor(Color bulletColor) {
 		this.bulletColor = bulletColor;
 	}
+
 	public boolean canShoot() {
 		return canShoot;
 	}
+
 	public void setCanShoot(boolean canShoot) {
 		this.canShoot = canShoot;
 	}
+
 	public boolean isInvincible() {
 		return invincible;
 	}
+
 	public void setInvincible(boolean invincible) {
 		this.invincible = invincible;
 	}
+
 	public int getIframe() {
 		return iframe;
 	}
+
 	public void setIframe(int iframe) {
 		this.iframe = iframe;
 	}
+
 	public int getHealth() {
 		return health;
 	}
+
 	public void setHealth(int health) {
 		this.health = health;
 		if(this instanceof PlayerShip) {
 			updateHealthBar();
 		}
 	}
+
 	public void dealDamage(int damage) {
 		health -= damage;
 		if(this instanceof PlayerShip) {					// If the player's health is being updated, the healthbar should reflect it
@@ -135,6 +153,7 @@ public abstract class Ship {
 			getGame().enemyHitCount = getGame().playSound("enemyhit",  getGame().enemyHitCount);
 		}
 	}
+
 	private void updateHealthBar() {
 		for(int i = 0;i < game.healthBar.size();i++) {	// Remove the current hearts from the screen
 			game.remove(game.healthBar.get(i));
@@ -147,76 +166,100 @@ public abstract class Ship {
 			game.add(toAdd);							// Add the heart to the screen
 		}
 	}
+
 	public int getCooldown() {
 		return cooldown;
 	}
+
 	public void setCooldown(int cooldown) {
 		this.cooldown = cooldown;
 	}
+
 	public int getMaxCooldown() {
 		return maxCooldown;
 	}
+
 	public void setMaxCooldown(int maxCooldown) {
 		this.maxCooldown = maxCooldown;
 	}
+
 	public double getxDir() {
 		return xDir;
 	}
+
 	public void setxDir(double xDir) {
 		this.xDir = xDir;
 	}
+
 	public double getyDir() {
 		return yDir;
 	}
+
 	public void setyDir(double yDir) {
 		this.yDir = yDir;
 	}
+
 	public int getSpeed() {
 		return speed;
 	}
+
 	public void setSpeed(int speed) {
 		this.speed = getGame().WINDOW_WIDTH/(1920/speed);
 	}
+
 	public int getSelectedGun() {
 		return selectedGun;
 	}
+
 	public void setSelectedGun(int selectedGun) {
 		this.selectedGun = selectedGun;
 	}
+
 	public MainApplication getGame() {
 		return game;
 	}
+
 	public void setGame(MainApplication game) {
 		this.game = game;
 	}
+
 	public boolean isDestroyed() {
 		return isDestroyed;
 	}
+
 	public int getDestroyedCounter() {
 		return destroyedCounter;
 	}
+
 	public void setDestroyed(boolean isDestroyed) {
 		this.isDestroyed = isDestroyed;
 	}
+
 	public void setDestroyedCounter(int destroyedCounter) {
 		this.destroyedCounter = destroyedCounter;
 	}
+
 	public int getPoints() {
 		return points;
 	}
+
 	public void setPoints(int points) {
 		this.points = points;
 	}
+
 	public GImage getExplosion() {
 		return explosion;
 	}
+
 	public void setExplosion(GImage explosion) {
 		this.explosion = explosion;
 		this.explosion.setSize(sprite.getSize());		// Set the size of the explosion sprite to the size of the ship's sprite
 	}
+
 	public FireTrail getTrail() {
 		return trail;
 	}
+
 	public void setTrail(FireTrail trail) {
 		this.trail = trail;
 	}
@@ -227,5 +270,29 @@ public abstract class Ship {
 
 	public void setCollisionDamage(int collisionDamage) {
 		this.collisionDamage = collisionDamage;
+	}
+
+	public double getBulletSize() {
+		return bulletSize;
+	}
+
+	public void setBulletSize(double bulletSize) {
+		this.bulletSize = bulletSize;
+	}
+
+	public double getBulletSpeed() {
+		return bulletSpeed;
+	}
+
+	public void setBulletSpeed(double bulletSpeed) {
+		this.bulletSpeed = bulletSpeed;
+	}
+
+	public int getBulletDamage() {
+		return bulletDamage;
+	}
+
+	public void setBulletDamage(int bulletDamage) {
+		this.bulletDamage = bulletDamage;
 	}
 }

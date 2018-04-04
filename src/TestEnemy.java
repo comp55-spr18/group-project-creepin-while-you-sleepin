@@ -22,6 +22,9 @@ public class TestEnemy extends Ship {
 		setSpeed(6);
 		setPoints(100);
 		setCollisionDamage(1);
+		setBulletDamage(1);
+		setBulletSpeed(6);
+		setBulletSize(15);
 		setTrail(new FireTrail(this));
 	}
 	@Override
@@ -38,7 +41,7 @@ public class TestEnemy extends Ship {
 	public void shoot() {
 		if(canShoot()) {
 			setCanShoot(false);
-			Projectile newProj = new Bullet(getGame(), false, getGunLocation()[0], -1, 0, 14, getBulletColor(), 20);
+			Projectile newProj = new Bullet(this, getGunLocation()[0], -1, 0);
 			newProj.aimAtPlayer();
 			getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);
 		} else {
