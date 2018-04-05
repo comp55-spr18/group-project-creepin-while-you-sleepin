@@ -35,6 +35,7 @@ public class MainApplication extends GraphicsApplication {
 	PlayerShip player;
 	int score = 0;
 	GLabel scoreBoard = new GLabel("SCORE: " + score, 10, 25);
+	GLabel alreadyHave = new GLabel("You currently have that upgrade, pick another");
 	ArrayList<GImage> healthBar = new ArrayList<GImage>();
 	boolean isShooting = false;
 	Timer timer = new Timer(1000/fps, this);

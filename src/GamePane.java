@@ -11,6 +11,9 @@ public class GamePane extends GraphicsPane {
 		this.program = app;
 		program.scoreBoard.setFont("Arial-Bold-22");
 		program.scoreBoard.setColor(Color.WHITE);
+		program.alreadyHave.setFont("arial-22-bold");
+		program.alreadyHave.setColor(Color.RED);
+		program.alreadyHave.setLocation(program.WINDOW_WIDTH/2 - program.alreadyHave.getWidth()/2, program.WINDOW_HEIGHT/2 - program.getHeight()/2);
 		background = new GImage("levels/testspacelevel.jpg");
 		background.setSize(program.getWidth()+ 500, program.getHeight());
 	}
