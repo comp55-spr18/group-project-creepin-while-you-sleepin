@@ -23,7 +23,7 @@ public class MainApplication extends GraphicsApplication {
 	public int shipDeathCount;
 	public int enemyHitCount;
 	public int playerHitCount;
-	int fps = 75;
+	int fps = 60;
 	boolean win = false;		// Notice that we have both win and lose booleans; default state is that both are false (the player hasn't won or lost but is playing)
 	boolean lose = false;		// this means we need to be explicit and can't assume that because win = false that the player lost
 	boolean easy = false;
