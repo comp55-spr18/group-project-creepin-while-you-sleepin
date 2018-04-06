@@ -3,12 +3,11 @@ import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
 public class PlayerShip extends Ship {
-	private int shots;
 	public PlayerShip(MainApplication game) {
 		setGame(game);
 		setInvincible(false);
 		setIframe(0);
-		shots = 1;
+		setShots(1);
 		setHealth(5);
 		setCooldown(0);
 		setMaxCooldown(20);
@@ -36,7 +35,7 @@ public class PlayerShip extends Ship {
 		if(canShoot() && getGame().isShooting) {
 			setCanShoot(false);
 			getGame().playerShootCount = getGame().playSound("playershoot", getGame().playerShootCount);
-			switch(shots) {
+			switch(getShots()) {
 			case 2:
 				new Bullet(this, new GPoint(getGunLocation()[0].getX(), getGunLocation()[0].getY() + getBulletSize()), 1, 0);
 				new Bullet(this, new GPoint(getGunLocation()[0].getX(), getGunLocation()[0].getY() - getBulletSize()), 1, 0);
@@ -115,13 +114,5 @@ public class PlayerShip extends Ship {
 		if (getGame().lose || getGame().win) {
 			getGame().remove(getSprite());
 		}
-	}
-	
-	public int getShots() {
-		return shots;
-	}
-	
-	public void setShots(int shots) {
-		this.shots = shots;
 	}
 }

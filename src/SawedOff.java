@@ -1,9 +1,10 @@
 import java.awt.Color;
+
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
-public class HeavyWeightEnemy extends Ship {
-	public HeavyWeightEnemy(MainApplication game, double y) {
+public class SawedOff extends Ship {
+	public SawedOff(MainApplication game, double y) {
 		setGame(game);
 		setInvincible(false);
 		setHealth(5);
@@ -40,11 +41,19 @@ public class HeavyWeightEnemy extends Ship {
 	public void shoot() {
 		if(canShoot()) {
 			setCanShoot(false);
-			Projectile newProj = new Bullet(this, getGunLocation()[0], -1, 0);
-			newProj.aimAtPlayer();aimAtPlayer();
-			getGame().add(newProj.getSprite());
-			getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);
-		} else {
+			getGame().playerShootCount = getGame().playSound("playershoot", getGame().playerShootCount);
+			switch(getShots()) {
+			case 2:
+				new Bullet(this, new GPoint(getGunLocation()[0].getX(), getGunLocation()[0].getY() + getBulletSize()), 1, 0);
+				new Bullet(this, new GPoint(getGunLocation()[0].getX(), getGunLocation()[0].getY() - getBulletSize()), 1, 0);
+				break;
+			case 3:
+				new Bullet(this, new GPoint(getGunLocation()[0].getX(), getGunLocation()[0].getY() + getBulletSize()), 1, 0.2);
+				new Bullet(this, new GPoint(getGunLocation()[0].getX(), getGunLocation()[0].getY() - getBulletSize()), 1, -0.2);
+			default:
+				new Bullet(this, getGunLocation()[0], 1, 0);
+			}
+		} else if (!canShoot()) {
 			setCooldown(getCooldown() + 1);
 			if(getCooldown() == getMaxCooldown()) {
 				setCooldown(0);
@@ -52,6 +61,6 @@ public class HeavyWeightEnemy extends Ship {
 			}
 		}
 	}
-}
 
+	}
 

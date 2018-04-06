@@ -22,6 +22,7 @@ public abstract class Ship {
 	private double bulletSize;
 	private double bulletSpeed;
 	private int bulletDamage;
+	private int shots;
 	
 	// These attributes only apply to enemy ships
 	private double xDir;			// Since each move() is different for each ship, these do whatever you make them do
@@ -294,5 +295,13 @@ public abstract class Ship {
 
 	public void setBulletDamage(int bulletDamage) {
 		this.bulletDamage = bulletDamage;
+	}
+	
+	public int getShots() {  
+		return shots;
+	}
+	
+	public void setShots(int shots) {
+		this.shots = shots;
 	}
 }
