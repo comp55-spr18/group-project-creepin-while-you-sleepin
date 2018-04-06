@@ -23,7 +23,7 @@ public class MainApplication extends GraphicsApplication {
 	public int shipDeathCount;
 	public int enemyHitCount;
 	public int playerHitCount;
-	int fps = 75;
+	int fps = 65;
 	boolean win = false;		// Notice that we have both win and lose booleans; default state is that both are false (the player hasn't won or lost but is playing)
 	boolean lose = false;		// this means we need to be explicit and can't assume that because win = false that the player lost
 	boolean easy = false;
@@ -31,9 +31,11 @@ public class MainApplication extends GraphicsApplication {
 	AudioPlayer audio;
 	ArrayList<Ship> enemies = new ArrayList<Ship>();
 	ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+	ArrayList<PowerUp> powers = new ArrayList<PowerUp>();
 	PlayerShip player;
 	int score = 0;
 	GLabel scoreBoard = new GLabel("SCORE: " + score, 10, 25);
+	GLabel alreadyHave = new GLabel("You currently have that upgrade, pick another");
 	ArrayList<GImage> healthBar = new ArrayList<GImage>();
 	boolean isShooting = false;
 	Timer timer = new Timer(1000/fps, this);
@@ -49,17 +51,15 @@ public class MainApplication extends GraphicsApplication {
 		endPane = new EndPane(this);
 		audio = AudioPlayer.getInstance();
 		playRandomSound();					// The audio player needs time to "wake up" when it gets used the first time
-		pause(2500);						// Give the audio player time to wake up
+		pause(2000);						// Give the audio player time to wake up
 		switchToMenu();						// Then switch to the menu screen
 	}
 
 	public void switchToMenu() {
-//		playRandomSound();
 		switchToScreen(menu);
 	}
 
 	public void switchToGame() {
-//		playRandomSound();
 		player = new PlayerShip(this);			// Initiate the game with a new player ship
 		wave = new Wave(this);
 		score = 0;								// Reset score
@@ -103,6 +103,11 @@ public class MainApplication extends GraphicsApplication {
 		for(Ship enemy : enemies) {							// and all of the enemy ships and projectiles
 			enemy.update();
 		}
+		for(PowerUp power : powers) {
+			if(power.checkCollision()) {
+				break;
+			}
+		}
 		for(Projectile proj : projectiles) {
 			proj.update();
 		}
@@ -112,15 +117,12 @@ public class MainApplication extends GraphicsApplication {
 			}
 		}
 		wave.update();										// Update the wave
-//		if(score >= 1000) {									// If you get 1000 or more points, you win (for now)
-//			win = true;										// Set win to true so the game knows you won
-//		}
 		if(win || lose) {									// If the game is over
-			if(win) {										// If you won, print it at the menu screen and stop the game timer
+			if(lose) {										// If you lost, print it at the menu screen and stop the game timer
 				switchToScreen(endPane);
 				timer.stop();
 			}
-			if(lose) {										// If you lost, print it at the menu screen and stop the game timer
+			if(win) {										// If you won, print it at the menu screen and stop the game timer
 				switchToScreen(endPane);
 				timer.stop();
 			}

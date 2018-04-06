@@ -3,6 +3,8 @@ import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
 public class TestEnemy extends Ship {
+	double i = -1.5;
+	double j = -0.05;
 	public TestEnemy(MainApplication game, double y) {
 		setGame(game);
 		setInvincible(false);
@@ -19,17 +21,25 @@ public class TestEnemy extends Ship {
 		setDestroyedCounter(0);
 		setxDir(-1);
 		setyDir(0);
-		setSpeed(6);
+		setSpeed(5);
 		setPoints(100);
 		setCollisionDamage(1);
+		setBulletDamage(1);
+		setBulletSpeed(10);
+		setBulletSize(15);
 		setTrail(new FireTrail(this));
 	}
 	@Override
 	public void move() {
-		getSprite().move(getxDir()*getSpeed(), getyDir()*getSpeed());
+		i = i+j;
+		setyDir(i);
+		if(Math.abs(i) >= 3) {
+			j *= -1;
+		}
+		getSprite().move(getxDir()*getSpeed(), getyDir());
 		double x = getSprite().getLocation().getX();
 		double y = getSprite().getLocation().getY();
-		setGunLocation(new GPoint[] {new GPoint(x,y+17.5)});
+		setGunLocation(new GPoint[] {new GPoint(x,y+getSprite().getHeight()/2)});
 		if(getSprite().getLocation().getX() < -100) {
 			setDestroyed(true);
 		}
@@ -38,7 +48,7 @@ public class TestEnemy extends Ship {
 	public void shoot() {
 		if(canShoot()) {
 			setCanShoot(false);
-			Projectile newProj = new Bullet(getGame(), false, getGunLocation()[0], -1, 0, 14, getBulletColor(), 20);
+			Projectile newProj = new Bullet(this, getGunLocation()[0], -1, 0);
 			newProj.aimAtPlayer();
 			getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);
 		} else {

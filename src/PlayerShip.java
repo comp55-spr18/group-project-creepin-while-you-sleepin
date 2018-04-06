@@ -3,13 +3,15 @@ import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
 public class PlayerShip extends Ship {
+	private int shots;
 	public PlayerShip(MainApplication game) {
 		setGame(game);
 		setInvincible(false);
 		setIframe(0);
+		shots = 1;
 		setHealth(5);
 		setCooldown(0);
-		setMaxCooldown(10);
+		setMaxCooldown(20);
 		setCanShoot(false);
 		setSprite(new GImage("sprites/playermodel.png", 0, 0));
 		setBulletColor(Color.GREEN);
@@ -17,6 +19,9 @@ public class PlayerShip extends Ship {
 		setExplosion(new GImage("explosion.png"));
 		setDestroyed(false);
 		setDestroyedCounter(0);
+		setBulletSize(15);
+		setBulletSpeed(25);
+		setBulletDamage(1);
 		getGame().add(getSprite());
 		setTrail(new FireTrail(this));
 	}
@@ -30,8 +35,18 @@ public class PlayerShip extends Ship {
 	public void shoot() {		// Returns the projectile type and iterates to the next gun location (or the same one if only one)
 		if(canShoot() && getGame().isShooting) {
 			setCanShoot(false);
-			new Bullet(getGame(), true, getGunLocation()[0], 1, 0, 25, getBulletColor(), 15);
 			getGame().playerShootCount = getGame().playSound("playershoot", getGame().playerShootCount);
+			switch(shots) {
+			case 2:
+				new Bullet(this, new GPoint(getGunLocation()[0].getX(), getGunLocation()[0].getY() + getBulletSize()), 1, 0);
+				new Bullet(this, new GPoint(getGunLocation()[0].getX(), getGunLocation()[0].getY() - getBulletSize()), 1, 0);
+				break;
+			case 3:
+				new Bullet(this, new GPoint(getGunLocation()[0].getX(), getGunLocation()[0].getY() + getBulletSize()), 1, 0.2);
+				new Bullet(this, new GPoint(getGunLocation()[0].getX(), getGunLocation()[0].getY() - getBulletSize()), 1, -0.2);
+			default:
+				new Bullet(this, getGunLocation()[0], 1, 0);
+			}
 		} else if (!canShoot()) {
 			setCooldown(getCooldown() + 1);
 			if(getCooldown() == getMaxCooldown()) {
@@ -100,5 +115,13 @@ public class PlayerShip extends Ship {
 		if (getGame().lose || getGame().win) {
 			getGame().remove(getSprite());
 		}
+	}
+	
+	public int getShots() {
+		return shots;
+	}
+	
+	public void setShots(int shots) {
+		this.shots = shots;
 	}
 }

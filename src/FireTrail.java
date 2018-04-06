@@ -44,26 +44,26 @@ public class FireTrail implements ActionListener {
 	}
 	// This function moves all the projectiles in the arraylist as well as updates the color and size each time
 	public void move() {
-		if(!ship.isDestroyed()) {	// If the ship is not destroyed
+		if(!ship.isDestroyed()) {							// If the ship is not destroyed
 			location = new GPoint(ship.getSprite().getX() + xOffset, ship.getSprite().getY()+ship.getSprite().getHeight()/2);	// Set the location relative to the ship
-			Projectile trailProj = new Emitter(ship.getGame(), true, location, xDir, 0, speed, Color.RED, size);	// Create an emitter with the proper values
+			Projectile trailProj = new Emitter(ship, location, xDir, 0, speed, Color.RED, size);	// Create an emitter with the proper values
 			trail.add(trailProj);							// Add the new emitter to the arraylist
 			ship.getGame().add(trailProj.getSprite());		// Add the emitter's sprite to the game
 		}
-		for(Projectile tr : trail) {	// For each projectile in the arraylist
-			tr.move();					// Move it
+		for(Projectile tr : trail) {						// For each projectile in the arraylist
+			tr.move();										// Move it
 			tr.getSprite().setSize(tr.getSprite().getWidth()-(shrinkScale/length), tr.getSprite().getWidth()-(shrinkScale/length));		// Set the size to be smaller
-			tr.getSprite().setLocation(tr.getSprite().getX(), tr.getSprite().getY()+((shrinkScale/2)/length));						// Set the position to be a little lower so it's centered
-			if(tr.getSprite().getColor().getGreen() + colorScale <= 255) {												// If more green can be added to the sprite
+			tr.getSprite().setLocation(tr.getSprite().getX(), tr.getSprite().getY()+((shrinkScale/2)/length));							// Set the position to be a little lower so it's centered
+			if(tr.getSprite().getColor().getGreen() + colorScale <= 255) {																// If more green can be added to the sprite
 				tr.getSprite().setColor(new Color(tr.getSprite().getColor().getRed(), (int) (tr.getSprite().getColor().getGreen() + colorScale), tr.getSprite().getColor().getBlue()));
-				tr.getSprite().setFillColor(tr.getSprite().getColor()); // Add green to the sprite (turning it from red to yellow gradually)
+				tr.getSprite().setFillColor(tr.getSprite().getColor()); 		// Add green to the sprite (turning it from red to yellow gradually)
 			}
 		}
-		for(Projectile tr : trail) {						// For each projectile in the arraylist
-			if(tr.getSprite().getWidth() <= 6*shrinkScale) {			// If the sprite's size is small enough
-				ship.getGame().remove(tr.getSprite());		// Remove the sprite
+		for(Projectile tr : trail) {							// For each projectile in the arraylist
+			if(tr.getSprite().getWidth() <= 6*shrinkScale) {	// If the sprite's size is small enough
+				ship.getGame().remove(tr.getSprite());			// Remove the sprite
 				tr.setDestroyed(true);
-				trail.remove(tr);							// Remove the projectile from the arraylist
+				trail.remove(tr);								// Remove the projectile from the arraylist
 				break;
 			}
 		}

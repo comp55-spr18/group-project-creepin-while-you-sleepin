@@ -5,8 +5,8 @@ public class HomingBullet extends Projectile {
 	private int gracePeriod = 0;		// Initial timer on the bullet
 	private int maxGracePeriod = 20;	// After gracePeriod passes this value, the projectile can hit enemies
 	private int disengage = 150;		// After gracePeriod passes this value, the missile will stop homing
-	public HomingBullet(MainApplication game, boolean isPlayerProj, GPoint gunLoc, double xD, double yD, int spd, Color bulletColor, int size) {
-		super(game, isPlayerProj, gunLoc, xD, yD, spd, bulletColor, size);
+	public HomingBullet(Ship ship, GPoint gunLoc, double xD, double yD) {
+		super(ship, gunLoc, xD, yD);
 		setDestructable(true);
 	}
 	

@@ -30,10 +30,10 @@ public class EndPane extends GraphicsPane {
 	@Override
 	public void showContents() {
 //		program.add(background);
-		if(program.win) {
-			endLabel.setLabel("You win!");
-		} else {
+		if(program.lose) {
 			endLabel.setLabel("You lose!");
+		} else {
+			endLabel.setLabel("You win!");
 		}
 		endLabel.setLocation(program.WINDOW_WIDTH/2 - endLabel.getWidth()/2, program.WINDOW_HEIGHT/2 - endLabel.getHeight()/2);
 		program.add(endLabel);

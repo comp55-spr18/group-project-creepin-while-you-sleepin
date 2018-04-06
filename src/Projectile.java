@@ -6,6 +6,7 @@ import acm.graphics.*;
 // Make a constructor for the new class and define a new onCollision() since move() and checkCollision() will be inherited
 
 public abstract class Projectile {
+	private Ship ship;
 	private MainApplication game;
 	private boolean isPlayerProjectile;			// Check if the projectile belongs to player
 	private double xDir;						// Using the x and y Dir variables creates a vector with speed as its magnitude, indicating the movement of the projectile
@@ -16,21 +17,22 @@ public abstract class Projectile {
 	private boolean isDestructable;				// Check if this projectile can be destroyed by the player's projectile
 	private int damage;
 
-	public Projectile(MainApplication game, boolean isPlayerProj, GPoint gunLoc, double xD, double yD, double spd, Color bulletColor, int size) {
-		setGame(game);
+	public Projectile(Ship ship, GPoint gunLoc, double xD, double yD) {
+		setShip(ship);
+		setGame(ship.getGame());
 		setDestroyed(false);
 		setDestructable(false);
-		setPlayerProjectile(isPlayerProj);
+		setPlayerProjectile(ship instanceof PlayerShip);
 		setSprite(new GOval(15,15));
-		getSprite().setFillColor(bulletColor);
-		getSprite().setColor(bulletColor);
+		getSprite().setFillColor(ship.getBulletColor());
+		getSprite().setColor(ship.getBulletColor());
 		getSprite().setFilled(true);
 		setxDir(xD);
 		setyDir(yD);
-		setSize(size, size);
-		setSpeed(spd);
+		setSize(ship.getBulletSize(), ship.getBulletSize());
+		setSpeed(ship.getBulletSpeed());
+		setDamage(ship.getBulletDamage());
 		getSprite().setLocation(gunLoc.getX(), gunLoc.getY() - getSprite().getHeight()/2);
-		setDamage(1);
 		getGame().projectiles.add(this);
 		getGame().add(getSprite());
 	}
@@ -184,5 +186,15 @@ public abstract class Projectile {
 	}
 	public void setDamage(int damage) {
 		this.damage = damage;
+	}
+
+
+	public Ship getShip() {
+		return ship;
+	}
+
+
+	public void setShip(Ship ship) {
+		this.ship = ship;
 	}
 }

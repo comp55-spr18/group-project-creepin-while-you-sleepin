@@ -7,7 +7,7 @@ public class Kamikazi extends Ship {
 	public Kamikazi(MainApplication game, double y) {
 		setGame(game);
 		setInvincible(false);
-		setHealth(1);
+		setHealth(3);
 		setCooldown(325);
 		setMaxCooldown(400);
 		setCanShoot(false);

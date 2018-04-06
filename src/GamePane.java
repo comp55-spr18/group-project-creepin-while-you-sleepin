@@ -11,6 +11,9 @@ public class GamePane extends GraphicsPane {
 		this.program = app;
 		program.scoreBoard.setFont("Arial-Bold-22");
 		program.scoreBoard.setColor(Color.WHITE);
+		program.alreadyHave.setFont("arial-22-bold");
+		program.alreadyHave.setColor(Color.RED);
+		program.alreadyHave.setLocation(program.WINDOW_WIDTH/2 - program.alreadyHave.getWidth()/2, program.WINDOW_HEIGHT/2 - program.getHeight()/2);
 		background = new GImage("levels/testspacelevel.jpg");
 		background.setSize(program.getWidth()+ 500, program.getHeight());
 	}
@@ -33,7 +36,8 @@ public class GamePane extends GraphicsPane {
 		for(Projectile proj : program.projectiles) {			// Remove all projectile sprites
 			program.remove(proj.getSprite());
 		}
-		program.remove(program.player.getSprite());						// Remove the playership sprite
+		program.remove(program.player.getSprite());	// Remove the playership sprite
+		program.remove(program.player.getExplosion());
 		program.remove(program.scoreBoard);
 		program.enemies.clear();								// Clear the enemies arraylist
 		program.projectiles.clear();							// Clear the projectiles arraylist

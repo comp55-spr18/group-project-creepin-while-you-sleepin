@@ -2,8 +2,8 @@ import java.awt.Color;
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
-public class boss extends Ship {
-	public boss(MainApplication game, double y) {
+public class Boss extends Ship {
+	public Boss(MainApplication game, double y) {
 		setGame(game);
 		setInvincible(false);
 		setHealth(2);
@@ -14,7 +14,6 @@ public class boss extends Ship {
 		setSprite(new GImage("boss 1.png", MainApplication.WINDOW_WIDTH, MainApplication.WINDOW_HEIGHT/(1080/y)));
 		setBulletColor(Color.white);
 		setSize(500, 500);
-		setSprite(new GImage("boss 1.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
 		setBulletColor(Color.RED);
 		setSize(50, 50);
 		setExplosion(new GImage("explosion.png"));
@@ -25,6 +24,9 @@ public class boss extends Ship {
 		setSpeed(7);
 		setPoints(100);
 		setCollisionDamage(2);
+		setBulletDamage(2);
+		setBulletSize(20);
+		setBulletSpeed(8);
 		setTrail(new FireTrail(this));
 	}
 	
@@ -39,29 +41,9 @@ public class boss extends Ship {
 	}
 	
 	public void shoot() {
-		/*boolean goingDown = false;
-		int yPosition = 0;
-		if (goingDown == true){
-		    if (yPosition <= 0){
-		        goingDown = false;
-		        yPosition++;
-		    }
-		    else {
-		        yPosition--;
-		    }
-		}
-		else {
-		    if (yPosition >= 50){
-		        goingDown = true;
-		        yPosition--;
-		    }
-		    else {
-		        yPosition++; 
-		    }
-		}*/
 		if(canShoot()) {
 			setCanShoot(false);
-			Projectile newProj = new Bullet(getGame(), false, getGunLocation()[0], -1, 0, 14, getBulletColor(), 350);
+			Projectile newProj = new Bullet(this, getGunLocation()[0], -1, 0);
 			newProj.setxDir((getGame().player.getSprite().getLocation().getX()+25) - newProj.getSprite().getLocation().getX()-newProj.getSprite().getWidth()/2);
 			newProj.setyDir((getGame().player.getSprite().getLocation().getY()+25) - newProj.getSprite().getLocation().getY()-newProj.getSprite().getWidth()/2);
 			getGame().add(newProj.getSprite());
