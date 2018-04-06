@@ -21,7 +21,7 @@ public class Wave {
 		game = g;
 		waveCount = 0;
 		upgradeMod = 3;
-		totalWaves = 20;			// For now there are 6 regular waves, 3 upgrade and 1 boss wave
+		totalWaves = 20;			// For now there are 13 regular waves, 6 upgrade waves and 1 boss wave
 		upgradeLine = new GLine(game.WINDOW_WIDTH/(1920/1000.0), 0, game.WINDOW_WIDTH/(1920/1000.0), game.WINDOW_HEIGHT);
 		upgradeLine.setColor(Color.RED);
 		upgradeLabel = new GLabel("Fly behind this line to see the upgrades");
@@ -215,8 +215,8 @@ public class Wave {
 	public void easy4() {
 		switch(enemyToSpawn) {
 			case 0:
-				size = 20;
-				delay = 25;
+				size = 10;
+				delay = 50;
 				break;
 			default:
 				switch(enemyToSpawn%2) {

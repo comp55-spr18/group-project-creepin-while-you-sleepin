@@ -23,7 +23,7 @@ public class MainApplication extends GraphicsApplication {
 	public int shipDeathCount;
 	public int enemyHitCount;
 	public int playerHitCount;
-	int fps = 75;
+	int fps = 60;
 	boolean win = false;		// Notice that we have both win and lose booleans; default state is that both are false (the player hasn't won or lost but is playing)
 	boolean lose = false;		// this means we need to be explicit and can't assume that because win = false that the player lost
 	boolean easy = false;
@@ -35,6 +35,7 @@ public class MainApplication extends GraphicsApplication {
 	PlayerShip player;
 	int score = 0;
 	GLabel scoreBoard = new GLabel("SCORE: " + score, 10, 25);
+	GLabel alreadyHave = new GLabel("You currently have that upgrade, pick another");
 	ArrayList<GImage> healthBar = new ArrayList<GImage>();
 	boolean isShooting = false;
 	Timer timer = new Timer(1000/fps, this);
