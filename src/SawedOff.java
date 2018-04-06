@@ -10,7 +10,7 @@ public class SawedOff extends Ship {
 		setShots(2);
 		setHealth(5);
 		setCooldown(0);
-		setMaxCooldown(40);
+		setMaxCooldown(70);
 		setCanShoot(false);
 		setGunLocation(new GPoint[] {});
 		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
@@ -21,7 +21,7 @@ public class SawedOff extends Ship {
 		setDestroyedCounter(0);
 		setxDir(-1);
 		setyDir(0);
-		setSpeed(6);
+		setSpeed(2);
 		setPoints(100);
 		setBulletDamage(1);
 		setBulletSpeed(10);
@@ -41,6 +41,15 @@ public class SawedOff extends Ship {
 	}
 	@Override
 	public void shoot() {
+		if(getHealth() < 3) {
+			setShots(3);
+			setSpeed(5);
+			setMaxCooldown(50);
+			if(getCooldown() > getMaxCooldown()) {
+				setCooldown(0);
+			}
+			
+		}
 		if(canShoot()) {
 			setCanShoot(false);
 			getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);
