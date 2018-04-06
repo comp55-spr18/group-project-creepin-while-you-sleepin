@@ -16,9 +16,13 @@ public class Wave {
 	int upgradeMod;
 	GLine upgradeLine;
 	GLabel upgradeLabel;
+	int prevSize;
+	int currSize;
 	
 	public Wave(MainApplication g) {
 		game = g;
+		prevSize = 0;
+		currSize = 0;
 		waveCount = 0;
 		upgradeMod = 3;
 		totalWaves = 20;			// For now there are 13 regular waves, 6 upgrade waves and 1 boss wave
@@ -53,8 +57,6 @@ public class Wave {
 	}
 	
 	public void getNextEnemy() {			// Generates the next enemy in the wave
-		int prevSize = game.enemies.size();
-		int currSize = 0;
 		if(waveCount < totalWaves && waveCount%upgradeMod != 0) {			// If it is not the final wave
 			if(selectedDifficulty == 0) {		// If the wave difficulty is easy
 				switch(selectedWave) {			// Switch statement for all the easy waves
@@ -89,20 +91,26 @@ public class Wave {
 		} else {								// If it is the final wave
 			fakeBossWave();						// Call the boss wave
 		}
-		currSize = game.enemies.size();
-		if(enemyToSpawn > 0 && currSize > prevSize) {					// If an enemy was created
-			for(int i = prevSize;i < currSize;i++) {
+		enemyToSpawn++;							// Increment the enemyToSpawn
+	}
+	
+	public void addEnemies() {
+		currSize = game.enemies.size();					// Get current size of enemies
+		if(currSize > prevSize) {						// If an enemy was created
+			for(int i = prevSize;i < currSize;i++) {	// Add the sprite of all new enemies
 				game.add(game.enemies.get(i).getSprite());
 			}
+			prevSize = currSize;						// Update prevSize
 		}
-		enemyToSpawn++;							// Increment the enemyToSpawn
 	}
 	
 	public void update() {
 		counter++;												// Increment counter
 		if(counter%delay == 0 && enemyToSpawn <= size) {		// After counter advances 'delay' number of frames, and if there are more enemies to spawn
 			getNextEnemy();										// call getNextEnemy() to add the next enemy to game.enemies
-		} else if (enemyToSpawn > size) {						// If all enemies have been spawned
+		}
+		addEnemies();
+		if (enemyToSpawn > size) {						// If all enemies have been spawned
 			for(Ship enemy : game.enemies) {					// Check to see if any enemy explosions are still visible (they are hidden when the ship is destroyed)
 				if(enemy.getExplosion().isVisible()) {			// If an enemy explosion is not hidden (still alive)
 					counter = 1;								// Set the counter to 1 to freeze it
