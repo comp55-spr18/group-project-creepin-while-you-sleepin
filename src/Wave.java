@@ -18,7 +18,7 @@ public class Wave {
 	GLabel upgradeLabel;
 	int prevSize;
 	int currSize;
-	
+
 	public Wave(MainApplication g) {
 		game = g;
 		waveCount = 0;
@@ -37,7 +37,7 @@ public class Wave {
 		}
 		getNewWave();				// Start the first wave
 	}
-	
+
 	public void getNewWave() {
 		if(game.enemies != null) {	// If enemies is not null
 			game.enemies.clear();	// Clear it
@@ -55,8 +55,8 @@ public class Wave {
 		waveCount++;												// Increment wave count
 		getNextEnemy();												// Get the next enemy (must be called here to initialize delay and size)
 	}
-	
-	public void getNextEnemy() {			// Generates the next enemy in the wave
+
+	public void getNextEnemy() {				// Generates the next enemy in the wave
 		if(waveCount < totalWaves && waveCount%upgradeMod != 0) {			// If it is not the final wave
 			if(selectedDifficulty == 0) {		// If the wave difficulty is easy
 				switch(selectedWave) {			// Switch statement for all the easy waves
@@ -93,7 +93,7 @@ public class Wave {
 		}
 		enemyToSpawn++;							// Increment the enemyToSpawn
 	}
-	
+
 	public void addEnemies() {
 		currSize = game.enemies.size();					// Get current size of enemies
 		if(currSize > prevSize) {						// If an enemy was created
@@ -103,14 +103,14 @@ public class Wave {
 			prevSize = currSize;						// Update prevSize
 		}
 	}
-	
+
 	public void update() {
 		counter++;												// Increment counter
 		if(counter%delay == 0 && enemyToSpawn <= size) {		// After counter advances 'delay' number of frames, and if there are more enemies to spawn
 			getNextEnemy();										// call getNextEnemy() to add the next enemy to game.enemies
 		}
 		addEnemies();
-		if (enemyToSpawn > size) {						// If all enemies have been spawned
+		if (enemyToSpawn > size) {								// If all enemies have been spawned
 			for(Ship enemy : game.enemies) {					// Check to see if any enemy explosions are still visible (they are hidden when the ship is destroyed)
 				if(enemy.getExplosion().isVisible()) {			// If an enemy explosion is not hidden (still alive)
 					counter = 1;								// Set the counter to 1 to freeze it
@@ -129,7 +129,7 @@ public class Wave {
 			}
 		}
 	}
-	
+
 	public void easy1() {			// Generates a basic easy wave
 		switch(enemyToSpawn) {
 			case 0:
@@ -157,7 +157,7 @@ public class Wave {
 				break;
 		}
 	}
-	
+
 	public void easy2() {
 		switch(enemyToSpawn) {
 			case 0:
@@ -187,7 +187,7 @@ public class Wave {
 				break;
 		}
 	}
-	
+
 	public void easy3() {
 		switch(enemyToSpawn) {
 			case 0:
@@ -234,7 +234,7 @@ public class Wave {
 			default:
 				switch(enemyToSpawn%2) {
 				case 0:
-					game.enemies.add(new TestEnemy(game, game.WINDOW_HEIGHT - 200));
+					game.enemies.add(new TestEnemy(game, game.WINDOW_HEIGHT - 500));
 					if(enemyToSpawn == 20) {
 						delay = 200;
 					}
@@ -291,7 +291,7 @@ public class Wave {
 		}
 		
 	}
-	
+
 	public void hard2() {			// Generates a drone wave
 		switch(enemyToSpawn) {		// Creates a switch for enemyToSpawn, using 0 (the first call) as the initiator for the wave
 			case 0:					// Initiate the wave
@@ -312,7 +312,7 @@ public class Wave {
 				}
 		}
 	}
-	
+
 	public void fakeBossWave() {			// Just a pseudo-boss wave until we have a boss
 		switch(enemyToSpawn) {
 			case 0:

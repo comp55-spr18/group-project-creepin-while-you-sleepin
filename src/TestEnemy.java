@@ -3,6 +3,8 @@ import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
 public class TestEnemy extends Ship {
+	double i = 0;
+	double j = 0.1;
 	public TestEnemy(MainApplication game, double y) {
 		setGame(game);
 		setInvincible(false);
@@ -29,10 +31,15 @@ public class TestEnemy extends Ship {
 	}
 	@Override
 	public void move() {
-		getSprite().move(getxDir()*getSpeed(), getyDir()*getSpeed());
+		i = i+j;
+		setyDir(i);
+		if(Math.abs(i) >= 5) {
+			j *= -1;
+		}
+		getSprite().move(getxDir()*getSpeed(), getyDir());
 		double x = getSprite().getLocation().getX();
 		double y = getSprite().getLocation().getY();
-		setGunLocation(new GPoint[] {new GPoint(x,y+17.5)});
+		setGunLocation(new GPoint[] {new GPoint(x,y+getSprite().getHeight()/2)});
 		if(getSprite().getLocation().getX() < -100) {
 			setDestroyed(true);
 		}
