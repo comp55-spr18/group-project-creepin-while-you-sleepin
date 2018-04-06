@@ -21,8 +21,6 @@ public class Wave {
 	
 	public Wave(MainApplication g) {
 		game = g;
-		prevSize = 0;
-		currSize = 0;
 		waveCount = 0;
 		upgradeMod = 3;
 		totalWaves = 20;			// For now there are 13 regular waves, 6 upgrade waves and 1 boss wave
@@ -45,6 +43,8 @@ public class Wave {
 			game.enemies.clear();	// Clear it
 		}
 		game.enemies = new ArrayList<Ship>();	// Make enemies a new arraylist
+		prevSize = 0;
+		currSize = 0;
 		counter = 0;							// Reset the counter
 		enemyToSpawn = 0;						// Reset the enemy to spawn (we set it to -1 so that it reads the delay and size of the wave but doesn't spawn anything)
 		if(selectedDifficulty == 0) {								// If the difficulty of the new wave is hard
