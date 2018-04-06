@@ -53,6 +53,8 @@ public class Wave {
 	}
 	
 	public void getNextEnemy() {			// Generates the next enemy in the wave
+		int prevSize = game.enemies.size();
+		int currSize = 0;
 		if(waveCount < totalWaves && waveCount%upgradeMod != 0) {			// If it is not the final wave
 			if(selectedDifficulty == 0) {		// If the wave difficulty is easy
 				switch(selectedWave) {			// Switch statement for all the easy waves
@@ -87,10 +89,13 @@ public class Wave {
 		} else {								// If it is the final wave
 			fakeBossWave();						// Call the boss wave
 		}
-		if(enemyToSpawn > 0) {					// If an enemy was created
-			game.add(game.enemies.get(game.enemies.size() - 1).getSprite());	// Add the sprite of the latest enemy added to enemies
+		currSize = game.enemies.size();
+		if(enemyToSpawn > 0 && currSize > prevSize) {					// If an enemy was created
+			for(int i = prevSize;i < currSize;i++) {
+				game.add(game.enemies.get(i).getSprite());
+			}
 		}
-		enemyToSpawn++;						// Increment the enemyToSpawn
+		enemyToSpawn++;							// Increment the enemyToSpawn
 	}
 	
 	public void update() {
@@ -258,22 +263,22 @@ public class Wave {
 		switch(enemyToSpawn) {
 			case 0:
 				size = 5;
-				delay = 20;
+				delay = 50;
 				break;
 			case 1:
-				game.enemies.add(new TestHomingEnemy(game, 500));
+				game.enemies.add(new TestHomingEnemy(game, 200));
 				break;
 			case 2:
 				game.enemies.add(new TestHomingEnemy(game, 100));
 				break;
 			case 3:
-				game.enemies.add(new TestHomingEnemy(game, 300));
-				break;
-			case 4:
 				game.enemies.add(new TestHomingEnemy(game, 500));
 				break;
+			case 4:
+				game.enemies.add(new TestHomingEnemy(game, 650));
+				break;
 			case 5:
-				game.enemies.add(new TestHomingEnemy(game, 100));
+				game.enemies.add(new TestHomingEnemy(game, 800));
 				break;
 		}
 		
@@ -282,10 +287,13 @@ public class Wave {
 	public void hard2() {			// Generates a drone wave
 		switch(enemyToSpawn) {		// Creates a switch for enemyToSpawn, using 0 (the first call) as the initiator for the wave
 			case 0:					// Initiate the wave
-				size = 50;
+				size = 70;
 				delay = 5;
 				break;
 			default:						// This means that if enemyToSpawn is anything other than 0, this will trigger
+				if(enemyToSpawn%3 == 0) {
+					game.enemies.add(new TestEnemy(game, 1080/2.0));
+				}
 				switch(enemyToSpawn%2) {	// Mod enemyToSpawn by 2 to turn it into a 0 or 1
 					case 0:					// If enemyToSpawn is even, spawn this one
 						game.enemies.add(new Drone(game, game.WINDOW_HEIGHT - 200));
