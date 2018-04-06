@@ -1,3 +1,4 @@
+import acm.graphics.GPoint;
 
 public class TestHomingEnemy extends TestEnemy {
 	public TestHomingEnemy(MainApplication game, double y) {
@@ -9,7 +10,18 @@ public class TestHomingEnemy extends TestEnemy {
 		setSpeed(4);
 		setPoints(200);
 	}
-	
+
+	@Override
+	public void move() {
+		getSprite().move(getxDir()*getSpeed(), getyDir()*getSpeed());
+		double x = getSprite().getLocation().getX();
+		double y = getSprite().getLocation().getY();
+		setGunLocation(new GPoint[] {new GPoint(x,y+getSprite().getHeight()/2)});
+		if(getSprite().getLocation().getX() < -100) {
+			setDestroyed(true);
+		}
+	}
+
 	@Override
 	public void shoot() {
 		if(canShoot()) {

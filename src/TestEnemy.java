@@ -3,8 +3,8 @@ import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
 public class TestEnemy extends Ship {
-	double i = 0;
-	double j = 0.1;
+	double i = -1.5;
+	double j = -0.05;
 	public TestEnemy(MainApplication game, double y) {
 		setGame(game);
 		setInvincible(false);
@@ -21,11 +21,11 @@ public class TestEnemy extends Ship {
 		setDestroyedCounter(0);
 		setxDir(-1);
 		setyDir(0);
-		setSpeed(6);
+		setSpeed(5);
 		setPoints(100);
 		setCollisionDamage(1);
 		setBulletDamage(1);
-		setBulletSpeed(14);
+		setBulletSpeed(10);
 		setBulletSize(15);
 		setTrail(new FireTrail(this));
 	}
@@ -33,7 +33,7 @@ public class TestEnemy extends Ship {
 	public void move() {
 		i = i+j;
 		setyDir(i);
-		if(Math.abs(i) >= 5) {
+		if(Math.abs(i) >= 3) {
 			j *= -1;
 		}
 		getSprite().move(getxDir()*getSpeed(), getyDir());

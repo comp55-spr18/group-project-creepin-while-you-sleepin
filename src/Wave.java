@@ -141,7 +141,7 @@ public class Wave {
 				delay = 100;											// Sets the new delay between enemy spawns to be 100
 				break;
 			case 2:
-				game.enemies.add(new TestEnemy(game, 100));		// The second and so on
+				game.enemies.add(new TestEnemy(game, 200));		// The second and so on
 				break;
 			case 3:
 				game.enemies.add(new TestEnemy(game, 300));
@@ -150,7 +150,7 @@ public class Wave {
 				game.enemies.add(new TestEnemy(game, 500));
 				break;
 			case 5:
-				game.enemies.add(new TestEnemy(game, 100));
+				game.enemies.add(new TestEnemy(game, 200));
 				break;
 			case 6:
 				game.enemies.add(new SprayBall(game, 450, game.WINDOW_WIDTH/3));
@@ -234,13 +234,13 @@ public class Wave {
 			default:
 				switch(enemyToSpawn%2) {
 				case 0:
-					game.enemies.add(new TestEnemy(game, game.WINDOW_HEIGHT - 500));
+					game.enemies.add(new TestEnemy(game, game.WINDOW_HEIGHT - 300));
 					if(enemyToSpawn == 20) {
 						delay = 200;
 					}
 					break;
 				case 1:
-					game.enemies.add(new TestEnemy(game, 100));
+					game.enemies.add(new TestEnemy(game, 300));
 					break;
 			}
 		}
@@ -261,7 +261,7 @@ public class Wave {
 				game.enemies.add(new Drone(game, 100));
 				break;
 			case 2:
-				game.enemies.add(new TestEnemy(game, 500));
+				game.enemies.add(new TestEnemy(game, 1080/2));
 				break;
 			}
 		}
@@ -322,10 +322,10 @@ public class Wave {
 			default:
 				switch(enemyToSpawn%2) {
 				case 0:
-					game.enemies.add(new TestEnemy(game, game.WINDOW_HEIGHT - 200));
+					game.enemies.add(new TestEnemy(game, game.WINDOW_HEIGHT - 300));
 					break;
 				case 1:
-					game.enemies.add(new TestEnemy(game, 100));
+					game.enemies.add(new TestEnemy(game, 300));
 					break;
 			}
 		}
