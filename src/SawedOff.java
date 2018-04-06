@@ -7,15 +7,16 @@ public class SawedOff extends Ship {
 	public SawedOff(MainApplication game, double y) {
 		setGame(game);
 		setInvincible(false);
+		setShots(2);
 		setHealth(5);
-		setCooldown(325);
-		setMaxCooldown(400);
+		setCooldown(0);
+		setMaxCooldown(40);
 		setCanShoot(false);
-		setGunLocation(new GPoint[] {new GPoint(50,15)});
+		setGunLocation(new GPoint[] {});
 		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
 		setExplosion(new GImage("explosion.png"));
 		setBulletColor(Color.yellow);
-		setSize(200, 200);
+		setSize(50, 50);
 		setDestroyed(false);
 		setDestroyedCounter(0);
 		setxDir(-1);
@@ -44,14 +45,14 @@ public class SawedOff extends Ship {
 			getGame().playerShootCount = getGame().playSound("playershoot", getGame().playerShootCount);
 			switch(getShots()) {
 			case 2:
-				new Bullet(this, new GPoint(getGunLocation()[0].getX(), getGunLocation()[0].getY() + getBulletSize()), 1, 0);
-				new Bullet(this, new GPoint(getGunLocation()[0].getX(), getGunLocation()[0].getY() - getBulletSize()), 1, 0);
+				new Bullet(this, new GPoint(getGunLocation()[0].getX(), getGunLocation()[0].getY() + getBulletSize()), -1, 0);
+				new Bullet(this, new GPoint(getGunLocation()[0].getX(), getGunLocation()[0].getY() - getBulletSize()), -1, 0);
 				break;
 			case 3:
-				new Bullet(this, new GPoint(getGunLocation()[0].getX(), getGunLocation()[0].getY() + getBulletSize()), 1, 0.2);
-				new Bullet(this, new GPoint(getGunLocation()[0].getX(), getGunLocation()[0].getY() - getBulletSize()), 1, -0.2);
+				new Bullet(this, new GPoint(getGunLocation()[0].getX(), getGunLocation()[0].getY() + getBulletSize()), -1, 0.2);
+				new Bullet(this, new GPoint(getGunLocation()[0].getX(), getGunLocation()[0].getY() - getBulletSize()), -1, -0.2);
 			default:
-				new Bullet(this, getGunLocation()[0], 1, 0);
+				new Bullet(this, getGunLocation()[0], -1, 0);
 			}
 		} else if (!canShoot()) {
 			setCooldown(getCooldown() + 1);
