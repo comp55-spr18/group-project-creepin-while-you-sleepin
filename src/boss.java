@@ -39,7 +39,27 @@ public class boss extends Ship {
 	}
 	
 	public void shoot() {
-		if(canShoot()) {
+		boolean goingDown = false;
+		int yPosition = 0;
+		if (goingDown == true){
+		    if (yPosition <= 0){
+		        goingDown = false;
+		        yPosition++;
+		    }
+		    else {
+		        yPosition--;
+		    }
+		}
+		else {
+		    if (yPosition >= 50){
+		        goingDown = true;
+		        yPosition--;
+		    }
+		    else {
+		        yPosition++; 
+		    }
+		}
+		/*if(canShoot()) {
 			setCanShoot(false);
 			Projectile newProj = new Bullet(getGame(), false, getGunLocation()[0], -1, 0, 14, getBulletColor(), 350);
 			newProj.setxDir((getGame().player.getSprite().getLocation().getX()+25) - newProj.getSprite().getLocation().getX()-newProj.getSprite().getWidth()/2);
@@ -52,6 +72,6 @@ public class boss extends Ship {
 				setCooldown(0);
 				setCanShoot(true);
 			}
-		}
+		}*/
 	}
 }
