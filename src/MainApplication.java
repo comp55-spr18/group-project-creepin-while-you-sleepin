@@ -23,7 +23,7 @@ public class MainApplication extends GraphicsApplication {
 	public int shipDeathCount;
 	public int enemyHitCount;
 	public int playerHitCount;
-	int fps = 60;
+	int fps = 65;
 	boolean win = false;		// Notice that we have both win and lose booleans; default state is that both are false (the player hasn't won or lost but is playing)
 	boolean lose = false;		// this means we need to be explicit and can't assume that because win = false that the player lost
 	boolean easy = false;
@@ -51,7 +51,7 @@ public class MainApplication extends GraphicsApplication {
 		endPane = new EndPane(this);
 		audio = AudioPlayer.getInstance();
 		playRandomSound();					// The audio player needs time to "wake up" when it gets used the first time
-		pause(2500);						// Give the audio player time to wake up
+		pause(2000);						// Give the audio player time to wake up
 		switchToMenu();						// Then switch to the menu screen
 	}
 
