@@ -75,6 +75,9 @@ public class Wave {
 				case 4:
 					easy5();
 					break;
+				case 5: 
+					fakeBossWave();
+					break;
 				}
 			} else {							// If the wave difficulty is hard
 				switch(selectedWave) {			// Switch statement for all the hard waves
@@ -83,6 +86,9 @@ public class Wave {
 					break;
 				case 1:
 					hard2();
+					break;
+				case 2:
+					fakeBossWave();
 					break;
 				}
 			}
@@ -321,12 +327,15 @@ public class Wave {
 				delay = 5;
 				break;
 			default:
+				if(enemyToSpawn%3 == 0) {
+					game.enemies.add(new Boss(game, 1080/2.0));
+				}
 				switch(enemyToSpawn%2) {
 				case 0:
-					game.enemies.add(new TestEnemy(game, game.WINDOW_HEIGHT - 300));
+					game.enemies.add(new Boss(game, game.WINDOW_HEIGHT - 300));
 					break;
 				case 1:
-					game.enemies.add(new TestEnemy(game, 300));
+					game.enemies.add(new Boss(game, 300));
 					break;
 			}
 		}
