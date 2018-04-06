@@ -14,15 +14,18 @@ public class SawedOff extends Ship {
 		setCanShoot(false);
 		setGunLocation(new GPoint[] {});
 		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
-		setExplosion(new GImage("explosion.png"));
 		setBulletColor(Color.yellow);
 		setSize(50, 50);
+		setExplosion(new GImage("explosion.png"));
 		setDestroyed(false);
 		setDestroyedCounter(0);
 		setxDir(-1);
 		setyDir(0);
 		setSpeed(6);
 		setPoints(100);
+		setBulletDamage(1);
+		setBulletSpeed(10);
+		setBulletSize(15);
 		setCollisionDamage(1);
 		setTrail(new FireTrail(this));
 	}
@@ -32,8 +35,6 @@ public class SawedOff extends Ship {
 		double x = getSprite().getLocation().getX();
 		double y = getSprite().getLocation().getY();
 		setGunLocation(new GPoint[] {new GPoint(x,y + getSprite().getHeight()/2)});
-
-
 		if(getSprite().getLocation().getX() < -300) {
 			setDestroyed(true);
 		}
@@ -42,7 +43,7 @@ public class SawedOff extends Ship {
 	public void shoot() {
 		if(canShoot()) {
 			setCanShoot(false);
-			getGame().playerShootCount = getGame().playSound("playershoot", getGame().playerShootCount);
+			getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);
 			switch(getShots()) {
 			case 2:
 				new Bullet(this, new GPoint(getGunLocation()[0].getX(), getGunLocation()[0].getY() + getBulletSize()), -1, 0);
