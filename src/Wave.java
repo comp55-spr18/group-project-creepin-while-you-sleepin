@@ -236,7 +236,7 @@ public class Wave {
 	public void easy5() {
 		switch(enemyToSpawn) {
 		case 0:
-			size = 60;
+			size = 20;
 			delay = 25;
 			break;
 		default:

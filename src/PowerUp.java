@@ -77,7 +77,7 @@ class BulletSizeUp extends PowerUp {
 	}
 	
 	public void onCollision() {
-		getGame().player.setBulletSize(getGame().player.getBulletSize() + 10);
+		getGame().player.setBulletSize(getGame().player.getBulletSize() + 15);
 	}
 }
 
