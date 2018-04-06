@@ -118,11 +118,11 @@ public class MainApplication extends GraphicsApplication {
 		}
 		wave.update();										// Update the wave
 		if(win || lose) {									// If the game is over
-			if(win) {										// If you won, print it at the menu screen and stop the game timer
+			if(lose) {										// If you lost, print it at the menu screen and stop the game timer
 				switchToScreen(endPane);
 				timer.stop();
 			}
-			if(lose) {										// If you lost, print it at the menu screen and stop the game timer
+			if(win) {										// If you won, print it at the menu screen and stop the game timer
 				switchToScreen(endPane);
 				timer.stop();
 			}
