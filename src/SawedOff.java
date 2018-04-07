@@ -44,6 +44,8 @@ public class SawedOff extends Ship {
 		if(getHealth() < 3) {
 			setShots(3);
 			setSpeed(5);
+			getSprite().setImage("sprites/enemy5.png");
+			getSprite().setSize(50, 50);
 			setMaxCooldown(50);
 			if(getCooldown() > getMaxCooldown()) {
 				setCooldown(0);
