@@ -292,9 +292,8 @@ public class Wave {
 				game.enemies.add(new TestHomingEnemy(game, 650));
 				break;
 			case 5:
-				game.enemies.add(new SawedOff(game, 800));
+				game.enemies.add(new TestHomingEnemy(game, 800));
 				break;
-	
 		}
 		
 	}
@@ -323,21 +322,11 @@ public class Wave {
 	public void fakeBossWave() {			// Just a pseudo-boss wave until we have a boss
 		switch(enemyToSpawn) {
 			case 0:
-				size = 50;
-				delay = 5;
+				size = 1;
+				delay = 1;
 				break;
 			default:
-				if(enemyToSpawn%3 == 0) {
-					game.enemies.add(new Boss(game, 1080/2.0));
-				}
-				switch(enemyToSpawn%2) {
-				case 0:
-					game.enemies.add(new Boss(game, game.WINDOW_HEIGHT - 300));
-					break;
-				case 1:
-					game.enemies.add(new Boss(game, 300));
-					break;
-			}
+				game.enemies.add(new Boss(game, 500));
 		}
 	}
 
