@@ -280,16 +280,16 @@ public class Wave {
 				delay = 50;
 				break;
 			case 1:
-				game.enemies.add(new TestHomingEnemy(game, 200));
+				game.enemies.add(new SawedOff(game, 200));
 				break;
 			case 2:
-				game.enemies.add(new TestHomingEnemy(game, 100));
+				game.enemies.add(new SawedOff(game, 100));
 				break;
 			case 3:
-				game.enemies.add(new TestHomingEnemy(game, 500));
+				game.enemies.add(new SawedOff(game, 500));
 				break;
 			case 4:
-				game.enemies.add(new TestHomingEnemy(game, 650));
+				game.enemies.add(new SawedOff(game, 650));
 				break;
 			case 5:
 				game.enemies.add(new TestHomingEnemy(game, 800));
@@ -301,8 +301,8 @@ public class Wave {
 	public void hard2() {			// Generates a drone wave
 		switch(enemyToSpawn) {		// Creates a switch for enemyToSpawn, using 0 (the first call) as the initiator for the wave
 			case 0:					// Initiate the wave
-				size = 70;
-				delay = 5;
+				size = 40;
+				delay = 10;
 				break;
 			default:						// This means that if enemyToSpawn is anything other than 0, this will trigger
 				if(enemyToSpawn%3 == 0) {

@@ -22,6 +22,9 @@ public class HeavyWeightEnemy extends Ship {
 		setSpeed(6);
 		setPoints(100);
 		setCollisionDamage(1);
+		setBulletDamage(3);
+		setBulletSpeed(10);
+		setBulletSize(50);
 		setTrail(new FireTrail(this));
 	}
 	@Override
@@ -41,7 +44,7 @@ public class HeavyWeightEnemy extends Ship {
 		if(canShoot()) {
 			setCanShoot(false);
 			Projectile newProj = new Bullet(this, getGunLocation()[0], -1, 0);
-			newProj.aimAtPlayer();aimAtPlayer();
+			newProj.aimAtPlayer();
 			getGame().add(newProj.getSprite());
 			getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);
 		} else {

@@ -53,9 +53,9 @@ public abstract class Projectile {
 	// Then it subtracts 1 health from whatever it hits and removes the projectile and stops its timer
 	public void onCollision(Ship target) {
 		if((isPlayerProjectile() && !(target instanceof PlayerShip)) || (!isPlayerProjectile() && target instanceof PlayerShip)) {
+			setDestroyed(true);
+			getGame().remove(getSprite());
 			if(!target.isInvincible()) {
-				setDestroyed(true);
-				getGame().remove(getSprite());
 				target.dealDamage(getDamage());
 			}
 		}
