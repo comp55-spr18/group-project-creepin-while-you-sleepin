@@ -50,7 +50,7 @@ public class Wave {
 		if(selectedDifficulty == 0) {								// If the difficulty of the new wave is hard
 			selectedWave = Math.abs(game.rgen.nextInt()%5);			// Randomly select one of the easy waves (currently hard1() and Drone())
 		} else {													// If the wave is easy
-			selectedWave = Math.abs(game.rgen.nextInt()%2);			// Randomly select one of the hard waves (currently only easy1())
+			selectedWave = Math.abs(game.rgen.nextInt()%3);			// Randomly select one of the hard waves (currently only easy1())
 		}
 		waveCount++;												// Increment wave count
 		getNextEnemy();												// Get the next enemy (must be called here to initialize delay and size)
@@ -88,6 +88,9 @@ public class Wave {
 					hard2();
 					break;
 				case 2:
+					hard3();
+					break;
+				case 3:
 					fakeBossWave();
 					break;
 				}
@@ -318,6 +321,31 @@ public class Wave {
 						break;
 				}
 		}
+	}
+	public void hard3() {			// Generates a basic bouncy wave
+		switch(enemyToSpawn) {
+			case 0:
+				size = 5;
+				delay = 100;
+				break;
+			case 1:
+				game.enemies.add(new Bouncer(game, 200));
+				break;
+			case 2:
+				game.enemies.add(new Bouncer(game, 100));
+				break;
+			case 3:
+				game.enemies.add(new Bouncer(game, 500));
+				break;
+			case 4:
+				game.enemies.add(new Bouncer(game, 650));
+				break;
+			case 5:
+				game.enemies.add(new Bouncer(game, 800));
+				break;
+	
+		}
+		
 	}
 
 	public void fakeBossWave() {			// Just a pseudo-boss wave until we have a boss

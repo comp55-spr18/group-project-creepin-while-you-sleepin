@@ -4,7 +4,7 @@ import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
 public class Bouncer extends Ship {
-	
+
 	public Bouncer(MainApplication game, double y) {
 		setGame(game);
 		setInvincible(false);
@@ -14,38 +14,61 @@ public class Bouncer extends Ship {
 		setMaxCooldown(70);
 		setCanShoot(false);
 		setGunLocation(new GPoint[] {});
-		setSprite(new GImage("sprites/enemy2.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
+		setSprite(new GImage("sprites/enemy2.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT / (1080 / y)));
 		setBulletColor(Color.yellow);
-		setSize(50, 50);
+		setSize(100, 100);
 		setExplosion(new GImage("explosion.png"));
 		setDestroyed(false);
 		setDestroyedCounter(0);
-		setxDir(-1);
-		setyDir(-6);
-		setSpeed(6);
+		setxDir(-2);
+		setyDir(-4);
+		setSpeed(4);
 		setPoints(100);
 		setBulletDamage(1);
 		setBulletSpeed(10);
-		setBulletSize(15);
+		setBulletSize(20);
 		setCollisionDamage(1);
 		setTrail(new FireTrail(this));
-		
+
 	}
+
 	@Override
 	public void move() {
-		
+
 		getSprite().move(getxDir(), getyDir());
 		double x = getSprite().getLocation().getX();
 		double y = getSprite().getLocation().getY();
-		setGunLocation(new GPoint[] {new GPoint(x,y + getSprite().getHeight()/2)});
-		
-		if(getSprite().getY()  <= 0||getSprite().getY() + getSprite().getHeight() >= getGame().WINDOW_HEIGHT) {
-			
-			setyDir(getyDir()*-1);
+		setGunLocation(new GPoint[] { new GPoint(x, y + getSprite().getHeight() / 2) });
+
+		if (getSprite().getY() <= 0 || getSprite().getY() + getSprite().getHeight() >= getGame().WINDOW_HEIGHT) {
+
+			setyDir(getyDir() * -1);
 		}
-		if(getSprite().getLocation().getX() < -300) {
+		if (getSprite().getLocation().getX() < -300) {
 			setDestroyed(true);
 		}
 	}
 
+	@Override
+	public void shoot() {
+		if (canShoot()) {
+			setCanShoot(false);
+			Projectile newProj = new Bullet(this, getGunLocation()[0], -1, 0);
+			newProj.aimAtPlayer();
+			getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);
+			
+			if(newProj.getSprite().getY()<=0|| newProj.getSprite().getY() + newProj.getSprite().getHeight()>= getGame().WINDOW_HEIGHT) {
+				
+				newProj.setyDir(getyDir()*-1); 
+				//This is just something I'm playing with not currently working, Im aware I also need
+				// to account for the x direction in this case.
+			}
+		} else {
+			setCooldown(getCooldown() + 1);
+			if (getCooldown() == getMaxCooldown()) {
+				setCooldown(0);
+				setCanShoot(true);
+			}
+		}
+	}
 }
