@@ -292,7 +292,7 @@ public class Wave {
 				game.enemies.add(new SawedOff(game, 650));
 				break;
 			case 5:
-				game.enemies.add(new SawedOff(game, 800));
+				game.enemies.add(new Bouncer(game, 800));
 				break;
 	
 		}
