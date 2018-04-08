@@ -40,7 +40,7 @@ public class Bouncer extends Ship {
 		double y = getSprite().getLocation().getY();
 		setGunLocation(new GPoint[] { new GPoint(x, y + getSprite().getHeight() / 2) });
 
-		if (getSprite().getY() <= 0 || getSprite().getY() + getSprite().getHeight() >= getGame().WINDOW_HEIGHT) {
+		if (getSprite().getY() <= 0 || getSprite().getY() + getSprite().getHeight() >= getGame().WINDOW_HEIGHT-100) {
 
 			setyDir(getyDir() * -1);
 		}
@@ -56,13 +56,6 @@ public class Bouncer extends Ship {
 			Projectile newProj = new Bullet(this, getGunLocation()[0], -1, 0);
 			newProj.aimAtPlayer();
 			getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);
-			
-			if(newProj.getSprite().getY()<=0|| newProj.getSprite().getY() + newProj.getSprite().getHeight()>= getGame().WINDOW_HEIGHT) {
-				
-				newProj.setyDir(getyDir()*-1); 
-				//This is just something I'm playing with not currently working, Im aware I also need
-				// to account for the x direction in this case.
-			}
 		} else {
 			setCooldown(getCooldown() + 1);
 			if (getCooldown() == getMaxCooldown()) {
