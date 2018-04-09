@@ -7,11 +7,12 @@ public class SwarmCaller extends BasicEnemy {
 		super(game, y);
 		getTrail().getTimer().stop();
 		setHealth(20);		//very tough			
-		setCooldown(100);			
+		setCooldown(10);			
 		setSprite(new GImage("sprites/enemy2.png", getGame().WINDOW_WIDTH, y));
 		setSize(80, 80);
+		setExplosion(new GImage("explosion.png"));
 		setTrail(new FireTrail(this));
-		setMaxCooldown(200); //Their firing is calling a swarm
+		setMaxCooldown(40); //Their firing is calling a swarm
 		setPoints(300);
 	}
 	
@@ -20,7 +21,7 @@ public class SwarmCaller extends BasicEnemy {
 		if(canShoot()) {
 			setCanShoot(false);
 			getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);
-			//getGame().enemies.add(new Drone(getGame(), 500));
+			getGame().enemies.add(new Drone(getGame(), 500));
 		} else {
 			setCooldown(getCooldown() + 1);
 			if(getCooldown() == getMaxCooldown()) {

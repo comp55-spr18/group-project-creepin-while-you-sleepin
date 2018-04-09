@@ -100,8 +100,8 @@ public class MainApplication extends GraphicsApplication {
 	// Main game loop
 	public void actionPerformed(ActionEvent e) {
 		player.update();									// These lines just call the update function of the player
-		for(Ship enemy : enemies) {							// and all of the enemy ships and projectiles
-			enemy.update();
+		for(int i = enemies.size() - 1;i >= 0;i--) {							// and all of the enemy ships and projectiles
+			enemies.get(i).update();
 		}
 		for(PowerUp power : powers) {
 			if(power.checkCollision()) {
