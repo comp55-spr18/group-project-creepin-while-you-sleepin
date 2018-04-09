@@ -86,7 +86,7 @@ public abstract class Projectile {
 			GRectangle hitbox = getSprite().getBounds();
 			hitbox.setSize(getSpeed(), hitbox.getHeight());
 			for(Ship enemy : game.enemies) {
-				if(enemy instanceof Boss && isPlayerProjectile()) {
+				if(enemy instanceof Boss && isPlayerProjectile() && !enemy.isDestroyed()) {
 					GRectangle enemyHitbox = enemy.getSprite().getBounds();
 					enemyHitbox.setSize(2*(enemy.getSprite().getWidth()/3), enemy.getSprite().getHeight());
 					enemyHitbox.setLocation(enemy.getSprite().getX() + enemy.getSprite().getWidth()/3, enemy.getSprite().getY());

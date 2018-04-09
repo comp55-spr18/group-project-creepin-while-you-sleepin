@@ -13,6 +13,7 @@ public class Wave {
 	int selectedWave;				// The rgen value of the current wave
 	int totalWaves;					// The total number of waves the player must fight (including the boss wave)
 	int waveCount;					// The current wave the player is on
+	int prevWave;
 	int upgradeMod;
 	GLine upgradeLine;
 	GLabel upgradeLabel;
@@ -24,6 +25,8 @@ public class Wave {
 		waveCount = 0;
 		upgradeMod = 3;
 		totalWaves = 10;			// For now there are 13 regular waves, 6 upgrade waves and 1 boss wave
+		selectedWave = -1;
+		prevWave = -1;
 		upgradeLine = new GLine(game.WINDOW_WIDTH/(1920/1000.0), 0, game.WINDOW_WIDTH/(1920/1000.0), game.WINDOW_HEIGHT);
 		upgradeLine.setColor(Color.RED);
 		upgradeLabel = new GLabel("Fly behind this line to see the upgrades");
@@ -48,11 +51,18 @@ public class Wave {
 		counter = 0;							// Reset the counter
 		enemyToSpawn = 0;						// Reset the enemy to spawn (we set it to -1 so that it reads the delay and size of the wave but doesn't spawn anything)
 		if(selectedDifficulty == 0) {								// If the difficulty of the new wave is hard
-			selectedWave = Math.abs(game.rgen.nextInt()%7);			// Randomly select one of the easy waves (currently hard1() and Drone())
+			while(selectedWave == prevWave) {
+				selectedWave = Math.abs(game.rgen.nextInt()%7);			// Randomly select one of the easy waves (currently hard1() and Drone())
+			}
 		} else {													// If the wave is easy
-			selectedWave = Math.abs(game.rgen.nextInt()%3);			// Randomly select one of the hard waves (currently only easy1())
+			while(selectedWave == prevWave) {
+				selectedWave = Math.abs(game.rgen.nextInt()%3);			// Randomly select one of the hard waves (currently only easy1())
+			}
 		}
 		waveCount++;												// Increment wave count
+		if(waveCount%upgradeMod != 0) {
+			prevWave = selectedWave;
+		}
 		getNextEnemy();												// Get the next enemy (must be called here to initialize delay and size)
 	}
 
@@ -80,6 +90,9 @@ public class Wave {
 					break;
 				case 6:
 					easy7();
+					break;
+				case 7:
+					easy8();
 					break;
 				}
 			} else {							// If the wave difficulty is hard
@@ -157,7 +170,7 @@ public class Wave {
 				delay = 100;											// Sets the new delay between enemy spawns to be 100
 				break;
 			case 2:
-				game.enemies.add(new BasicEnemy(game, 200));		// The second and so on
+				game.enemies.add(new BasicEnemy(game, 250));		// The second and so on
 				break;
 			case 3:
 				game.enemies.add(new BasicEnemy(game, 300));
@@ -166,7 +179,7 @@ public class Wave {
 				game.enemies.add(new BasicEnemy(game, 500));
 				break;
 			case 5:
-				game.enemies.add(new BasicEnemy(game, 200));
+				game.enemies.add(new BasicEnemy(game, 250));
 				break;
 			case 6:
 				game.enemies.add(new SprayBall(game, 450, game.WINDOW_WIDTH/3));
@@ -250,13 +263,13 @@ public class Wave {
 			default:
 				switch(enemyToSpawn%2) {
 				case 0:
-					game.enemies.add(new BasicEnemy(game, game.WINDOW_HEIGHT - 300));
+					game.enemies.add(new Bouncer(game, game.WINDOW_HEIGHT - 300));
 					if(enemyToSpawn == 20) {
 						delay = 200;
 					}
 					break;
 				case 1:
-					game.enemies.add(new BasicEnemy(game, 300));
+					game.enemies.add(new Bouncer(game, 300));
 					break;
 			}
 		}
@@ -335,6 +348,30 @@ public class Wave {
 				}
 		}
 	}
+	
+	void easy8() {
+		switch(enemyToSpawn) {
+		case 0:
+			size = 5;
+			delay = 100;
+			break;
+		case 1:
+			game.enemies.add(new SawedOff(game, 1080/2));
+			break;
+		case 2:
+			game.enemies.add(new Bouncer(game, 400));
+			break;
+		case 3:
+			game.enemies.add(new TestHomingEnemy(game, 700));
+			break;
+		case 4:
+			game.enemies.add(new Kamikazi(game, 200));
+			break;
+		case 5:
+			game.enemies.add(new SprayBall(game, 1080/2, 1920/2));
+			break;
+		}
+	}
 
 	public void hard1() {			// Generates a basic hard wave
 		switch(enemyToSpawn) {
@@ -343,23 +380,21 @@ public class Wave {
 				delay = 50;
 				break;
 			case 1:
-				game.enemies.add(new SawedOff(game, 200));
+				game.enemies.add(new TestHomingEnemy(game, 200));
 				break;
 			case 2:
-				game.enemies.add(new SawedOff(game, 100));
+				game.enemies.add(new TestHomingEnemy(game, 100));
 				break;
 			case 3:
-				game.enemies.add(new SawedOff(game, 500));
+				game.enemies.add(new TestHomingEnemy(game, 500));
 				break;
 			case 4:
-				game.enemies.add(new SawedOff(game, 650));
+				game.enemies.add(new TestHomingEnemy(game, 650));
 				break;
 			case 5:
 				game.enemies.add(new TestHomingEnemy(game, 800));
-				game.enemies.add(new Bouncer(game, 800));
 				break;
 		}
-		
 	}
 
 	public void hard2() {			// Generates a drone wave
@@ -369,15 +404,16 @@ public class Wave {
 				delay = 10;
 				break;
 			default:						// This means that if enemyToSpawn is anything other than 0, this will trigger
-				switch(enemyToSpawn%3) {	// Mod enemyToSpawn by 2 to turn it into a 0 or 1
+				switch(enemyToSpawn%2) {	// Mod enemyToSpawn by 2 to turn it into a 0 or 1
 					case 0:					// If enemyToSpawn is even, spawn this one
 						game.enemies.add(new Drone(game, game.WINDOW_HEIGHT - 200));
 						break;
 					case 1:					// Otherwise spawn this one (note that this one gets called first)
 						game.enemies.add(new Drone(game, 100));
+						if(enemyToSpawn%5 == 0) {
+							game.enemies.add(new Kamikazi(game, 1080/2));
+						}
 						break;
-					case 2:
-						game.enemies.add(new Kamikazi(game, 1080/2));
 				}
 		}
 	}
@@ -396,9 +432,7 @@ public class Wave {
 			case 3:
 				game.enemies.add(new Bouncer(game, 500));
 				break;
-	
 		}
-		
 	}
 
 	public void fakeBossWave() {			// Just a pseudo-boss wave until we have a boss

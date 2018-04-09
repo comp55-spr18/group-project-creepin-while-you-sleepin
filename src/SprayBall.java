@@ -9,13 +9,15 @@ public class SprayBall extends BasicEnemy {
 	public SprayBall(MainApplication game, double y, double detonation) {
 		super(game, y);
 		getTrail().getTimer().stop();
-		setHealth(999);
+		setHealth(50);
 		setCooldown(700); 
 		setSprite(new GImage("sprites/enemy4.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
 		//pretty sure this line is pointless
 		setGunLocation(new GPoint[] {}); 
 		setSize(120, 120);
 		getSprite().setLocation(getSprite().getX(), getSprite().getY() - getSprite().getHeight()/2);
+		setExplosion(new GImage("explosion.png"));
+		setPoints(500);
 		setSpeed(6);
 		setTrail(new FireTrail(this));
 		setBulletSpeed(12);
