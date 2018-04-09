@@ -401,7 +401,7 @@ public class Wave {
 				delay = 1;
 				break;
 			default:
-				game.enemies.add(new Boss(game, 500));
+				game.enemies.add(new Boss(game, 200));
 		}
 	}
 
