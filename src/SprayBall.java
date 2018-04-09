@@ -1,7 +1,7 @@
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
-public class SprayBall extends TestEnemy {
+public class SprayBall extends BasicEnemy {
 	private int firing = 0;
 	private int delay = 0;
 	private double ballDet = getGame().WINDOW_WIDTH/3; //recommended detonation point
@@ -15,6 +15,7 @@ public class SprayBall extends TestEnemy {
 		//pretty sure this line is pointless
 		setGunLocation(new GPoint[] {}); 
 		setSize(120, 120);
+		getSprite().setLocation(getSprite().getX(), getSprite().getY() - getSprite().getHeight()/2);
 		setSpeed(6);
 		setTrail(new FireTrail(this));
 		setBulletSpeed(12);

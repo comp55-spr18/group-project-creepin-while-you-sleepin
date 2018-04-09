@@ -1,6 +1,6 @@
 import acm.graphics.GPoint;
 
-public class TestHomingEnemy extends TestEnemy {
+public class TestHomingEnemy extends BasicEnemy {
 	public TestHomingEnemy(MainApplication game, double y) {
 		super(game, y);
 		setBulletSize(40);

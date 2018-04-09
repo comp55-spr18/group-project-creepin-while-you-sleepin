@@ -2,21 +2,22 @@ import java.awt.Color;
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
-public class TestEnemy extends Ship {
+public class BasicEnemy extends Ship {
 	double i = -1.5;
 	double j = -0.05;
-	public TestEnemy(MainApplication game, double y) {
+	public BasicEnemy(MainApplication game, double y) {
 		setGame(game);
 		setInvincible(false);
 		setHealth(2);
-		setCooldown(100);
-		setMaxCooldown(175);
+		setCooldown(500);
+		setMaxCooldown(575);
 		setCanShoot(false);
 		setGunLocation(new GPoint[] {new GPoint(50,15)});
 		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
 		setBulletColor(Color.RED);
 		setSize(50, 50);
 		setExplosion(new GImage("explosion.png"));
+		getSprite().setLocation(getSprite().getX(), getSprite().getY() - getSprite().getHeight()/2);
 		setDestroyed(false);
 		setDestroyedCounter(0);
 		setxDir(-1);

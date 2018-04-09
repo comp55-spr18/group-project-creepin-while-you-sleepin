@@ -1,7 +1,7 @@
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
-public class Drone extends TestEnemy {
+public class Drone extends BasicEnemy {
 	private int lifetime = 0;
 	private double topBot;
 	

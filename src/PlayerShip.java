@@ -22,7 +22,7 @@ public class PlayerShip extends Ship {
 		setBulletSpeed(25);
 		setBulletDamage(1);
 		getGame().add(getSprite());
-		setTrail(new FireTrail(this));
+//		setTrail(new FireTrail(this));
 	}
 	@Override
 	public void move() {		// Moves the player's ship hitbox to the location of the ship

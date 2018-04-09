@@ -32,12 +32,12 @@ public class FireTrail implements ActionListener {
 			speed = 2;
 		} else {
 			xDir = 1;
-			length = 0.35*(size/50.0);
+			length = 0.5;
 			speed = 1;
 			xOffset = size;
 		}
-		projCount = (int) (((size/shrinkScale)*length) - 3/(shrinkScale/length));
-		colorScale = (int) ((int) 255/(projCount/2.0));
+		projCount = 15;
+		colorScale = 30;
 		trail = new ArrayList<Projectile>();
 		timer = new Timer(5, this);
 		timer.start();
@@ -59,12 +59,15 @@ public class FireTrail implements ActionListener {
 				tr.getSprite().setFillColor(tr.getSprite().getColor()); 		// Add green to the sprite (turning it from red to yellow gradually)
 			}
 		}
-		for(Projectile tr : trail) {							// For each projectile in the arraylist
-			if(tr.getSprite().getWidth() <= 6*shrinkScale) {	// If the sprite's size is small enough
-				ship.getGame().remove(tr.getSprite());			// Remove the sprite
-				tr.setDestroyed(true);
-				trail.remove(tr);								// Remove the projectile from the arraylist
-				break;
+		while(trail.size() > projCount) {
+			Projectile tr = trail.get(0);
+			ship.getGame().remove(tr.getSprite());
+			tr.setDestroyed(true);
+			trail.remove(tr);
+		}
+		for(int i = trail.size() - 1;i >= 0;i--) {	// This for loop iterates backwards thru the projectiles arraylist to avoid exceptions
+			if(trail.get(i).isDestroyed()) {			// If the projectile is destroyed
+				trail.remove(i);						// Remove it from the arraylist
 			}
 		}
 		ship.getSprite().sendToFront();
@@ -72,7 +75,7 @@ public class FireTrail implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		move();
-		if(trail.isEmpty() || ship.getGame().win) {
+		if(ship.isDestroyed() || ship.getGame().win) {
 			for(Projectile proj : trail) {
 				ship.getGame().remove(proj.getSprite());
 			}
