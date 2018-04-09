@@ -365,19 +365,21 @@ public class Wave {
 	public void hard2() {			// Generates a drone wave
 		switch(enemyToSpawn) {		// Creates a switch for enemyToSpawn, using 0 (the first call) as the initiator for the wave
 			case 0:					// Initiate the wave
-				size = 40;
-				delay = 10;
+				size = 25;
+				delay = 2;
 				break;
 			default:						// This means that if enemyToSpawn is anything other than 0, this will trigger
-				switch(enemyToSpawn%3) {	// Mod enemyToSpawn by 2 to turn it into a 0 or 1
+				switch(enemyToSpawn%2) {	// Mod enemyToSpawn by 2 to turn it into a 0 or 1
 					case 0:					// If enemyToSpawn is even, spawn this one
-						game.enemies.add(new Drone(game, game.WINDOW_HEIGHT - 200));
+						//game.enemies.add(new Drone(game, game.WINDOW_HEIGHT - 200));
+						game.enemies.add(new SwarmBot(game, 450, 1));
 						break;
 					case 1:					// Otherwise spawn this one (note that this one gets called first)
-						game.enemies.add(new Drone(game, 100));
+						//game.enemies.add(new Drone(game, 100));
+						game.enemies.add(new SwarmBot(game, 550, 2));
 						break;
 					case 2:
-						game.enemies.add(new Kamikazi(game, 1080/2));
+						//game.enemies.add(new Kamikazi(game, 1080/2));
 				}
 		}
 	}
