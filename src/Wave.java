@@ -400,7 +400,7 @@ public class Wave {
 	public void hard2() {			// Generates a drone wave
 		switch(enemyToSpawn) {		// Creates a switch for enemyToSpawn, using 0 (the first call) as the initiator for the wave
 			case 0:					// Initiate the wave
-				size = 40;
+				size = 25;
 				delay = 10;
 				break;
 			default:						// This means that if enemyToSpawn is anything other than 0, this will trigger
