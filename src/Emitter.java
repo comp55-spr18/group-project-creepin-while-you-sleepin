@@ -5,6 +5,7 @@ public class Emitter extends Projectile {
 	public Emitter(Ship ship, GPoint gunLoc, double xD, double yD, double spd, Color bulletColor, int size) {
 		super(ship, gunLoc, xD, yD);
 		setSpeed(spd);
+		setPlayerProjectile(true);
 		getSprite().setColor(bulletColor);
 		getSprite().setFillColor(bulletColor);
 		setSize(size, size);

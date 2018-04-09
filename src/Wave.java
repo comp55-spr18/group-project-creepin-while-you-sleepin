@@ -126,11 +126,18 @@ public class Wave {
 					return;										// Exit the function
 				}
 			}
+			for(Projectile proj : game.projectiles) {
+				if(!proj.isPlayerProjectile()) {
+					counter = 1;
+					return;
+				}
+			}
 			if(!game.powers.isEmpty()) {
 				counter = 1;
 				return;
 			}
 			game.remove(upgradeLine);
+			game.remove(upgradeLabel);
 			if(waveCount == totalWaves) {
 				game.win = true;
 			} else {
