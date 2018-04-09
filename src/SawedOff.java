@@ -51,10 +51,7 @@ public class SawedOff extends Ship {
 			setCooldown(0);
 			setMaxCooldown(50);
 			triggered = true;
-			
 			}
-			
-		
 		if(canShoot()) {
 			setCanShoot(false);
 			getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);

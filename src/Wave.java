@@ -13,8 +13,8 @@ public class Wave {
 	int selectedWave;				// The rgen value of the current wave
 	int totalWaves;					// The total number of waves the player must fight (including the boss wave)
 	int waveCount;					// The current wave the player is on
-	int prevWave;
-	int upgradeMod;
+	int prevWave;					// The previous wave that was generated
+	int upgradeMod;					// How often upgrade waves occur
 	GLine upgradeLine;
 	GLabel upgradeLabel;
 	int prevSize;
