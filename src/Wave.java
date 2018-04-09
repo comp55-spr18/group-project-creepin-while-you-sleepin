@@ -425,7 +425,7 @@ public class Wave {
 				delay = 100;
 				break;
 			case 1:
-				game.enemies.add(new Bouncer(game, 200));
+				game.enemies.add(new SawedOff(game, 200));
 				break;
 			case 2:
 				game.enemies.add(new Bouncer(game, 100));
