@@ -19,9 +19,9 @@ public class HomingBullet extends Projectile {
 		if(gracePeriod < disengage) {
 			aimAtPlayer();
 		}
-		if(getGame() != null && (getSprite().getLocation().getX() < -50 || getSprite().getLocation().getX() > getGame().WINDOW_WIDTH)) {
-			getGame().remove(getSprite());
+		if(getGame() != null && (getSprite().getX() < -50 || getSprite().getX() > getGame().WINDOW_WIDTH || getSprite().getY() < -50 || getSprite().getY() > getGame().WINDOW_HEIGHT)) {
 			setDestroyed(true);
+			getGame().remove(getSprite());
 		}
 	}
 	
