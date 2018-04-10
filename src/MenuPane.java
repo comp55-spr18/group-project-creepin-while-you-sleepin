@@ -48,10 +48,12 @@ public class MenuPane extends GraphicsPane {
 		if (obj == rect) {
 			program.easy = true;
 			program.startGame();
+			program.player.move(e);
 		}
 		if (obj == rect2) {
 			program.easy = false;
 			program.startGame();
+			program.player.move(e);
 		}
 		if (obj == rect3) {
 			System.exit(0);

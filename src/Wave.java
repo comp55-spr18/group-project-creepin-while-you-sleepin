@@ -163,7 +163,7 @@ public class Wave {
 				level++;
 				waveCount = 0;
 				game.playerControl = false;
-			} else {
+			} else if(!game.lose){
 				getNewWave();										// Reaching this point means all enemies are dead, so get a new wave to spawn
 			}
 		}

@@ -42,7 +42,9 @@ public class PlayerShip extends Ship {
 	@Override
 	public void move() {
 		getSprite().move(10, 0);
-		getShield().move(10, 0);
+		if(isShielded()) {
+			getShield().move(10, 0);
+		}
 	}
 	@Override
 	public void shoot() {		// Returns the projectile type and iterates to the next gun location (or the same one if only one)
