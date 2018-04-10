@@ -47,11 +47,11 @@ public class MenuPane extends GraphicsPane {
 		GObject obj = program.getElementAt(e.getX(), e.getY());
 		if (obj == rect) {
 			program.easy = true;
-			program.switchToGame();
+			program.startGame();
 		}
 		if (obj == rect2) {
 			program.easy = false;
-			program.switchToGame();
+			program.startGame();
 		}
 		if (obj == rect3) {
 			System.exit(0);

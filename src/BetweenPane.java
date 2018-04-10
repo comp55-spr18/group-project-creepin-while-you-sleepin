@@ -50,7 +50,7 @@ public class BetweenPane extends GraphicsPane {
 	public void mousePressed(MouseEvent e) {
 		GObject obj = program.getElementAt(e.getX(), e.getY());
 		if (obj == rect) {
-			program.switchToBetween();
+			program.switchToGame();
 			program.playerControl = true;
 			program.player.move(e);
 		}

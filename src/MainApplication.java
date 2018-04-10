@@ -67,8 +67,12 @@ public class MainApplication extends GraphicsApplication {
 	public void switchToBetween() {
 		switchToScreen(betweenPane);
 	}
-
+	
 	public void switchToGame() {
+		switchToScreen(gamePane);
+	}
+
+	public void startGame() {
 		player = new PlayerShip(this);			// Initiate the game with a new player ship
 		wave = new Wave(this);
 		score = 0;								// Reset score

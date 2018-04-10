@@ -21,7 +21,7 @@ public class PlayerShip extends Ship {
 		setExplosion(new GImage("explosion.png"));
 		setBulletSize(15);
 		setBulletSpeed(25);
-		setBulletDamage(1);
+		setBulletDamage(150);
 		setShieldCooldown(0);
 		setShieldMaxCooldown(500);
 		setPoints(0);
