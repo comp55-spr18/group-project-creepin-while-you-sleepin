@@ -8,15 +8,19 @@ public abstract class Ship {
 	private int selectedGun;			// Integer switch that selects which point in gunLocation array to fire from
 	private Color bulletColor;			// The color of the projectiles fired by this ship
 	private boolean canShoot;			// Trigger that toggles on/off on cooldown in the main loop
-	private boolean invincible;			// Trigger that toggles on/off on cooldown in the main loop
+	private boolean invincible = false;	// Trigger that toggles on/off on cooldown in the main loop
 	private int iframe;					// Number of frames that the ship will be invincible for if at all
 	private int health;					// The number of hits the ship can take before being destroyed
 	private int maxHealth;
 	private int cooldown;				// The initial value of cooldown (Set to 0 if the ship can fire as soon as it spawns)
 	private int maxCooldown;			// The number of frames between each call of the Shoot() function
-	private boolean isDestroyed;		// Toggles the destruction sequence of the ship
-	private int destroyedCounter;		// Counter for how long the death sprite lasts
+	private boolean isDestroyed = false;		// Toggles the destruction sequence of the ship
+	private int destroyedCounter = 0;		// Counter for how long the death sprite lasts
 	private int points;					// The points the ship is worth
+	private boolean shielded = false;
+	private GOval shield;
+	private int shieldCooldown;
+	private int shieldMaxCooldown;
 	private GImage explosion;
 	private FireTrail trail;
 	private int collisionDamage;
@@ -62,6 +66,16 @@ public abstract class Ship {
 			if (getGame().lose || getGame().win) {	// If the game is over
 				getGame().remove(getSprite());		// Remove the ship sprite
 				setDestroyed(true);
+			}
+			if(isShielded()) {
+				getShield().setLocation(sprite.getLocation());
+				if(!getShield().isVisible()) {
+					setShieldCooldown(getShieldCooldown() + 1);
+					if(getShieldCooldown() == getShieldMaxCooldown()) {
+						getShield().setVisible(true);
+						setShieldCooldown(0);
+					}
+				}
 			}
 		}
 		if(isDestroyed()) {									// If the ship is destroyed
@@ -146,6 +160,18 @@ public abstract class Ship {
 	}
 
 	public void dealDamage(int damage) {
+		if(isShielded()) {
+			if(!getShield().isVisible()) {
+				calculateDamage(damage);
+			} else {
+				getShield().setVisible(false);
+			}
+		} else {
+			calculateDamage(damage);
+		}
+	}
+	
+	public void calculateDamage(int damage) {
 		health -= damage;
 		if(this instanceof PlayerShip) {					// If the player's health is being updated, the healthbar should reflect it
 			setInvincible(true);
@@ -153,6 +179,9 @@ public abstract class Ship {
 			getGame().playerHitCount = getGame().playSound("playerhit", getGame().playerHitCount);
 		} else {
 			getGame().enemyHitCount = getGame().playSound("enemyhit",  getGame().enemyHitCount);
+		}
+		if(getHealth() <= 0) {
+			setDestroyed(true);
 		}
 	}
 
@@ -313,5 +342,41 @@ public abstract class Ship {
 	public void setMaxHealth(int maxHealth) {
 		this.maxHealth = maxHealth;
 		setHealth(maxHealth);
+	}
+
+	public GOval getShield() {
+		return shield;
+	}
+
+	public int getShieldCooldown() {
+		return shieldCooldown;
+	}
+
+	public void setShieldCooldown(int shieldCooldown) {
+		this.shieldCooldown = shieldCooldown;
+	}
+
+	public int getShieldMaxCooldown() {
+		return shieldMaxCooldown;
+	}
+
+	public void setShieldMaxCooldown(int shieldMaxCooldown) {
+		this.shieldMaxCooldown = shieldMaxCooldown;
+	}
+
+	public boolean isShielded() {
+		return shielded;
+	}
+
+	public void setShielded(boolean shielded) {
+		this.shielded = shielded;
+		if(shielded) {
+			shield = new GOval(getSprite().getX(), getSprite().getY(), getSprite().getWidth(), getSprite().getHeight());
+			shield.setFilled(true);
+			shield.setFillColor(Color.CYAN);
+			game.add(shield);
+		} else {
+			shield = null;
+		}
 	}
 }

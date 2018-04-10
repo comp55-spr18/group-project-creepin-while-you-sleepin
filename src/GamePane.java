@@ -32,12 +32,18 @@ public class GamePane extends GraphicsPane {
 		for(Ship enemy : program.enemies) {						// Remove all enemy sprites
 			program.remove(enemy.getSprite());
 			program.remove(enemy.getExplosion());
+			if(enemy.isShielded()) {
+				program.remove(enemy.getShield());
+			}
 		}
 		for(Projectile proj : program.projectiles) {			// Remove all projectile sprites
 			program.remove(proj.getSprite());
 		}
 		program.remove(program.player.getSprite());	// Remove the playership sprite
 		program.remove(program.player.getExplosion());
+		if(program.player.isShielded()) {
+			program.remove(program.player.getShield());
+		}
 		program.remove(program.scoreBoard);
 		program.enemies.clear();								// Clear the enemies arraylist
 		program.projectiles.clear();							// Clear the projectiles arraylist

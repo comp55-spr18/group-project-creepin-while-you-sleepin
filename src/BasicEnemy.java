@@ -7,7 +7,6 @@ public class BasicEnemy extends Ship {
 	double j = -0.05;
 	public BasicEnemy(MainApplication game, double y) {
 		setGame(game);
-		setInvincible(false);
 		setHealth(2);
 		setCooldown(500);
 		setMaxCooldown(575);
@@ -18,8 +17,6 @@ public class BasicEnemy extends Ship {
 		setSize(50, 50);
 		setExplosion(new GImage("explosion.png"));
 		getSprite().setLocation(getSprite().getX(), getSprite().getY() - getSprite().getHeight()/2);
-		setDestroyed(false);
-		setDestroyedCounter(0);
 		setxDir(-1);
 		setyDir(0);
 		setSpeed(5);

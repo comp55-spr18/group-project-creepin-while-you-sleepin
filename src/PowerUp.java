@@ -181,3 +181,26 @@ class HealthUp extends PowerUp {
 		getGame().player.setMaxHealth(getGame().player.getMaxHealth() + 1);
 	}
 }
+
+class ShieldUp extends PowerUp {
+	ShieldUp(MainApplication game, double x, double y) {
+		setGame(game);
+		double xPos = game.WINDOW_WIDTH/(1920/x);
+		double yPos = game.WINDOW_HEIGHT/(1080/y);
+		double scaleX = game.WINDOW_WIDTH/(1920/scale);
+		double scaleY = game.WINDOW_HEIGHT/(1080/scale);
+		setSprite(new GButton("Regen Shield", xPos, yPos, scaleX, scaleY));
+		getSprite().setFillColor(Color.LIGHT_GRAY);
+		getGame().powers.add(this);
+		getGame().add(getSprite());
+	}
+	
+	public void onCollision() {
+		if(!getGame().player.isShielded()) {
+			getGame().player.setShielded(true);
+		} else {
+			getGame().player.setShieldCooldown(0);
+			getGame().player.setShieldMaxCooldown(getGame().player.getShieldMaxCooldown() - 50);
+		}
+	}
+}

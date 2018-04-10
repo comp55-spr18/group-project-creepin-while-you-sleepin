@@ -16,19 +16,22 @@ public class PlayerShip extends Ship {
 		setBulletColor(Color.GREEN);
 		setSize(50, 50);
 		setExplosion(new GImage("explosion.png"));
-		setDestroyed(false);
-		setDestroyedCounter(0);
 		setBulletSize(15);
 		setBulletSpeed(25);
 		setBulletDamage(1);
+		setShieldCooldown(0);
+		setShieldMaxCooldown(500);
 		getGame().add(getSprite());
 		setTrail(new FireTrail(this));
 	}
 	@Override
 	public void move() {		// Moves the player's ship hitbox to the location of the ship
-		double x = getSprite().getLocation().getX();
-		double y = getSprite().getLocation().getY();
+		double x = getSprite().getX();
+		double y = getSprite().getY();
 		setGunLocation(new GPoint[] {new GPoint(x + getSprite().getWidth(), y + getSprite().getHeight()/2)});
+		if(isShielded()) {
+			getShield().setLocation(x, y);
+		}
 	}
 	@Override
 	public void shoot() {		// Returns the projectile type and iterates to the next gun location (or the same one if only one)
@@ -84,16 +87,20 @@ public class PlayerShip extends Ship {
 					setSize(50, 50);
 				}
 				setIframe(getIframe() + 1);
+				// If the player's iframe count hits 100, make them vulnerable again
+				if(getIframe() == 50) {
+					getSprite().setImage("sprites/playermodel.png");
+					setSize(50, 50);
+					setInvincible(false);
+					setIframe(0);
+				}
 			}
-			// If the player's iframe count hits 100, make them vulnerable again
-			if(getIframe() == 50) {
-				getSprite().setImage("sprites/playermodel.png");
-				setSize(50, 50);
-				setInvincible(false);
-				setIframe(0);
-			}
-			if(getHealth() <= 0) {
-				setDestroyed(true);
+			if(isShielded() && !getShield().isVisible()) {
+				setShieldCooldown(getShieldCooldown() + 1);
+				if(getShieldCooldown() == getShieldMaxCooldown()) {
+					getShield().setVisible(true);
+					setShieldCooldown(0);
+				}
 			}
 		} else {
 			if(getDestroyedCounter() == 0) {

@@ -26,7 +26,7 @@ public class Wave {
 		level = 1;
 		waveCount = 0;
 		upgradeMod = 3;
-		totalWaves = 7;			// For now there are 13 regular waves, 6 upgrade waves and 1 boss wave
+		totalWaves = 4;			// For now there are 13 regular waves, 6 upgrade waves and 1 boss wave
 		selectedWave = -1;
 		prevWave = -1;
 		upgradeLine = new GLine(game.WINDOW_WIDTH/(1920/1000.0), 0, game.WINDOW_WIDTH/(1920/1000.0), game.WINDOW_HEIGHT);
@@ -464,6 +464,7 @@ public class Wave {
 			game.powers.add(new DoubleShot(game, 1500, 450));
 			game.powers.add(new BulletSizeUp(game, 1500, 550));
 			game.powers.add(new HealthUp(game, 1500, 650));
+			game.powers.add(new ShieldUp(game, 1500, 750));
 			game.remove(upgradeLine);
 			game.remove(upgradeLabel);
 			enemyToSpawn = 0;
