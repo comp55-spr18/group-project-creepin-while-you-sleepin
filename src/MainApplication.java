@@ -14,7 +14,7 @@ public class MainApplication extends GraphicsApplication {
 	private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	final int WINDOW_WIDTH = (int) screenSize.getWidth();
 	final int WINDOW_HEIGHT = (int) screenSize.getHeight();
-	public GamePane gamePane;
+	private GamePane gamePane;
 	private MenuPane menu;
 	private BetweenPane betweenPane;
 	private EndPane endPane;
@@ -62,6 +62,10 @@ public class MainApplication extends GraphicsApplication {
 
 	public void switchToMenu() {
 		switchToScreen(menu);
+	}
+	
+	public void switchToBetween() {
+		switchToScreen(betweenPane);
 	}
 
 	public void switchToGame() {
