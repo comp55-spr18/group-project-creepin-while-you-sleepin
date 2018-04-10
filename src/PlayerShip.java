@@ -5,6 +5,7 @@ import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
 public class PlayerShip extends Ship {
+	private boolean shooting = false;
 	public PlayerShip(MainApplication game) {
 		setGame(game);
 		setInvincible(false);
@@ -45,7 +46,7 @@ public class PlayerShip extends Ship {
 	}
 	@Override
 	public void shoot() {		// Returns the projectile type and iterates to the next gun location (or the same one if only one)
-		if(canShoot() && getGame().isShooting) {
+		if(canShoot() && isShooting()) {
 			setCanShoot(false);
 			getGame().playerShootCount = getGame().playSound("playershoot", getGame().playerShootCount);
 			switch(getShots()) {
@@ -129,5 +130,12 @@ public class PlayerShip extends Ship {
 				getGame().lose = true;
 			}
 		}
+	}
+	// Getters and setters
+	public boolean isShooting() {
+		return shooting;
+	}
+	public void setShooting(boolean shooting) {
+		this.shooting = shooting;
 	}
 }

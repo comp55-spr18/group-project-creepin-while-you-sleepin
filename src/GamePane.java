@@ -67,7 +67,7 @@ public class GamePane extends GraphicsPane {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		if(SwingUtilities.isLeftMouseButton(e) && !program.player.isDestroyed() && program.playerControl) {
-			program.isShooting = true;
+			program.player.setShooting(true);
 		}
 	}
 	@Override
@@ -77,7 +77,7 @@ public class GamePane extends GraphicsPane {
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		if(SwingUtilities.isLeftMouseButton(e) && !program.player.isDestroyed() && program.playerControl) {
-			program.isShooting = false;
+			program.player.setShooting(false);
 		}
 	}
 }
