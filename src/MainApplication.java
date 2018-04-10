@@ -41,7 +41,7 @@ public class MainApplication extends GraphicsApplication {
 	PlayerShip player;
 	int score = 0;
 	GLabel scoreBoard = new GLabel("SCORE: " + score, 10, 25);
-	GLabel alreadyHave = new GLabel("You currently have that upgrade, pick another");
+	GLabel alreadyHave = new GLabel("You have maxed that upgrade");
 	ArrayList<GImage> healthBar = new ArrayList<GImage>();
 	Timer timer = new Timer(1000/fps, this);
 	Wave wave;
