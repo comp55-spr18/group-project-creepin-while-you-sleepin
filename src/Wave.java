@@ -463,11 +463,10 @@ public class Wave {
 			game.powers.add(new FireRateUp(game, 1500, 50));
 			game.powers.add(new BulletDamageUp(game, 1500, 150));
 			game.powers.add(new BulletSpeedUp(game, 1500, 250));
-			game.powers.add(new SpreadShot(game, 1500, 350));
-			game.powers.add(new DoubleShot(game, 1500, 450));
-			game.powers.add(new BulletSizeUp(game, 1500, 550));
-			game.powers.add(new HealthUp(game, 1500, 650));
-			game.powers.add(new ShieldUp(game, 1500, 750));
+			game.powers.add(new BulletSizeUp(game, 1500, 350));
+			game.powers.add(new HealthUp(game, 1500, 450));
+			game.powers.add(new ShieldUp(game, 1500, 550));
+			game.powers.add(new BulletUp(game, 1500, 650));
 			game.remove(upgradeLine);
 			game.remove(upgradeLabel);
 			enemyToSpawn = 0;

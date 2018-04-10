@@ -4,16 +4,12 @@ public class PowerUp {
 	MainApplication game;
 	GButton sprite;
 	int height = 75;
-	int width = 150;
+	int width = 300;
 	
 	public boolean checkCollision() {
 		if(game != null) {
 			if(getGame().player.getSprite().getBounds().intersects(getSprite().getBounds())) {
-				if(this instanceof SpreadShot && game.player.getShots() == 3) {
-					getGame().add(getGame().alreadyHave);
-					return false;
-				}
-				if(this instanceof DoubleShot && game.player.getShots() == 2) {
+				if(this instanceof BulletUp && game.player.getShots() == 5) {
 					getGame().add(getGame().alreadyHave);
 					return false;
 				}
@@ -127,39 +123,21 @@ class BulletDamageUp extends PowerUp {
 	}
 }
 
-class SpreadShot extends PowerUp {
-	SpreadShot(MainApplication game, double x, double y) {
+class BulletUp extends PowerUp {
+	BulletUp(MainApplication game, double x, double y) {
 		setGame(game);
 		double xPos = game.WINDOW_WIDTH/(1920/x);
 		double yPos = game.WINDOW_HEIGHT/(1080/y);
 		double scaleX = game.WINDOW_WIDTH/(1920/width);
 		double scaleY = game.WINDOW_HEIGHT/(1080/height);
-		setSprite(new GButton("SpreadShot", xPos, yPos, scaleX, scaleY));
-		getSprite().setFillColor(Color.MAGENTA);
-		getGame().powers.add(this);
-		getGame().add(getSprite());
-	}
-	
-	public void onCollision() {
-		getGame().player.setShots(3);
-	}
-}
-
-class DoubleShot extends PowerUp {
-	DoubleShot(MainApplication game, double x, double y) {
-		setGame(game);
-		double xPos = game.WINDOW_WIDTH/(1920/x);
-		double yPos = game.WINDOW_HEIGHT/(1080/y);
-		double scaleX = game.WINDOW_WIDTH/(1920/width);
-		double scaleY = game.WINDOW_HEIGHT/(1080/height);
-		setSprite(new GButton("DoubleShot", xPos, yPos, scaleX, scaleY));
+		setSprite(new GButton("+1 Bullet", xPos, yPos, scaleX, scaleY));
 		getSprite().setFillColor(Color.CYAN);
 		getGame().powers.add(this);
 		getGame().add(getSprite());
 	}
 	
 	public void onCollision() {
-		getGame().player.setShots(2);
+		getGame().player.setShots(getGame().player.getShots() + 1);
 	}
 }
 
