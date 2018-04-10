@@ -6,7 +6,7 @@ public class HeavyWeightEnemy extends Ship {
 	public HeavyWeightEnemy(MainApplication game, double y) {
 		setGame(game);
 		setInvincible(false);
-		setHealth(5);
+		setMaxHealth(5);
 		setCooldown(325);
 		setMaxCooldown(400);
 		setCanShoot(false);

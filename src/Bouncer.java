@@ -9,7 +9,7 @@ public class Bouncer extends Ship {
 		setGame(game);
 		setInvincible(false);
 		setShots(2);
-		setHealth(5);
+		setMaxHealth(5);
 		setCooldown(0);
 		setMaxCooldown(150);
 		setCanShoot(false);

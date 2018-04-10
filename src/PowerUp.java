@@ -162,3 +162,21 @@ class DoubleShot extends PowerUp {
 		getGame().player.setShots(2);
 	}
 }
+
+class HealthUp extends PowerUp {
+	HealthUp(MainApplication game, double x, double y) {
+		setGame(game);
+		double xPos = game.WINDOW_WIDTH/(1920/x);
+		double yPos = game.WINDOW_HEIGHT/(1080/y);
+		double scaleX = game.WINDOW_WIDTH/(1920/100);
+		double scaleY = game.WINDOW_HEIGHT/(1080/100);
+		setSprite(new GButton("+1 Max HP", xPos, yPos, scaleX, scaleY));
+		getSprite().setFillColor(Color.PINK);
+		getGame().powers.add(this);
+		getGame().add(getSprite());
+	}
+	
+	public void onCollision() {
+		getGame().player.setMaxHealth(getGame().player.getMaxHealth() + 1);
+	}
+}

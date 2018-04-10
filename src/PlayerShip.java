@@ -8,7 +8,7 @@ public class PlayerShip extends Ship {
 		setInvincible(false);
 		setIframe(0);
 		setShots(1);
-		setHealth(5);
+		setMaxHealth(5);
 		setCooldown(0);
 		setMaxCooldown(20);
 		setCanShoot(false);

@@ -11,6 +11,7 @@ public abstract class Ship {
 	private boolean invincible;			// Trigger that toggles on/off on cooldown in the main loop
 	private int iframe;					// Number of frames that the ship will be invincible for if at all
 	private int health;					// The number of hits the ship can take before being destroyed
+	private int maxHealth;
 	private int cooldown;				// The initial value of cooldown (Set to 0 if the ship can fire as soon as it spawns)
 	private int maxCooldown;			// The number of frames between each call of the Shoot() function
 	private boolean isDestroyed;		// Toggles the destruction sequence of the ship
@@ -303,5 +304,14 @@ public abstract class Ship {
 	
 	public void setShots(int shots) {
 		this.shots = shots;
+	}
+
+	public int getMaxHealth() {
+		return maxHealth;
+	}
+
+	public void setMaxHealth(int maxHealth) {
+		this.maxHealth = maxHealth;
+		setHealth(maxHealth);
 	}
 }

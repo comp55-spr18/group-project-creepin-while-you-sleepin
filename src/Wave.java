@@ -461,7 +461,7 @@ public class Wave {
 			game.powers.add(new BulletDamageUp(game, 1500, 200));
 			game.powers.add(new BulletSpeedUp(game, 1500, 350));
 			game.powers.add(new SpreadShot(game, 1500, 500));
-			game.powers.add(new DoubleShot(game, 1500, 650));
+			game.powers.add(new HealthUp(game, 1500, 650));
 			game.powers.add(new BulletSizeUp(game, 1500, 800));
 			game.remove(upgradeLine);
 			game.remove(upgradeLabel);

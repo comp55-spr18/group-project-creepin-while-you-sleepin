@@ -6,7 +6,7 @@ public class Boss extends Ship {
 	public Boss(MainApplication game, double y) {
 		setGame(game);
 		setInvincible(false);
-		setHealth(150);
+		setMaxHealth(150);
 		setCooldown(0);
 		setMaxCooldown(50);
 		setCanShoot(false);

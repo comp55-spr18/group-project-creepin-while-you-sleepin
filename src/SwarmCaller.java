@@ -6,7 +6,7 @@ public class SwarmCaller extends BasicEnemy {
 	public SwarmCaller(MainApplication game, double y) {
 		super(game, y);
 		getTrail().getTimer().stop();
-		setHealth(20);		//very tough			
+		setMaxHealth(20);		//very tough			
 		setCooldown(10);			
 		setSprite(new GImage("sprites/enemy2.png", getGame().WINDOW_WIDTH, y));
 		setSize(80, 80);

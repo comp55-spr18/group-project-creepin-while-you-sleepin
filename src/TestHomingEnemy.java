@@ -6,7 +6,7 @@ public class TestHomingEnemy extends BasicEnemy {
 		setBulletSize(40);
 		setBulletDamage(2);
 		setBulletSpeed(8);
-		setHealth(4);
+		setMaxHealth(4);
 		setSpeed(4);
 		setPoints(200);
 	}
