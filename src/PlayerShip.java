@@ -1,4 +1,6 @@
 import java.awt.Color;
+import java.awt.event.MouseEvent;
+
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
@@ -25,13 +27,15 @@ public class PlayerShip extends Ship {
 		getGame().add(getSprite());
 		setTrail(new FireTrail(this));
 	}
-	@Override
-	public void move() {		// Moves the player's gun location to the location of the ship
-		double x = getSprite().getX();
-		double y = getSprite().getY();
-		setGunLocation(new GPoint[] {new GPoint(x + getSprite().getWidth(), y + getSprite().getHeight()/2)});
-		if(isShielded()) {
-			getShield().setLocation(x, y);
+	public void move(MouseEvent e) {		// Moves the player's gun location to the location of the ship
+		if(!isDestroyed() && getGame().playerControl) {
+			getSprite().setLocation(new GPoint(e.getX() - getSprite().getWidth()/2, e.getY() - getSprite().getHeight()/2));
+			double x = getSprite().getX();
+			double y = getSprite().getY();
+			setGunLocation(new GPoint[] {new GPoint(x + getSprite().getWidth(), y + getSprite().getHeight()/2)});
+			if(isShielded()) {
+				getShield().setLocation(x, y);
+			}
 		}
 	}
 	@Override
