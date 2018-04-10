@@ -11,7 +11,7 @@ public class Boss extends Ship {
 		setMaxCooldown(50);
 		setCanShoot(false);
 		setGunLocation(new GPoint[] {new GPoint(50,15)});
-		setSprite(new GImage("boss 1.png", MainApplication.WINDOW_WIDTH, MainApplication.WINDOW_HEIGHT/(1080/y)));
+		setSprite(new GImage("boss 1.png", game.WINDOW_WIDTH, game.WINDOW_HEIGHT/(1080/y)));
 		setBulletColor(Color.white);
 		setSize(500, 500);
 		setBulletColor(Color.RED);

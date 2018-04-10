@@ -1,4 +1,3 @@
-import java.awt.*;
 import acm.graphics.*;
 
 // This is an abstract class so all functions declared in this class can be overwritten in a subclass if you'd like

@@ -25,6 +25,7 @@ public final class AudioPlayer {
 	}
 
 	private AudioPlayer() {
+		@SuppressWarnings("unused")
 		final JFXPanel fxPanel = new JFXPanel();
 		players = new HashMap<String, MediaPlayer>();
 	}

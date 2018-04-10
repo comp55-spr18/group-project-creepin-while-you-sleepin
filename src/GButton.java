@@ -16,6 +16,7 @@ import acm.graphics.GCompound;
 import acm.graphics.GLabel;
 import acm.graphics.GRoundRect;
 
+@SuppressWarnings("serial")
 public class GButton extends GCompound {
 	private GRoundRect rect;
 	private GLabel message;

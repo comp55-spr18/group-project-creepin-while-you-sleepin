@@ -1,7 +1,5 @@
 import java.awt.Color;
 
-import acm.graphics.*;
-
 public class PowerUp {
 	MainApplication game;
 	GButton sprite;

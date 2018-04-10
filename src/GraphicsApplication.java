@@ -16,6 +16,7 @@ import java.awt.event.MouseEvent;
 
 import acm.program.GraphicsProgram;
 
+@SuppressWarnings("serial")
 public abstract class GraphicsApplication extends GraphicsProgram {
 	private GraphicsPane curScreen;
 	

@@ -9,10 +9,11 @@ import java.awt.Toolkit;
 import acm.graphics.GImage;
 import acm.graphics.GLabel;
 
+@SuppressWarnings("serial")
 public class MainApplication extends GraphicsApplication {
 	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	public static final int WINDOW_WIDTH = (int) screenSize.getWidth();
-	public static final int WINDOW_HEIGHT = (int) screenSize.getHeight();
+	public final int WINDOW_WIDTH = (int) screenSize.getWidth();
+	public final int WINDOW_HEIGHT = (int) screenSize.getHeight();
 	private GamePane somePane;
 	private MenuPane menu;
 	private EndPane endPane;

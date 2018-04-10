@@ -19,6 +19,7 @@ import java.util.List;
 import acm.graphics.GCompound;
 import acm.graphics.GLabel;
 
+@SuppressWarnings("serial")
 public class GParagraph extends GCompound {
 	public static final String NEWLINE = "\n";
 	private double startX;

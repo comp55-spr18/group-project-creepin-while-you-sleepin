@@ -1,4 +1,3 @@
-import java.awt.Color;
 import acm.graphics.GPoint;
 
 public class HomingBullet extends Projectile {
