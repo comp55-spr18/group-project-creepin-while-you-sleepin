@@ -128,10 +128,7 @@ public class MainApplication extends GraphicsApplication {
 		if(playerControl) {
 			wave.update();										// Update the wave
 		} else {
-			player.getSprite().move(10, 0);
-			if(player.isShielded()) {
-				player.getShield().move(10, 0);
-			}
+			player.move();
 			if(player.getSprite().getX() > WINDOW_WIDTH + 300) {
 				if(win) {										// If you won, print it at the menu screen and stop the game timer
 					switchToScreen(endPane);

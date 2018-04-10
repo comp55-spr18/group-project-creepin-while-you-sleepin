@@ -52,6 +52,7 @@ public class BetweenPane extends GraphicsPane {
 		if (obj == rect) {
 			program.switchToScreen(program.gamePane);
 			program.playerControl = true;
+			program.player.move(e);
 		}
 		if (obj == rect2) {
 			System.exit(0);
