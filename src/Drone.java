@@ -50,7 +50,6 @@ public class Drone extends BasicEnemy {
 	public void move() {
 		if(getSprite().getLocation().getX() < (getGame().WINDOW_WIDTH) / 1.5) {
 			if (getxDir() != 1) {
-				
 				if(topBot <= getGame().WINDOW_HEIGHT/2) {
 					if(getxDir() <= 0) {
 						setyDir(getyDir() + .04);

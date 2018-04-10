@@ -22,21 +22,21 @@ public class FireTrail {
 	
 	FireTrail(Ship s) {
 		ship = s;
-		size = (int) ship.getSprite().getWidth()/2;
+		size = (int) (ship.getSprite().getWidth()/1.5);
 		shrinkScale = ship.getSprite().getWidth()/100.0;
 		if(ship instanceof PlayerShip) {
 			xDir = -1;
 			xOffset = 0;
-			length = 0.5;
+			length = 0.4;
 			speed = 2;
 		} else {
 			xDir = 1;
-			length = 0.5;
+			length = 0.4;
 			speed = 1;
-			xOffset = ship.getSprite().getWidth() - size/1.2;
+			xOffset = ship.getSprite().getWidth() - size/1.5;
 		}
 		projCount = 15;
-		colorScale = 30;
+		colorScale = 25;
 		trail = new ArrayList<Projectile>();
 	}
 	// This function moves all the projectiles in the arraylist as well as updates the color and size each time
@@ -56,14 +56,15 @@ public class FireTrail {
 				tr.getSprite().setFillColor(tr.getSprite().getColor()); 		// Add green to the sprite (turning it from red to yellow gradually)
 			}
 		}
-		while(trail.size() > projCount) {
+		if(trail.size() > projCount) {
 			Projectile tr = trail.get(0);
 			ship.getGame().remove(tr.getSprite());
 			tr.setDestroyed(true);
 			trail.remove(tr);
 		}
 		for(int i = trail.size() - 1;i >= 0;i--) {	// This for loop iterates backwards thru the projectiles arraylist to avoid exceptions
-			if(trail.get(i).isDestroyed()) {			// If the projectile is destroyed
+			if(trail.get(i).isDestroyed() || trail.get(i).getSprite().getWidth() < 3) {			// If the projectile is destroyed
+				ship.getGame().remove(trail.get(i).getSprite());
 				trail.remove(i);						// Remove it from the arraylist
 			}
 		}
