@@ -11,22 +11,22 @@ import acm.graphics.GLabel;
 
 @SuppressWarnings("serial")
 public class MainApplication extends GraphicsApplication {
-	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	public final int WINDOW_WIDTH = (int) screenSize.getWidth();
-	public final int WINDOW_HEIGHT = (int) screenSize.getHeight();
+	private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	final int WINDOW_WIDTH = (int) screenSize.getWidth();
+	final int WINDOW_HEIGHT = (int) screenSize.getHeight();
 	public GamePane gamePane;
 	private MenuPane menu;
 	private BetweenPane betweenPane;
 	private EndPane endPane;
 	
 	// Variables for game loop
-	public int lowShootCount;
-	public int playerShootCount;
-	public int shipDeathCount;
-	public int enemyHitCount;
-	public int playerHitCount;
-	public int shieldHitCount;
-	public int shieldRegenCount;
+	int lowShootCount;
+	int playerShootCount;
+	int shipDeathCount;
+	int enemyHitCount;
+	int playerHitCount;
+	int shieldHitCount;
+	int shieldRegenCount;
 	int fps = 65;
 	boolean win = false;		// Notice that we have both win and lose booleans; default state is that both are false (the player hasn't won or lost but is playing)
 	boolean lose = false;		// this means we need to be explicit and can't assume that because win = false that the player lost

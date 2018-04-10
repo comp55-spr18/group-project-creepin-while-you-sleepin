@@ -1,15 +1,16 @@
 import java.awt.Color;
 import java.awt.event.MouseEvent;
+
+import acm.graphics.GImage;
 import acm.graphics.GLabel;
 import acm.graphics.GObject;
 
 public class BetweenPane extends GraphicsPane {
-	private MainApplication program; // you will use program to get access to
-	// all of the GraphicsProgram calls
+	private MainApplication program;
 	private GButton rect;
 	private GButton rect2;
-	private GLabel endLabel;
-//	private GImage background;
+	private GLabel levelLabel;
+	private GImage background;
 
 	public BetweenPane(MainApplication app) {
 		super();
@@ -20,26 +21,27 @@ public class BetweenPane extends GraphicsPane {
 		rect2 = new GButton("QUIT", 13*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
 		rect.setFillColor(Color.RED);
 		rect2.setFillColor(Color.RED);
-		endLabel = new GLabel("");
-		endLabel.setFont("Arial-Bold-100");
-//		background = new GImage("mainmenu.jpg");
-//		background.setSize(program.getWidth(), program.getHeight());
+		levelLabel = new GLabel("");
+		levelLabel.setFont("Arial-Bold-100");
+		levelLabel.setColor(Color.WHITE);
+		background = new GImage("levels/testspacelevel.jpg");
+		background.setSize(program.getWidth(), program.getHeight());
 	}
 
 	@Override
 	public void showContents() {
-//		program.add(background);
-		endLabel.setLabel("LEVEL " + program.wave.level);
-		endLabel.setLocation(program.WINDOW_WIDTH/2 - endLabel.getWidth()/2, program.WINDOW_HEIGHT/2 - endLabel.getHeight()/2);
-		program.add(endLabel);
+		program.add(background);
+		levelLabel.setLabel("LEVEL " + program.wave.getLevel());
+		levelLabel.setLocation(program.WINDOW_WIDTH/2 - levelLabel.getWidth()/2, program.WINDOW_HEIGHT/2 - levelLabel.getHeight()/2);
+		program.add(levelLabel);
 		program.add(rect);
 		program.add(rect2);
 	}
 
 	@Override
 	public void hideContents() {
-//		program.remove(background);
-		program.remove(endLabel);
+		program.remove(background);
+		program.remove(levelLabel);
 		program.remove(rect);
 		program.remove(rect2);
 	}

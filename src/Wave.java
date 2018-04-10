@@ -4,23 +4,23 @@ import acm.graphics.GLabel;
 import acm.graphics.GLine;
 
 public class Wave {
-	MainApplication game;
-	int counter;					// Counter to keep track of time between waves
-	int enemyToSpawn;				// The next enemy the wave wants to spawn
-	int delay;						// The delay before the next enemy spawns
-	int size;						// The size of the current wave
-	int selectedDifficulty;			// The difficulty of the current wave
-	int selectedWave;				// The rgen value of the current wave
-	int totalWaves;					// The total number of waves the player must fight (including the boss wave)
-	int waveCount;					// The current wave the player is on
-	int prevWave;					// The previous wave that was generated
-	int upgradeMod;					// How often upgrade waves occur
-	int level;
-	int maxLevel;
-	GLine upgradeLine;
-	GLabel upgradeLabel;
-	int prevSize;
-	int currSize;
+	private MainApplication game;			// The game
+	private int counter;					// Counter to keep track of time between waves
+	private int enemyToSpawn;				// The next enemy the wave wants to spawn
+	private int delay;						// The delay before the next enemy spawns
+	private int size;						// The size of the current wave
+	private int selectedDifficulty;			// The difficulty of the current wave
+	private int selectedWave;				// The rgen value of the current wave
+	private int totalWaves;					// The total number of waves the player must fight (including the boss wave)
+	private int waveCount;					// The current wave the player is on
+	private int prevWave;					// The previous wave that was generated
+	private int upgradeMod;					// How often upgrade waves occur
+	private int level;						// The current level the player is on
+	private int maxLevel;					// The max number of levels in the game
+	private GLine upgradeLine;				// The line that appears if the player is on the right side of the screen at the start of an upgrade wave
+	private GLabel upgradeLabel;			// The label telling the player to fly past the line to spawn the upgrades
+	private int prevSize;					// The previous size of game.enemies
+	private int currSize;					// The current size of game.enemies
 
 	public Wave(MainApplication g) {
 		game = g;
@@ -476,5 +476,141 @@ public class Wave {
 			game.add(upgradeLine);
 			game.add(upgradeLabel);
 		}
+	}
+	// Getters and setters
+	public MainApplication getGame() {
+		return game;
+	}
+
+	public int getCounter() {
+		return counter;
+	}
+
+	public int getEnemyToSpawn() {
+		return enemyToSpawn;
+	}
+
+	public int getDelay() {
+		return delay;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public int getSelectedDifficulty() {
+		return selectedDifficulty;
+	}
+
+	public int getSelectedWave() {
+		return selectedWave;
+	}
+
+	public int getTotalWaves() {
+		return totalWaves;
+	}
+
+	public int getWaveCount() {
+		return waveCount;
+	}
+
+	public int getPrevWave() {
+		return prevWave;
+	}
+
+	public int getUpgradeMod() {
+		return upgradeMod;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public int getMaxLevel() {
+		return maxLevel;
+	}
+
+	public GLine getUpgradeLine() {
+		return upgradeLine;
+	}
+
+	public GLabel getUpgradeLabel() {
+		return upgradeLabel;
+	}
+
+	public int getPrevSize() {
+		return prevSize;
+	}
+
+	public int getCurrSize() {
+		return currSize;
+	}
+
+	public void setGame(MainApplication game) {
+		this.game = game;
+	}
+
+	public void setCounter(int counter) {
+		this.counter = counter;
+	}
+
+	public void setEnemyToSpawn(int enemyToSpawn) {
+		this.enemyToSpawn = enemyToSpawn;
+	}
+
+	public void setDelay(int delay) {
+		this.delay = delay;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
+	public void setSelectedDifficulty(int selectedDifficulty) {
+		this.selectedDifficulty = selectedDifficulty;
+	}
+
+	public void setSelectedWave(int selectedWave) {
+		this.selectedWave = selectedWave;
+	}
+
+	public void setTotalWaves(int totalWaves) {
+		this.totalWaves = totalWaves;
+	}
+
+	public void setWaveCount(int waveCount) {
+		this.waveCount = waveCount;
+	}
+
+	public void setPrevWave(int prevWave) {
+		this.prevWave = prevWave;
+	}
+
+	public void setUpgradeMod(int upgradeMod) {
+		this.upgradeMod = upgradeMod;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	public void setMaxLevel(int maxLevel) {
+		this.maxLevel = maxLevel;
+	}
+
+	public void setUpgradeLine(GLine upgradeLine) {
+		this.upgradeLine = upgradeLine;
+	}
+
+	public void setUpgradeLabel(GLabel upgradeLabel) {
+		this.upgradeLabel = upgradeLabel;
+	}
+
+	public void setPrevSize(int prevSize) {
+		this.prevSize = prevSize;
+	}
+
+	public void setCurrSize(int currSize) {
+		this.currSize = currSize;
 	}
 }
