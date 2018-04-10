@@ -26,6 +26,9 @@ public class GamePane extends GraphicsPane {
 		}
 		program.add(program.scoreBoard);
 		program.add(program.player.getSprite());
+		if(program.player.isShielded()) {
+			program.add(program.player.getShield());
+		}
 		background.sendToBack();
 	}
 
