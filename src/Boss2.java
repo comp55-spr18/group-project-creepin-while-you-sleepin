@@ -13,14 +13,14 @@ public class Boss2 extends Ship {
 		setGunLocation(new GPoint[] {new GPoint(50,15)});
 		setSprite(new GImage("boss 1.png", game.WINDOW_WIDTH, game.WINDOW_HEIGHT/(1080/y)));
 		setBulletColor(Color.white);
-		setSize(500, 500);
+		setSize(400, 400);
 		setBulletColor(Color.RED);
 		setExplosion(new GImage("explosion.png"));
 		setDestroyed(false);
 		setDestroyedCounter(0);
 		setxDir(-1);
 		setyDir(0);
-		setSpeed(4);
+		setSpeed(6);
 		setPoints(100);
 		setCollisionDamage(2);
 		setBulletDamage(2);
