@@ -4,6 +4,7 @@ import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
 public class SawedOff extends Ship {
+	private boolean triggered;
 	public SawedOff(MainApplication game, double y) {
 		setGame(game);
 		setInvincible(false);
@@ -28,6 +29,7 @@ public class SawedOff extends Ship {
 		setBulletSize(15);
 		setCollisionDamage(1);
 		setTrail(new FireTrail(this));
+		triggered = false;
 	}
 	@Override
 	public void move() {
@@ -41,17 +43,15 @@ public class SawedOff extends Ship {
 	}
 	@Override
 	public void shoot() {
-		if(getHealth() < 3) {
+		if(getHealth() < 3 && !triggered) {
 			setShots(3);
 			setSpeed(5);
 			getSprite().setImage("sprites/enemy5.png");
-			getSprite().setSize(50, 50);
+			setSize(50, 50);
+			setCooldown(0);
 			setMaxCooldown(50);
-			if(getCooldown() > getMaxCooldown()) {
-				setCooldown(0);
+			triggered = true;
 			}
-			
-		}
 		if(canShoot()) {
 			setCanShoot(false);
 			getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);

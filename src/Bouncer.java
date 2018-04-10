@@ -11,7 +11,7 @@ public class Bouncer extends Ship {
 		setShots(2);
 		setHealth(5);
 		setCooldown(0);
-		setMaxCooldown(70);
+		setMaxCooldown(150);
 		setCanShoot(false);
 		setGunLocation(new GPoint[] {});
 		setSprite(new GImage("sprites/enemy2.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT / (1080 / y)));

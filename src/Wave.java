@@ -13,8 +13,8 @@ public class Wave {
 	int selectedWave;				// The rgen value of the current wave
 	int totalWaves;					// The total number of waves the player must fight (including the boss wave)
 	int waveCount;					// The current wave the player is on
-	int prevWave;
-	int upgradeMod;
+	int prevWave;					// The previous wave that was generated
+	int upgradeMod;					// How often upgrade waves occur
 	GLine upgradeLine;
 	GLabel upgradeLabel;
 	int prevSize;
@@ -133,7 +133,8 @@ public class Wave {
 		}
 		addEnemies();
 		if (enemyToSpawn > size) {								// If all enemies have been spawned
-			for(Ship enemy : game.enemies) {					// Check to see if any enemy explosions are still visible (they are hidden when the ship is destroyed)
+			for(int i = game.enemies.size() - 1;i >= 0;i--) {					// Check to see if any enemy explosions are still visible (they are hidden when the ship is destroyed)
+				Ship enemy = game.enemies.get(i);
 				if(enemy.getExplosion().isVisible()) {			// If an enemy explosion is not hidden (still alive)
 					counter = 1;								// Set the counter to 1 to freeze it
 					return;										// Exit the function
@@ -257,8 +258,8 @@ public class Wave {
 	public void easy4() {
 		switch(enemyToSpawn) {
 			case 0:
-				size = 10;
-				delay = 50;
+				size = 5;
+				delay = 100;
 				break;
 			default:
 				switch(enemyToSpawn%2) {
@@ -376,11 +377,11 @@ public class Wave {
 	public void hard1() {			// Generates a basic hard wave
 		switch(enemyToSpawn) {
 			case 0:
-				size = 5;
+				size = 1;
 				delay = 50;
 				break;
 			case 1:
-				game.enemies.add(new TestHomingEnemy(game, 200));
+				game.enemies.add(new SwarmCaller(game, 200));
 				break;
 			case 2:
 				game.enemies.add(new TestHomingEnemy(game, 100));
@@ -424,7 +425,7 @@ public class Wave {
 				delay = 100;
 				break;
 			case 1:
-				game.enemies.add(new Bouncer(game, 200));
+				game.enemies.add(new SawedOff(game, 200));
 				break;
 			case 2:
 				game.enemies.add(new Bouncer(game, 100));
