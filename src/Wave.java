@@ -445,7 +445,7 @@ public class Wave {
 		}
 	}
 
-	public void firstBossWave() {			// Just a pseudo-boss wave until we have a boss
+	public void firstBossWave() {			// Implements easy mode of a boss wave into the program
 		switch(enemyToSpawn) {
 			case 0:
 				size = 1;
@@ -453,6 +453,16 @@ public class Wave {
 				break;
 			default:
 				game.enemies.add(new Boss(game, 200));
+		}
+	}
+	
+	public void secondBossWave() {          // Implements hard mode of the boss wave into the program
+		switch(enemyToSpawn) {
+		case 0:
+			size = 1;
+			delay = 1;
+		default:
+			game.enemies.add(new Boss2(game,200));
 		}
 	}
 
