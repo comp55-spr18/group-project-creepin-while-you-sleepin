@@ -31,6 +31,7 @@ public class BasicEnemy extends Ship {
 	public void move() {
 		i = i+j;
 		setyDir(i);
+		setyDir(getGame().WINDOW_HEIGHT/(1080/getyDir()));
 		if(Math.abs(i) >= 3) {
 			j *= -1;
 		}

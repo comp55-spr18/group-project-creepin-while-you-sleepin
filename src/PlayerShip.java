@@ -10,7 +10,7 @@ public class PlayerShip extends Ship {
 		setGame(game);
 		setInvincible(false);
 		setIframe(0);
-		setShots(5);
+		setShots(1);
 		setMaxHealth(5);
 		setCooldown(0);
 		setMaxCooldown(20);
