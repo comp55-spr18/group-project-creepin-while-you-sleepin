@@ -135,7 +135,7 @@ class SpreadShot extends PowerUp {
 		double scaleX = game.WINDOW_WIDTH/(1920/100);
 		double scaleY = game.WINDOW_HEIGHT/(1080/100);
 		setSprite(new GButton("SpreadShot", xPos, yPos, scaleX, scaleY));
-		getSprite().setFillColor(Color.YELLOW);
+		getSprite().setFillColor(Color.MAGENTA);
 		getGame().powers.add(this);
 		getGame().add(getSprite());
 	}
@@ -153,7 +153,7 @@ class DoubleShot extends PowerUp {
 		double scaleX = game.WINDOW_WIDTH/(1920/100);
 		double scaleY = game.WINDOW_HEIGHT/(1080/100);
 		setSprite(new GButton("DoubleShot", xPos, yPos, scaleX, scaleY));
-		getSprite().setFillColor(Color.YELLOW);
+		getSprite().setFillColor(Color.CYAN);
 		getGame().powers.add(this);
 		getGame().add(getSprite());
 	}
