@@ -215,11 +215,11 @@ public class Wave {
 				delay = 300;
 				break;
 			case 4:
-				game.enemies.add(new TestHomingEnemy(game, 500));
+				game.enemies.add(new HomingEnemy(game, 500));
 				delay = 100;
 				break;
 			case 5:
-				game.enemies.add(new TestHomingEnemy(game, 200));
+				game.enemies.add(new HomingEnemy(game, 200));
 				break;
 			case 6:
 				game.enemies.add(new SprayBall(game, 450, 1920/3));
@@ -372,7 +372,7 @@ public class Wave {
 			game.enemies.add(new Bouncer(game, 400));
 			break;
 		case 3:
-			game.enemies.add(new TestHomingEnemy(game, 700));
+			game.enemies.add(new HomingEnemy(game, 700));
 			break;
 		case 4:
 			game.enemies.add(new Kamikazi(game, 200));
@@ -393,16 +393,16 @@ public class Wave {
 				game.enemies.add(new SwarmCaller(game, 200));
 				break;
 			case 2:
-				game.enemies.add(new TestHomingEnemy(game, 100));
+				game.enemies.add(new HomingEnemy(game, 100));
 				break;
 			case 3:
-				game.enemies.add(new TestHomingEnemy(game, 500));
+				game.enemies.add(new HomingEnemy(game, 500));
 				break;
 			case 4:
-				game.enemies.add(new TestHomingEnemy(game, 650));
+				game.enemies.add(new HomingEnemy(game, 650));
 				break;
 			case 5:
-				game.enemies.add(new TestHomingEnemy(game, 800));
+				game.enemies.add(new HomingEnemy(game, 800));
 				break;
 		}
 	}

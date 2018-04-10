@@ -1,13 +1,13 @@
 import acm.graphics.GPoint;
 
-public class TestHomingEnemy extends BasicEnemy {
-	public TestHomingEnemy(MainApplication game, double y) {
+public class HomingEnemy extends BasicEnemy {
+	public HomingEnemy(MainApplication game, double y) {
 		super(game, y);
 		setBulletSize(40);
 		setBulletDamage(2);
 		setBulletSpeed(8);
 		setMaxHealth(4);
-		setSpeed(4);
+		setSpeed(6);
 		setPoints(200);
 	}
 
