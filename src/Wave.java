@@ -458,11 +458,12 @@ public class Wave {
 		size = 0;
 		if(game.player.getSprite().getX() < game.WINDOW_WIDTH/(1920/1000.0)) {
 			game.powers.add(new FireRateUp(game, 1500, 50));
-			game.powers.add(new BulletDamageUp(game, 1500, 200));
-			game.powers.add(new BulletSpeedUp(game, 1500, 350));
-			game.powers.add(new SpreadShot(game, 1500, 500));
+			game.powers.add(new BulletDamageUp(game, 1500, 150));
+			game.powers.add(new BulletSpeedUp(game, 1500, 250));
+			game.powers.add(new SpreadShot(game, 1500, 350));
+			game.powers.add(new DoubleShot(game, 1500, 450));
+			game.powers.add(new BulletSizeUp(game, 1500, 550));
 			game.powers.add(new HealthUp(game, 1500, 650));
-			game.powers.add(new BulletSizeUp(game, 1500, 800));
 			game.remove(upgradeLine);
 			game.remove(upgradeLabel);
 			enemyToSpawn = 0;

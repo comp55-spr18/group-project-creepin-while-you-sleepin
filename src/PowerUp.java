@@ -5,6 +5,7 @@ import acm.graphics.*;
 public class PowerUp {
 	MainApplication game;
 	GButton sprite;
+	int scale = 75;
 	
 	public boolean checkCollision() {
 		if(game != null) {
@@ -55,8 +56,8 @@ class FireRateUp extends PowerUp {
 		setGame(game);
 		double xPos = game.WINDOW_WIDTH/(1920/x);
 		double yPos = game.WINDOW_HEIGHT/(1080/y);
-		double scaleX = game.WINDOW_WIDTH/(1920/100);
-		double scaleY = game.WINDOW_HEIGHT/(1080/100);
+		double scaleX = game.WINDOW_WIDTH/(1920/scale);
+		double scaleY = game.WINDOW_HEIGHT/(1080/scale);
 		setSprite(new GButton("Fire Rate", xPos, yPos, scaleX, scaleY));
 		getSprite().setFillColor(Color.RED);
 		getGame().powers.add(this);
@@ -78,8 +79,8 @@ class BulletSizeUp extends PowerUp {
 		setGame(game);
 		double xPos = game.WINDOW_WIDTH/(1920/x);
 		double yPos = game.WINDOW_HEIGHT/(1080/y);
-		double scaleX = game.WINDOW_WIDTH/(1920/100);
-		double scaleY = game.WINDOW_HEIGHT/(1080/100);
+		double scaleX = game.WINDOW_WIDTH/(1920/scale);
+		double scaleY = game.WINDOW_HEIGHT/(1080/scale);
 		setSprite(new GButton("Bullet Size", xPos, yPos, scaleX, scaleY));
 		getSprite().setFillColor(Color.BLUE);
 		getGame().powers.add(this);
@@ -96,8 +97,8 @@ class BulletSpeedUp extends PowerUp {
 		setGame(game);
 		double xPos = game.WINDOW_WIDTH/(1920/x);
 		double yPos = game.WINDOW_HEIGHT/(1080/y);
-		double scaleX = game.WINDOW_WIDTH/(1920/100);
-		double scaleY = game.WINDOW_HEIGHT/(1080/100);
+		double scaleX = game.WINDOW_WIDTH/(1920/scale);
+		double scaleY = game.WINDOW_HEIGHT/(1080/scale);
 		setSprite(new GButton("Bullet Speed", xPos, yPos, scaleX, scaleY));
 		getSprite().setFillColor(Color.GREEN);
 		getGame().powers.add(this);
@@ -114,8 +115,8 @@ class BulletDamageUp extends PowerUp {
 		setGame(game);
 		double xPos = game.WINDOW_WIDTH/(1920/x);
 		double yPos = game.WINDOW_HEIGHT/(1080/y);
-		double scaleX = game.WINDOW_WIDTH/(1920/100);
-		double scaleY = game.WINDOW_HEIGHT/(1080/100);
+		double scaleX = game.WINDOW_WIDTH/(1920/scale);
+		double scaleY = game.WINDOW_HEIGHT/(1080/scale);
 		setSprite(new GButton("Bullet Damage", xPos, yPos, scaleX, scaleY));
 		getSprite().setFillColor(Color.YELLOW);
 		getGame().powers.add(this);
@@ -132,8 +133,8 @@ class SpreadShot extends PowerUp {
 		setGame(game);
 		double xPos = game.WINDOW_WIDTH/(1920/x);
 		double yPos = game.WINDOW_HEIGHT/(1080/y);
-		double scaleX = game.WINDOW_WIDTH/(1920/100);
-		double scaleY = game.WINDOW_HEIGHT/(1080/100);
+		double scaleX = game.WINDOW_WIDTH/(1920/scale);
+		double scaleY = game.WINDOW_HEIGHT/(1080/scale);
 		setSprite(new GButton("SpreadShot", xPos, yPos, scaleX, scaleY));
 		getSprite().setFillColor(Color.MAGENTA);
 		getGame().powers.add(this);
@@ -150,8 +151,8 @@ class DoubleShot extends PowerUp {
 		setGame(game);
 		double xPos = game.WINDOW_WIDTH/(1920/x);
 		double yPos = game.WINDOW_HEIGHT/(1080/y);
-		double scaleX = game.WINDOW_WIDTH/(1920/100);
-		double scaleY = game.WINDOW_HEIGHT/(1080/100);
+		double scaleX = game.WINDOW_WIDTH/(1920/scale);
+		double scaleY = game.WINDOW_HEIGHT/(1080/scale);
 		setSprite(new GButton("DoubleShot", xPos, yPos, scaleX, scaleY));
 		getSprite().setFillColor(Color.CYAN);
 		getGame().powers.add(this);
@@ -168,8 +169,8 @@ class HealthUp extends PowerUp {
 		setGame(game);
 		double xPos = game.WINDOW_WIDTH/(1920/x);
 		double yPos = game.WINDOW_HEIGHT/(1080/y);
-		double scaleX = game.WINDOW_WIDTH/(1920/100);
-		double scaleY = game.WINDOW_HEIGHT/(1080/100);
+		double scaleX = game.WINDOW_WIDTH/(1920/scale);
+		double scaleY = game.WINDOW_HEIGHT/(1080/scale);
 		setSprite(new GButton("+1 Max HP", xPos, yPos, scaleX, scaleY));
 		getSprite().setFillColor(Color.PINK);
 		getGame().powers.add(this);
