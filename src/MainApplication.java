@@ -20,14 +20,14 @@ public class MainApplication extends GraphicsApplication {
 	private EndPane endPane;
 	
 	// Variables for game loop
-	int lowShootCount;
+	int lowShootCount;			// These variables are just telling the audio player which sound to play
 	int playerShootCount;
 	int shipDeathCount;
 	int enemyHitCount;
 	int playerHitCount;
 	int shieldHitCount;
 	int shieldRegenCount;
-	int fps = 65;
+	int fps = 65;				// How many updates are called per second
 	boolean win = false;		// Notice that we have both win and lose booleans; default state is that both are false (the player hasn't won or lost but is playing)
 	boolean lose = false;		// this means we need to be explicit and can't assume that because win = false that the player lost
 	boolean easy = false;
@@ -55,9 +55,9 @@ public class MainApplication extends GraphicsApplication {
 		endPane = new EndPane(this);
 		betweenPane = new BetweenPane(this);
 		audio = AudioPlayer.getInstance();
-		playRandomSound();					// The audio player needs time to "wake up" when it gets used the first time
-		pause(2000);						// Give the audio player time to wake up
-		switchToMenu();						// Then switch to the menu screen
+		playRandomSound();						// The audio player needs time to "wake up" when it gets used the first time
+		pause(2000);							// Give the audio player time to wake up
+		switchToMenu();							// Then switch to the menu screen
 	}
 
 	public void switchToMenu() {
@@ -112,8 +112,12 @@ public class MainApplication extends GraphicsApplication {
 	// Main game loop
 	public void actionPerformed(ActionEvent e) {
 		player.update();									// These lines just call the update function of the player
+		player.getTrail().update();
 		for(int i = enemies.size() - 1;i >= 0;i--) {							// and all of the enemy ships and projectiles
 			enemies.get(i).update();
+			if(enemies.get(i).getTrail() != null) {
+				enemies.get(i).getTrail().update();
+			}
 		}
 		for(PowerUp power : powers) {
 			if(power.checkCollision()) {
@@ -145,6 +149,7 @@ public class MainApplication extends GraphicsApplication {
 		if(lose) {										// If you lost, print it at the menu screen and stop the game timer
 			switchToScreen(endPane);
 			timer.stop();
+			return;
 		}
 	}
 }

@@ -7,7 +7,6 @@ public class Drone extends BasicEnemy {
 	
 	public Drone(MainApplication game, double y) {
 		super(game, y);
-		getTrail().getTimer().stop();
 		setMaxHealth(1);				// They're weak enemies
 		setCooldown(920);			// I want them to fire once then never again, dealt with by long cd
 		setSprite(new GImage("sprites/enemy2.png", getGame().WINDOW_WIDTH, y));

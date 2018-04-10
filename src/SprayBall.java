@@ -8,7 +8,6 @@ public class SprayBall extends BasicEnemy {
 	
 	public SprayBall(MainApplication game, double y, double detonation) {
 		super(game, y);
-		getTrail().getTimer().stop();
 		setMaxHealth(50);
 		setCooldown(700); 
 		setSprite(new GImage("sprites/enemy4.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));

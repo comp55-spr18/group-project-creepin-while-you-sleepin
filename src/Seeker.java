@@ -9,7 +9,6 @@ public class Seeker extends BasicEnemy {
 	
 	public Seeker(MainApplication game, double y) {
 		super(game, y);
-		getTrail().getTimer().stop();
 		setMaxHealth(6);				// They're tough enemies			
 		setSprite(new GImage("sprites/enemy2.png", getGame().WINDOW_WIDTH, y));
 		setSize(100, 100);

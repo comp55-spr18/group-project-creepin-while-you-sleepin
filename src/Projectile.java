@@ -16,6 +16,7 @@ public abstract class Projectile {
 	private boolean isDestructable;				// Check if this projectile can be destroyed by the player's projectile
 	private int damage;
 
+	// Constructor that every projectile should use
 	public Projectile(Ship ship, GPoint gunLoc, double xD, double yD) {
 		setShip(ship);
 		setGame(ship.getGame());

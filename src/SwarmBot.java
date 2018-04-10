@@ -5,7 +5,6 @@ public class SwarmBot extends BasicEnemy {
 	private double upDown;
 	public SwarmBot(MainApplication game, double y, int spawnPos) {
 		super(game, y);
-		getTrail().getTimer().stop();
 		setMaxHealth(1);				// They're weak enemies, but its a swarm so it doesn't matter
 		setCooldown(0);			// They Never fire
 		setSprite(new GImage("sprites/enemy2.png", getGame().WINDOW_WIDTH, y));
