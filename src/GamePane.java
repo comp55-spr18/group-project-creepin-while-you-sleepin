@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.event.MouseEvent;
+import javax.swing.SwingUtilities;
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
@@ -68,7 +69,7 @@ public class GamePane extends GraphicsPane {
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {
-		if(!program.player.isDestroyed() && program.playerControl) {
+		if(SwingUtilities.isLeftMouseButton(e) && !program.player.isDestroyed() && program.playerControl) {
 			program.player.getSprite().setLocation(new GPoint(e.getX() - program.player.getSprite().getWidth()/2, e.getY() - program.player.getSprite().getHeight()/2));
 			program.player.move();
 			program.isShooting = true;
@@ -83,7 +84,7 @@ public class GamePane extends GraphicsPane {
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		if(!program.player.isDestroyed() && program.playerControl) {
+		if(SwingUtilities.isLeftMouseButton(e) && !program.player.isDestroyed() && program.playerControl) {
 			program.player.getSprite().setLocation(new GPoint(e.getX() - program.player.getSprite().getWidth()/2, e.getY() - program.player.getSprite().getHeight()/2));
 			program.player.move();
 			program.isShooting = false;
