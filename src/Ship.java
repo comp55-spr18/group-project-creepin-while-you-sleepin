@@ -72,6 +72,7 @@ public abstract class Ship {
 				if(!getShield().isVisible()) {
 					setShieldCooldown(getShieldCooldown() + 1);
 					if(getShieldCooldown() == getShieldMaxCooldown()) {
+						getGame().shieldRegenCount = getGame().playSound("shieldregen", getGame().shieldRegenCount);
 						getShield().setVisible(true);
 						setShieldCooldown(0);
 					}
@@ -164,6 +165,7 @@ public abstract class Ship {
 			if(!getShield().isVisible()) {
 				calculateDamage(damage);
 			} else {
+				getGame().shieldHitCount = getGame().playSound("shieldhit", getGame().shieldHitCount);
 				getShield().setVisible(false);
 			}
 		} else {
