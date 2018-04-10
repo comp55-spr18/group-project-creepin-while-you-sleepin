@@ -39,7 +39,7 @@ public class Boss extends Ship {
 		setTrail(new FireTrail(this));
 	}
 	
-	public void move() {
+	public void move() { //boss will spawn in and then bounce up and down on the screen
 		getSprite().move(getxDir()*getSpeed(), getyDir()*getSpeed());
 		if(getSprite().getX() <= 1000 && getyDir() == 0) {
 			setxDir(0);
@@ -56,7 +56,7 @@ public class Boss extends Ship {
 		}
 	}
 	
-	public void shoot() {
+	public void shoot() { //shoot is constructed to shoot multiple straight bullets at the player
 		if(canShoot()) {
 			setCanShoot(false);
 			Projectile newProj = new Bullet(this, getGunLocation()[getSelectedGun()], -1, 0);
