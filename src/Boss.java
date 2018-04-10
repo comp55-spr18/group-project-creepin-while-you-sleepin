@@ -23,7 +23,7 @@ public class Boss extends Ship {
 		setSpeed(4);
 		setPoints(100);
 		setCollisionDamage(2);
-		setBulletDamage(2);
+		setBulletDamage(2*game.wave.level);
 		setBulletSize(40);
 		setBulletSpeed(8);
 		setSelectedGun(0);
