@@ -131,10 +131,6 @@ public abstract class Projectile {
 	public void update() {
 		move();
 		checkCollision();
-		if(getGame().lose || getGame().win) {
-			getGame().remove(getSprite());
-			setDestroyed(true);
-		}
 	}
 	
 	// Getters and setters

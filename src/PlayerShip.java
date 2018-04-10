@@ -21,6 +21,7 @@ public class PlayerShip extends Ship {
 		setBulletDamage(1);
 		setShieldCooldown(0);
 		setShieldMaxCooldown(500);
+		setPoints(0);
 		getGame().add(getSprite());
 		setTrail(new FireTrail(this));
 	}
@@ -118,9 +119,6 @@ public class PlayerShip extends Ship {
 				getExplosion().setVisible(false);
 				getGame().lose = true;
 			}
-		}
-		if (getGame().lose || getGame().win) {
-			getGame().remove(getSprite());
 		}
 	}
 }

@@ -16,6 +16,7 @@ public class Wave {
 	int prevWave;					// The previous wave that was generated
 	int upgradeMod;					// How often upgrade waves occur
 	int level;
+	int maxLevel;
 	GLine upgradeLine;
 	GLabel upgradeLabel;
 	int prevSize;
@@ -24,9 +25,10 @@ public class Wave {
 	public Wave(MainApplication g) {
 		game = g;
 		level = 1;
+		maxLevel = 2;
 		waveCount = 0;
 		upgradeMod = 3;
-		totalWaves = 7;			// For now there are 4 regular waves, 2 upgrade waves and 1 boss wave
+		totalWaves = 2;			// For now there are 4 regular waves, 2 upgrade waves and 1 boss wave
 		selectedWave = -1;
 		prevWave = -1;
 		upgradeLine = new GLine(game.WINDOW_WIDTH/(1920/1000.0), 0, game.WINDOW_WIDTH/(1920/1000.0), game.WINDOW_HEIGHT);
@@ -155,11 +157,12 @@ public class Wave {
 			game.remove(upgradeLine);
 			game.remove(upgradeLabel);
 			if(waveCount == totalWaves) {
-				if(level == 2) {
+				if(level == maxLevel) {
 					game.win = true;
 				}
 				level++;
 				waveCount = 0;
+				game.playerControl = false;
 			} else {
 				getNewWave();										// Reaching this point means all enemies are dead, so get a new wave to spawn
 			}

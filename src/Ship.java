@@ -59,10 +59,6 @@ public abstract class Ship {
 		if(!isDestroyed()) {
 			move();									// Move the ship
 			shoot();								// Tell the ship to shoot
-			if(getHealth() <= 0) {					// If the ship's health is below 0
-				getGame().updateScoreBoard(points);	// Add points to the score board
-				setDestroyed(true);					// Destroy the ship
-			}
 			if (getGame().lose || getGame().win) {	// If the game is over
 				getGame().remove(getSprite());		// Remove the ship sprite
 				setDestroyed(true);
@@ -182,8 +178,9 @@ public abstract class Ship {
 		} else {
 			getGame().enemyHitCount = getGame().playSound("enemyhit",  getGame().enemyHitCount);
 		}
-		if(getHealth() <= 0) {
-			setDestroyed(true);
+		if(getHealth() <= 0) {								// If the ship's health is below 0
+			getGame().updateScoreBoard(points);				// Add points to the score board
+			setDestroyed(true);								// Destroy the ship
 		}
 	}
 

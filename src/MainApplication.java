@@ -14,8 +14,9 @@ public class MainApplication extends GraphicsApplication {
 	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	public final int WINDOW_WIDTH = (int) screenSize.getWidth();
 	public final int WINDOW_HEIGHT = (int) screenSize.getHeight();
-	private GamePane somePane;
+	public GamePane gamePane;
 	private MenuPane menu;
+	private BetweenPane betweenPane;
 	private EndPane endPane;
 	
 	// Variables for game loop
@@ -30,6 +31,7 @@ public class MainApplication extends GraphicsApplication {
 	boolean win = false;		// Notice that we have both win and lose booleans; default state is that both are false (the player hasn't won or lost but is playing)
 	boolean lose = false;		// this means we need to be explicit and can't assume that because win = false that the player lost
 	boolean easy = false;
+	boolean playerControl = true;
 	Random rgen = new Random();
 	AudioPlayer audio;
 	ArrayList<Ship> enemies = new ArrayList<Ship>();
@@ -49,9 +51,10 @@ public class MainApplication extends GraphicsApplication {
 	}
 
 	public void run() {
-		somePane = new GamePane(this);
+		gamePane = new GamePane(this);
 		menu = new MenuPane(this);
 		endPane = new EndPane(this);
+		betweenPane = new BetweenPane(this);
 		audio = AudioPlayer.getInstance();
 		playRandomSound();					// The audio player needs time to "wake up" when it gets used the first time
 		pause(2000);						// Give the audio player time to wake up
@@ -67,6 +70,7 @@ public class MainApplication extends GraphicsApplication {
 		wave = new Wave(this);
 		score = 0;								// Reset score
 		updateScoreBoard(0);					// Initialize score board
+		playerControl = true;
 		lowShootCount = 0;
 		playerShootCount = 0;
 		shipDeathCount = 0;
@@ -76,7 +80,7 @@ public class MainApplication extends GraphicsApplication {
 		lose = false;							// Reset the lose/win booleans
 		win = false;
 		timer.start();							// Start the game
-		switchToScreen(somePane);				// Switch to the game screen
+		switchToScreen(gamePane);				// Switch to the game screen
 	}
 
 	private void playRandomSound() {
@@ -121,16 +125,23 @@ public class MainApplication extends GraphicsApplication {
 				projectiles.remove(i);						// Remove it from the arraylist
 			}
 		}
-		wave.update();										// Update the wave
-		if(win || lose) {									// If the game is over
-			if(lose) {										// If you lost, print it at the menu screen and stop the game timer
-				switchToScreen(endPane);
-				timer.stop();
+		if(playerControl) {
+			wave.update();										// Update the wave
+		} else {
+			player.getSprite().move(10, 0);
+			if(player.getSprite().getX() > WINDOW_WIDTH + 300) {
+				if(win) {										// If you won, print it at the menu screen and stop the game timer
+					switchToScreen(endPane);
+					timer.stop();
+					return;
+				}
+				switchToScreen(betweenPane);
 			}
-			if(win) {										// If you won, print it at the menu screen and stop the game timer
-				switchToScreen(endPane);
-				timer.stop();
-			}
+			isShooting = false;
+		}
+		if(lose) {										// If you lost, print it at the menu screen and stop the game timer
+			switchToScreen(endPane);
+			timer.stop();
 		}
 	}
 }

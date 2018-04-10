@@ -75,7 +75,7 @@ public class FireTrail implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		move();
-		if(ship.isDestroyed() || ship.getGame().win) {
+		if(ship.isDestroyed()) {
 			for(Projectile proj : trail) {
 				ship.getGame().remove(proj.getSprite());
 			}

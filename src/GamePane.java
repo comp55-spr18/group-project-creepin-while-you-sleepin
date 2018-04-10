@@ -14,14 +14,18 @@ public class GamePane extends GraphicsPane {
 		program.alreadyHave.setFont("arial-22-bold");
 		program.alreadyHave.setColor(Color.RED);
 		program.alreadyHave.setLocation(program.WINDOW_WIDTH/2 - program.alreadyHave.getWidth()/2, program.WINDOW_HEIGHT/2 - program.getHeight()/2);
-		background = new GImage("levels/testspacelevel.jpg");
+		background = new GImage("levels/test.gif");
 		background.setSize(program.getWidth()+ 500, program.getHeight());
 	}
 
 	@Override
 	public void showContents() {
-		program.add(program.scoreBoard);
 		program.add(background);
+		for(GImage heart : program.healthBar) {
+			program.add(heart);
+		}
+		program.add(program.scoreBoard);
+		program.add(program.player.getSprite());
 		background.sendToBack();
 	}
 
@@ -45,21 +49,23 @@ public class GamePane extends GraphicsPane {
 			program.remove(program.player.getShield());
 		}
 		program.remove(program.scoreBoard);
+		for(GImage heart : program.healthBar) {
+			program.remove(heart);
+		}
 		program.enemies.clear();								// Clear the enemies arraylist
 		program.projectiles.clear();							// Clear the projectiles arraylist
-		program.player.setHealth(0);
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		if(!program.player.isDestroyed()) {
+		if(!program.player.isDestroyed() && program.playerControl) {
 			program.player.getSprite().setLocation(new GPoint(e.getX() - program.player.getSprite().getWidth()/2, e.getY() - program.player.getSprite().getHeight()/2));
 			program.player.move();
 		}
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {
-		if(!program.player.isDestroyed()) {
+		if(!program.player.isDestroyed() && program.playerControl) {
 			program.player.getSprite().setLocation(new GPoint(e.getX() - program.player.getSprite().getWidth()/2, e.getY() - program.player.getSprite().getHeight()/2));
 			program.player.move();
 			program.isShooting = true;
@@ -67,14 +73,14 @@ public class GamePane extends GraphicsPane {
 	}
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		if(!program.player.isDestroyed()) {
+		if(!program.player.isDestroyed() && program.playerControl) {
 			program.player.getSprite().setLocation(new GPoint(e.getX() - program.player.getSprite().getWidth()/2, e.getY() - program.player.getSprite().getHeight()/2));
 			program.player.move();
 		}
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		if(!program.player.isDestroyed()) {
+		if(!program.player.isDestroyed() && program.playerControl) {
 			program.player.getSprite().setLocation(new GPoint(e.getX() - program.player.getSprite().getWidth()/2, e.getY() - program.player.getSprite().getHeight()/2));
 			program.player.move();
 			program.isShooting = false;
