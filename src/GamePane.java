@@ -1,15 +1,22 @@
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import javax.swing.SwingUtilities;
 import acm.graphics.GImage;
+import acm.graphics.GLabel;
 import acm.graphics.GPoint;
 
 public class GamePane extends GraphicsPane {
 	private MainApplication program;
 	private GImage background;
+	private GLabel pauseLabel;
 
 	public GamePane(MainApplication app) {
 		this.program = app;
+		pauseLabel = new GLabel("PAUSED (Click on player ship to resume)");
+		pauseLabel.setFont("Arial-Bold-40");
+		pauseLabel.setColor(Color.WHITE);
+		pauseLabel.setLocation(program.WINDOW_WIDTH/2 - pauseLabel.getWidth()/2, program.WINDOW_HEIGHT/2 - program.getHeight()/2);
 		program.scoreBoard.setFont("Arial-Bold-22");
 		program.scoreBoard.setColor(Color.WHITE);
 		program.alreadyHave.setFont("arial-22-bold");
@@ -62,22 +69,44 @@ public class GamePane extends GraphicsPane {
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		program.player.move(e);
+		if(!program.paused) {
+			program.player.move(e);
+		}
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {
-		if(SwingUtilities.isLeftMouseButton(e) && !program.player.isDestroyed() && program.playerControl) {
-			program.player.setShooting(true);
+		if(!program.paused) {
+			if(SwingUtilities.isLeftMouseButton(e) && !program.player.isDestroyed() && program.playerControl) {
+				program.player.setShooting(true);
+			}
+		} else {
+			GImage playerSprite = program.player.getSprite();
+			if(e.getX() >= playerSprite.getX() && e.getX() <= playerSprite.getX() + playerSprite.getWidth() && e.getY() >= playerSprite.getY() && e.getY() <= playerSprite.getY() + playerSprite.getHeight()) {
+				program.paused = false;
+				program.remove(pauseLabel);
+				program.player.move(e);
+			}
 		}
 	}
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		program.player.move(e);
+		if(!program.paused) {
+			program.player.move(e);
+		}
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		if(SwingUtilities.isLeftMouseButton(e) && !program.player.isDestroyed() && program.playerControl) {
+		if(!program.paused && SwingUtilities.isLeftMouseButton(e) && !program.player.isDestroyed() && program.playerControl) {
 			program.player.setShooting(false);
+		}
+	}
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+			if(!program.paused) {
+				program.paused = true;
+				program.add(pauseLabel);
+			}
 		}
 	}
 }

@@ -27,11 +27,12 @@ public class MainApplication extends GraphicsApplication {
 	int playerHitCount;
 	int shieldHitCount;
 	int shieldRegenCount;
-	int fps = 150;				// How many updates are called per second
+	int fps = 65;				// How many updates are called per second
 	boolean win = false;		// Notice that we have both win and lose booleans; default state is that both are false (the player hasn't won or lost but is playing)
 	boolean lose = false;		// this means we need to be explicit and can't assume that because win = false that the player lost
 	boolean easy = false;
 	boolean playerControl = true;
+	boolean paused = false;
 	Random rgen = new Random();
 	AudioPlayer audio;
 	ArrayList<Ship> enemies = new ArrayList<Ship>();
@@ -115,45 +116,47 @@ public class MainApplication extends GraphicsApplication {
 	
 	// Main game loop
 	public void actionPerformed(ActionEvent e) {
-		player.update();									// These lines just call the update function of the player
-		player.getTrail().update();
-		for(int i = enemies.size() - 1;i >= 0;i--) {							// and all of the enemy ships and projectiles
-			enemies.get(i).update();
-			if(enemies.get(i).getTrail() != null) {
-				enemies.get(i).getTrail().update();
-			}
-		}
-		for(PowerUp power : powers) {
-			if(power.checkCollision()) {
-				break;
-			}
-		}
-		for(Projectile proj : projectiles) {
-			proj.update();
-		}
-		for(int i = projectiles.size() - 1;i >= 0;i--) {	// This for loop iterates backwards thru the projectiles arraylist to avoid exceptions
-			if(projectiles.get(i).isDestroyed()) {			// If the projectile is destroyed
-				projectiles.remove(i);						// Remove it from the arraylist
-			}
-		}
-		if(playerControl) {
-			wave.update();										// Update the wave
-		} else {
-			player.setShooting(false);
-			player.move();
-			if(player.getSprite().getX() > WINDOW_WIDTH + 300) {
-				if(win) {										// If you won, print it at the menu screen and stop the game timer
-					switchToScreen(endPane);
-					timer.stop();
-					return;
+		if(!paused) {
+			player.update();									// These lines just call the update function of the player
+			player.getTrail().update();
+			for(int i = enemies.size() - 1;i >= 0;i--) {							// and all of the enemy ships and projectiles
+				enemies.get(i).update();
+				if(enemies.get(i).getTrail() != null) {
+					enemies.get(i).getTrail().update();
 				}
-				switchToScreen(betweenPane);
 			}
-		}
-		if(lose) {										// If you lost, print it at the menu screen and stop the game timer
-			switchToScreen(endPane);
-			timer.stop();
-			return;
+			for(PowerUp power : powers) {
+				if(power.checkCollision()) {
+					break;
+				}
+			}
+			for(Projectile proj : projectiles) {
+				proj.update();
+			}
+			for(int i = projectiles.size() - 1;i >= 0;i--) {	// This for loop iterates backwards thru the projectiles arraylist to avoid exceptions
+				if(projectiles.get(i).isDestroyed()) {			// If the projectile is destroyed
+					projectiles.remove(i);						// Remove it from the arraylist
+				}
+			}
+			if(playerControl) {
+				wave.update();										// Update the wave
+			} else {
+				player.setShooting(false);
+				player.move();
+				if(player.getSprite().getX() > WINDOW_WIDTH + 300) {
+					if(win) {										// If you won, print it at the menu screen and stop the game timer
+						switchToScreen(endPane);
+						timer.stop();
+						return;
+					}
+					switchToScreen(betweenPane);
+				}
+			}
+			if(lose) {										// If you lost, print it at the menu screen and stop the game timer
+				switchToScreen(endPane);
+				timer.stop();
+				return;
+			}
 		}
 	}
 }
