@@ -6,8 +6,7 @@ import acm.graphics.GPoint;
 public class SawedOff extends Ship {
 	private boolean triggered;
 	public SawedOff(MainApplication game, double y) {
-		setGame(game);
-		setInvincible(false);
+		super(game);
 		setShots(2);
 		setMaxHealth(5);
 		setCooldown(0);
@@ -17,9 +16,6 @@ public class SawedOff extends Ship {
 		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
 		setBulletColor(Color.yellow);
 		setSize(50, 50);
-		setExplosion(new GImage("explosion.png"));
-		setDestroyed(false);
-		setDestroyedCounter(0);
 		setxDir(-1);
 		setyDir(0);
 		setSpeed(2);

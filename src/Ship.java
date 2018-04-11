@@ -8,14 +8,14 @@ public abstract class Ship {
 	private int selectedGun;			// Integer switch that selects which point in gunLocation array to fire from
 	private Color bulletColor;			// The color of the projectiles fired by this ship
 	private boolean canShoot;			// Trigger that toggles on/off on cooldown in the main loop
-	private boolean invincible = false;	// Trigger that toggles on/off on cooldown in the main loop
+	private boolean invincible;			// Trigger that toggles on/off on cooldown in the main loop
 	private int iframe;					// Number of frames that the ship will be invincible for if at all
 	private int health;					// The number of hits the ship can take before being destroyed
 	private int maxHealth;
 	private int cooldown;				// The initial value of cooldown (Set to 0 if the ship can fire as soon as it spawns)
 	private int maxCooldown;			// The number of frames between each call of the Shoot() function
-	private boolean isDestroyed = false;		// Toggles the destruction sequence of the ship
-	private int destroyedCounter = 0;		// Counter for how long the death sprite lasts
+	private boolean isDestroyed;		// Toggles the destruction sequence of the ship
+	private int destroyedCounter;		// Counter for how long the death sprite lasts
 	private int points;					// The points the ship is worth
 	private boolean shielded = false;
 	private GOval shield;
@@ -33,6 +33,17 @@ public abstract class Ship {
 	private double xDir;			// Since each move() is different for each ship, these do whatever you make them do
 	private double yDir;
 	private int speed;
+	
+	Ship(MainApplication game) {
+		setGame(game);
+		game.enemies.add(this);
+		setDestroyed(false);
+		setInvincible(false);
+		setDestroyedCounter(0);
+		setShielded(false);
+		setCollisionDamage(1);
+		setExplosion(new GImage("explosion.png"));
+	}
 	
 	//vector move does the angle math for you.
 	public void vectorMove () {
@@ -95,6 +106,7 @@ public abstract class Ship {
 	// Getters and setters, nothing important down here
 	public void setSize(double x, double y) {
 		getSprite().setSize(getGame().WINDOW_WIDTH/(1920/x), getGame().WINDOW_HEIGHT/(1080/y));
+		getExplosion().setSize(getSprite().getSize());
 	}
 
 	public GImage getSprite() {

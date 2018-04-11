@@ -7,8 +7,7 @@ import acm.graphics.GPoint;
 public class PlayerShip extends Ship {
 	private boolean shooting = false;
 	public PlayerShip(MainApplication game) {
-		setGame(game);
-		setInvincible(false);
+		super(game);
 		setIframe(0);
 		setShots(1);
 		setMaxHealth(5);
@@ -22,8 +21,6 @@ public class PlayerShip extends Ship {
 		setBulletSize(15);
 		setBulletSpeed(25);
 		setBulletDamage(1);
-		setShieldCooldown(0);
-		setShieldMaxCooldown(500);
 		setPoints(0);
 		getGame().add(getSprite());
 		setTrail(new FireTrail(this));

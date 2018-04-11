@@ -4,7 +4,7 @@ import acm.graphics.GPoint;
 
 public class Boss extends Ship {
 	public Boss(MainApplication game, double y) {
-		setGame(game);
+		super(game);
 		setInvincible(false);
 		setMaxHealth(150);
 		setCooldown(0);

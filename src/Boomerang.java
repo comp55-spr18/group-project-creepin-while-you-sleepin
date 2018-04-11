@@ -5,7 +5,7 @@ import acm.graphics.GPoint;
 
 public class Boomerang extends Ship {
 	public Boomerang(MainApplication game, double y) {
-		setGame(game);
+		super(game);
 		setHealth(2);
 		setCooldown(0);
 		setMaxCooldown(75);
@@ -14,13 +14,11 @@ public class Boomerang extends Ship {
 		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT / (1080 / y)));
 		setBulletColor(Color.RED);
 		setSize(50, 50);
-		setExplosion(new GImage("explosion.png"));
 		getSprite().setLocation(getSprite().getX(), getSprite().getY() - getSprite().getHeight() / 2);
 		setxDir(-1);
 		setyDir(0);
 		setSpeed(5);
 		setPoints(100);
-		setCollisionDamage(1);
 		setBulletDamage(1);
 		setBulletSpeed(20);
 		setBulletSize(15);

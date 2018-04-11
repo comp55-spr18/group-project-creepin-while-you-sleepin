@@ -177,6 +177,8 @@ class ShieldUp extends PowerUp {
 	public void onCollision() {
 		if(!getGame().player.isShielded()) {
 			getGame().player.setShielded(true);
+			getGame().player.setShieldCooldown(0);
+			getGame().player.setShieldMaxCooldown(500);
 		} else {
 			getGame().player.setShieldCooldown(0);
 			getGame().player.setShieldMaxCooldown(getGame().player.getShieldMaxCooldown() - 50);

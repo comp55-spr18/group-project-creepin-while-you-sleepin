@@ -5,8 +5,7 @@ import acm.graphics.GPoint;
 
 public class Kamikazi extends Ship {
 	public Kamikazi(MainApplication game, double y) {
-		setGame(game);
-		setInvincible(false);
+		super(game);
 		setMaxHealth(2);
 		setCooldown(325);
 		setMaxCooldown(400);
@@ -14,10 +13,7 @@ public class Kamikazi extends Ship {
 		setGunLocation(new GPoint[] {new GPoint(50,15)});
 		setSprite(new GImage("sprites/enemy3.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
 		setSize(50, 50);
-		setExplosion(new GImage("explosion.png"));
 		setBulletColor(Color.yellow);
-		setDestroyed(false);
-		setDestroyedCounter(0);
 		setxDir(-1);
 		setyDir(0);
 		setSpeed(8);
