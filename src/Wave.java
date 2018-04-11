@@ -24,7 +24,7 @@ public class Wave {
 
 	public Wave(MainApplication g) {
 		game = g;
-		level = 1;
+		level = 3;
 		maxLevel = 2;
 		waveCount = 0;
 		upgradeMod = 3;
@@ -115,7 +115,7 @@ public class Wave {
 		} else if(waveCount%upgradeMod == 0 && waveCount != totalWaves) {
 			upgradeWave();						// Call the upgrade wave
 		} else {								// If it is the final wave
-			fakeBossWave();						// Call the boss wave
+			firstBossWave();						// Call the boss wave
 		}
 		enemyToSpawn++;							// Increment the enemyToSpawn
 	}
@@ -445,7 +445,7 @@ public class Wave {
 		}
 	}
 
-	public void fakeBossWave() {			// Just a pseudo-boss wave until we have a boss
+	public void firstBossWave() {			// Implements easy mode of a boss wave into the program
 		switch(enemyToSpawn) {
 			case 0:
 				size = 1;
@@ -453,6 +453,16 @@ public class Wave {
 				break;
 			default:
 				game.enemies.add(new Boss(game, 200));
+		}
+	}
+	
+	public void secondBossWave() {          // Implements hard mode of the boss wave into the program
+		switch(enemyToSpawn) {
+		case 0:
+			size = 1;
+			delay = 1;
+		default:
+			game.enemies.add(new Boss2(game,200));
 		}
 	}
 
@@ -467,6 +477,7 @@ public class Wave {
 			game.powers.add(new HealthUp(game, 1500, 450));
 			game.powers.add(new ShieldUp(game, 1500, 550));
 			game.powers.add(new BulletUp(game, 1500, 650));
+			game.powers.add(new Exit(game, 1500, 750));
 			game.remove(upgradeLine);
 			game.remove(upgradeLabel);
 			enemyToSpawn = 0;
