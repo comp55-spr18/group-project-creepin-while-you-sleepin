@@ -33,7 +33,9 @@ public class SprayBall extends BasicEnemy {
 			Projectile newProj = new Bullet(this, getGunLocation()[0], -1, 0);
 			Projectile newProj1 = new Bullet(this, getGunLocation()[1], 0, -1);
 			Projectile newProj2 = new Bullet(this, getGunLocation()[2], 1, 0);
-			Projectile newProj3 = new Bullet(this, getGunLocation()[3], 0, 1);			
+			Projectile newProj3 = new Bullet(this, getGunLocation()[3], 0, 1);
+			double x = getSprite().getLocation().getX();
+			double y = getSprite().getLocation().getY();
 			if (firing < 10) {
 				newProj.setxDir(-1+firing*(.1));
 				newProj.setyDir(0-firing*(.1));
@@ -43,6 +45,11 @@ public class SprayBall extends BasicEnemy {
 				newProj2.setyDir(0+firing*(.1));
 				newProj3.setxDir(0-firing*(.1));
 				newProj3.setyDir(1-firing*(.1));
+				setGunLocation(new GPoint[] {
+				new GPoint(x+(getSprite().getWidth()/200)*Math.pow(firing,2),y+(getSprite().getHeight()/2)), 
+				new GPoint(x+getSprite().getWidth()/2,y),
+				new GPoint(x+getSprite().getWidth(),y+getSprite().getHeight()/2), 
+				new GPoint(x+getSprite().getWidth()/2,y+getSprite().getHeight())});
 			}
 			else {
 				newProj.setxDir(-1+firing*(.1));
@@ -53,6 +60,11 @@ public class SprayBall extends BasicEnemy {
 				newProj2.setyDir(2-firing*(.1));
 				newProj3.setxDir(-2+firing*(.1));
 				newProj3.setyDir(1-firing*(.1));
+				setGunLocation(new GPoint[] {
+				new GPoint(x+10+25-(getSprite().getWidth()/200)*Math.pow(firing-10-5,2),y+getSprite().getHeight()/2), 
+				new GPoint(x+getSprite().getWidth()/2,y),
+				new GPoint(x+getSprite().getWidth(),y+getSprite().getHeight()/2), 
+				new GPoint(x+getSprite().getWidth()/2,y+getSprite().getHeight())});
 			}
 			getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);
 			firing++;
