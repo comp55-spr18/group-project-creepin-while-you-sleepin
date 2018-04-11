@@ -24,7 +24,7 @@ public class Wave {
 
 	public Wave(MainApplication g) {
 		game = g;
-		level = 1;
+		level = 3;
 		maxLevel = 2;
 		waveCount = 0;
 		upgradeMod = 3;
@@ -467,6 +467,7 @@ public class Wave {
 			game.powers.add(new HealthUp(game, 1500, 450));
 			game.powers.add(new ShieldUp(game, 1500, 550));
 			game.powers.add(new BulletUp(game, 1500, 650));
+			game.powers.add(new Exit(game, 1500, 750));
 			game.remove(upgradeLine);
 			game.remove(upgradeLabel);
 			enemyToSpawn = 0;
