@@ -4,6 +4,7 @@ import acm.graphics.GPoint;
 public class Drone extends BasicEnemy {
 	private int lifetime = 0;
 	private double topBot;
+	private double droneCurve;
 	
 	public Drone(MainApplication game, double y) {
 		super(game, y);
@@ -18,6 +19,8 @@ public class Drone extends BasicEnemy {
 		setBulletSize(20);
 		setBulletSpeed(12);
 		setBulletDamage(1);
+		//This sets the arc of the drones based on the height of the player's screen. Can also be altered to change the drone's curve
+		droneCurve = 43.2/getGame().WINDOW_HEIGHT;
 		if (y <= getGame().WINDOW_HEIGHT/2) {
 			setyDir(.3);
 		}
@@ -57,23 +60,23 @@ public class Drone extends BasicEnemy {
 			if (getxDir() != 1) {
 				if(topBot <= getGame().WINDOW_HEIGHT/2) {
 					if(getxDir() <= 0) {
-						setyDir(getyDir() + .04);
+						setyDir(getyDir() + droneCurve);
 					}
 					else {
-						setyDir(getyDir() - .04);
+						setyDir(getyDir() - droneCurve);
 					}
 				}
 				
 				else {
 					if(getxDir() <= 0) {
-						setyDir(getyDir() - .04);
+						setyDir(getyDir() - droneCurve);
 					}
 					else {
-						setyDir(getyDir() + .04);
+						setyDir(getyDir() + droneCurve);
 					}
 				}
 				
-				setxDir(getxDir() + .04);
+				setxDir(getxDir() + droneCurve);
 			}
 		}
 		lifetime++;
