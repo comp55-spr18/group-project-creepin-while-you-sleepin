@@ -160,7 +160,8 @@ public abstract class Projectile {
 		return speed;
 	}
 	public void setSpeed(double speed) {
-		this.speed = getGame().WINDOW_WIDTH/(1920/speed);
+		this.speed = speed;
+		
 	}
 	public GOval getSprite() {
 		return sprite;

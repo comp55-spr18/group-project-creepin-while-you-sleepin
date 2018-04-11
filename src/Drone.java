@@ -24,9 +24,14 @@ public class Drone extends BasicEnemy {
 		else {
 			setyDir(-.3);
 		}
-		//setLocation(new GPoint(getGame().WINDOW_WIDTH/1.1, y));
 		topBot = y;
-		//setSprite(new GImage("sprites/enemy1.png", getLocation().getX(), getLocation().getY()));		
+		switch(game.wave.getLevel()) {
+			case 2:
+				setBulletDamage(2);
+				setShielded(true);
+				setShieldCooldown(0);
+				setShieldMaxCooldown(100000);
+		}
 	}
 	// tweaked bullet speed
 	@Override

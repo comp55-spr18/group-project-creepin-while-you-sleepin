@@ -315,7 +315,7 @@ public abstract class Ship {
 	}
 
 	public void setBulletSpeed(double bulletSpeed) {
-		this.bulletSpeed = bulletSpeed;
+		this.bulletSpeed = getGame().WINDOW_WIDTH/(1920/bulletSpeed);
 	}
 
 	public int getBulletDamage() {

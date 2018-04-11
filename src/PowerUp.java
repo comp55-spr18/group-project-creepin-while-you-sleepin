@@ -148,7 +148,7 @@ class HealthUp extends PowerUp {
 		double yPos = game.WINDOW_HEIGHT/(1080/y);
 		double scaleX = game.WINDOW_WIDTH/(1920/width);
 		double scaleY = game.WINDOW_HEIGHT/(1080/height);
-		setSprite(new GButton("+1 Max HP", xPos, yPos, scaleX, scaleY));
+		setSprite(new GButton("+2 Max HP", xPos, yPos, scaleX, scaleY));
 		getSprite().setFillColor(Color.PINK);
 		getGame().powers.add(this);
 		getGame().add(getSprite());
@@ -156,8 +156,8 @@ class HealthUp extends PowerUp {
 	
 	public void onCollision() {
 		int damageTaken = getGame().player.getMaxHealth() - getGame().player.getHealth();
-		getGame().player.setMaxHealth(getGame().player.getMaxHealth() + 1);
-		getGame().player.setHealth(getGame().player.getMaxHealth() - damageTaken + 1);
+		getGame().player.setMaxHealth(getGame().player.getMaxHealth() + 2);
+		getGame().player.setHealth(getGame().player.getMaxHealth() - damageTaken);
 	}
 }
 
