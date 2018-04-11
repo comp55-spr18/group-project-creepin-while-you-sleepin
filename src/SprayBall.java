@@ -46,10 +46,10 @@ public class SprayBall extends BasicEnemy {
 				newProj3.setxDir(0-firing*(.1));
 				newProj3.setyDir(1-firing*(.1));
 				setGunLocation(new GPoint[] {
-				new GPoint(x+(getSprite().getWidth()/200)*Math.pow(firing,2),y+(getSprite().getHeight()/2)), 
-				new GPoint(x+getSprite().getWidth()/2,y),
-				new GPoint(x+getSprite().getWidth(),y+getSprite().getHeight()/2), 
-				new GPoint(x+getSprite().getWidth()/2,y+getSprite().getHeight())});
+				new GPoint(x+(getSprite().getWidth()/200)*Math.pow(firing,2),y+(getSprite().getHeight()/2)-(getSprite().getHeight()/2)+(getSprite().getHeight()/200)*Math.pow(firing-10,2)),  
+				new GPoint(x+(getSprite().getWidth()/2)+(getSprite().getWidth()/2)-(getSprite().getWidth()/200)*Math.pow(firing-10,2),y+(getSprite().getHeight()/200)*Math.pow(firing,2)),
+				new GPoint(x+getSprite().getWidth()-(getSprite().getWidth()/200)*Math.pow(firing,2),y+(getSprite().getHeight()/2)+(getSprite().getHeight()/2)-(getSprite().getHeight()/200)*Math.pow(firing-10,2)), 
+				new GPoint(x+getSprite().getWidth()/2-(getSprite().getWidth()/2)+(getSprite().getWidth()/200)*Math.pow(firing-10,2),y+getSprite().getHeight()-(getSprite().getHeight()/200)*Math.pow(firing,2))});
 			}
 			else {
 				newProj.setxDir(-1+firing*(.1));
@@ -61,10 +61,10 @@ public class SprayBall extends BasicEnemy {
 				newProj3.setxDir(-2+firing*(.1));
 				newProj3.setyDir(1-firing*(.1));
 				setGunLocation(new GPoint[] {
-				new GPoint(x+10+25-(getSprite().getWidth()/200)*Math.pow(firing-10-5,2),y+getSprite().getHeight()/2), 
-				new GPoint(x+getSprite().getWidth()/2,y),
-				new GPoint(x+getSprite().getWidth(),y+getSprite().getHeight()/2), 
-				new GPoint(x+getSprite().getWidth()/2,y+getSprite().getHeight())});
+				new GPoint(x+(getSprite().getWidth())-(getSprite().getWidth()/200)*Math.pow(firing-20,2),y+(getSprite().getHeight()/2)-(getSprite().getHeight()/2)+(getSprite().getHeight()/200)*Math.pow(firing-10,2)),  
+				new GPoint(x+(getSprite().getWidth()/2)+(getSprite().getWidth()/2)-(getSprite().getWidth()/200)*Math.pow(firing-10,2),y+(getSprite().getHeight()/2)+(getSprite().getHeight()/2)-(getSprite().getHeight()/200)*Math.pow(firing-20,2)),
+				new GPoint(x+getSprite().getWidth()-(getSprite().getWidth())+(getSprite().getWidth()/200)*Math.pow(firing-20,2),y+(getSprite().getHeight()/2)+(getSprite().getHeight()/2)-(getSprite().getHeight()/200)*Math.pow(firing-10,2)), 
+				new GPoint(x+getSprite().getWidth()/2-(getSprite().getWidth()/2)+(getSprite().getWidth()/200)*Math.pow(firing-10,2),y+getSprite().getHeight()-(getSprite().getHeight())+(getSprite().getHeight()/200)*Math.pow(firing-20,2))});
 			}
 			getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);
 			firing++;
@@ -84,6 +84,8 @@ public class SprayBall extends BasicEnemy {
 	//moves 2/3 of map, pauses for firing, then leaves
 	@Override
 	public void move() {
+		double x = getSprite().getLocation().getX();
+		double y = getSprite().getLocation().getY();
 		if (getSprite().getLocation().getX() < ballDet && (firing != 21)) {
 			delay++;
 			if (delay == 50) {
@@ -94,12 +96,11 @@ public class SprayBall extends BasicEnemy {
 		}
 		else {
 			getSprite().move(getxDir()*getSpeed(), getyDir()*getSpeed());
+			//moving all 4 gun locations, 1=front 2=top, 3=back, 4=bot
+			setGunLocation(new GPoint[] {new GPoint(x,y+getSprite().getHeight()/2), new GPoint(x+getSprite().getWidth()/2,y), new GPoint(x+getSprite().getWidth(),y+getSprite().getHeight()/2), new GPoint(x+getSprite().getWidth()/2,y+getSprite().getHeight())});
 		}
-		double x = getSprite().getLocation().getX();
-		double y = getSprite().getLocation().getY();
-		//moving all 4 gun locations, 1=front 2=top, 3=back, 4=bot
-		setGunLocation(new GPoint[] {new GPoint(x,y+getSprite().getHeight()/2), new GPoint(x+getSprite().getWidth()/2,y), new GPoint(x+getSprite().getWidth(),y+getSprite().getHeight()/2), new GPoint(x+getSprite().getWidth()/2,y+getSprite().getHeight())});
-		if(getSprite().getLocation().getX() < -100) {
+		
+		if(getSprite().getLocation().getX() < -200) {
 			setDestroyed(true);
 		}
 	}
