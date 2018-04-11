@@ -80,23 +80,4 @@ public class FireTrail {
 			trail.clear();
 		}
 	}
-	// Getters and setters
-	public ArrayList<Projectile> getTrail() {
-		return trail;
-	}
-	public void setTrail(ArrayList<Projectile> trail) {
-		this.trail = trail;
-	}
-	public Ship getShip() {
-		return ship;
-	}
-	public void setShip(Ship ship) {
-		this.ship = ship;
-	}
-	public int getxDir() {
-		return xDir;
-	}
-	public void setxDir(int xDir) {
-		this.xDir = xDir;
-	}
 }
