@@ -295,7 +295,6 @@ public abstract class Ship {
 
 	public void setExplosion(GImage explosion) {
 		this.explosion = explosion;
-		this.explosion.setSize(sprite.getSize());		// Set the size of the explosion sprite to the size of the ship's sprite
 	}
 
 	public FireTrail getTrail() {
