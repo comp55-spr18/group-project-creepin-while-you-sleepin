@@ -105,3 +105,4 @@ public class SprayBall extends BasicEnemy {
 		}
 	}
 }
+
