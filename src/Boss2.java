@@ -2,8 +2,8 @@ import java.awt.Color;
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
-public class Boss extends Ship {
-	public Boss(MainApplication game, double y) {
+public class Boss2 extends Ship {
+	public Boss2(MainApplication game, double y) {
 		setGame(game);
 		setInvincible(false);
 		setMaxHealth(150);
@@ -13,19 +13,19 @@ public class Boss extends Ship {
 		setGunLocation(new GPoint[] {new GPoint(50,15)});
 		setSprite(new GImage("boss 1.png", game.WINDOW_WIDTH, game.WINDOW_HEIGHT/(1080/y)));
 		setBulletColor(Color.white);
-		setSize(500, 500);
+		setSize(400, 400);
 		setBulletColor(Color.RED);
 		setExplosion(new GImage("explosion.png"));
 		setDestroyed(false);
 		setDestroyedCounter(0);
 		setxDir(-1);
 		setyDir(0);
-		setSpeed(4);
+		setSpeed(6);
 		setPoints(100);
 		setCollisionDamage(2);
 		setBulletDamage(2);
-		setBulletSize(40);
-		setBulletSpeed(8);
+		setBulletSize(60);
+		setBulletSpeed(10);
 		setSelectedGun(0);
 		switch(game.wave.getLevel()) {
 			case 2:
@@ -39,7 +39,7 @@ public class Boss extends Ship {
 		setTrail(new FireTrail(this));
 	}
 	
-	public void move() { //boss will spawn in and then bounce up and down on the screen
+	public void move() { //boss again will spawn in and bounce up and down on screen
 		getSprite().move(getxDir()*getSpeed(), getyDir()*getSpeed());
 		if(getSprite().getX() <= 1000 && getyDir() == 0) {
 			setxDir(0);
@@ -56,7 +56,7 @@ public class Boss extends Ship {
 		}
 	}
 	
-	public void shoot() { //shoot is constructed to shoot multiple straight bullets at the player
+	public void shoot() {
 		if(canShoot()) {
 			setCanShoot(false);
 			Projectile newProj = new Bullet(this, getGunLocation()[getSelectedGun()], -1, 0);
