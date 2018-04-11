@@ -176,23 +176,23 @@ public class Wave {
 				delay = 50;
 				break;
 			case 1:
-				game.enemies.add(new BasicEnemy(game, 500));		// This is the first enemy it spawns
+				new BasicEnemy(game, 500);		// This is the first enemy it spawns
 				delay = 100;											// Sets the new delay between enemy spawns to be 100
 				break;
 			case 2:
-				game.enemies.add(new BasicEnemy(game, 250));		// The second and so on
+				new BasicEnemy(game, 250);		// The second and so on
 				break;
 			case 3:
-				game.enemies.add(new BasicEnemy(game, 300));
+				new BasicEnemy(game, 300);
 				break;
 			case 4:
-				game.enemies.add(new BasicEnemy(game, 500));
+				new BasicEnemy(game, 500);
 				break;
 			case 5:
-				game.enemies.add(new BasicEnemy(game, 250));
+				new BasicEnemy(game, 250);
 				break;
 			case 6:
-				game.enemies.add(new SprayBall(game, 450, game.WINDOW_WIDTH/3));
+				new SprayBall(game, 450, game.WINDOW_WIDTH/3);
 				break;
 		}
 	}
@@ -204,25 +204,25 @@ public class Wave {
 				delay = 50;
 				break;
 			case 1:
-				game.enemies.add(new BasicEnemy(game, 500));
+				new BasicEnemy(game, 500);
 				delay = 100;
 				break;
 			case 2:
-				game.enemies.add(new Kamikazi(game, 900));
+				new Kamikazi(game, 900);
 				break;
 			case 3:
-				game.enemies.add(new SprayBall(game, 300, 1000));
+				new SprayBall(game, 300, 1000);
 				delay = 300;
 				break;
 			case 4:
-				game.enemies.add(new HomingEnemy(game, 500));
+				new HomingEnemy(game, 500);
 				delay = 100;
 				break;
 			case 5:
-				game.enemies.add(new HomingEnemy(game, 200));
+				new HomingEnemy(game, 200);
 				break;
 			case 6:
-				game.enemies.add(new SprayBall(game, 450, 1920/3));
+				new SprayBall(game, 450, 1920/3);
 				break;
 		}
 	}
@@ -234,31 +234,31 @@ public class Wave {
 				delay = 20;
 				break;
 			case 21:
-				game.enemies.add(new BasicEnemy(game, 500));
+				new BasicEnemy(game, 500);
 				delay = 50;
 				break;
 			case 22:
-				game.enemies.add(new BasicEnemy(game, 450));
+				new BasicEnemy(game, 450);
 				break;
 			case 23:
-				game.enemies.add(new BasicEnemy(game, 500));
+				new BasicEnemy(game, 500);
 				break;
 			case 24:
-				game.enemies.add(new BasicEnemy(game, 550));
+				new BasicEnemy(game, 550);
 				break;
 			case 25:
-				game.enemies.add(new BasicEnemy(game, 500));
+				new BasicEnemy(game, 500);
 				break;
 			default:
 				switch(enemyToSpawn%2) {
 					case 0:
-						game.enemies.add(new Drone(game, game.WINDOW_HEIGHT - 200));
+						new Drone(game, game.WINDOW_HEIGHT - 200);
 						if(enemyToSpawn == 20) {
 							delay = 200;
 						}
 						break;
 					case 1:
-						game.enemies.add(new Drone(game, 100));
+						new Drone(game, 100);
 						break;
 				}
 		}
@@ -273,13 +273,13 @@ public class Wave {
 			default:
 				switch(enemyToSpawn%2) {
 				case 0:
-					game.enemies.add(new Bouncer(game, game.WINDOW_HEIGHT - 300));
+					new Bouncer(game, game.WINDOW_HEIGHT - 300);
 					if(enemyToSpawn == 20) {
 						delay = 200;
 					}
 					break;
 				case 1:
-					game.enemies.add(new Bouncer(game, 300));
+					new Bouncer(game, 300);
 					break;
 			}
 		}
@@ -294,13 +294,13 @@ public class Wave {
 		default:
 			switch(enemyToSpawn%3) {
 			case 0:
-				game.enemies.add(new Drone(game, game.WINDOW_HEIGHT - 200));
+				new Drone(game, game.WINDOW_HEIGHT - 200);
 				break;
 			case 1:
-				game.enemies.add(new Drone(game, 100));
+				new Drone(game, 100);
 				break;
 			case 2:
-				game.enemies.add(new BasicEnemy(game, 1080/2));
+				new BasicEnemy(game, 1080/2);
 				break;
 			}
 		}
@@ -313,31 +313,31 @@ public class Wave {
 				delay = 50;
 				break;
 			case 1:
-				game.enemies.add(new SprayBall(game, 1080/2, 1920/2));
+				new SprayBall(game, 1080/2, 1920/2);
 				delay = 400;
 				break;
 			case 2:
-				game.enemies.add(new BasicEnemy(game, 200));
-				game.enemies.add(new BasicEnemy(game, 800));
+				new BasicEnemy(game, 200);
+				new BasicEnemy(game, 800);
 				delay = 50;
 				break;
 			case 3:
-				game.enemies.add(new BasicEnemy(game, 400));
-				game.enemies.add(new BasicEnemy(game, 600));
+				new BasicEnemy(game, 400);
+				new BasicEnemy(game, 600);
 				break;
 			case 4:
-				game.enemies.add(new BasicEnemy(game, 500));
+				new BasicEnemy(game, 500);
 				break;
 			case 5:
-				game.enemies.add(new BasicEnemy(game, 500));
+				new BasicEnemy(game, 500);
 				break;
 			case 6:
-				game.enemies.add(new BasicEnemy(game, 400));
-				game.enemies.add(new BasicEnemy(game, 600));
+				new BasicEnemy(game, 400);
+				new BasicEnemy(game, 600);
 				break;
 			case 7:
-				game.enemies.add(new BasicEnemy(game, 200));
-				game.enemies.add(new BasicEnemy(game, 800));
+				new BasicEnemy(game, 200);
+				new BasicEnemy(game, 800);
 				break;
 		}
 	}
@@ -351,10 +351,10 @@ public class Wave {
 			default:
 				switch(enemyToSpawn%2) {
 					case 0:
-						game.enemies.add(new BasicEnemy(game, 250));
+						new BasicEnemy(game, 250);
 						break;
 					case 1:
-						game.enemies.add(new BasicEnemy(game, 850));
+						new BasicEnemy(game, 850);
 						break;
 				}
 		}
@@ -367,19 +367,19 @@ public class Wave {
 			delay = 100;
 			break;
 		case 1:
-			game.enemies.add(new SawedOff(game, 1080/2));
+			new SawedOff(game, 1080/2);
 			break;
 		case 2:
-			game.enemies.add(new Bouncer(game, 400));
+			new Bouncer(game, 400);
 			break;
 		case 3:
-			game.enemies.add(new HomingEnemy(game, 700));
+			new HomingEnemy(game, 700);
 			break;
 		case 4:
-			game.enemies.add(new Kamikazi(game, 200));
+			new Kamikazi(game, 200);
 			break;
 		case 5:
-			game.enemies.add(new SprayBall(game, 1080/2, 1920/2));
+			new SprayBall(game, 1080/2, 1920/2);
 			break;
 		}
 	}
@@ -391,19 +391,19 @@ public class Wave {
 				delay = 50;
 				break;
 			case 1:
-				game.enemies.add(new SwarmCaller(game, 200));
+				new SwarmCaller(game, 200);
 				break;
 			case 2:
-				game.enemies.add(new HomingEnemy(game, 100));
+				new HomingEnemy(game, 100);
 				break;
 			case 3:
-				game.enemies.add(new HomingEnemy(game, 500));
+				new HomingEnemy(game, 500);
 				break;
 			case 4:
-				game.enemies.add(new HomingEnemy(game, 650));
+				new HomingEnemy(game, 650);
 				break;
 			case 5:
-				game.enemies.add(new HomingEnemy(game, 800));
+				new HomingEnemy(game, 800);
 				break;
 		}
 	}
@@ -417,12 +417,12 @@ public class Wave {
 			default:						// This means that if enemyToSpawn is anything other than 0, this will trigger
 				switch(enemyToSpawn%2) {	// Mod enemyToSpawn by 2 to turn it into a 0 or 1
 					case 0:					// If enemyToSpawn is even, spawn this one
-						game.enemies.add(new Drone(game, game.WINDOW_HEIGHT - 200));
+						new Drone(game, game.WINDOW_HEIGHT - 200);
 						break;
 					case 1:					// Otherwise spawn this one (note that this one gets called first)
-						game.enemies.add(new Drone(game, 100));
+						new Drone(game, 100);
 						if(enemyToSpawn%5 == 0) {
-							game.enemies.add(new Kamikazi(game, 1080/2));
+							new Kamikazi(game, 1080/2);
 						}
 						break;
 				}
@@ -435,13 +435,13 @@ public class Wave {
 				delay = 100;
 				break;
 			case 1:
-				game.enemies.add(new SawedOff(game, 200));
+				new SawedOff(game, 200);
 				break;
 			case 2:
-				game.enemies.add(new Bouncer(game, 100));
+				new Bouncer(game, 100);
 				break;
 			case 3:
-				game.enemies.add(new Bouncer(game, 500));
+				new Bouncer(game, 500);
 				break;
 		}
 	}
@@ -453,7 +453,7 @@ public class Wave {
 				delay = 1;
 				break;
 			default:
-				game.enemies.add(new Boss(game, 200));
+				new Boss(game, 200);
 		}
 	}
 	
@@ -463,7 +463,7 @@ public class Wave {
 			size = 1;
 			delay = 1;
 		default:
-			game.enemies.add(new Boss2(game,200));
+			new Boss2(game,200);
 		}
 	}
 
@@ -471,14 +471,14 @@ public class Wave {
 		delay = 1;
 		size = 0;
 		if(game.player.getSprite().getX() < game.WINDOW_WIDTH/(1920/1000.0)) {
-			game.powers.add(new FireRateUp(game, 1500, 50));
-			game.powers.add(new BulletDamageUp(game, 1500, 150));
-			game.powers.add(new BulletSpeedUp(game, 1500, 250));
-			game.powers.add(new BulletSizeUp(game, 1500, 350));
-			game.powers.add(new HealthUp(game, 1500, 450));
-			game.powers.add(new ShieldUp(game, 1500, 550));
-			game.powers.add(new BulletUp(game, 1500, 650));
-			game.powers.add(new Exit(game, 1500, 750));
+			new FireRateUp(game, 1500, 50);
+			new BulletDamageUp(game, 1500, 150);
+			new BulletSpeedUp(game, 1500, 250);
+			new BulletSizeUp(game, 1500, 350);
+			new HealthUp(game, 1500, 450);
+			new ShieldUp(game, 1500, 550);
+			new BulletUp(game, 1500, 650);
+			new Exit(game, 1500, 750);
 			game.remove(upgradeLine);
 			game.remove(upgradeLabel);
 			enemyToSpawn = 0;
