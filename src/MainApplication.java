@@ -149,6 +149,7 @@ public class MainApplication extends GraphicsApplication {
 						timer.stop();
 						return;
 					}
+					player.setHealth(player.getMaxHealth());
 					switchToScreen(betweenPane);
 				}
 			}

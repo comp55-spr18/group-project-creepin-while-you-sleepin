@@ -148,14 +148,16 @@ class HealthUp extends PowerUp {
 		double yPos = game.WINDOW_HEIGHT/(1080/y);
 		double scaleX = game.WINDOW_WIDTH/(1920/width);
 		double scaleY = game.WINDOW_HEIGHT/(1080/height);
-		setSprite(new GButton("+1 Max HP", xPos, yPos, scaleX, scaleY));
+		setSprite(new GButton("+2 Max HP", xPos, yPos, scaleX, scaleY));
 		getSprite().setFillColor(Color.PINK);
 		getGame().powers.add(this);
 		getGame().add(getSprite());
 	}
 	
 	public void onCollision() {
-		getGame().player.setMaxHealth(getGame().player.getMaxHealth() + 1);
+		int damageTaken = getGame().player.getMaxHealth() - getGame().player.getHealth();
+		getGame().player.setMaxHealth(getGame().player.getMaxHealth() + 2);
+		getGame().player.setHealth(getGame().player.getMaxHealth() - damageTaken);
 	}
 }
 
@@ -179,5 +181,22 @@ class ShieldUp extends PowerUp {
 			getGame().player.setShieldCooldown(0);
 			getGame().player.setShieldMaxCooldown(getGame().player.getShieldMaxCooldown() - 50);
 		}
+	}
+}
+
+class Exit extends PowerUp {
+	Exit(MainApplication game, double x, double y) {
+		setGame(game);
+		double xPos = game.WINDOW_WIDTH/(1920/x);
+		double yPos = game.WINDOW_HEIGHT/(1080/y);
+		double scaleX = game.WINDOW_WIDTH/(1920/width);
+		double scaleY = game.WINDOW_HEIGHT/(1080/height);
+		setSprite(new GButton("Exit", xPos, yPos, scaleX, scaleY));
+		getSprite().setFillColor(Color.DARK_GRAY);
+		getGame().powers.add(this);
+		getGame().add(getSprite());
+	}
+	
+	public void onCollision() {
 	}
 }

@@ -347,6 +347,7 @@ public class Wave {
 			case 0:
 				size = 20;
 				delay = 15;
+				break;
 			default:
 				switch(enemyToSpawn%2) {
 					case 0:
@@ -477,6 +478,7 @@ public class Wave {
 			game.powers.add(new HealthUp(game, 1500, 450));
 			game.powers.add(new ShieldUp(game, 1500, 550));
 			game.powers.add(new BulletUp(game, 1500, 650));
+			game.powers.add(new Exit(game, 1500, 750));
 			game.remove(upgradeLine);
 			game.remove(upgradeLabel);
 			enemyToSpawn = 0;

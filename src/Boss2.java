@@ -39,7 +39,7 @@ public class Boss2 extends Ship {
 		setTrail(new FireTrail(this));
 	}
 	
-	public void move() {
+	public void move() { //boss again will spawn in and bounce up and down on screen
 		getSprite().move(getxDir()*getSpeed(), getyDir()*getSpeed());
 		if(getSprite().getX() <= 1000 && getyDir() == 0) {
 			setxDir(0);
