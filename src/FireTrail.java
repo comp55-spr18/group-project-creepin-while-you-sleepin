@@ -22,18 +22,18 @@ public class FireTrail {
 	
 	FireTrail(Ship s) {
 		ship = s;
-		size = (int) (ship.getSprite().getWidth()/1.5);
+		size = (int) (ship.getSprite().getWidth()/2);
 		shrinkScale = ship.getSprite().getWidth()/100.0;
 		if(ship instanceof PlayerShip) {
 			xDir = -1;
 			xOffset = 0;
-			length = 0.4;
+			length = 0.25;
 			speed = 2;
 		} else {
 			xDir = 1;
-			length = 0.4;
+			length = 0.25;
 			speed = 1;
-			xOffset = ship.getSprite().getWidth() - size/1.5;
+			xOffset = ship.getSprite().getWidth() - size/1.2;
 		}
 		projCount = 15;
 		colorScale = 25;
