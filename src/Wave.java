@@ -24,7 +24,7 @@ public class Wave {
 
 	public Wave(MainApplication g) {
 		game = g;
-		level = 3;
+		level = 1;
 		maxLevel = 2;
 		waveCount = 0;
 		upgradeMod = 3;
@@ -347,6 +347,7 @@ public class Wave {
 			case 0:
 				size = 20;
 				delay = 15;
+				break;
 			default:
 				switch(enemyToSpawn%2) {
 					case 0:
