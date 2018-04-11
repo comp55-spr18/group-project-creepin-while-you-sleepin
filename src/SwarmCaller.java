@@ -3,15 +3,19 @@ import acm.graphics.GPoint;
 
 public class SwarmCaller extends BasicEnemy {
 	
+	private int waveCall;
+	private double playery;
+	
 	public SwarmCaller(MainApplication game, double y) {
 		super(game, y);
 		setMaxHealth(20);		//very tough			
-		setCooldown(10);			
+		setCooldown(0);			
 		setSprite(new GImage("sprites/enemy2.png", getGame().WINDOW_WIDTH, y));
 		setSize(80, 80);
 		setExplosion(new GImage("explosion.png"));
 		setTrail(new FireTrail(this));
-		setMaxCooldown(40); //Their firing is calling a swarm
+		setMaxCooldown(5); //spawns two more swarmBots when called
+		waveCall = 0;//Calls another swarm when big enough
 		setPoints(300);
 	}
 	
@@ -19,10 +23,22 @@ public class SwarmCaller extends BasicEnemy {
 	public void shoot() {
 		if(canShoot()) {
 			setCanShoot(false);
-			getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);
-			getGame().enemies.add(new Drone(getGame(), 500));
+			if (waveCall == 150) {
+				getGame().playSound("r2d", 2);
+				playery = getGame().player.getSprite().getY() + getGame().player.getSprite().getHeight()/2;
+			}
+			if (waveCall >= 150) {
+				//spawns enemies targeting the player's location
+				getGame().enemies.add(new SwarmBot(getGame(), playery-getGame().player.getSprite().getHeight()/2, 1));
+				getGame().enemies.add(new SwarmBot(getGame(), playery+getGame().player.getSprite().getHeight()/2, 2));
+			}
+			if(waveCall >= 205) {
+				waveCall = 0;
+			}
+			
 		} else {
 			setCooldown(getCooldown() + 1);
+			waveCall++;
 			if(getCooldown() == getMaxCooldown()) {
 				setCooldown(0);
 				setCanShoot(true);

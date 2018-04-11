@@ -12,7 +12,7 @@ public class Seeker extends BasicEnemy {
 		setMaxHealth(6);				// They're tough enemies			
 		setSprite(new GImage("sprites/enemy2.png", getGame().WINDOW_WIDTH, y));
 		setSize(100, 100);
-		setSpeed(12);
+		setSpeed(15);
 		setExplosion(new GImage("explosion.png"));
 		setTrail(new FireTrail(this));
 		setPoints(200);
@@ -36,14 +36,14 @@ public class Seeker extends BasicEnemy {
 			playerx = shipSprite.getX() + shipSprite.getWidth()/2;
 			playery = shipSprite.getY() + shipSprite.getHeight()/2;
 			aimAtPlayer();
-			seek = 100;	
 		}
 		//checks if seeker is within one move(speed) of target coordinates. If it is, stops seeker
-		if ((((Math.abs(playerx - getSprite().getX() + getSprite().getWidth()/2)) <= getSpeed()) && (seek < 99)) || (((Math.abs(playery - getSprite().getY() + getSprite().getHeight()/2) <= getSpeed())) && (seek < 99)) ) {
+		if (((Math.abs(playerx - getSprite().getX() - getSprite().getWidth()/2)) <= (getSpeed()/2+1)) && (seek < 0) && ((Math.abs(playery - getSprite().getY() - getSprite().getHeight()/2) <= (getSpeed()/2+1))) ) {
 			setxDir(0);
 			setyDir(0);
+			seek = 50;
 		}
-		else {
+		if (seek <= 0) {
 			vectorMove();
 		}
 		seek--;

@@ -387,23 +387,24 @@ public class Wave {
 	public void hard1() {			// Generates a basic hard wave
 		switch(enemyToSpawn) {
 			case 0:
-				size = 1;
+				size = 5;
 				delay = 50;
 				break;
 			case 1:
-				new SwarmCaller(game, 200);
+				new SwarmCaller(game, 500);
 				break;
 			case 2:
-				new HomingEnemy(game, 100);
+				new Seeker(game, 400);
 				break;
 			case 3:
-				new HomingEnemy(game, 500);
+				new Seeker(game, 100);
 				break;
 			case 4:
-				new HomingEnemy(game, 650);
+				new Seeker(game, 700);
+				delay = 32;
 				break;
 			case 5:
-				new HomingEnemy(game, 800);
+				new SprayBall(game, 1080/2, 1920/2);
 				break;
 		}
 	}
