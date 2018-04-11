@@ -15,7 +15,6 @@ public class SprayBall extends BasicEnemy {
 		setGunLocation(new GPoint[] {}); 
 		setSize(120, 120);
 		getSprite().setLocation(getSprite().getX(), getSprite().getY() - getSprite().getHeight()/2);
-		setExplosion(new GImage("explosion.png"));
 		setSpeed(6);
 		setTrail(new FireTrail(this));
 		setBulletSpeed(12);

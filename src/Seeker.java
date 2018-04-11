@@ -13,7 +13,6 @@ public class Seeker extends BasicEnemy {
 		setSprite(new GImage("sprites/enemy2.png", getGame().WINDOW_WIDTH, y));
 		setSize(100, 100);
 		setSpeed(15);
-		setExplosion(new GImage("explosion.png"));
 		setTrail(new FireTrail(this));
 		setPoints(200);
 		setxDir(0);

@@ -12,7 +12,6 @@ public class SwarmCaller extends BasicEnemy {
 		setCooldown(0);			
 		setSprite(new GImage("sprites/enemy2.png", getGame().WINDOW_WIDTH, y));
 		setSize(80, 80);
-		setExplosion(new GImage("explosion.png"));
 		setTrail(new FireTrail(this));
 		setMaxCooldown(5); //spawns two more swarmBots when called
 		waveCall = 0;//Calls another swarm when big enough
