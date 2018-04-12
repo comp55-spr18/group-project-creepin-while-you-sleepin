@@ -34,7 +34,7 @@ public class PlayerShip extends Ship {
 		setBulletDamage(1);
 		setBeamHeight(40);
 		setBeamDur(30);
-		setBeamDamage(1);
+		setBeamDamage(40);
 		setPoints(0);
 		getGame().add(getSprite());
 		setTrail(new FireTrail(this));

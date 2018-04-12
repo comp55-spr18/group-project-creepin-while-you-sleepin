@@ -80,10 +80,10 @@ public class GamePane extends GraphicsPane {
 	public void mousePressed(MouseEvent e) {
 		if(!program.paused) {
 			if(!program.player.isDestroyed() && program.playerControl) {
-				if(SwingUtilities.isLeftMouseButton(e)) {
+				if(e.getButton() == MouseEvent.BUTTON1) {
 					program.player.setShooting(true);
 				}
-				if(SwingUtilities.isRightMouseButton(e)) {
+				if(e.getButton() == MouseEvent.BUTTON3) {
 					program.player.setShootingAlt(true);
 				}
 			}
@@ -105,10 +105,10 @@ public class GamePane extends GraphicsPane {
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		if(!program.paused && !program.player.isDestroyed() && program.playerControl) {
-			if(SwingUtilities.isLeftMouseButton(e)) {
+			if(e.getButton() == MouseEvent.BUTTON1) {
 				program.player.setShooting(false);
 			}
-			if(SwingUtilities.isRightMouseButton(e)) {
+			if(e.getButton() == MouseEvent.BUTTON3) {
 				program.player.setShootingAlt(false);
 			}
 		}

@@ -43,8 +43,8 @@ public abstract class Ship {
 		game.enemies.add(this);
 		setDestroyed(false);
 		setInvincible(false);
-		setIframe(0);
-		setMaxIframe(30);
+		setIframe(0);				// Iframes for any ship but the player only effect beam damage detection
+		setMaxIframe(20);
 		setDestroyedCounter(0);
 		setShielded(false);
 		setCollisionDamage(1);
@@ -228,7 +228,7 @@ public abstract class Ship {
 				}
 			}
 		} else {
-			for(int i = size - 1;i < healthChange + size;i++) {
+			for(int i = size;i < healthChange + size;i++) {
 				if(i >= 0) {
 					GImage toAdd = new GImage("heart.png", 10 + 25*i, 30);
 					toAdd.setSize(20, 20);

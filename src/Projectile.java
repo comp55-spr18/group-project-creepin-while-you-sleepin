@@ -56,6 +56,8 @@ public abstract class Projectile {
 			getGame().remove(getSprite());
 			if(!target.isInvincible()) {
 				target.dealDamage(getDamage());
+			} else if(!(target instanceof PlayerShip)) {
+				target.dealDamage(getDamage());
 			}
 		}
 	}

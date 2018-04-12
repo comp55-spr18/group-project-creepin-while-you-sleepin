@@ -153,6 +153,8 @@ public class MainApplication extends GraphicsApplication {
 					}
 					player.setHealth(player.getMaxHealth());
 					switchToScreen(betweenPane);
+					timer.stop();
+					return;
 				}
 			}
 			if(lose) {										// If you lost, print it at the menu screen and stop the game timer

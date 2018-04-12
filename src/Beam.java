@@ -1,5 +1,4 @@
 import java.awt.Color;
-
 import acm.graphics.GPoint;
 import acm.graphics.GRect;
 import acm.graphics.GRectangle;
@@ -27,7 +26,7 @@ public class Beam extends Projectile {
 		} else {
 			sprite = new GRect(gunLoc.getX() - 2000, gunLoc.getY(), 2000, 1);
 		}
-		ship.getGame().add(sprite);
+		getGame().add(sprite);
 		sprite.setColor(Color.RED);
 		sprite.setFilled(true);
 		sprite.setFillColor(sprite.getColor());
