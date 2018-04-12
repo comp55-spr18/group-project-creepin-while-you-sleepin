@@ -32,7 +32,7 @@ public abstract class Projectile {
 		setSize(ship.getBulletSize(), ship.getBulletSize());
 		setSpeed(ship.getBulletSpeed());
 		setDamage(ship.getBulletDamage());
-		getSprite().setLocation(gunLoc.getX(), gunLoc.getY() - getSprite().getHeight()/2);
+		getSprite().setLocation(gunLoc.getX() - getSprite().getWidth()/2, gunLoc.getY() - getSprite().getHeight()/2);
 		getGame().projectiles.add(this);
 		getGame().add(getSprite());
 	}

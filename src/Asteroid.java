@@ -6,7 +6,7 @@ import acm.graphics.GPoint;
 public class Asteroid extends Ship {
 	public Asteroid(MainApplication game, double x) {
 		super(game);
-		setHealth(2);
+		setHealth(1);
 		setCooldown(0);
 		setMaxCooldown(75);
 		setCanShoot(false);
@@ -17,10 +17,6 @@ public class Asteroid extends Ship {
 		setxDir(-1);
 		setyDir(1);
 		setSpeed(8);
-		setPoints(100);
-		setBulletDamage(1);
-		setBulletSpeed(20);
-		setBulletSize(15);
 		setTrail(new FireTrail(this));
 //		getGame().fallCount = getGame().playSound("fall", getGame().fallCount);
 		
@@ -35,7 +31,4 @@ public class Asteroid extends Ship {
 			setDestroyed(true);
 		}
 	}
-	
-	
-
 }

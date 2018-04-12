@@ -7,6 +7,7 @@ public class Wave {
 	private MainApplication game;			// The game
 	private int counter;					// Counter to keep track of time between waves
 	private int enemyToSpawn;				// The next enemy the wave wants to spawn
+	private int asteroidWaveSize;
 	private int asteroidToSpawn;
 	private boolean asteroidWave;
 	private int asteroidDelay;
@@ -27,6 +28,7 @@ public class Wave {
 
 	public Wave(MainApplication g) {
 		game = g;
+		asteroidWaveSize = 10;
 		asteroidDelay = 50;
 		asteroidToSpawn = 0;
 		asteroidWave = false;
@@ -165,8 +167,8 @@ public class Wave {
 			getNextEnemy();										// call getNextEnemy() to add the next enemy to game.enemies
 		}
 		addEnemies();											// Add any new enemy sprites
-		if(asteroidWave && counter%asteroidDelay == 0) {		// If an asteroid wave is triggered, and the delay satisfies
-			asteroidBelt();										// Call asteroidBelt to spawn the next asteroid
+		if(asteroidWave && counter%asteroidDelay == 0 && asteroidToSpawn < asteroidWaveSize) {		// If an asteroid wave is triggered, and the delay satisfies
+			new Asteroid(game, game.rgen.nextInt()%500 + 1500);										// Call asteroidBelt to spawn the next asteroid
 			asteroidToSpawn++;									// Increment asteroidToSpawn
 		}
 		if (enemyToSpawn > size && isClear()) {					// If all enemies have been spawned and the screen is clear
@@ -510,29 +512,6 @@ public class Wave {
 			case 3:
 				new Bouncer(game, 500);
 				break;
-		}
-	}
-
-	public void asteroidBelt() {
-		switch (asteroidToSpawn) {
-		case 0:
-			new Asteroid(game,2000);
-			break;
-		case 1:
-			new Asteroid(game,900);
-			break;
-		case 2:
-			new Asteroid(game,1200);
-			break;
-		case 3:
-			new Asteroid(game,1800);
-			break;
-		case 4:
-			new Asteroid(game,1900);
-			break;
-		case 5:
-			new Asteroid(game,1000);
-			break;
 		}
 	}
 

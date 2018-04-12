@@ -9,7 +9,7 @@ public class Emitter extends Projectile {
 		getSprite().setColor(bulletColor);
 		getSprite().setFillColor(bulletColor);
 		getSprite().setSize(size, size);
-		getSprite().setLocation(gunLoc.getX(), gunLoc.getY() - getSprite().getHeight()/2);
+		getSprite().setLocation(gunLoc.getX() - getSprite().getWidth()/2, gunLoc.getY() - getSprite().getHeight()/2);
 		setDamage(0);
 	}
 	

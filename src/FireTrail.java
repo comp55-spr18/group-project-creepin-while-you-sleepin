@@ -17,6 +17,7 @@ public class FireTrail {
 	private double length;					// The length of the trail
 	private double speed;					// The speed of the projectiles in the trail
 	private double xOffset;					// The offset of the trail relative to the ship
+	private double yOffset;
 	private int projCount;
 	private int colorScale;
 	private double shrinkScale;
@@ -26,23 +27,25 @@ public class FireTrail {
 		size = (int) (ship.getSprite().getWidth()/2);
 		shrinkScale = ship.getSprite().getWidth()/100.0;
 		yDir = 0;
+		yOffset = 0;
 		if(ship instanceof PlayerShip) {
 			xDir = -1;
-			xOffset = 0;
+			xOffset = -size/2;
 			length = 0.25;
 			speed = 2;
 		} else if(ship instanceof Asteroid) {
-			xDir = -0.5;
+			xDir = 1;
 			yDir = -1;
 			xOffset = 0;
-			length = 0.2;
+			yOffset = 0;
+			length = 0.15;
 			speed = 1;
-			size = (int) (ship.getSprite().getWidth()/1.1);
+			size = (int) (ship.getSprite().getWidth());
 		} else {
 			xDir = 1;
-			length = 0.25;
+			length = 0.3;
 			speed = 1;
-			xOffset = ship.getSprite().getWidth() - size/1.2;
+			xOffset = size/2;
 		}
 		projCount = 15;
 		colorScale = 25;
@@ -51,7 +54,7 @@ public class FireTrail {
 	// This function moves all the projectiles in the arraylist as well as updates the color and size each time
 	public void move() {
 		if(!ship.isDestroyed()) {							// If the ship is not destroyed
-			location = new GPoint(ship.getSprite().getX() + xOffset, ship.getSprite().getY()+ship.getSprite().getHeight()/2);	// Set the location relative to the ship
+			location = new GPoint(ship.getSprite().getX() + ship.getSprite().getWidth()/2 + xOffset, ship.getSprite().getY()+ship.getSprite().getHeight()/2);	// Set the location relative to the ship
 			Projectile trailProj = new Emitter(ship, location, xDir, yDir, speed, Color.RED, size);	// Create an emitter with the proper values
 			trail.add(trailProj);							// Add the new emitter to the arraylist
 			ship.getGame().add(trailProj.getSprite());		// Add the emitter's sprite to the game
