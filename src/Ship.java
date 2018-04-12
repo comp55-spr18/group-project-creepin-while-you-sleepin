@@ -29,6 +29,7 @@ public abstract class Ship {
 	private double bulletSpeed;
 	private int bulletDamage;
 	private double beamHeight;
+	private double beamDur;
 	private int shots;
 	
 	// These attributes only apply to enemy ships
@@ -408,5 +409,21 @@ public abstract class Ship {
 		} else {
 			shield = null;
 		}
+	}
+
+	public double getBeamHeight() {
+		return beamHeight;
+	}
+
+	public double getBeamDur() {
+		return beamDur;
+	}
+
+	public void setBeamHeight(double beamHeight) {
+		this.beamHeight = getGame().WINDOW_HEIGHT/(1080/beamHeight);
+	}
+
+	public void setBeamDur(double beamDur) {
+		this.beamDur = beamDur;
 	}
 }

@@ -48,12 +48,8 @@ public class SwarmCaller extends BasicEnemy {
 	//moves onto screen, then stops.
 	@Override
 	public void move() {
-		double x = getSprite().getLocation().getX();
-		double y = getSprite().getLocation().getY();
 		if (getSprite().getLocation().getX() > getGame().WINDOW_WIDTH/1.2) {
 			getSprite().move(getxDir()*getSpeed(), getyDir()*getSpeed());
-			setGunLocation(new GPoint[] {new GPoint(x,y+getSprite().getHeight()/2)});
 		}
-		
 	}
 }

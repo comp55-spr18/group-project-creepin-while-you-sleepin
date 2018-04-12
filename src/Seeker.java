@@ -20,11 +20,7 @@ public class Seeker extends BasicEnemy {
 	}
 	// tweaked bullet speed
 	@Override
-	public void shoot() {
-		if(canShoot()) {
-			setCanShoot(false);
-		}
-	}
+	public void shoot() {}
 
 	//moves the drone until part-way down the screen, where it curves back the way it came
 	@Override
@@ -48,6 +44,5 @@ public class Seeker extends BasicEnemy {
 		seek--;
 		double x = getSprite().getLocation().getX();
 		double y = getSprite().getLocation().getY();
-		setGunLocation(new GPoint[] {new GPoint(x,y+getSprite().getHeight()/2)});
 	}
 }

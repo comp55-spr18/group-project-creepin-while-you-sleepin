@@ -12,7 +12,7 @@ public class Bouncer extends Ship {
 		setCooldown(0);
 		setMaxCooldown(150);
 		setCanShoot(false);
-		setGunLocation(new GPoint[] {});
+		setGunLocation(new GPoint[] {new GPoint()});
 		setSprite(new GImage("sprites/enemy2.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT / (1080 / y)));
 		setBulletColor(Color.yellow);
 		setSize(100, 100);
@@ -30,11 +30,10 @@ public class Bouncer extends Ship {
 
 	@Override
 	public void move() {
-
 		getSprite().move(getxDir(), getyDir());
 		double x = getSprite().getLocation().getX();
 		double y = getSprite().getLocation().getY();
-		setGunLocation(new GPoint[] { new GPoint(x, y + getSprite().getHeight() / 2) });
+		getGunLocation()[0].setLocation(x,y+getSprite().getHeight()/2);
 		if (getSprite().getY() <= 0 || getSprite().getY() + getSprite().getHeight() >= getGame().WINDOW_HEIGHT-100) {
 			setyDir(getyDir() * -1);
 		}

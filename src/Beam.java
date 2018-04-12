@@ -11,16 +11,21 @@ public class Beam extends Projectile {
 	private double duration;	// The duration the beam freezes at maxHeight
 	private double counter;		// The counter that counts up to the duration
 	private double maxHeight;	// The maximum height of the beam
+	private GPoint location;
 	Beam(Ship ship, GPoint gunLoc) {
 		super(ship, gunLoc, 0, 0);
-		maxHeight = 50;
-		maxHeight = ship.getGame().WINDOW_HEIGHT/(1080/maxHeight);	// Converts from 1080p to any screen height
+		location = gunLoc;
+		maxHeight = ship.getBeamHeight();
 		counter = 0;
+		duration = ship.getBeamDur();
 		rateChange = maxHeight/120;
 		rate = 15*rateChange;
-		duration = 30;
 		ship.getGame().remove(getSprite());
-		sprite = new GRect(gunLoc.getX(), gunLoc.getY(), 2000, 1);
+		if(ship instanceof PlayerShip) {
+			sprite = new GRect(gunLoc.getX(), gunLoc.getY(), 2000, 1);
+		} else {
+			sprite = new GRect(gunLoc.getX() - 2000, gunLoc.getY(), 2000, 1);
+		}
 		ship.getGame().add(sprite);
 		sprite.setColor(Color.RED);
 		sprite.setFilled(true);
@@ -39,7 +44,11 @@ public class Beam extends Projectile {
 			setDestroyed(true);
 			getShip().getGame().remove(sprite);
 		}
-		sprite.setLocation(getShip().getSprite().getX() + getShip().getSprite().getWidth(), getShip().getSprite().getY() + getShip().getSprite().getHeight()/2 - sprite.getHeight()/2);
+		if(getShip() instanceof PlayerShip) {
+			sprite.setLocation(location.getX(), location.getY() - sprite.getHeight()/2);
+		} else {
+			sprite.setLocation(location.getX() - 2000, location.getY() - sprite.getHeight()/2);
+		}
 	}
 	
 	public void onCollision(Ship target) {

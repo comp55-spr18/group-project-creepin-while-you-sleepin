@@ -3,6 +3,7 @@ import acm.graphics.GPoint;
 public class HomingEnemy extends BasicEnemy {
 	public HomingEnemy(MainApplication game, double y) {
 		super(game, y);
+		setGunLocation(new GPoint[] {new GPoint()});
 		setBulletSize(40);
 		setBulletDamage(2);
 		setBulletSpeed(8);
@@ -16,7 +17,7 @@ public class HomingEnemy extends BasicEnemy {
 		getSprite().move(getxDir()*getSpeed(), getyDir()*getSpeed());
 		double x = getSprite().getLocation().getX();
 		double y = getSprite().getLocation().getY();
-		setGunLocation(new GPoint[] {new GPoint(x,y+getSprite().getHeight()/2)});
+		getGunLocation()[0].setLocation(x,y+getSprite().getHeight()/2);
 		if(getSprite().getLocation().getX() < -100) {
 			setDestroyed(true);
 		}

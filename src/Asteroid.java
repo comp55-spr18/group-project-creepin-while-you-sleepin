@@ -10,7 +10,6 @@ public class Asteroid extends Ship {
 		setCooldown(0);
 		setMaxCooldown(75);
 		setCanShoot(false);
-		setGunLocation(new GPoint[] {});
 		setSprite(new GImage("sprites/asteroid.gif", getGame().WINDOW_WIDTH/(1920/x), -100));
 		setBulletColor(Color.RED);
 		setSize(100, 100);
@@ -20,7 +19,11 @@ public class Asteroid extends Ship {
 		setTrail(new FireTrail(this));
 //		getGame().fallCount = getGame().playSound("fall", getGame().fallCount);
 		
-	}
+	}	
+
+	@Override
+	public void shoot() {}
+
 	@Override
 	public void move() {
 		getSprite().move(getxDir() * getSpeed(), getyDir() * getSpeed());

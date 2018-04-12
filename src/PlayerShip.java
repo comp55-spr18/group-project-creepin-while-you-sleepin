@@ -15,6 +15,7 @@ public class PlayerShip extends Ship {
 		setCooldown(0);
 		setMaxCooldown(20);
 		setCanShoot(false);
+		setGunLocation(new GPoint[] {new GPoint()});
 		setSprite(new GImage("sprites/playermodel.png", 0, 0));
 		setBulletColor(Color.GREEN);
 		setSize(50, 50);
@@ -22,6 +23,8 @@ public class PlayerShip extends Ship {
 		setBulletSize(15);
 		setBulletSpeed(25);
 		setBulletDamage(1);
+		setBeamHeight(40);
+		setBeamDur(30);
 		setPoints(0);
 		getGame().add(getSprite());
 		setTrail(new FireTrail(this));
@@ -31,7 +34,7 @@ public class PlayerShip extends Ship {
 			getSprite().setLocation(new GPoint(e.getX() - getSprite().getWidth()/2, e.getY() - getSprite().getHeight()/2));
 			double x = getSprite().getX();
 			double y = getSprite().getY();
-			setGunLocation(new GPoint[] {new GPoint(x + getSprite().getWidth(), y + getSprite().getHeight()/2)});
+			getGunLocation()[0].setLocation(x + getSprite().getWidth(), y + getSprite().getHeight()/2);
 			if(isShielded()) {
 				getShield().setLocation(x, y);
 			}

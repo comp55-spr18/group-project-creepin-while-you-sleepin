@@ -43,9 +43,6 @@ public class SwarmBot extends BasicEnemy {
 		}
 			
 		getSprite().move(getxDir()*getSpeed(), getyDir()*getSpeed());
-		double x = getSprite().getLocation().getX();
-		double y = getSprite().getLocation().getY();
-		setGunLocation(new GPoint[] {new GPoint(x,y+getSprite().getHeight()/2)});
 		if(getSprite().getLocation().getX() < -100) {
 			setDestroyed(true);
 		}

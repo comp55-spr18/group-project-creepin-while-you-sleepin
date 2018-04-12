@@ -13,6 +13,7 @@ public class Drone extends BasicEnemy {
 		setSprite(new GImage("sprites/enemy2.png", getGame().WINDOW_WIDTH, y));
 		setSize(40, 40);
 		setSpeed(10);
+		setGunLocation(new GPoint[] {new GPoint()});
 		setTrail(new FireTrail(this));
 		setMaxCooldown(1000);
 		setPoints(25);
@@ -83,7 +84,7 @@ public class Drone extends BasicEnemy {
 		getSprite().move(getxDir()*getSpeed(), getyDir()*getSpeed());
 		double x = getSprite().getLocation().getX();
 		double y = getSprite().getLocation().getY();
-		setGunLocation(new GPoint[] {new GPoint(x,y+getSprite().getHeight()/2)});
+		getGunLocation()[0].setLocation(x,y+getSprite().getHeight()/2);
 		if(lifetime > 200) {
 			setDestroyed(true);
 		}

@@ -23,12 +23,8 @@ public class Kamikazi extends Ship {
 	}
 	@Override
 	public void move() {
-		//Problem is here: ship will not spawn, goal is to get ship to move directly at player ship no shots fired, fast movement
 		aimAtPlayer();
 		vectorMove();
-		double x = getSprite().getLocation().getX();
-		double y = getSprite().getLocation().getY();
-		setGunLocation(new GPoint[] {new GPoint(x,y+17.5)});
 		if(getSprite().getLocation().getX() < -300) {
 			setDestroyed(true);
 		}

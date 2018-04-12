@@ -11,7 +11,7 @@ public class BasicEnemy extends Ship {
 		setCooldown(500);
 		setMaxCooldown(575);
 		setCanShoot(false);
-		setGunLocation(new GPoint[] {new GPoint(50,15)});
+		setGunLocation(new GPoint[] {new GPoint()});
 		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
 		setBulletColor(Color.RED);
 		setSize(50, 50);
@@ -42,7 +42,7 @@ public class BasicEnemy extends Ship {
 		getSprite().move(getxDir()*getSpeed(), getyDir());
 		double x = getSprite().getLocation().getX();
 		double y = getSprite().getLocation().getY();
-		setGunLocation(new GPoint[] {new GPoint(x,y+getSprite().getHeight()/2)});
+		getGunLocation()[0].setLocation(x,y+getSprite().getHeight()/2);
 		if(getSprite().getLocation().getX() < -100) {
 			setDestroyed(true);
 		}
