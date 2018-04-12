@@ -5,9 +5,18 @@ import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
 public class PlayerShip extends Ship {
-	private boolean shooting = false;
+	private boolean shooting;
+	private boolean shootingAlt;
+	private boolean canShootAlt;
+	private int altCooldown;
+	private int altMaxCooldown;
 	public PlayerShip(MainApplication game) {
 		super(game);
+		shooting = false;
+		shootingAlt = false;
+		canShootAlt = false;
+		altCooldown = 275;
+		altMaxCooldown = 300;
 		setIframe(0);
 		setMaxIframe(50);
 		setShots(1);
@@ -75,13 +84,24 @@ public class PlayerShip extends Ship {
 				new Bullet(this, new GPoint(getGunLocation()[0].getX(), getGunLocation()[0].getY() + getBulletSize()), 1, 0.2);
 				new Bullet(this, new GPoint(getGunLocation()[0].getX(), getGunLocation()[0].getY() - getBulletSize()), 1, -0.2);
 			default:
-				new Beam(this, getGunLocation()[0]);
+				new Bullet(this, getGunLocation()[0], 1, 0);
 			}
 		} else if (!canShoot()) {
 			setCooldown(getCooldown() + 1);
 			if(getCooldown() == getMaxCooldown()) {
 				setCooldown(0);
 				setCanShoot(true);
+			}
+		}
+		if(canShootAlt && shootingAlt) {
+			canShootAlt = false;
+			getGame().playerShootCount = getGame().playSound("playershoot", getGame().playerShootCount);
+			new Beam(this, getGunLocation()[0]);
+		} else if(!canShootAlt) {
+			altCooldown++;
+			if(altCooldown == altMaxCooldown) {
+				altCooldown = 0;
+				canShootAlt = true;
 			}
 		}
 	}
@@ -154,5 +174,17 @@ public class PlayerShip extends Ship {
 	}
 	public void setShooting(boolean shooting) {
 		this.shooting = shooting;
+	}
+	public boolean isShootingAlt() {
+		return shootingAlt;
+	}
+	public void setShootingAlt(boolean shootingAlt) {
+		this.shootingAlt = shootingAlt;
+	}
+	public boolean isCanShootAlt() {
+		return canShootAlt;
+	}
+	public void setCanShootAlt(boolean canShootAlt) {
+		this.canShootAlt = canShootAlt;
 	}
 }

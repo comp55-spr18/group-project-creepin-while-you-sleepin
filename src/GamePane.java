@@ -76,8 +76,13 @@ public class GamePane extends GraphicsPane {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		if(!program.paused) {
-			if(SwingUtilities.isLeftMouseButton(e) && !program.player.isDestroyed() && program.playerControl) {
-				program.player.setShooting(true);
+			if(!program.player.isDestroyed() && program.playerControl) {
+				if(SwingUtilities.isLeftMouseButton(e)) {
+					program.player.setShooting(true);
+				}
+				if(SwingUtilities.isRightMouseButton(e)) {
+					program.player.setShootingAlt(true);
+				}
 			}
 		} else {
 			GImage playerSprite = program.player.getSprite();
@@ -96,8 +101,13 @@ public class GamePane extends GraphicsPane {
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		if(!program.paused && SwingUtilities.isLeftMouseButton(e) && !program.player.isDestroyed() && program.playerControl) {
-			program.player.setShooting(false);
+		if(!program.paused && !program.player.isDestroyed() && program.playerControl) {
+			if(SwingUtilities.isLeftMouseButton(e)) {
+				program.player.setShooting(false);
+			}
+			if(SwingUtilities.isRightMouseButton(e)) {
+				program.player.setShootingAlt(false);
+			}
 		}
 	}
 	@Override

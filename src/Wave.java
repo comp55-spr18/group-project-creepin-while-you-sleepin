@@ -36,7 +36,7 @@ public class Wave {
 		maxLevel = 2;
 		waveCount = 0;
 		upgradeMod = 3;
-		totalWaves = 1;			// For now there are 4 regular waves, 2 upgrade waves and 1 boss wave
+		totalWaves = 7;			// For now there are 4 regular waves, 2 upgrade waves and 1 boss wave
 		selectedWave = -1;
 		prevWave = -1;
 		upgradeLine = new GLine(game.WINDOW_WIDTH/(1920/1000.0), 0, game.WINDOW_WIDTH/(1920/1000.0), game.WINDOW_HEIGHT);
