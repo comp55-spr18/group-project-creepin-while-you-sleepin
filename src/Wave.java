@@ -28,7 +28,7 @@ public class Wave {
 
 	public Wave(MainApplication g) {
 		game = g;
-		asteroidWaveSize = 10;
+		asteroidWaveSize = 15;
 		asteroidDelay = 50;
 		asteroidToSpawn = 0;
 		asteroidWave = false;
@@ -36,7 +36,7 @@ public class Wave {
 		maxLevel = 2;
 		waveCount = 0;
 		upgradeMod = 3;
-		totalWaves = 1;			// For now there are 4 regular waves, 2 upgrade waves and 1 boss wave
+		totalWaves = 7;			// For now there are 4 regular waves, 2 upgrade waves and 1 boss wave
 		selectedWave = -1;
 		prevWave = -1;
 		upgradeLine = new GLine(game.WINDOW_WIDTH/(1920/1000.0), 0, game.WINDOW_WIDTH/(1920/1000.0), game.WINDOW_HEIGHT);
@@ -161,13 +161,26 @@ public class Wave {
 		return true;										// Otherwise it is empty and returns true
 	}
 
+	public boolean onlyAsteroids() {		// This function checks to see if asteroids are the only thing left on the screen
+		if(!isClear()) {
+			for(int i = game.enemies.size() - 1;i >= 0;i--) {
+				if(game.enemies.get(i).getExplosion().isVisible() && !(game.enemies.get(i) instanceof Asteroid)) {
+					return false;
+				}
+			}
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public void update() {
 		counter++;												// Increment counter
 		if(counter%delay == 0 && enemyToSpawn <= size) {		// After counter advances 'delay' number of frames, and if there are more enemies to spawn
 			getNextEnemy();										// call getNextEnemy() to add the next enemy to game.enemies
 		}
 		addEnemies();											// Add any new enemy sprites
-		if(asteroidWave && counter%asteroidDelay == 0 && asteroidToSpawn < asteroidWaveSize) {		// If an asteroid wave is triggered, and the delay satisfies
+		if(asteroidWave && counter%asteroidDelay == 0 && asteroidToSpawn < asteroidWaveSize && !onlyAsteroids()) {		// If an asteroid wave is triggered, and the delay satisfies
 			new Asteroid(game, game.rgen.nextInt()%500 + 1500);										// Call asteroidBelt to spawn the next asteroid
 			asteroidToSpawn++;									// Increment asteroidToSpawn
 		}
