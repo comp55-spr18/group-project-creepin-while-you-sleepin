@@ -1,5 +1,4 @@
 import acm.graphics.GImage;
-import acm.graphics.GPoint;
 
 public class SwarmBot extends BasicEnemy {
 	private double upDown;

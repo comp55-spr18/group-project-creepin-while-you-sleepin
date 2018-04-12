@@ -1,6 +1,5 @@
 import acm.graphics.GImage;
 import acm.graphics.GObject;
-import acm.graphics.GPoint;
 
 public class Seeker extends BasicEnemy {
 	private int seek = 0;
@@ -42,7 +41,5 @@ public class Seeker extends BasicEnemy {
 			vectorMove();
 		}
 		seek--;
-		double x = getSprite().getLocation().getX();
-		double y = getSprite().getLocation().getY();
 	}
 }

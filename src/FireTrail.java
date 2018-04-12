@@ -1,10 +1,5 @@
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
-import javax.swing.Timer;
-
 import acm.graphics.GPoint;
 
 public class FireTrail {
@@ -17,7 +12,6 @@ public class FireTrail {
 	private double length;					// The length of the trail
 	private double speed;					// The speed of the projectiles in the trail
 	private double xOffset;					// The offset of the trail relative to the ship
-	private double yOffset;
 	private int projCount;
 	private int colorScale;
 	private double shrinkScale;
@@ -27,7 +21,6 @@ public class FireTrail {
 		size = (int) (ship.getSprite().getWidth()/2);
 		shrinkScale = ship.getSprite().getWidth()/100.0;
 		yDir = 0;
-		yOffset = 0;
 		if(ship instanceof PlayerShip) {
 			xDir = -1;
 			xOffset = -size/2;
@@ -37,7 +30,6 @@ public class FireTrail {
 			xDir = 1;
 			yDir = -1;
 			xOffset = 0;
-			yOffset = 0;
 			length = 0.15;
 			speed = 1;
 			size = (int) (ship.getSprite().getWidth());

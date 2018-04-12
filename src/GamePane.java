@@ -1,10 +1,8 @@
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import javax.swing.SwingUtilities;
 import acm.graphics.GImage;
 import acm.graphics.GLabel;
-import acm.graphics.GPoint;
 
 public class GamePane extends GraphicsPane {
 	private MainApplication program;
