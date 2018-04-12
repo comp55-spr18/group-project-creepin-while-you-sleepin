@@ -27,6 +27,7 @@ public abstract class Ship {
 	private double bulletSize;
 	private double bulletSpeed;
 	private int bulletDamage;
+	private double beamHeight;
 	private int shots;
 	
 	// These attributes only apply to enemy ships

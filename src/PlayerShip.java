@@ -70,7 +70,7 @@ public class PlayerShip extends Ship {
 				new Bullet(this, new GPoint(getGunLocation()[0].getX(), getGunLocation()[0].getY() + getBulletSize()), 1, 0.2);
 				new Bullet(this, new GPoint(getGunLocation()[0].getX(), getGunLocation()[0].getY() - getBulletSize()), 1, -0.2);
 			default:
-				new Bullet(this, getGunLocation()[0], 1, 0);
+				new Beam(this, getGunLocation()[0]);
 			}
 		} else if (!canShoot()) {
 			setCooldown(getCooldown() + 1);

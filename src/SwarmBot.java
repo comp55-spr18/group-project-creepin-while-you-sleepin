@@ -5,13 +5,11 @@ public class SwarmBot extends BasicEnemy {
 	private double upDown;
 	public SwarmBot(MainApplication game, double y, int spawnPos) {
 		super(game, y);
-		setMaxHealth(1);				// They're weak enemies, but its a swarm so it doesn't matter
-		setCooldown(0);			// They Never fire
+		setMaxHealth(1);		// They're weak enemies, but its a swarm so it doesn't matter
 		setSprite(new GImage("sprites/enemy2.png", getGame().WINDOW_WIDTH, y));
 		setSize(40, 40);
 		setSpeed(25);			//fast
 		setTrail(new FireTrail(this));
-		setMaxCooldown(1000);
 		setPoints(0);			//worth no points
 		if (spawnPos == 1) {
 			setyDir(.25);
@@ -19,23 +17,12 @@ public class SwarmBot extends BasicEnemy {
 		else {
 			setyDir(-.25);
 		}
-		//setLocation(new GPoint(getGame().WINDOW_WIDTH/1.1, y));
-		upDown = spawnPos;
-		//setSprite(new GImage("sprites/enemy1.png", getLocation().getX(), getLocation().getY()));		
+		upDown = spawnPos;	
 	}
+
 	// Can't shoot
 	@Override
-	public void shoot() {
-		if(canShoot()) {
-			setCanShoot(false);
-		} else {
-			setCooldown(getCooldown() + 1);
-			if(getCooldown() == getMaxCooldown()) {
-				setCooldown(0);
-				setCanShoot(true);
-			}
-		}
-	}
+	public void shoot() {}
 
 	//DNA helix movement with other SwarmBots
 	@Override
