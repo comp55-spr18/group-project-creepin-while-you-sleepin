@@ -9,7 +9,7 @@ public class SwarmBot extends BasicEnemy {
 		setCooldown(0);			// They Never fire
 		setSprite(new GImage("sprites/enemy2.png", getGame().WINDOW_WIDTH, y));
 		setSize(40, 40);
-		setSpeed(30);			//fast
+		setSpeed(25);			//fast
 		setTrail(new FireTrail(this));
 		setMaxCooldown(1000);
 		setPoints(0);			//worth no points
