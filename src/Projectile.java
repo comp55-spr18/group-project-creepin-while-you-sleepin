@@ -36,14 +36,13 @@ public abstract class Projectile {
 		getGame().projectiles.add(this);
 		getGame().add(getSprite());
 	}
-	
 
 	// The default function for move() moves the projectile in a straight line given an x and y direction and velocity
 	public void move() {
 		int dx = 1;
 		if(getxDir() < 0) dx = -1;
 		getSprite().move(Math.cos(Math.atan(getyDir()/getxDir()))*getSpeed()*dx, Math.sin(Math.atan(getyDir()/getxDir()))*getSpeed()*dx);
-		if(getGame() != null && (getSprite().getX() < -50 || getSprite().getX() > getGame().WINDOW_WIDTH || getSprite().getY() < -50 || getSprite().getY() > getGame().WINDOW_HEIGHT)) {
+		if(getGame() != null && (getSprite().getX() < -getSprite().getWidth() || getSprite().getX() > getGame().WINDOW_WIDTH || getSprite().getY() < -getSprite().getHeight() || getSprite().getY() > getGame().WINDOW_HEIGHT)) {
 			setDestroyed(true);
 			getGame().remove(getSprite());
 		}
