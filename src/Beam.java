@@ -95,4 +95,9 @@ public class Beam extends Projectile {
 			}
 		}
 	}
+
+	// Getters
+	public GRect getBeamSprite() {
+		return sprite;
+	}
 }

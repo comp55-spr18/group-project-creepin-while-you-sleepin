@@ -222,8 +222,10 @@ public abstract class Ship {
 		int size = game.healthBar.size();
 		if(healthChange < 0) {
 			for(int i = 0;i < Math.abs(healthChange);i++) {
-				game.remove(game.healthBar.get(size - 1 - i));
-				game.healthBar.remove(size - 1 - i);
+				if(size - 1 - i >= 0) {
+					game.remove(game.healthBar.get(size - 1 - i));
+					game.healthBar.remove(size - 1 - i);
+				}
 			}
 		} else {
 			for(int i = size - 1;i < healthChange + size;i++) {

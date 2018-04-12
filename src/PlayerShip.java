@@ -31,7 +31,7 @@ public class PlayerShip extends Ship {
 		setExplosion(new GImage("explosion.png"));
 		setBulletSize(15);
 		setBulletSpeed(25);
-		setBulletDamage(1);
+		setBulletDamage(101);
 		setBeamHeight(40);
 		setBeamDur(30);
 		setBeamDamage(1);

@@ -53,6 +53,9 @@ public class GamePane extends GraphicsPane {
 		}
 		for(Projectile proj : program.projectiles) {			// Remove all projectile sprites
 			program.remove(proj.getSprite());
+			if(proj instanceof Beam) {
+				program.remove(((Beam) proj).getBeamSprite());
+			}
 		}
 		program.remove(program.player.getSprite());	// Remove the playership sprite
 		program.remove(program.player.getExplosion());

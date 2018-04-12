@@ -29,6 +29,7 @@ public class Boss extends Ship {
 		setBulletSpeed(8);
 		setBeamHeight(250);
 		setBeamDur(65);
+		setBeamDamage(1);
 		setSelectedGun(0);
 		switch(game.wave.getLevel()) {
 			case 2:
