@@ -56,11 +56,11 @@ public class Wave {
 		enemyToSpawn = 0;						// Reset the enemy to spawn (we set it to -1 so that it reads the delay and size of the wave but doesn't spawn anything)
 		if(selectedDifficulty == 0) {								// If the difficulty of the new wave is hard
 			while(selectedWave == prevWave) {
-				selectedWave = Math.abs(game.rgen.nextInt()%7);			// Randomly select one of the easy waves (currently hard1() and Drone())
+				selectedWave = Math.abs(game.rgen.nextInt()%10);			// Randomly select one of the easy waves (currently hard1() and Drone())
 			}
 		} else {													// If the wave is easy
 			while(selectedWave == prevWave) {
-				selectedWave = Math.abs(game.rgen.nextInt()%1);			// Randomly select one of the hard waves (currently only easy1())
+				selectedWave = Math.abs(game.rgen.nextInt()%4);			// Randomly select one of the hard waves (currently only easy1())
 			}
 		}
 		waveCount++;												// Increment wave count
@@ -97,6 +97,12 @@ public class Wave {
 					break;
 				case 7:
 					easy8();
+					break;
+				case 8:
+					easy9();
+					break;
+				case 9:
+					easy10();
 					break;
 				}
 			} else {							// If the wave difficulty is hard
@@ -383,6 +389,51 @@ public class Wave {
 			break;
 		case 5:
 			new SprayBall(game, 1080/2, 1920/2);
+			break;
+		}
+	}
+	
+	void easy9() {
+		switch(enemyToSpawn) {
+		case 0:
+			size = 3;
+			delay = 100;
+			break;
+		case 1:
+			new SwarmCaller(game, 500);
+			break;
+		case 2:
+			new BasicEnemy(game, 300);
+			break;
+		case 3:
+			new BasicEnemy(game, 800);
+			break;
+		}
+	}
+	
+	void easy10() {
+		switch(enemyToSpawn) {
+		case 0:
+			size = 5;
+			delay = 150;
+			break;
+		case 1:
+			new Seeker(game, 500);
+			break;
+		case 2:
+			new Seeker(game, 300);
+			break;
+		case 3:
+			new SawedOff(game, 400);
+			new SawedOff(game, 600);
+			break;
+		case 4:
+			new SprayBall(game, 500, 100);
+			delay = 300;
+			break;
+		case 5:
+			new HomingEnemy(game, 300);
+			new HomingEnemy(game, 800);
 			break;
 		}
 	}

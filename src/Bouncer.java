@@ -18,7 +18,7 @@ public class Bouncer extends Ship {
 		setSize(100, 100);
 		setxDir(-2);
 		setyDir(-4);
-		setSpeed(4);
+		setSpeed(10);
 		setPoints(100);
 		setBulletDamage(1);
 		setBulletSpeed(10);

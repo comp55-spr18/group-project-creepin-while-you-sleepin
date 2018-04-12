@@ -7,7 +7,7 @@ public class HomingEnemy extends BasicEnemy {
 		setBulletDamage(2);
 		setBulletSpeed(8);
 		setMaxHealth(4);
-		setSpeed(6);
+		setSpeed(4);
 		setPoints(200);
 	}
 

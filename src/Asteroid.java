@@ -22,7 +22,7 @@ public class Asteroid extends Ship {
 		setBulletSpeed(20);
 		setBulletSize(15);
 		setTrail(new FireTrail(this));
-		getGame().fallCount = getGame().playSound("fall", getGame().fallCount);
+//		getGame().fallCount = getGame().playSound("fall", getGame().fallCount);
 		
 	}
 	@Override
