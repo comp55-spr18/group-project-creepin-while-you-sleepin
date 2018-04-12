@@ -144,8 +144,7 @@ public class Wave {
 	
 	public boolean isClear() {				// This function checks to see if all enemies/projectiles/powerups are gone from the screen (so the game knows when to start the next wave)
 		for(int i = game.enemies.size() - 1;i >= 0;i--) {	// Check to see if any enemy explosions are still visible (they are hidden when the ship is destroyed)
-			Ship enemy = game.enemies.get(i);
-			if(enemy.getExplosion().isVisible()) {			// If an enemy explosion is not hidden (still alive)
+			if(game.enemies.get(i).getExplosion().isVisible()) {			// If an enemy explosion is not hidden (still alive)
 				return false;								// Return false
 			}
 		}
@@ -182,9 +181,11 @@ public class Wave {
 				game.playerControl = false;						// Take control away from player to trigger next level
 			} else if(!game.lose){								// If it was not the final wave (and the player is not dead), get the next wave
 				getNewWave();									// Get a new wave
+				asteroidWave = false;							// set asteroidWave to false (so it can be triggered again
+				asteroidToSpawn = 0;							// Reset asteroidToSpawn
 			}
 		}
-		if(game.rgen.nextInt()%600 == 0 && game.powers.isEmpty()) {						// Every time update() is called, there is a 1/600 chance of triggering an asteroidWave
+		if(game.rgen.nextInt()%600 == 0 && game.powers.isEmpty()) {		// Every time update() is called, there is a 1/600 chance of triggering an asteroidWave
 			asteroidWave = true;
 		}
 	}
@@ -531,8 +532,6 @@ public class Wave {
 			break;
 		case 5:
 			new Asteroid(game,1000);
-			asteroidWave = false;
-			asteroidToSpawn = 0;
 			break;
 		}
 	}
