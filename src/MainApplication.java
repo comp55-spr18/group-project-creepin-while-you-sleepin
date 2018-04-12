@@ -27,6 +27,7 @@ public class MainApplication extends GraphicsApplication {
 	int playerHitCount;
 	int shieldHitCount;
 	int shieldRegenCount;
+	int asteroidCount;
 	int fps = 65;				// How many updates are called per second
 	boolean win = false;		// Notice that we have both win and lose booleans; default state is that both are false (the player hasn't won or lost but is playing)
 	boolean lose = false;		// this means we need to be explicit and can't assume that because win = false that the player lost
@@ -85,6 +86,7 @@ public class MainApplication extends GraphicsApplication {
 		enemyHitCount = 0;
 		shieldHitCount = 0;
 		shieldRegenCount = 0;
+		asteroidCount = 0;
 		lose = false;							// Reset the lose/win booleans
 		win = false;
 		timer.start();							// Start the game

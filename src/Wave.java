@@ -110,6 +110,9 @@ public class Wave {
 				case 2:
 					hard3();
 					break;
+				case 3:
+					asteroidBelt();
+					break;
 				}
 			}
 		} else if(waveCount%upgradeMod == 0 && waveCount != totalWaves) {
@@ -391,7 +394,7 @@ public class Wave {
 				delay = 50;
 				break;
 			case 1:
-				new Asteroid(game, 800);
+				new Asteroid(game, 1000);
 				break;
 			case 2:
 				new Seeker(game, 400);
@@ -444,6 +447,30 @@ public class Wave {
 			case 3:
 				new Bouncer(game, 500);
 				break;
+		}
+	}
+	public void asteroidBelt() {
+		switch (enemyToSpawn) {
+		case 0:
+			size = 5;
+			delay = 50;
+			break;
+		case 1:
+			new Asteroid(game,900);
+			break;
+		case 2:
+			new Asteroid(game,1200);
+			break;
+		case 3:
+			new Asteroid(game,1800);
+			break;
+		case 4:
+			new Asteroid(game,1900);
+			break;
+		case 5:
+			new Asteroid(game,1000);
+			break;
+			
 		}
 	}
 
