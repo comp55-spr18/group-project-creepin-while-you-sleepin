@@ -186,7 +186,7 @@ public abstract class Ship {
 	public void setHealth(int health) {
 		this.health = health;
 		if(this instanceof PlayerShip) {
-			updateHealthBar();
+			updateHealthBar(getMaxHealth());
 		}
 	}
 
@@ -207,7 +207,7 @@ public abstract class Ship {
 		health -= damage;
 		if(this instanceof PlayerShip) {					// If the player's health is being updated, the healthbar should reflect it
 			setInvincible(true);
-			updateHealthBar();
+			updateHealthBar(-damage);
 			getGame().playerHitCount = getGame().playSound("playerhit", getGame().playerHitCount);
 		} else {
 			getGame().enemyHitCount = getGame().playSound("enemyhit",  getGame().enemyHitCount);
@@ -218,16 +218,22 @@ public abstract class Ship {
 		}
 	}
 
-	private void updateHealthBar() {
-		for(int i = 0;i < game.healthBar.size();i++) {	// Remove the current hearts from the screen
-			game.remove(game.healthBar.get(i));
-		}
-		game.healthBar.clear();							// Clear the arraylist containing the heart images
-		for(int i = 0;i < health;i++) {					// For each point of health the player's ship has
-			GImage toAdd = new GImage("heart.png", 10 + 25*i, 30);	// Add a heart to the arraylist
-			toAdd.setSize(20, 20);						// Set the size
-			game.healthBar.add(toAdd);					// Add the heart to the arraylist
-			game.add(toAdd);							// Add the heart to the screen
+	private void updateHealthBar(int healthChange) {
+		int size = game.healthBar.size();
+		if(healthChange < 0) {
+			for(int i = 0;i < Math.abs(healthChange);i++) {
+				game.remove(game.healthBar.get(size - 1 - i));
+				game.healthBar.remove(size - 1 - i);
+			}
+		} else {
+			for(int i = size - 1;i < healthChange + size;i++) {
+				if(i >= 0) {
+					GImage toAdd = new GImage("heart.png", 10 + 25*i, 30);
+					toAdd.setSize(20, 20);
+					game.healthBar.add(toAdd);
+					game.add(toAdd);
+				}
+			}
 		}
 	}
 

@@ -15,8 +15,8 @@ public class PlayerShip extends Ship {
 		shooting = false;
 		shootingAlt = false;
 		canShootAlt = false;
-		altCooldown = 275;
-		altMaxCooldown = 300;
+		altCooldown = 125;
+		altMaxCooldown = 150;
 		setIframe(0);
 		setMaxIframe(50);
 		setShots(1);
