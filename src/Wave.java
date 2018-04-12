@@ -7,6 +7,9 @@ public class Wave {
 	private MainApplication game;			// The game
 	private int counter;					// Counter to keep track of time between waves
 	private int enemyToSpawn;				// The next enemy the wave wants to spawn
+	private int asteroidToSpawn;
+	private boolean asteroidWave;
+	private int asteroidDelay;
 	private int delay;						// The delay before the next enemy spawns
 	private int size;						// The size of the current wave
 	private int selectedDifficulty;			// The difficulty of the current wave
@@ -24,6 +27,9 @@ public class Wave {
 
 	public Wave(MainApplication g) {
 		game = g;
+		asteroidDelay = 50;
+		asteroidToSpawn = 0;
+		asteroidWave = false;
 		level = 1;
 		maxLevel = 2;
 		waveCount = 0;
@@ -60,7 +66,7 @@ public class Wave {
 			}
 		} else {													// If the wave is easy
 			while(selectedWave == prevWave) {
-				selectedWave = Math.abs(game.rgen.nextInt()%4);			// Randomly select one of the hard waves (currently only easy1())
+				selectedWave = Math.abs(game.rgen.nextInt()%3);			// Randomly select one of the hard waves (currently only easy1())
 			}
 		}
 		waveCount++;												// Increment wave count
@@ -116,9 +122,6 @@ public class Wave {
 				case 2:
 					hard3();
 					break;
-				case 3:
-					asteroidBelt();
-					break;
 				}
 			}
 		} else if(waveCount%upgradeMod == 0 && waveCount != totalWaves) {
@@ -145,6 +148,13 @@ public class Wave {
 			getNextEnemy();										// call getNextEnemy() to add the next enemy to game.enemies
 		}
 		addEnemies();
+		if(game.rgen.nextInt()%100 == 0) {
+			asteroidWave = true;
+		}
+		if(asteroidWave && counter%asteroidDelay == 0) {
+			asteroidBelt();
+			asteroidToSpawn++;
+		}
 		if (enemyToSpawn > size) {								// If all enemies have been spawned
 			for(int i = game.enemies.size() - 1;i >= 0;i--) {					// Check to see if any enemy explosions are still visible (they are hidden when the ship is destroyed)
 				Ship enemy = game.enemies.get(i);
@@ -500,11 +510,11 @@ public class Wave {
 				break;
 		}
 	}
+
 	public void asteroidBelt() {
-		switch (enemyToSpawn) {
+		switch (asteroidToSpawn) {
 		case 0:
-			size = 5;
-			delay = 50;
+			new Asteroid(game,2000);
 			break;
 		case 1:
 			new Asteroid(game,900);
@@ -520,8 +530,9 @@ public class Wave {
 			break;
 		case 5:
 			new Asteroid(game,1000);
+			asteroidWave = false;
+			asteroidToSpawn = 0;
 			break;
-			
 		}
 	}
 
