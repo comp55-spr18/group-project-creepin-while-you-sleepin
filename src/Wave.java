@@ -148,7 +148,7 @@ public class Wave {
 			getNextEnemy();										// call getNextEnemy() to add the next enemy to game.enemies
 		}
 		addEnemies();
-		if(game.rgen.nextInt()%100 == 0) {
+		if(game.rgen.nextInt()%300 == 0) {
 			asteroidWave = true;
 		}
 		if(asteroidWave && counter%asteroidDelay == 0) {
