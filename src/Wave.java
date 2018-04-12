@@ -60,7 +60,7 @@ public class Wave {
 			}
 		} else {													// If the wave is easy
 			while(selectedWave == prevWave) {
-				selectedWave = Math.abs(game.rgen.nextInt()%3);			// Randomly select one of the hard waves (currently only easy1())
+				selectedWave = Math.abs(game.rgen.nextInt()%1);			// Randomly select one of the hard waves (currently only easy1())
 			}
 		}
 		waveCount++;												// Increment wave count
@@ -391,7 +391,7 @@ public class Wave {
 				delay = 50;
 				break;
 			case 1:
-				new SwarmCaller(game, 500);
+				new Asteroid(game, 800);
 				break;
 			case 2:
 				new Seeker(game, 400);
