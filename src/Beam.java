@@ -7,14 +7,16 @@ import acm.graphics.GRectangle;
 public class Beam extends Projectile {
 	private GRect sprite;
 	private double rate;
+	private double rateChange;
 	private double duration;
 	private double counter;
 	private double maxHeight;
 	Beam(Ship ship, GPoint gunLoc) {
 		super(ship, gunLoc, 0, 0);
-		maxHeight = 120;
+		maxHeight = 30;
 		counter = 0;
-		rate = 15;
+		rateChange = maxHeight/120;
+		rate = 15*rateChange;
 		duration = 30;
 		ship.getGame().remove(getSprite());
 		sprite = new GRect(gunLoc.getX(), gunLoc.getY(), 2000, 1);
@@ -28,10 +30,7 @@ public class Beam extends Projectile {
 		if(sprite.getHeight() + rate > 0) {
 			if(counter >= duration || rate > 0) {
 				sprite.setSize(sprite.getWidth(), sprite.getHeight() + rate);
-				if(sprite.getHeight() >= maxHeight) {
-					rate *= -1;
-				}
-				rate--;
+				rate -= rateChange;
 			} else {
 				counter++;
 			}
