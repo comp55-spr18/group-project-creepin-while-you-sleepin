@@ -184,7 +184,7 @@ public class Wave {
 				getNewWave();									// Get a new wave
 			}
 		}
-		if(game.rgen.nextInt()%600 == 0) {						// Every time update() is called, there is a 1/600 chance of triggering an asteroidWave
+		if(game.rgen.nextInt()%600 == 0 && game.powers.isEmpty()) {						// Every time update() is called, there is a 1/600 chance of triggering an asteroidWave
 			asteroidWave = true;
 		}
 	}
