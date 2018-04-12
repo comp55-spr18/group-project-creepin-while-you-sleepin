@@ -184,10 +184,10 @@ public abstract class Ship {
 	}
 
 	public void setHealth(int health) {
-		this.health = health;
 		if(this instanceof PlayerShip) {
-			updateHealthBar(getMaxHealth());
+			updateHealthBar(health - getHealth());
 		}
+		this.health = health;
 	}
 
 	public void dealDamage(int damage) {
