@@ -187,7 +187,7 @@ public class Wave {
 				asteroidToSpawn = 0;							// Reset asteroidToSpawn
 			}
 		}
-		if(game.rgen.nextInt()%600 == 0 && game.powers.isEmpty()) {		// Every time update() is called, there is a 1/600 chance of triggering an asteroidWave
+		if(game.rgen.nextInt()%2500 == 0 && game.powers.isEmpty()) {		// Every time update() is called, there is a 1/600 chance of triggering an asteroidWave
 			asteroidWave = true;
 		}
 	}
