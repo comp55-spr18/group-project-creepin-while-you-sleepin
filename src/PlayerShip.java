@@ -9,6 +9,7 @@ public class PlayerShip extends Ship {
 	public PlayerShip(MainApplication game) {
 		super(game);
 		setIframe(0);
+		setMaxIframe(50);
 		setShots(1);
 		setMaxHealth(5);
 		setCooldown(0);
@@ -111,7 +112,7 @@ public class PlayerShip extends Ship {
 				}
 				setIframe(getIframe() + 1);
 				// If the player's iframe count hits 100, make them vulnerable again
-				if(getIframe() == 50) {
+				if(getIframe() == getMaxIframe()) {
 					getSprite().setImage("sprites/playermodel.png");
 					setSize(50, 50);
 					setInvincible(false);

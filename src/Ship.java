@@ -10,6 +10,7 @@ public abstract class Ship {
 	private boolean canShoot;			// Trigger that toggles on/off on cooldown in the main loop
 	private boolean invincible;			// Trigger that toggles on/off on cooldown in the main loop
 	private int iframe;					// Number of frames that the ship will be invincible for if at all
+	private int maxIframe;				// Maximum number of iframes the ship will go through before becoming vulnerable
 	private int health;					// The number of hits the ship can take before being destroyed
 	private int maxHealth;
 	private int cooldown;				// The initial value of cooldown (Set to 0 if the ship can fire as soon as it spawns)
@@ -40,6 +41,8 @@ public abstract class Ship {
 		game.enemies.add(this);
 		setDestroyed(false);
 		setInvincible(false);
+		setIframe(0);
+		setMaxIframe(30);
 		setDestroyedCounter(0);
 		setShielded(false);
 		setCollisionDamage(1);
@@ -74,6 +77,14 @@ public abstract class Ship {
 			if (getGame().lose || getGame().win) {	// If the game is over
 				getGame().remove(getSprite());		// Remove the ship sprite
 				setDestroyed(true);
+			}
+			if(isInvincible()) {
+				setIframe(getIframe() + 1);
+				// If the ship's iframe count hits 30, make them vulnerable again
+				if(getIframe() == getMaxIframe()) {
+					setInvincible(false);
+					setIframe(0);
+				}
 			}
 			if(isShielded()) {
 				getShield().setLocation(sprite.getLocation());
@@ -156,6 +167,14 @@ public abstract class Ship {
 
 	public void setIframe(int iframe) {
 		this.iframe = iframe;
+	}
+
+	public int getMaxIframe() {
+		return maxIframe;
+	}
+
+	public void setMaxIframe(int maxIframe) {
+		this.maxIframe = maxIframe;
 	}
 
 	public int getHealth() {

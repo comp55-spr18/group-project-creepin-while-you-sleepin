@@ -5,15 +5,16 @@ import acm.graphics.GRect;
 import acm.graphics.GRectangle;
 
 public class Beam extends Projectile {
-	private GRect sprite;
-	private double rate;
-	private double rateChange;
-	private double duration;
-	private double counter;
-	private double maxHeight;
+	private GRect sprite;		// The rectangle that is drawn
+	private double rate;		// The rate at which the rectangle gains height
+	private double rateChange;	// The rate of change of rate
+	private double duration;	// The duration the beam freezes at maxHeight
+	private double counter;		// The counter that counts up to the duration
+	private double maxHeight;	// The maximum height of the beam
 	Beam(Ship ship, GPoint gunLoc) {
 		super(ship, gunLoc, 0, 0);
-		maxHeight = 30;
+		maxHeight = 50;
+		maxHeight = ship.getGame().WINDOW_HEIGHT/(1080/maxHeight);	// Converts from 1080p to any screen height
 		counter = 0;
 		rateChange = maxHeight/120;
 		rate = 15*rateChange;
@@ -44,6 +45,7 @@ public class Beam extends Projectile {
 	public void onCollision(Ship target) {
 		if((isPlayerProjectile() && !(target instanceof PlayerShip)) || (!isPlayerProjectile() && target instanceof PlayerShip)) {
 			if(!target.isInvincible()) {
+				target.setInvincible(true);
 				target.dealDamage(getDamage());
 			}
 		}
