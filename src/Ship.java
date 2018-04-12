@@ -30,6 +30,7 @@ public abstract class Ship {
 	private int bulletDamage;
 	private double beamHeight;
 	private double beamDur;
+	private int beamDamage;
 	private int shots;
 	
 	// These attributes only apply to enemy ships
@@ -425,5 +426,13 @@ public abstract class Ship {
 
 	public void setBeamDur(double beamDur) {
 		this.beamDur = beamDur;
+	}
+
+	public int getBeamDamage() {
+		return beamDamage;
+	}
+
+	public void setBeamDamage(int beamDamage) {
+		this.beamDamage = beamDamage;
 	}
 }

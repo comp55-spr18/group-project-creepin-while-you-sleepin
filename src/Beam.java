@@ -14,6 +14,7 @@ public class Beam extends Projectile {
 	private GPoint location;
 	Beam(Ship ship, GPoint gunLoc) {
 		super(ship, gunLoc, 0, 0);
+		setDamage(ship.getBeamDamage());
 		location = gunLoc;
 		maxHeight = ship.getBeamHeight();
 		counter = 0;
