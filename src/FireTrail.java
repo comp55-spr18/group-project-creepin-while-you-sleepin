@@ -10,7 +10,8 @@ import acm.graphics.GPoint;
 public class FireTrail {
 	private ArrayList<Projectile> trail;	// The ArrayList the projectiles are stored in
 	private Ship ship;						// The ship the trail belongs to
-	private int xDir;						// The x direction of the trail
+	private double xDir;						// The x direction of the trail
+	private double yDir;
 	private int size;						// The initial size of the trail
 	private GPoint location;				// The location the trail begins at
 	private double length;					// The length of the trail
@@ -24,11 +25,19 @@ public class FireTrail {
 		ship = s;
 		size = (int) (ship.getSprite().getWidth()/2);
 		shrinkScale = ship.getSprite().getWidth()/100.0;
+		yDir = 0;
 		if(ship instanceof PlayerShip) {
 			xDir = -1;
 			xOffset = 0;
 			length = 0.25;
 			speed = 2;
+		} else if(ship instanceof Asteroid) {
+			xDir = -0.5;
+			yDir = -1;
+			xOffset = 0;
+			length = 0.2;
+			speed = 1;
+			size = (int) (ship.getSprite().getWidth()/1.1);
 		} else {
 			xDir = 1;
 			length = 0.25;
@@ -43,7 +52,7 @@ public class FireTrail {
 	public void move() {
 		if(!ship.isDestroyed()) {							// If the ship is not destroyed
 			location = new GPoint(ship.getSprite().getX() + xOffset, ship.getSprite().getY()+ship.getSprite().getHeight()/2);	// Set the location relative to the ship
-			Projectile trailProj = new Emitter(ship, location, xDir, 0, speed, Color.RED, size);	// Create an emitter with the proper values
+			Projectile trailProj = new Emitter(ship, location, xDir, yDir, speed, Color.RED, size);	// Create an emitter with the proper values
 			trail.add(trailProj);							// Add the new emitter to the arraylist
 			ship.getGame().add(trailProj.getSprite());		// Add the emitter's sprite to the game
 		}

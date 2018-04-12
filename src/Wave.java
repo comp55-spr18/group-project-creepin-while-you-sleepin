@@ -141,50 +141,51 @@ public class Wave {
 			prevSize = currSize;						// Update prevSize
 		}
 	}
+	
+	public boolean isClear() {				// This function checks to see if all enemies/projectiles/powerups are gone from the screen (so the game knows when to start the next wave)
+		for(int i = game.enemies.size() - 1;i >= 0;i--) {	// Check to see if any enemy explosions are still visible (they are hidden when the ship is destroyed)
+			Ship enemy = game.enemies.get(i);
+			if(enemy.getExplosion().isVisible()) {			// If an enemy explosion is not hidden (still alive)
+				return false;								// Return false
+			}
+		}
+		for(Projectile proj : game.projectiles) {			// For all projectiles in the game
+			if(!proj.isPlayerProjectile()) {				// If it is hostile
+				return false;								// Return false
+			}
+		}
+		if(!game.powers.isEmpty()) {						// If there are powerups in the game
+			return false;									// Return false
+		}
+		return true;										// Otherwise it is empty and returns true
+	}
 
 	public void update() {
 		counter++;												// Increment counter
 		if(counter%delay == 0 && enemyToSpawn <= size) {		// After counter advances 'delay' number of frames, and if there are more enemies to spawn
 			getNextEnemy();										// call getNextEnemy() to add the next enemy to game.enemies
 		}
-		addEnemies();
-		if(game.rgen.nextInt()%300 == 0) {
-			asteroidWave = true;
+		addEnemies();											// Add any new enemy sprites
+		if(asteroidWave && counter%asteroidDelay == 0) {		// If an asteroid wave is triggered, and the delay satisfies
+			asteroidBelt();										// Call asteroidBelt to spawn the next asteroid
+			asteroidToSpawn++;									// Increment asteroidToSpawn
 		}
-		if(asteroidWave && counter%asteroidDelay == 0) {
-			asteroidBelt();
-			asteroidToSpawn++;
-		}
-		if (enemyToSpawn > size) {								// If all enemies have been spawned
-			for(int i = game.enemies.size() - 1;i >= 0;i--) {					// Check to see if any enemy explosions are still visible (they are hidden when the ship is destroyed)
-				Ship enemy = game.enemies.get(i);
-				if(enemy.getExplosion().isVisible()) {			// If an enemy explosion is not hidden (still alive)
-					counter = 1;								// Set the counter to 1 to freeze it
-					return;										// Exit the function
-				}
-			}
-			for(Projectile proj : game.projectiles) {
-				if(!proj.isPlayerProjectile()) {
-					counter = 1;
-					return;
-				}
-			}
-			if(!game.powers.isEmpty()) {
-				counter = 1;
-				return;
-			}
-			game.remove(upgradeLine);
+		if (enemyToSpawn > size && isClear()) {					// If all enemies have been spawned and the screen is clear
+			game.remove(upgradeLine);							// Remove any labels that may have shown during a powerup wave
 			game.remove(upgradeLabel);
-			if(waveCount == totalWaves) {
-				if(level == maxLevel) {
-					game.win = true;
+			if(waveCount == totalWaves) {						// If it is the final wave (as in the player beat the boss)
+				if(level == maxLevel) {							// If this was the last level
+					game.win = true;							// The player won the game
 				}
-				level++;
-				waveCount = 0;
-				game.playerControl = false;
-			} else if(!game.lose){
-				getNewWave();										// Reaching this point means all enemies are dead, so get a new wave to spawn
+				level++;										// Increment the level
+				waveCount = 0;									// Reset the waveCount
+				game.playerControl = false;						// Take control away from player to trigger next level
+			} else if(!game.lose){								// If it was not the final wave (and the player is not dead), get the next wave
+				getNewWave();									// Get a new wave
 			}
+		}
+		if(game.rgen.nextInt()%600 == 0) {						// Every time update() is called, there is a 1/600 chance of triggering an asteroidWave
+			asteroidWave = true;
 		}
 	}
 
