@@ -68,7 +68,7 @@ public class Wave {
 			}
 		} else {													// If the wave is easy
 			while(selectedWave == prevWave) {
-				selectedWave = Math.abs(game.rgen.nextInt()%3);			// Randomly select one of the hard waves (currently only easy1())
+				selectedWave = Math.abs(game.rgen.nextInt()%7);			// Randomly select one of the hard waves (currently only easy1())
 			}
 		}
 		waveCount++;												// Increment wave count
