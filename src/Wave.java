@@ -64,7 +64,7 @@ public class Wave {
 		enemyToSpawn = 0;						// Reset the enemy to spawn (we set it to -1 so that it reads the delay and size of the wave but doesn't spawn anything)
 		if(selectedDifficulty == 0) {								// If the difficulty of the new wave is hard
 			while(selectedWave == prevWave) {
-				selectedWave = Math.abs(game.rgen.nextInt()%10);			// Randomly select one of the easy waves (currently hard1() and Drone())
+				selectedWave = Math.abs(game.rgen.nextInt()%1);			// Randomly select one of the easy waves (currently hard1() and Drone())
 			}
 		} else {													// If the wave is easy
 			while(selectedWave == prevWave) {
@@ -230,7 +230,7 @@ public class Wave {
 				delay = 50;
 				break;
 			case 1:
-				new BasicEnemy(game, 500);		// This is the first enemy it spawns
+				new Squeeze(game, 250);		// This is the first enemy it spawns
 				delay = 100;											// Sets the new delay between enemy spawns to be 100
 				break;
 			case 2:
