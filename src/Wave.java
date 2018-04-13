@@ -147,6 +147,7 @@ public class Wave {
 			upgradeWave();						// Call the upgrade wave
 		} else {								// If it is the final wave
 			firstBossWave();						// Call the boss wave
+			//secondBossWave();                 //IMPLEMENTATION FOR SECOND PHASE NEEDS TO BE CHECKED
 		}
 		enemyToSpawn++;							// Increment the enemyToSpawn
 	}
