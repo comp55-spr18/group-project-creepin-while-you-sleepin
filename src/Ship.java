@@ -29,7 +29,8 @@ public abstract class Ship {
 	private double bulletSpeed;
 	private int bulletDamage;
 	private double beamHeight;
-	private double beamDur;
+	private int beamDuration;
+	private int beamWarningDuration;
 	private int beamDamage;
 	private int shots;
 	
@@ -424,16 +425,16 @@ public abstract class Ship {
 		return beamHeight;
 	}
 
-	public double getBeamDur() {
-		return beamDur;
+	public double getBeamDuration() {
+		return beamDuration;
 	}
 
 	public void setBeamHeight(double beamHeight) {
 		this.beamHeight = getGame().WINDOW_HEIGHT/(1080/beamHeight);
 	}
 
-	public void setBeamDur(double beamDur) {
-		this.beamDur = beamDur;
+	public void setBeamDuration(int beamDuration) {
+		this.beamDuration = beamDuration;
 	}
 
 	public int getBeamDamage() {
@@ -442,5 +443,13 @@ public abstract class Ship {
 
 	public void setBeamDamage(int beamDamage) {
 		this.beamDamage = beamDamage;
+	}
+
+	public int getBeamWarningDuration() {
+		return beamWarningDuration;
+	}
+
+	public void setBeamWarningDuration(int beamWarningDuration) {
+		this.beamWarningDuration = beamWarningDuration;
 	}
 }

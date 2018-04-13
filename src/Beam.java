@@ -11,13 +11,15 @@ public class Beam extends Projectile {
 	private double counter;		// The counter that counts up to the duration
 	private double maxHeight;	// The maximum height of the beam
 	private GPoint location;
+	private int warningDuration;
 	Beam(Ship ship, GPoint gunLoc) {
 		super(ship, gunLoc, 0, 0);
+		warningDuration = ship.getBeamWarningDuration();
 		setDamage(ship.getBeamDamage());
 		location = gunLoc;
 		maxHeight = ship.getBeamHeight();
 		counter = 0;
-		duration = ship.getBeamDur();
+		duration = ship.getBeamDuration();
 		rateChange = maxHeight/120;
 		rate = 15*rateChange;
 		ship.getGame().remove(getSprite());
@@ -33,16 +35,20 @@ public class Beam extends Projectile {
 	}
 	
 	public void move() {
-		if(sprite.getHeight() + rate > 0) {
-			if(counter >= duration || rate > 0) {
-				sprite.setSize(sprite.getWidth(), sprite.getHeight() + rate);
-				rate -= rateChange;
+		if(warningDuration < 0) {
+			if(sprite.getHeight() + rate > 0) {
+				if(counter >= duration || rate > 0) {
+					sprite.setSize(sprite.getWidth(), sprite.getHeight() + rate);
+					rate -= rateChange;
+				} else {
+					counter++;
+				}
 			} else {
-				counter++;
+				setDestroyed(true);
+				getShip().getGame().remove(sprite);
 			}
 		} else {
-			setDestroyed(true);
-			getShip().getGame().remove(sprite);
+			warningDuration--;
 		}
 		if(getShip() instanceof PlayerShip) {
 			sprite.setLocation(location.getX(), location.getY() - sprite.getHeight()/2);
@@ -69,7 +75,7 @@ public class Beam extends Projectile {
 	}
 
 	public void checkCollision() {
-		if(getGame() != null) {
+		if(getGame() != null && warningDuration < 0) {
 			GRectangle hitbox = sprite.getBounds();
 			for(int i = getGame().enemies.size() - 1;i >= 0;i--) {
 				Ship enemy = getGame().enemies.get(i);
