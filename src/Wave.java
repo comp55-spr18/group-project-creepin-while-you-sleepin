@@ -28,7 +28,7 @@ public class Wave {
 
 	public Wave(MainApplication g) {
 		game = g;
-		asteroidWaveSize = 15;
+		asteroidWaveSize = 10;
 		asteroidDelay = 50;
 		asteroidToSpawn = 0;
 		asteroidWave = false;
@@ -217,7 +217,7 @@ public class Wave {
 				asteroidToSpawn = 0;							// Reset asteroidToSpawn
 			}
 		}
-		if(game.rgen.nextInt()%2500 == 0 && game.powers.isEmpty()) {		// Every time update() is called, there is a 1/600 chance of triggering an asteroidWave
+		if(game.rgen.nextInt()%3500 == 0 && game.powers.isEmpty()) {		// Every time update() is called, there is a 1/600 chance of triggering an asteroidWave
 			asteroidWave = true;
 		}
 	}

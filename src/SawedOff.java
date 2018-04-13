@@ -33,7 +33,7 @@ public class SawedOff extends Ship {
 		double x = getSprite().getLocation().getX();
 		double y = getSprite().getLocation().getY();
 		getGunLocation()[0].setLocation(x,y+getSprite().getHeight()/2);
-		if(getSprite().getLocation().getX() < -300) {
+		if(getSprite().getLocation().getX() < -100) {
 			setDestroyed(true);
 		}
 	}
