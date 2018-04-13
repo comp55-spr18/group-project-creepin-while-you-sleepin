@@ -117,18 +117,26 @@ public class Wave {
 				switch(selectedWave) {			// Switch statement for all the hard waves
 				case 0:
 					hard1();
+					
 					break;
 				case 1:
 					hard2();
+					
 					break;
 				case 2:
 					hard3();
+					
 					break;
 				case 3:
 					hard4();
+					
 					break;
 				case 4:
 					hard5();
+					
+					break;
+				case 5:
+					hard6();
 					break;
 				}
 			}
@@ -581,6 +589,39 @@ public class Wave {
 				new SwarmCaller(game, 800);
 				new SprayBall(game, 830, 300);
 				break;
+		}
+	}
+	public void hard6() {
+		switch(enemyToSpawn) {
+		case 0:
+			size = 42;
+			delay = 7;
+			break;
+		default:
+			switch(enemyToSpawn%2) {
+				case 0:
+					if(enemyToSpawn < 21) {
+					new BasicEnemy(game, 250);
+					}
+					else {
+					new Drone(game, game.WINDOW_HEIGHT - 200);
+					}
+					if ((enemyToSpawn == 8) || (enemyToSpawn == 24)) {
+						new Seeker(game, 1080/2);
+					}
+					break;
+				case 1:
+					if(enemyToSpawn < 22) {
+					new BasicEnemy(game, 850);
+					}
+					else {
+					new Drone(game, 100);
+					}
+					if(enemyToSpawn == 11) {
+						new SprayBall(game, 1080/2, 500);
+					}
+					break;
+			}
 		}
 	}
 	
