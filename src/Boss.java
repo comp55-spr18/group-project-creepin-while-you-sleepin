@@ -28,7 +28,8 @@ public class Boss extends Ship {
 		setBulletSize(40);
 		setBulletSpeed(8);
 		setBeamHeight(250);
-		setBeamDur(65);
+		setBeamDuration(65);
+		setBeamWarningDuration(60);
 		setBeamDamage(1);
 		setSelectedGun(0);
 		switch(game.wave.getLevel()) {
@@ -66,7 +67,7 @@ public class Boss extends Ship {
 			Projectile newProj = new Bullet(this, getGunLocation()[getSelectedGun()], -1, 0);
 			newProj.aimAtPlayer();
 			setSelectedGun((getSelectedGun() + 1)%2);
-			if(getHealth() < 50 && counter%5 == 0) {
+			if(getHealth() < 50 && counter%10 == 0) {
 				new Beam(this, getGunLocation()[2]);
 			}
 			counter++;
