@@ -5,7 +5,7 @@ public class SwarmBot extends BasicEnemy {
 	public SwarmBot(MainApplication game, double y, int spawnPos) {
 		super(game, y);
 		setMaxHealth(1);		// They're weak enemies, but its a swarm so it doesn't matter
-		setSprite(new GImage("sprites/enemy2.png", getGame().WINDOW_WIDTH, y));
+		setSprite(new GImage("sprites/enemy3.png", getGame().WINDOW_WIDTH, y));
 		setSize(40, 40);
 		setSpeed(25);			//fast
 		setTrail(new FireTrail(this));
