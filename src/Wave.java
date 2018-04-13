@@ -124,6 +124,12 @@ public class Wave {
 				case 2:
 					hard3();
 					break;
+				case 3:
+					hard4();
+					break;
+				case 4:
+					hard5();
+					break;
 				}
 			}
 		} else if(waveCount%upgradeMod == 0 && waveCount != totalWaves) {
@@ -527,6 +533,57 @@ public class Wave {
 				break;
 		}
 	}
+	public void hard4() {			// Generates an armada
+		switch(enemyToSpawn) {
+			case 0:
+				size = 15;
+				delay = 100;
+				break;
+			case 1:
+				new SawedOff(game, 100);
+				new SawedOff(game, 250);
+				new SawedOff(game, 400);
+				new SawedOff(game, 550);
+				new SawedOff(game, 700);
+				new SawedOff(game, 850);
+				break;
+			case 2:
+				new Bouncer(game, 200);
+				new Bouncer(game, 550);
+				new Bouncer(game, 800);
+				break;
+			case 3:
+				new SawedOff(game, 250);
+				new SawedOff(game, 450);
+				new SawedOff(game, 650);
+				new Bouncer(game, 600);
+				new Bouncer(game, 400);
+				break;
+			case 4:
+				new SprayBall(game, 1080/2, 500);
+				break;
+		}
+	}
+	public void hard5() {			// Generates a swarmCaller wave
+		switch(enemyToSpawn) {
+			case 0:
+				size = 5;
+				delay = 100;
+				break;
+			case 1:
+				new SwarmCaller(game, 300);
+				new SprayBall(game, 330, 500);
+				break;
+			case 2:
+				new SprayBall(game, 580, 400);
+				break;
+			case 3:
+				new SwarmCaller(game, 800);
+				new SprayBall(game, 830, 300);
+				break;
+		}
+	}
+	
 
 	public void firstBossWave() {			// Implements easy mode of a boss wave into the program
 		switch(enemyToSpawn) {
