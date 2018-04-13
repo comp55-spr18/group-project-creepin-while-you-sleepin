@@ -116,27 +116,27 @@ public class Wave {
 			} else {							// If the wave difficulty is hard
 				switch(selectedWave) {			// Switch statement for all the hard waves
 				case 0:
-					hard1();
+					hard7();
 					
 					break;
 				case 1:
-					hard2();
+					hard7();
 					
 					break;
 				case 2:
-					hard3();
+					hard7();
 					
 					break;
 				case 3:
-					hard4();
+					hard7();
 					
 					break;
 				case 4:
-					hard5();
+					hard7();
 					
 					break;
 				case 5:
-					hard6();
+					hard7();
 					break;
 				case 6:
 					hard7();
@@ -632,7 +632,7 @@ public class Wave {
 	public void hard7() {			// Armada mark 2
 		switch(enemyToSpawn) {
 		case 0:
-			size = 15;
+			size = 6;
 			delay = 100;
 			break;
 		case 1:
@@ -668,6 +668,7 @@ public class Wave {
 			new SawedOff(game, 500);
 			new SawedOff(game, 700);
 			delay = 300;
+			break;
 		case 6:			
 			new Kamikazi(game, 100);
 			new Kamikazi(game, 300);
