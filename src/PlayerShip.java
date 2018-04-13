@@ -15,8 +15,8 @@ public class PlayerShip extends Ship {
 		shooting = false;
 		shootingAlt = false;
 		canShootAlt = false;
-		altCooldown = 125;
-		altMaxCooldown = 150;
+		altCooldown = 225;
+		altMaxCooldown = 250;
 		setIframe(0);
 		setMaxIframe(50);
 		setShots(1);
@@ -34,7 +34,7 @@ public class PlayerShip extends Ship {
 		setBulletDamage(1);
 		setBeamHeight(40);
 		setBeamDuration(30);
-		setBeamDamage(1);
+		setBeamDamage(2);
 		setBeamWarningDuration(0);
 		setPoints(0);
 		getGame().add(getSprite());
