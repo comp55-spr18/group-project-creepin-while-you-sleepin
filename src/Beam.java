@@ -35,6 +35,10 @@ public class Beam extends Projectile {
 	}
 	
 	public void move() {
+		if(getShip().isDestroyed()) {
+			setDestroyed(true);
+			getGame().remove(sprite);
+		}
 		if(warningDuration < 0) {
 			if(sprite.getHeight() + rate > 0) {
 				if(counter >= duration || rate > 0) {
@@ -45,7 +49,7 @@ public class Beam extends Projectile {
 				}
 			} else {
 				setDestroyed(true);
-				getShip().getGame().remove(sprite);
+				getGame().remove(sprite);
 			}
 		} else {
 			warningDuration--;
