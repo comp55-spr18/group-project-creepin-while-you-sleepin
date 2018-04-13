@@ -138,6 +138,9 @@ public class Wave {
 				case 5:
 					hard6();
 					break;
+				case 6:
+					hard7();
+					break;
 				}
 			}
 		} else if(waveCount%upgradeMod == 0 && waveCount != totalWaves) {
@@ -486,7 +489,8 @@ public class Wave {
 				delay = 50;
 				break;
 			case 1:
-				new Asteroid(game, 1000);
+				//new Asteroid(game, 1000);
+				new SwarmCaller(game, 510);
 				break;
 			case 2:
 				new Seeker(game, 400);
@@ -625,6 +629,53 @@ public class Wave {
 		}
 	}
 	
+	public void hard7() {			// Armada mark 2
+		switch(enemyToSpawn) {
+		case 0:
+			size = 15;
+			delay = 100;
+			break;
+		case 1:
+			new Tank(game, 100);
+			new Tank(game, 200);
+			new Tank(game, 300);
+			new Tank(game, 400);
+			new Tank(game, 500);
+			new Tank(game, 600);
+			new Tank(game, 700);
+			new Tank(game, 800);
+			new Tank(game, 900);
+			break;
+		case 2:
+			new BasicEnemy(game, 200);
+			new BasicEnemy(game, 400);
+			new BasicEnemy(game, 600);
+			new BasicEnemy(game, 800);
+			new Seeker(game, 100);
+			break;
+		case 3:
+			new SawedOff(game, 200);
+			new SawedOff(game, 400);
+			new SawedOff(game, 600);
+			new SawedOff(game, 800);
+			break;
+		case 4:
+			new Seeker(game, 800);
+			break;
+		case 5:
+			new SawedOff(game, 100);
+			new SawedOff(game, 300);
+			new SawedOff(game, 500);
+			new SawedOff(game, 700);
+			delay = 300;
+		case 6:			
+			new Kamikazi(game, 100);
+			new Kamikazi(game, 300);
+			new Kamikazi(game, 500);
+			new Kamikazi(game, 700);
+			break;
+		}
+	}
 
 	public void firstBossWave() {			// Implements easy mode of a boss wave into the program
 		switch(enemyToSpawn) {
