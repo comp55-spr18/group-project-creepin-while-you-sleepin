@@ -18,6 +18,7 @@ public class Wave {
 	private boolean upgradeWave;
 	private boolean bossWave;
 	private boolean finished;
+	private Event event;
 
 	public Wave(Level lev) {
 		level = lev;
@@ -43,14 +44,32 @@ public class Wave {
 		selectedWave = level.getPrevWave();
 		if(game.easy) {							// If the difficulty of the new wave is easy
 			while(selectedWave == level.getPrevWave()) {
-				selectedWave = Math.abs(game.rgen.nextInt()%10);	// Randomly select one of the easy waves (currently hard1() and Drone())
+				selectedWave = Math.abs(game.rgen.nextInt(10));	// Randomly select one of the easy waves (currently hard1() and Drone())
 			}
 		} else {													// If the wave is hard
 			while(selectedWave == level.getPrevWave()) {
-				selectedWave = Math.abs(game.rgen.nextInt()%7);		// Randomly select one of the hard waves (currently only easy1())
+				selectedWave = Math.abs(game.rgen.nextInt(7));		// Randomly select one of the hard waves (currently only easy1())
 			}
 		}
-//		getNextEnemy();		
+	}
+
+	public void update() {
+		counter++;												// Increment counter
+		if(counter%delay == 0 && enemyToSpawn <= size) {		// After counter advances 'delay' number of frames, and if there are more enemies to spawn
+			getNextEnemy();										// call getNextEnemy() to add the next enemy to game.enemies
+		}
+		addEnemies();											// Add any new enemy sprites
+		if (enemyToSpawn > size && isClear()) {					// If all enemies have been spawned and the screen is clear
+			game.remove(upgradeLine);							// Remove any labels that may have shown during a powerup wave
+			game.remove(upgradeLabel);
+			setFinished(true);
+		}
+		if(game.rgen.nextInt(3500) == 0 && event == null) {
+			event = new Event(this);
+		}
+		if(event != null) {
+			event.update();
+		}
 	}
 
 	public void getNextEnemy() {				// Generates the next enemy in the wave
@@ -122,7 +141,6 @@ public class Wave {
 			upgradeWave();						// Call the upgrade wave
 		} else {								// If it is the final wave
 			firstBossWave();						// Call the boss wave
-			//secondBossWave();                 //IMPLEMENTATION FOR SECOND PHASE NEEDS TO BE CHECKED
 		}
 		enemyToSpawn++;							// Increment the enemyToSpawn
 	}
@@ -154,29 +172,16 @@ public class Wave {
 		return true;										// Otherwise it is empty and returns true
 	}
 
-	public boolean onlyAsteroids() {		// This function checks to see if asteroids are the only thing left on the screen
+	public boolean onlyEvent() {		// This function checks to see if event enemies are the only thing left on the screen
 		if(!isClear()) {
 			for(int i = game.enemies.size() - 1;i >= 0;i--) {
-				if(game.enemies.get(i).getExplosion().isVisible() && !(game.enemies.get(i) instanceof Asteroid)) {
+				if(game.enemies.get(i).getExplosion().isVisible() && !game.enemies.get(i).isEventEnemy()) {
 					return false;
 				}
 			}
 			return true;
 		} else {
 			return false;
-		}
-	}
-
-	public void update() {
-		counter++;												// Increment counter
-		if(counter%delay == 0 && enemyToSpawn <= size) {		// After counter advances 'delay' number of frames, and if there are more enemies to spawn
-			getNextEnemy();										// call getNextEnemy() to add the next enemy to game.enemies
-		}
-		addEnemies();											// Add any new enemy sprites
-		if (enemyToSpawn > size && isClear()) {					// If all enemies have been spawned and the screen is clear
-			game.remove(upgradeLine);							// Remove any labels that may have shown during a powerup wave
-			game.remove(upgradeLabel);
-			setFinished(true);
 		}
 	}
 
@@ -710,5 +715,13 @@ public class Wave {
 
 	public void setBossWave(boolean bossWave) {
 		this.bossWave = bossWave;
+	}
+
+	public MainApplication getGame() {
+		return game;
+	}
+
+	public void setGame(MainApplication game) {
+		this.game = game;
 	}
 }
