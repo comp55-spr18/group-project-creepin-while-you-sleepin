@@ -13,7 +13,7 @@ public class Squeeze extends Ship {
 		setGunLocation(new GPoint[] {new GPoint()});
 		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
 		setBulletColor(Color.yellow);
-		setSize(50, 50);
+		setSize(100, 100);
 		setxDir(-1);
 		setyDir(0);
 		setSpeed(2);
@@ -21,8 +21,8 @@ public class Squeeze extends Ship {
 		setCollisionDamage(1);
 		setTrail(new FireTrail(this));
 		setBeamHeight(100);
-		setBeamDuration(65);
-		setBeamWarningDuration(60);
+		setBeamDuration(80);
+		setBeamWarningDuration(75);
 		setBeamDamage(1);
 	}
 	@Override

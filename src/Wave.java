@@ -142,7 +142,7 @@ public class Wave {
 //					hard7();
 //					break;
 				default:
-					hard7();
+					hard8();
 				}
 			}
 		} else if(waveCount%upgradeMod == 0 && waveCount != totalWaves) {
@@ -681,38 +681,40 @@ public class Wave {
 			break;
 		}
 	}
-//	public void hard8() {
-//		switch(enemyToSpawn) {
-//		case 0:
-//			size = 5;
-//			delay = 100;
-//			break;
-//		case 1:
-//			new Squeeze(game,100);
-//			new Squeeze(game,800);
-//			delay = 200;
-//			break;
-//		case 2:
-//			new Boomerang(game,400);
-//			new Boomerang (game,600);
-//			delay=100;
-//			break;
-//		case 3:
-//			new Kamikazi(game,600);
-//			break;
-//		case 4: 
-//			new HeavyWeightEnemy(game,400);
-//			break;
-//		case 5:
-//			new SprayBall(game,400,500);
-//			break;
-//		case 6:
-//			new
-//		
-//			
-//		}
-//		
-//	}
+	public void hard8() {
+		switch(enemyToSpawn) {
+		case 0:
+			size = 6;
+			delay = 100;
+			break;
+		case 1:
+			new Squeeze(game,100);
+			new Squeeze(game,800);
+			delay = 200;
+			break;
+		case 2:
+			new Boomerang(game,400);
+			new Boomerang (game,600);
+			delay=100;
+			break;
+		case 3:
+			new Kamikazi(game,600);
+			break;
+		case 4: 
+			new HeavyWeightEnemy(game,400);
+			new HeavyWeightEnemy(game,700);
+			break;
+		case 5:
+			new SprayBall(game,400,500);
+			break;
+		case 6:
+			new SwarmCaller(game,400);
+			break;
+		
+			
+		}
+		
+	}
 
 	public void firstBossWave() {			// Implements easy mode of a boss wave into the program
 		switch(enemyToSpawn) {
