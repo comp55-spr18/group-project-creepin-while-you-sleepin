@@ -4,17 +4,10 @@ import acm.graphics.*;
 // If you want a new projectile to behave like this one but interact differently when it hits something, just
 // Make a constructor for the new class and define a new onCollision() since move() and checkCollision() will be inherited
 
-public abstract class Projectile {
+public abstract class Projectile extends Object {
 	private Ship ship;
-	private MainApplication game;
 	private boolean isPlayerProjectile;			// Check if the projectile belongs to player
-	private double xDir;						// Using the x and y Dir variables creates a vector with speed as its magnitude, indicating the movement of the projectile
-	private double yDir;
-	private double speed;
-	private GOval sprite;						// The sprite that will be used for the projectile, currently just a circle for simplicity
-	private boolean isDestroyed;
 	private boolean isDestructable;				// Check if this projectile can be destroyed by the player's projectile
-	private int damage;
 
 	// Constructor that every projectile should use
 	public Projectile(Ship ship, GPoint gunLoc, double xD, double yD) {
@@ -31,7 +24,7 @@ public abstract class Projectile {
 		setyDir(yD);
 		setSize(ship.getBulletSize(), ship.getBulletSize());
 		setSpeed(ship.getBulletSpeed());
-		setDamage(ship.getBulletDamage());
+		setCollisionDamage(ship.getBulletDamage());
 		getSprite().setLocation(gunLoc.getX() - getSprite().getWidth()/2, gunLoc.getY() - getSprite().getHeight()/2);
 		getGame().projectiles.add(this);
 		getGame().add(getSprite());
@@ -54,11 +47,7 @@ public abstract class Projectile {
 		if((isPlayerProjectile() && !(target instanceof PlayerShip)) || (!isPlayerProjectile() && target instanceof PlayerShip)) {
 			setDestroyed(true);
 			getGame().remove(getSprite());
-			if(!target.isInvincible()) {
-				target.dealDamage(getDamage());
-			} else if(!(target instanceof PlayerShip)) {
-				target.dealDamage(getDamage());
-			}
+			target.dealDamage(getCollisionDamage());
 		}
 	}
 	
@@ -83,11 +72,11 @@ public abstract class Projectile {
 	// The default checkCollision creates three GPoints at the top, center, and bottom of the projectile
 	// If these points collide with an enemy or player, onCollision() is called
 	public void checkCollision() {
-		if(game != null) {
+		if(getGame() != null) {
 			GRectangle hitbox = getSprite().getBounds();
 			hitbox.setSize(getSpeed(), hitbox.getHeight());
-			for(int i = game.enemies.size() - 1;i >= 0;i--) {
-				Ship enemy = game.enemies.get(i);
+			for(int i = getGame().enemies.size() - 1;i >= 0;i--) {
+				Ship enemy = getGame().enemies.get(i);
 				if(enemy instanceof Boss && isPlayerProjectile() && !enemy.isDestroyed()) {
 					GRectangle enemyHitbox = enemy.getSprite().getBounds();
 					enemyHitbox.setSize(2*(enemy.getSprite().getWidth()/3), enemy.getSprite().getHeight());
@@ -101,11 +90,11 @@ public abstract class Projectile {
 					return;
 				}
 			}
-			if(isColliding(getSprite(), game.player.getSprite())) {
-				onCollision(game.player);
+			if(isColliding(getSprite(), getGame().player.getSprite())) {
+				onCollision(getGame().player);
 				return;
 			}
-			for(Projectile proj : game.projectiles) {
+			for(Projectile proj : getGame().projectiles) {
 				if(proj.isDestructable() && proj.getSprite().getBounds().intersects(hitbox)) {
 					onCollision(proj);
 				}
@@ -145,42 +134,11 @@ public abstract class Projectile {
 	public void setPlayerProjectile(boolean isPlayerProjectile) {
 		this.isPlayerProjectile = isPlayerProjectile;
 	}
-	public double getxDir() {
-		return xDir;
-	}
-	public void setxDir(double xDir) {
-		this.xDir = xDir;
-	}
-	public double getyDir() {
-		return yDir;
-	}
-	public void setyDir(double yDir) {
-		this.yDir = yDir;
-	}
-	public double getSpeed() {
-		return speed;
-	}
-	public void setSpeed(double speed) {
-		this.speed = speed;
-		
-	}
 	public GOval getSprite() {
-		return sprite;
+		return (GOval) sprite;
 	}
 	public void setSprite(GOval sprite) {
 		this.sprite = sprite;
-	}
-	public MainApplication getGame() {
-		return game;
-	}
-	public void setGame(MainApplication game) {
-		this.game = game;
-	}
-	public boolean isDestroyed() {
-		return isDestroyed;
-	}
-	public void setDestroyed(boolean isDestroyed) {
-		this.isDestroyed = isDestroyed;
 	}
 	public boolean isDestructable() {
 		return isDestructable;
@@ -188,19 +146,9 @@ public abstract class Projectile {
 	public void setDestructable(boolean isDestructable) {
 		this.isDestructable = isDestructable;
 	}
-	public int getDamage() {
-		return damage;
-	}
-	public void setDamage(int damage) {
-		this.damage = damage;
-	}
-
-
 	public Ship getShip() {
 		return ship;
 	}
-
-
 	public void setShip(Ship ship) {
 		this.ship = ship;
 	}

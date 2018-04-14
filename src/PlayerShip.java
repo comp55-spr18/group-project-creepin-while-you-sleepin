@@ -107,29 +107,10 @@ public class PlayerShip extends Ship {
 			}
 		}
 	}
-	
-	public void checkCollision() {
-		for(Ship enemy : getGame().enemies) {
-			if(getSprite().getBounds().intersects(enemy.getSprite().getBounds()) && !enemy.isDestroyed()) {
-				onCollision(enemy);
-			}
-		}
-	}
-
-	public void onCollision(Ship enemy) {
-		if(!isInvincible()) {
-			dealDamage(enemy.getCollisionDamage());
-			if(enemy instanceof Kamikazi) {
-				enemy.setDestroyed(true);
-				getGame().remove(enemy.getSprite());
-			}
-		}
-	}
 
 	public void update() {
 		if(!isDestroyed()) {
 			shoot();
-			checkCollision();
 			// If the player is invincible, increment their invincibility timer
 			if(isInvincible()) {
 				if(getIframe() == 0) {

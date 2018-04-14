@@ -10,7 +10,7 @@ public class Emitter extends Projectile {
 		getSprite().setFillColor(bulletColor);
 		getSprite().setSize(size, size);
 		getSprite().setLocation(gunLoc.getX() - getSprite().getWidth()/2, gunLoc.getY() - getSprite().getHeight()/2);
-		setDamage(0);
+		setCollisionDamage(0);
 	}
 	
 	// I had to redefine checkCollision and onCollision here since this projectile type does nothing but add aesthetics

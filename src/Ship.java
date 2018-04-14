@@ -1,9 +1,7 @@
 import java.awt.*;
 import acm.graphics.*;
 
-public abstract class Ship {
-	private MainApplication game;		// Reference to the pane the game runs on so that the ship is aware of other variables in the game
-	private GImage sprite;				// The image that will be displayed for the ship
+public abstract class Ship extends Object {
 	private GPoint[] gunLocation;		// The points that will be used to fire projectiles, if any
 	private int selectedGun;			// Integer switch that selects which point in gunLocation array to fire from
 	private Color bulletColor;			// The color of the projectiles fired by this ship
@@ -15,7 +13,6 @@ public abstract class Ship {
 	private int maxHealth;
 	private int cooldown;				// The initial value of cooldown (Set to 0 if the ship can fire as soon as it spawns)
 	private int maxCooldown;			// The number of frames between each call of the Shoot() function
-	private boolean isDestroyed;		// Toggles the destruction sequence of the ship
 	private int destroyedCounter;		// Counter for how long the death sprite lasts
 	private int points;					// The points the ship is worth
 	private boolean shielded = false;
@@ -24,7 +21,6 @@ public abstract class Ship {
 	private int shieldMaxCooldown;
 	private GImage explosion;
 	private FireTrail trail;
-	private int collisionDamage;
 	private double bulletSize;
 	private double bulletSpeed;
 	private int bulletDamage;
@@ -34,11 +30,6 @@ public abstract class Ship {
 	private int beamDamage;
 	private int shots;
 	private boolean eventEnemy;
-	
-	// These attributes only apply to enemy ships
-	private double xDir;			// Since each move() is different for each ship, these do whatever you make them do
-	private double yDir;
-	private int speed;
 	
 	Ship(MainApplication game) {
 		setGame(game);
@@ -81,6 +72,7 @@ public abstract class Ship {
 		if(!isDestroyed()) {
 			move();									// Move the ship
 			shoot();								// Tell the ship to shoot
+			checkCollision();
 			if (getGame().lose || getGame().win) {	// If the game is over
 				getGame().remove(getSprite());		// Remove the ship sprite
 				setDestroyed(true);
@@ -122,6 +114,12 @@ public abstract class Ship {
 		}
 	}
 
+	public void checkCollision() {
+		if(getSprite().getBounds().intersects(game.player.getSprite().getBounds())) {
+			game.player.dealDamage(getCollisionDamage());
+		}
+	}
+
 	// Getters and setters, nothing important down here
 	public void setSize(double x, double y) {
 		getSprite().setSize(getGame().WINDOW_WIDTH/(1920/x), getGame().WINDOW_HEIGHT/(1080/y));
@@ -129,7 +127,7 @@ public abstract class Ship {
 	}
 
 	public GImage getSprite() {
-		return sprite;
+		return (GImage) sprite;
 	}
 
 	public void setSprite(GImage sprite) {
@@ -197,13 +195,13 @@ public abstract class Ship {
 
 	public void dealDamage(int damage) {
 		if(isShielded()) {
-			if(!getShield().isVisible()) {
+			if(!getShield().isVisible() && !isInvincible()) {
 				calculateDamage(damage);
 			} else {
 				getGame().shieldHitCount = getGame().playSound("shieldhit", getGame().shieldHitCount);
 				getShield().setVisible(false);
 			}
-		} else {
+		} else if(!isInvincible() || !(this instanceof PlayerShip)) {
 			calculateDamage(damage);
 		}
 	}
@@ -276,11 +274,11 @@ public abstract class Ship {
 		this.yDir = yDir;
 	}
 
-	public int getSpeed() {
+	public double getSpeed() {
 		return speed;
 	}
 
-	public void setSpeed(int speed) {
+	public void setSpeed(double speed) {
 		this.speed = getGame().WINDOW_WIDTH/(1920/speed);
 	}
 

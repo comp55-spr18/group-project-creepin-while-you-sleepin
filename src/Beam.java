@@ -4,7 +4,6 @@ import acm.graphics.GRect;
 import acm.graphics.GRectangle;
 
 public class Beam extends Projectile {
-	private GRect sprite;		// The rectangle that is drawn
 	private double rate;		// The rate at which the rectangle gains height
 	private double rateChange;	// The rate of change of rate
 	private double duration;	// The duration the beam freezes at maxHeight
@@ -15,7 +14,7 @@ public class Beam extends Projectile {
 	Beam(Ship ship, GPoint gunLoc) {
 		super(ship, gunLoc, 0, 0);
 		warningDuration = ship.getBeamWarningDuration();
-		setDamage(ship.getBeamDamage());
+		setCollisionDamage(ship.getBeamDamage());
 		location = gunLoc;
 		maxHeight = ship.getBeamHeight();
 		counter = 0;
@@ -24,14 +23,14 @@ public class Beam extends Projectile {
 		rate = 15*rateChange;
 		ship.getGame().remove(getSprite());
 		if(ship instanceof PlayerShip) {
-			sprite = new GRect(gunLoc.getX(), gunLoc.getY(), 2000, 1);
+			setSprite(new GRect(gunLoc.getX(), gunLoc.getY(), 2000, 1));
 		} else {
-			sprite = new GRect(gunLoc.getX() - 2000, gunLoc.getY(), 2000, 1);
+			setSprite(new GRect(gunLoc.getX() - 2000, gunLoc.getY(), 2000, 1));
 		}
 		getGame().add(sprite);
-		sprite.setColor(Color.RED);
-		sprite.setFilled(true);
-		sprite.setFillColor(sprite.getColor());
+		getBeamSprite().setColor(Color.RED);
+		getBeamSprite().setFilled(true);
+		getBeamSprite().setFillColor(sprite.getColor());
 	}
 	
 	public void move() {
@@ -42,7 +41,7 @@ public class Beam extends Projectile {
 		if(warningDuration < 0) {
 			if(sprite.getHeight() + rate > 0) {
 				if(counter >= duration || rate > 0) {
-					sprite.setSize(sprite.getWidth(), sprite.getHeight() + rate);
+					getBeamSprite().setSize(sprite.getWidth(), sprite.getHeight() + rate);
 					rate -= rateChange;
 				} else {
 					counter++;
@@ -65,7 +64,7 @@ public class Beam extends Projectile {
 		if((isPlayerProjectile() && !(target instanceof PlayerShip)) || (!isPlayerProjectile() && target instanceof PlayerShip)) {
 			if(!target.isInvincible()) {
 				target.setInvincible(true);
-				target.dealDamage(getDamage());
+				target.dealDamage(getCollisionDamage());
 			}
 		}
 	}
@@ -83,14 +82,7 @@ public class Beam extends Projectile {
 			GRectangle hitbox = sprite.getBounds();
 			for(int i = getGame().enemies.size() - 1;i >= 0;i--) {
 				Ship enemy = getGame().enemies.get(i);
-				if(enemy instanceof Boss && isPlayerProjectile() && !enemy.isDestroyed()) {
-					GRectangle enemyHitbox = enemy.getSprite().getBounds();
-					enemyHitbox.setSize(2*(enemy.getSprite().getWidth()/3), enemy.getSprite().getHeight());
-					enemyHitbox.setLocation(enemy.getSprite().getX() + enemy.getSprite().getWidth()/3, enemy.getSprite().getY());
-					if(enemyHitbox.intersects(hitbox)) {
-						onCollision(enemy);
-					}
-				} else if(enemy.getSprite().getBounds().intersects(hitbox) && !enemy.isDestroyed()) {
+				if(enemy.getSprite().getBounds().intersects(hitbox) && !enemy.isDestroyed()) {
 					onCollision(enemy);
 				}
 			}
@@ -107,6 +99,10 @@ public class Beam extends Projectile {
 
 	// Getters
 	public GRect getBeamSprite() {
-		return sprite;
+		return (GRect) sprite;
+	}
+
+	public void setSprite(GRect sprite) {
+		this.sprite = sprite;
 	}
 }

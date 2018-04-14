@@ -31,7 +31,7 @@ public class HomingBullet extends Projectile {
 				getGame().remove(getSprite());
 				setDestroyed(true);
 				if(target instanceof PlayerShip) {
-					target.dealDamage(getDamage());
+					target.dealDamage(getCollisionDamage());
 				} else {
 					target.dealDamage(10);
 					getGame().updateScoreBoard(300);
