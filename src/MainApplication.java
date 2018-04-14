@@ -32,7 +32,6 @@ public class MainApplication extends GraphicsApplication {
 	boolean win = false;		// Notice that we have both win and lose booleans; default state is that both are false (the player hasn't won or lost but is playing)
 	boolean lose = false;		// this means we need to be explicit and can't assume that because win = false that the player lost
 	boolean easy = false;
-	boolean playerControl = true;
 	boolean paused = false;
 	Random rgen = new Random();
 	AudioPlayer audio;
@@ -43,9 +42,11 @@ public class MainApplication extends GraphicsApplication {
 	int score = 0;
 	GLabel scoreBoard = new GLabel("SCORE: " + score, 10, 25);
 	GLabel alreadyHave = new GLabel("You have maxed that upgrade");
-	ArrayList<GImage> healthBar = new ArrayList<GImage>();
+	ArrayList<GImage> healthBar;
 	Timer timer = new Timer(1000/fps, this);
-	Wave wave;
+	Level level;
+	int currLevel;
+	int maxLevel = 3;
 
 	public void init() {
 		setSize(WINDOW_WIDTH, WINDOW_HEIGHT - 100);
@@ -75,11 +76,12 @@ public class MainApplication extends GraphicsApplication {
 	}
 
 	public void startGame() {
+		healthBar = new ArrayList<GImage>();
 		player = new PlayerShip(this);			// Initiate the game with a new player ship
-		wave = new Wave(this);
+		level = new Level(this);
 		score = 0;								// Reset score
 		updateScoreBoard(0);					// Initialize score board
-		playerControl = true;
+		currLevel = 1;
 		lowShootCount = 0;
 		playerShootCount = 0;
 		shipDeathCount = 0;
@@ -115,7 +117,7 @@ public class MainApplication extends GraphicsApplication {
 		score += toAdd;
 		scoreBoard.setLabel("SCORE: " + score);
 	}
-	
+
 	// Main game loop
 	public void actionPerformed(ActionEvent e) {
 		if(!paused) {
@@ -140,21 +142,25 @@ public class MainApplication extends GraphicsApplication {
 					projectiles.remove(i);						// Remove it from the arraylist
 				}
 			}
-			if(playerControl) {
-				wave.update();										// Update the wave
+			if(!level.isFinished()) {
+				level.update();										// Update the level
 			} else {
 				player.setShooting(false);
 				player.move();
 				if(player.getSprite().getX() > WINDOW_WIDTH + 300) {
-					if(win) {										// If you won, print it at the menu screen and stop the game timer
+					if(currLevel == maxLevel) {
+						win = true;
 						switchToScreen(endPane);
 						timer.stop();
 						return;
+					} else {
+						currLevel++;
+						level = new Level(this);
+						player.setHealth(player.getMaxHealth());
+						switchToScreen(betweenPane);
+						timer.stop();
+						return;
 					}
-					player.setHealth(player.getMaxHealth());
-					switchToScreen(betweenPane);
-					timer.stop();
-					return;
 				}
 			}
 			if(lose) {										// If you lost, print it at the menu screen and stop the game timer

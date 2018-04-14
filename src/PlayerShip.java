@@ -34,14 +34,15 @@ public class PlayerShip extends Ship {
 		setBulletDamage(1);
 		setBeamHeight(40);
 		setBeamDuration(30);
-		setBeamDamage(2);
+		setBeamDamage(50);
 		setBeamWarningDuration(0);
 		setPoints(0);
 		getGame().add(getSprite());
 		setTrail(new FireTrail(this));
 	}
+
 	public void move(MouseEvent e) {		// Moves the player's gun location to the location of the ship
-		if(!isDestroyed() && getGame().playerControl) {
+		if(!isDestroyed() && !getGame().level.isFinished()) {
 			getSprite().setLocation(new GPoint(e.getX() - getSprite().getWidth()/2, e.getY() - getSprite().getHeight()/2));
 			double x = getSprite().getX();
 			double y = getSprite().getY();

@@ -29,13 +29,6 @@ public class Drone extends BasicEnemy {
 			setyDir(-.3);
 		}
 		topBot = y;
-		switch(game.wave.getLevel()) {
-			case 2:
-				setBulletDamage(2);
-				setShielded(true);
-				setShieldCooldown(0);
-				setShieldMaxCooldown(100000);
-		}
 	}
 	// tweaked bullet speed
 	@Override

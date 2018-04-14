@@ -41,7 +41,9 @@ public abstract class Ship {
 	
 	Ship(MainApplication game) {
 		setGame(game);
-		game.enemies.add(this);
+		if(!(this instanceof PlayerShip)) {
+			game.enemies.add(this);
+		}
 		setDestroyed(false);
 		setInvincible(false);
 		setIframe(0);				// Iframes for any ship but the player only effect beam damage detection

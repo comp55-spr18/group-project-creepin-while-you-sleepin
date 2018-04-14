@@ -24,12 +24,6 @@ public class BasicEnemy extends Ship {
 		setBulletSpeed(10);
 		setBulletSize(15);
 		setTrail(new FireTrail(this));
-		switch(game.wave.getLevel()) {
-			case 2:
-				setMaxHealth(3);
-				setCooldown(300);
-				setMaxCooldown(375);
-		}
 	}
 	@Override
 	public void move() {

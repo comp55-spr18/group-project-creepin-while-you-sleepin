@@ -5,82 +5,57 @@ import acm.graphics.GLine;
 
 public class Wave {
 	private MainApplication game;			// The game
+	private Level level;
 	private int counter;					// Counter to keep track of time between waves
 	private int enemyToSpawn;				// The next enemy the wave wants to spawn
-	private int asteroidWaveSize;
-	private int asteroidToSpawn;
-	private boolean asteroidWave;
-	private int asteroidDelay;
 	private int delay;						// The delay before the next enemy spawns
 	private int size;						// The size of the current wave
-	private int selectedDifficulty;			// The difficulty of the current wave
 	private int selectedWave;				// The rgen value of the current wave
-	private int totalWaves;					// The total number of waves the player must fight (including the boss wave)
-	private int waveCount;					// The current wave the player is on
-	private int prevWave;					// The previous wave that was generated
-	private int upgradeMod;					// How often upgrade waves occur
-	private int level;						// The current level the player is on
-	private int maxLevel;					// The max number of levels in the game
 	private GLine upgradeLine;				// The line that appears if the player is on the right side of the screen at the start of an upgrade wave
 	private GLabel upgradeLabel;			// The label telling the player to fly past the line to spawn the upgrades
 	private int prevSize;					// The previous size of game.enemies
 	private int currSize;					// The current size of game.enemies
+	private boolean upgradeWave;
+	private boolean bossWave;
+	private boolean finished;
 
-	public Wave(MainApplication g) {
-		game = g;
-		asteroidWaveSize = 10;
-		asteroidDelay = 50;
-		asteroidToSpawn = 0;
-		asteroidWave = false;
-		level = 1;
-		maxLevel = 2;
-		waveCount = 0;
-		upgradeMod = 3;
-		totalWaves = 7;			// For now there are 4 regular waves, 2 upgrade waves and 1 boss wave
+	public Wave(Level lev) {
+		level = lev;
+		game = level.getGame();
+		setFinished(false);
 		selectedWave = -1;
-		prevWave = -1;
 		upgradeLine = new GLine(game.WINDOW_WIDTH/(1920/1000.0), 0, game.WINDOW_WIDTH/(1920/1000.0), game.WINDOW_HEIGHT);
 		upgradeLine.setColor(Color.RED);
 		upgradeLabel = new GLabel("Fly behind this line to see the upgrades");
 		upgradeLabel.setFont("arial-22-bold");
 		upgradeLabel.setLocation(game.WINDOW_WIDTH/(1920/1050.0), game.WINDOW_HEIGHT/2 - upgradeLabel.getHeight()/2);
 		upgradeLabel.setColor(Color.RED);
-		if(game.easy) {				// If the game is on easy, set selectedDifficulty to 0
-			selectedDifficulty = 0;
-		} else {					// If the game is on hard, set selectedDifficulty to 1
-			selectedDifficulty = 1;
-		}
-		getNewWave();				// Start the first wave
-	}
-
-	public void getNewWave() {
-		if(game.enemies != null) {	// If enemies is not null
-			game.enemies.clear();	// Clear it
+		if(game.enemies != null) {				// If enemies is not null
+			game.enemies.clear();				// Clear it
 		}
 		game.enemies = new ArrayList<Ship>();	// Make enemies a new arraylist
 		prevSize = 0;
 		currSize = 0;
 		counter = 0;							// Reset the counter
-		enemyToSpawn = 0;						// Reset the enemy to spawn (we set it to -1 so that it reads the delay and size of the wave but doesn't spawn anything)
-		if(selectedDifficulty == 0) {								// If the difficulty of the new wave is hard
-			while(selectedWave == prevWave) {
-				selectedWave = Math.abs(game.rgen.nextInt()%10);			// Randomly select one of the easy waves (currently hard1() and Drone())
+		enemyToSpawn = 0;						// Reset the enemy to spawn
+		size = 0;
+		delay = 1;
+		selectedWave = level.getPrevWave();
+		if(game.easy) {							// If the difficulty of the new wave is easy
+			while(selectedWave == level.getPrevWave()) {
+				selectedWave = Math.abs(game.rgen.nextInt()%10);	// Randomly select one of the easy waves (currently hard1() and Drone())
 			}
-		} else {													// If the wave is easy
-			while(selectedWave == prevWave) {
-				selectedWave = Math.abs(game.rgen.nextInt()%3);			// Randomly select one of the hard waves (currently only easy1())
+		} else {													// If the wave is hard
+			while(selectedWave == level.getPrevWave()) {
+				selectedWave = Math.abs(game.rgen.nextInt()%7);		// Randomly select one of the hard waves (currently only easy1())
 			}
 		}
-		waveCount++;												// Increment wave count
-		if(waveCount%upgradeMod != 0) {
-			prevWave = selectedWave;
-		}
-		getNextEnemy();												// Get the next enemy (must be called here to initialize delay and size)
+//		getNextEnemy();		
 	}
 
 	public void getNextEnemy() {				// Generates the next enemy in the wave
-		if(waveCount < totalWaves && waveCount%upgradeMod != 0) {			// If it is not the final wave
-			if(selectedDifficulty == 0) {		// If the wave difficulty is easy
+		if(!upgradeWave && !bossWave) {			// If it is not the final wave
+			if(game.easy) {		// If the wave difficulty is easy
 				switch(selectedWave) {			// Switch statement for all the easy waves
 				case 0:
 					easy1();
@@ -143,7 +118,7 @@ public class Wave {
 					break;
 				}
 			}
-		} else if(waveCount%upgradeMod == 0 && waveCount != totalWaves) {
+		} else if(upgradeWave) {
 			upgradeWave();						// Call the upgrade wave
 		} else {								// If it is the final wave
 			firstBossWave();						// Call the boss wave
@@ -197,28 +172,10 @@ public class Wave {
 			getNextEnemy();										// call getNextEnemy() to add the next enemy to game.enemies
 		}
 		addEnemies();											// Add any new enemy sprites
-		if(asteroidWave && counter%asteroidDelay == 0 && asteroidToSpawn < asteroidWaveSize && !onlyAsteroids()) {		// If an asteroid wave is triggered, and the delay satisfies
-			new Asteroid(game, game.rgen.nextInt()%500 + 1500);										// Call asteroidBelt to spawn the next asteroid
-			asteroidToSpawn++;									// Increment asteroidToSpawn
-		}
 		if (enemyToSpawn > size && isClear()) {					// If all enemies have been spawned and the screen is clear
 			game.remove(upgradeLine);							// Remove any labels that may have shown during a powerup wave
 			game.remove(upgradeLabel);
-			if(waveCount == totalWaves) {						// If it is the final wave (as in the player beat the boss)
-				if(level == maxLevel) {							// If this was the last level
-					game.win = true;							// The player won the game
-				}
-				level++;										// Increment the level
-				waveCount = 0;									// Reset the waveCount
-				game.playerControl = false;						// Take control away from player to trigger next level
-			} else if(!game.lose){								// If it was not the final wave (and the player is not dead), get the next wave
-				getNewWave();									// Get a new wave
-				asteroidWave = false;							// set asteroidWave to false (so it can be triggered again
-				asteroidToSpawn = 0;							// Reset asteroidToSpawn
-			}
-		}
-		if(game.rgen.nextInt()%3500 == 0 && game.powers.isEmpty()) {		// Every time update() is called, there is a 1/600 chance of triggering an asteroidWave
-			asteroidWave = true;
+			setFinished(true);
 		}
 	}
 
@@ -721,10 +678,35 @@ public class Wave {
 		}
 	}
 	// Getters
-	public int getLevel() {
-		return level;
+	public boolean isFinished() {
+		return finished;
 	}
-	public int getMaxLevel() {
-		return maxLevel;
+
+	public void setFinished(boolean finished) {
+		this.finished = finished;
+	}
+
+	public boolean isUpgradeWave() {
+		return upgradeWave;
+	}
+
+	public void setUpgradeWave(boolean upgradeWave) {
+		this.upgradeWave = upgradeWave;
+	}
+
+	public int getSelectedWave() {
+		return selectedWave;
+	}
+
+	public void setSelectedWave(int selectedWave) {
+		this.selectedWave = selectedWave;
+	}
+
+	public boolean isBossWave() {
+		return bossWave;
+	}
+
+	public void setBossWave(boolean bossWave) {
+		this.bossWave = bossWave;
 	}
 }

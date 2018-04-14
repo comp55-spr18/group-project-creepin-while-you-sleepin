@@ -77,7 +77,7 @@ public class GamePane extends GraphicsPane {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		if(!program.paused) {
-			if(!program.player.isDestroyed() && program.playerControl) {
+			if(!program.player.isDestroyed() && !program.level.isFinished()) {
 				if(e.getButton() == MouseEvent.BUTTON1) {
 					program.player.setShooting(true);
 				}
@@ -102,7 +102,7 @@ public class GamePane extends GraphicsPane {
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		if(!program.paused && !program.player.isDestroyed() && program.playerControl) {
+		if(!program.paused && !program.player.isDestroyed() && !program.level.isFinished()) {
 			if(e.getButton() == MouseEvent.BUTTON1) {
 				program.player.setShooting(false);
 			}
