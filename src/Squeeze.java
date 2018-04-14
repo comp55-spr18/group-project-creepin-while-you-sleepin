@@ -18,11 +18,12 @@ public class Squeeze extends Ship {
 		setyDir(0);
 		setSpeed(2);
 		setPoints(100);
-		setBulletDamage(1);
-		setBulletSpeed(10);
-		setBulletSize(15);
 		setCollisionDamage(1);
 		setTrail(new FireTrail(this));
+		setBeamHeight(100);
+		setBeamDuration(65);
+		setBeamWarningDuration(60);
+		setBeamDamage(1);
 	}
 	@Override
 	public void move() {
@@ -38,7 +39,7 @@ public class Squeeze extends Ship {
 	public void shoot() {
 		if(canShoot()) {
 			setCanShoot(false);
-			Projectile newProj = new Beam(this, getGunLocation()[1]);
+		 new Beam(this, getGunLocation()[0]);
 			getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);
 		} else {
 			setCooldown(getCooldown() + 1);

@@ -20,7 +20,7 @@ public class HeavyWeightEnemy extends Ship {
 		setCollisionDamage(1);
 		setBulletDamage(3);
 		setBulletSpeed(10);
-		setBulletSize(50);
+		setBulletSize(200);
 		setTrail(new FireTrail(this));
 	}
 	@Override

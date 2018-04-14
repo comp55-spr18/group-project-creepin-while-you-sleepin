@@ -64,7 +64,7 @@ public class Wave {
 		enemyToSpawn = 0;						// Reset the enemy to spawn (we set it to -1 so that it reads the delay and size of the wave but doesn't spawn anything)
 		if(selectedDifficulty == 0) {								// If the difficulty of the new wave is hard
 			while(selectedWave == prevWave) {
-				selectedWave = Math.abs(game.rgen.nextInt()%1);			// Randomly select one of the easy waves (currently hard1() and Drone())
+				selectedWave = Math.abs(game.rgen.nextInt()%10);			// Randomly select one of the easy waves (currently hard1() and Drone())
 			}
 		} else {													// If the wave is easy
 			while(selectedWave == prevWave) {
@@ -115,32 +115,34 @@ public class Wave {
 				}
 			} else {							// If the wave difficulty is hard
 				switch(selectedWave) {			// Switch statement for all the hard waves
-				case 0:
-					hard1();
-				
-					break;
-				case 1:
-					hard2();
-					
-					break;
-				case 2:
-					hard3();
-					
-					break;
-				case 3:
-					hard4();
-					
-					break;
-				case 4:
-					hard5();
-					
-					break;
-				case 5:
-					hard6();
-					break;
-				case 6:
+//				case 0:
+//					hard1();
+//				
+//					break;
+//				case 1:
+//					hard2();
+//					
+//					break;
+//				case 2:
+//					hard3();
+//					
+//					break;
+//				case 3:
+//					hard4();
+//					
+//					break;
+//				case 4:
+//					hard5();
+//					
+//					break;
+//				case 5:
+//					hard6();
+//					break;
+//				case 6:
+//					hard7();
+//					break;
+				default:
 					hard7();
-					break;
 				}
 			}
 		} else if(waveCount%upgradeMod == 0 && waveCount != totalWaves) {
@@ -230,7 +232,7 @@ public class Wave {
 				delay = 50;
 				break;
 			case 1:
-				new Squeeze(game, 250);		// This is the first enemy it spawns
+				new BasicEnemy(game, 150);		// This is the first enemy it spawns
 				delay = 100;											// Sets the new delay between enemy spawns to be 100
 				break;
 			case 2:
@@ -679,6 +681,38 @@ public class Wave {
 			break;
 		}
 	}
+//	public void hard8() {
+//		switch(enemyToSpawn) {
+//		case 0:
+//			size = 5;
+//			delay = 100;
+//			break;
+//		case 1:
+//			new Squeeze(game,100);
+//			new Squeeze(game,800);
+//			delay = 200;
+//			break;
+//		case 2:
+//			new Boomerang(game,400);
+//			new Boomerang (game,600);
+//			delay=100;
+//			break;
+//		case 3:
+//			new Kamikazi(game,600);
+//			break;
+//		case 4: 
+//			new HeavyWeightEnemy(game,400);
+//			break;
+//		case 5:
+//			new SprayBall(game,400,500);
+//			break;
+//		case 6:
+//			new
+//		
+//			
+//		}
+//		
+//	}
 
 	public void firstBossWave() {			// Implements easy mode of a boss wave into the program
 		switch(enemyToSpawn) {
