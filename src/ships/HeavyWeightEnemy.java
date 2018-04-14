@@ -46,7 +46,7 @@ public class HeavyWeightEnemy extends Ship {
 	public void shoot() {
 		if(canShoot()) {
 			setCanShoot(false);
-			Projectile newProj = new Bullet(this, getGunLocation()[0], -1, 0);
+			Bullet newProj = new Bullet(this, getGunLocation()[0], -1, 0);
 			newProj.aimAtPlayer();
 			getGame().add(newProj.getSprite());
 			getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);

@@ -62,7 +62,7 @@ public class Boss extends Ship {
 	public void shoot() { //shoot is constructed to shoot multiple straight bullets at the player
 		if(canShoot()) {
 			setCanShoot(false);
-			Projectile newProj = new Bullet(this, getGunLocation()[getSelectedGun()], -1, 0);
+			Bullet newProj = new Bullet(this, getGunLocation()[getSelectedGun()], -1, 0);
 			newProj.aimAtPlayer();
 			setSelectedGun((getSelectedGun() + 1)%2);
 			if(getHealth() < 50 && counter%10 == 0) {

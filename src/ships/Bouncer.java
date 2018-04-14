@@ -1,7 +1,5 @@
 package ships;
-
 import java.awt.Color;
-
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 import game.Game;
@@ -52,7 +50,7 @@ public class Bouncer extends Ship {
 	public void shoot() {
 		if (canShoot()) {
 			setCanShoot(false);
-			Projectile newProj = new Bullet(this, getGunLocation()[0], -1, 0);
+			Bullet newProj = new Bullet(this, getGunLocation()[0], -1, 0);
 			newProj.aimAtPlayer();
 			getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);
 		} else {

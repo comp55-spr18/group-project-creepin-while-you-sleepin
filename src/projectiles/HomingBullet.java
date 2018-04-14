@@ -3,7 +3,7 @@ import acm.graphics.GPoint;
 import ships.PlayerShip;
 import ships.Ship;
 
-public class HomingBullet extends Projectile {
+public class HomingBullet extends Bullet {
 	private int gracePeriod = 0;		// Initial timer on the bullet
 	private int maxGracePeriod = 20;	// After gracePeriod passes this value, the projectile can hit enemies
 	private int disengage = 150;		// After gracePeriod passes this value, the missile will stop homing

@@ -8,7 +8,7 @@ import ships.PlayerShip;
 import ships.Ship;
 
 public class FireTrail {
-	private ArrayList<Projectile> trail;	// The ArrayList the projectiles are stored in
+	private ArrayList<Emitter> trail;	// The ArrayList the projectiles are stored in
 	private Ship ship;						// The ship the trail belongs to
 	private double xDir;						// The x direction of the trail
 	private double yDir;
@@ -46,17 +46,17 @@ public class FireTrail {
 		}
 		projCount = 15;
 		colorScale = 25;
-		trail = new ArrayList<Projectile>();
+		trail = new ArrayList<Emitter>();
 	}
 	// This function moves all the projectiles in the arraylist as well as updates the color and size each time
 	public void move() {
 		if(!ship.isDestroyed()) {							// If the ship is not destroyed
 			location = new GPoint(ship.getSprite().getX() + ship.getSprite().getWidth()/2 + xOffset, ship.getSprite().getY()+ship.getSprite().getHeight()/2);	// Set the location relative to the ship
-			Projectile trailProj = new Emitter(ship, location, xDir, yDir, speed, Color.RED, size);	// Create an emitter with the proper values
+			Emitter trailProj = new Emitter(ship, location, xDir, yDir, speed, Color.RED, size);	// Create an emitter with the proper values
 			trail.add(trailProj);							// Add the new emitter to the arraylist
 			ship.getGame().add(trailProj.getSprite());		// Add the emitter's sprite to the game
 		}
-		for(Projectile tr : trail) {						// For each projectile in the arraylist
+		for(Emitter tr : trail) {						// For each projectile in the arraylist
 			tr.move();										// Move it
 			tr.getSprite().setSize(tr.getSprite().getWidth()-(shrinkScale/length), tr.getSprite().getWidth()-(shrinkScale/length));		// Set the size to be smaller
 			tr.getSprite().setLocation(tr.getSprite().getX(), tr.getSprite().getY()+((shrinkScale/2)/length));							// Set the position to be a little lower so it's centered

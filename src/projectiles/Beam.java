@@ -25,12 +25,12 @@ public class Beam extends Projectile {
 		duration = ship.getBeamDuration();
 		rateChange = maxHeight/120;
 		rate = 15*rateChange;
-		ship.getGame().remove(getSprite());
 		if(ship instanceof PlayerShip) {
 			setSprite(new GRect(gunLoc.getX(), gunLoc.getY(), 2000, 1));
 		} else {
 			setSprite(new GRect(gunLoc.getX() - 2000, gunLoc.getY(), 2000, 1));
 		}
+		getGame().projectiles.add(this);
 		getGame().add(sprite);
 		getBeamSprite().setColor(Color.RED);
 		getBeamSprite().setFilled(true);

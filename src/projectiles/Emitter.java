@@ -4,7 +4,7 @@ import java.awt.Color;
 import acm.graphics.GPoint;
 import ships.Ship;
 // This class exists just for fancy effects, it is a bullet that does no damage
-public class Emitter extends Projectile {
+public class Emitter extends Bullet {
 	public Emitter(Ship ship, GPoint gunLoc, double xD, double yD, double spd, Color bulletColor, int size) {
 		super(ship, gunLoc, xD, yD);
 		setSpeed(spd);
