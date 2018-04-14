@@ -91,27 +91,27 @@ public class Wave {
 			} else {							// If the wave difficulty is hard
 				switch(selectedWave) {			// Switch statement for all the hard waves
 				case 0:
-					hard7();
-					
+					hard1();
+				
 					break;
 				case 1:
-					hard7();
+					hard2();
 					
 					break;
 				case 2:
-					hard7();
+					hard3();
 					
 					break;
 				case 3:
-					hard7();
+					hard4();
 					
 					break;
 				case 4:
-					hard7();
+					hard5();
 					
 					break;
 				case 5:
-					hard7();
+					hard6();
 					break;
 				case 6:
 					hard7();
@@ -122,6 +122,7 @@ public class Wave {
 			upgradeWave();						// Call the upgrade wave
 		} else {								// If it is the final wave
 			firstBossWave();						// Call the boss wave
+			//secondBossWave();                 //IMPLEMENTATION FOR SECOND PHASE NEEDS TO BE CHECKED
 		}
 		enemyToSpawn++;							// Increment the enemyToSpawn
 	}
@@ -505,7 +506,7 @@ public class Wave {
 	public void hard4() {			// Generates an armada
 		switch(enemyToSpawn) {
 			case 0:
-				size = 15;
+				size = 4;
 				delay = 100;
 				break;
 			case 1:
@@ -536,7 +537,7 @@ public class Wave {
 	public void hard5() {			// Generates a swarmCaller wave
 		switch(enemyToSpawn) {
 			case 0:
-				size = 5;
+				size = 3;
 				delay = 100;
 				break;
 			case 1:
@@ -624,6 +625,7 @@ public class Wave {
 			new SawedOff(game, 300);
 			new SawedOff(game, 500);
 			new SawedOff(game, 700);
+			new SawedOff(game, 900);
 			delay = 300;
 			break;
 		case 6:			
