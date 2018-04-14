@@ -3,7 +3,7 @@ import java.awt.*;
 
 import acm.graphics.*;
 import game.Game;
-import main.Object;
+import misc.Object;
 import projectiles.FireTrail;
 
 public abstract class Ship extends Object {

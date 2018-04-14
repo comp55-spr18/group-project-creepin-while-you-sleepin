@@ -1,6 +1,6 @@
 package projectiles;
 import acm.graphics.*;
-import main.Object;
+import misc.Object;
 import ships.*;
 
 // This is an abstract class so all functions declared in this class can be overwritten in a subclass if you'd like

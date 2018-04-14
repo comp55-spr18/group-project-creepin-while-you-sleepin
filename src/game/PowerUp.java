@@ -1,7 +1,7 @@
 package game;
 import java.awt.Color;
 
-import main.GButton;
+import misc.GButton;
 
 public class PowerUp {
 	Game game;

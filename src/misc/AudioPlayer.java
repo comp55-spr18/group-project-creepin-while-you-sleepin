@@ -1,4 +1,4 @@
-package main;
+package misc;
 
 /*
  * Typical usage of the AudioPlayer.java

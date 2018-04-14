@@ -9,12 +9,12 @@ import java.awt.Toolkit;
 
 import acm.graphics.GImage;
 import acm.graphics.GLabel;
-import main.AudioPlayer;
-import main.BetweenPane;
-import main.EndPane;
-import main.GamePane;
-import main.GraphicsApplication;
-import main.MenuPane;
+import misc.AudioPlayer;
+import misc.BetweenPane;
+import misc.EndPane;
+import misc.GamePane;
+import misc.GraphicsApplication;
+import misc.MenuPane;
 import projectiles.Projectile;
 import ships.PlayerShip;
 import ships.Ship;
