@@ -1,7 +1,7 @@
 import java.awt.Color;
 
 public class PowerUp {
-	MainApplication game;
+	Game game;
 	GButton sprite;
 	int height = 75;
 	int width = 300;
@@ -29,11 +29,11 @@ public class PowerUp {
 	public void onCollision() {
 	}
 
-	public MainApplication getGame() {
+	public Game getGame() {
 		return game;
 	}
 
-	public void setGame(MainApplication game) {
+	public void setGame(Game game) {
 		this.game = game;
 	}
 
@@ -47,7 +47,7 @@ public class PowerUp {
 }
 
 class FireRateUp extends PowerUp {
-	FireRateUp(MainApplication game, double x, double y) {
+	FireRateUp(Game game, double x, double y) {
 		setGame(game);
 		double xPos = game.WINDOW_WIDTH/(1920/x);
 		double yPos = game.WINDOW_HEIGHT/(1080/y);
@@ -70,7 +70,7 @@ class FireRateUp extends PowerUp {
 }
 
 class BulletSizeUp extends PowerUp {
-	BulletSizeUp(MainApplication game, double x, double y) {
+	BulletSizeUp(Game game, double x, double y) {
 		setGame(game);
 		double xPos = game.WINDOW_WIDTH/(1920/x);
 		double yPos = game.WINDOW_HEIGHT/(1080/y);
@@ -88,7 +88,7 @@ class BulletSizeUp extends PowerUp {
 }
 
 class BulletSpeedUp extends PowerUp {
-	BulletSpeedUp(MainApplication game, double x, double y) {
+	BulletSpeedUp(Game game, double x, double y) {
 		setGame(game);
 		double xPos = game.WINDOW_WIDTH/(1920/x);
 		double yPos = game.WINDOW_HEIGHT/(1080/y);
@@ -106,7 +106,7 @@ class BulletSpeedUp extends PowerUp {
 }
 
 class BulletDamageUp extends PowerUp {
-	BulletDamageUp(MainApplication game, double x, double y) {
+	BulletDamageUp(Game game, double x, double y) {
 		setGame(game);
 		double xPos = game.WINDOW_WIDTH/(1920/x);
 		double yPos = game.WINDOW_HEIGHT/(1080/y);
@@ -124,7 +124,7 @@ class BulletDamageUp extends PowerUp {
 }
 
 class BulletUp extends PowerUp {
-	BulletUp(MainApplication game, double x, double y) {
+	BulletUp(Game game, double x, double y) {
 		setGame(game);
 		double xPos = game.WINDOW_WIDTH/(1920/x);
 		double yPos = game.WINDOW_HEIGHT/(1080/y);
@@ -142,7 +142,7 @@ class BulletUp extends PowerUp {
 }
 
 class HealthUp extends PowerUp {
-	HealthUp(MainApplication game, double x, double y) {
+	HealthUp(Game game, double x, double y) {
 		setGame(game);
 		double xPos = game.WINDOW_WIDTH/(1920/x);
 		double yPos = game.WINDOW_HEIGHT/(1080/y);
@@ -162,7 +162,7 @@ class HealthUp extends PowerUp {
 }
 
 class ShieldUp extends PowerUp {
-	ShieldUp(MainApplication game, double x, double y) {
+	ShieldUp(Game game, double x, double y) {
 		setGame(game);
 		double xPos = game.WINDOW_WIDTH/(1920/x);
 		double yPos = game.WINDOW_HEIGHT/(1080/y);
@@ -187,7 +187,7 @@ class ShieldUp extends PowerUp {
 }
 
 class Exit extends PowerUp {
-	Exit(MainApplication game, double x, double y) {
+	Exit(Game game, double x, double y) {
 		setGame(game);
 		double xPos = game.WINDOW_WIDTH/(1920/x);
 		double yPos = game.WINDOW_HEIGHT/(1080/y);

@@ -1,7 +1,8 @@
+
 import acm.graphics.GPoint;
 
 public class HomingEnemy extends BasicEnemy {
-	public HomingEnemy(MainApplication game, double y) {
+	public HomingEnemy(Game game, double y) {
 		super(game, y);
 		setGunLocation(new GPoint[] {new GPoint()});
 		setBulletSize(40);

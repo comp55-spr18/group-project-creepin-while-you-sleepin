@@ -1,12 +1,12 @@
 public class Level {
-	MainApplication game;
+	Game game;
 	private int totalWaves;					// The total number of waves the player must fight (including the boss wave)
 	private int currWave;					// The current wave the player is on
 	private int prevWave;					// The previous wave that was generated
 	private int upgradeMod;					// How often upgrade waves occur
 	private Wave wave;						// The wave object generating waves
 	private boolean finished;
-	public Level(MainApplication g) {
+	public Level(Game g) {
 		game = g;
 		currWave = 1;
 		totalWaves = 7;
@@ -39,7 +39,7 @@ public class Level {
 		wave.update();
 	}
 
-	public MainApplication getGame() {
+	public Game getGame() {
 		return game;
 	}
 
@@ -63,7 +63,7 @@ public class Level {
 		return wave;
 	}
 
-	public void setGame(MainApplication game) {
+	public void setGame(Game game) {
 		this.game = game;
 	}
 

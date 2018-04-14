@@ -31,7 +31,7 @@ public abstract class Ship extends Object {
 	private int shots;
 	private boolean eventEnemy;
 	
-	Ship(MainApplication game) {
+	Ship(Game game) {
 		setGame(game);
 		setEventEnemy(false);
 		if(!(this instanceof PlayerShip)) {
@@ -290,11 +290,11 @@ public abstract class Ship extends Object {
 		this.selectedGun = selectedGun;
 	}
 
-	public MainApplication getGame() {
+	public Game getGame() {
 		return game;
 	}
 
-	public void setGame(MainApplication game) {
+	public void setGame(Game game) {
 		this.game = game;
 	}
 

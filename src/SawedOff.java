@@ -1,11 +1,13 @@
+
 import java.awt.Color;
+
 
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
 public class SawedOff extends Ship {
 	private boolean triggered;
-	public SawedOff(MainApplication game, double y) {
+	public SawedOff(Game game, double y) {
 		super(game);
 		setShots(2);
 		setMaxHealth(5);

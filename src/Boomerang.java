@@ -1,10 +1,12 @@
+
 import java.awt.Color;
+
 
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
 public class Boomerang extends Ship {
-	public Boomerang(MainApplication game, double y) {
+	public Boomerang(Game game, double y) {
 		super(game);
 		setHealth(2);
 		setCooldown(0);

@@ -10,7 +10,7 @@ public class PlayerShip extends Ship {
 	private boolean canShootAlt;
 	private int altCooldown;
 	private int altMaxCooldown;
-	public PlayerShip(MainApplication game) {
+	public PlayerShip(Game game) {
 		super(game);
 		shooting = false;
 		shootingAlt = false;

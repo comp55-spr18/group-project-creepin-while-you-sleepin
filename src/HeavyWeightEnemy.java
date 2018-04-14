@@ -1,9 +1,10 @@
+
 import java.awt.Color;
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
 public class HeavyWeightEnemy extends Ship {
-	public HeavyWeightEnemy(MainApplication game, double y) {
+	public HeavyWeightEnemy(Game game, double y) {
 		super(game);
 		setMaxHealth(5);
 		setCooldown(325);

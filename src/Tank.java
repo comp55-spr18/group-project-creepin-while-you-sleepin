@@ -1,9 +1,10 @@
+
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
 public class Tank extends BasicEnemy {
 	
-	public Tank(MainApplication game, double y) {
+	public Tank(Game game, double y) {
 		super(game, y);
 		setMaxHealth(30);		// They soak damage for other ships
 		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, y));

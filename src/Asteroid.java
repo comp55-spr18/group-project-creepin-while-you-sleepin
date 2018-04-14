@@ -4,7 +4,7 @@ import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
 public class Asteroid extends Ship {
-	public Asteroid(MainApplication game, double x) {
+	public Asteroid(Game game, double x) {
 		super(game);
 		setHealth(1);
 		setCooldown(0);

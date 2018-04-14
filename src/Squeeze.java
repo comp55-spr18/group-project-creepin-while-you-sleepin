@@ -1,10 +1,12 @@
+
 import java.awt.Color;
+
 
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
 public class Squeeze extends Ship {
-	public Squeeze(MainApplication game, double y) {
+	public Squeeze(Game game, double y) {
 		super(game);
 		setMaxHealth(5);
 		setCooldown(0);

@@ -1,9 +1,10 @@
+
 import java.awt.Color;
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
 public class Boss2 extends Ship {
-	public Boss2(MainApplication game, double y) {
+	public Boss2(Game game, double y) {
 		super(game);
 		setInvincible(false);
 		setMaxHealth(150);

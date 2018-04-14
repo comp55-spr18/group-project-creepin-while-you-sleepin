@@ -1,5 +1,5 @@
 public class Event {
-	MainApplication game;
+	Game game;
 	Wave wave;
 	private int selectedEvent;
 	private int eventSize;

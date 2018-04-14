@@ -1,3 +1,4 @@
+
 import acm.graphics.GImage;
 
 public class SwarmCaller extends BasicEnemy {
@@ -5,7 +6,7 @@ public class SwarmCaller extends BasicEnemy {
 	private int waveCall;
 	private double playery;
 	
-	public SwarmCaller(MainApplication game, double y) {
+	public SwarmCaller(Game game, double y) {
 		super(game, y);
 		setMaxHealth(20);		//very tough			
 		setCooldown(0);			

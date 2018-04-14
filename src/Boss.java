@@ -1,10 +1,11 @@
+
 import java.awt.Color;
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
 public class Boss extends Ship {
 	private int counter;
-	public Boss(MainApplication game, double y) {
+	public Boss(Game game, double y) {
 		super(game);
 		counter = 0;
 		setMaxHealth(150);
@@ -16,9 +17,6 @@ public class Boss extends Ship {
 		setBulletColor(Color.white);
 		setSize(500, 500);
 		setBulletColor(Color.RED);
-		setExplosion(new GImage("explosion.png"));
-		setDestroyed(false);
-		setDestroyedCounter(0);
 		setxDir(-1);
 		setyDir(0);
 		setSpeed(4);

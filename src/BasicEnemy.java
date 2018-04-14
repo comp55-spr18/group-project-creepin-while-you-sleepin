@@ -1,3 +1,4 @@
+
 import java.awt.Color;
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
@@ -5,7 +6,7 @@ import acm.graphics.GPoint;
 public class BasicEnemy extends Ship {
 	double i = -1.5;
 	double j = -0.05;
-	public BasicEnemy(MainApplication game, double y) {
+	public BasicEnemy(Game game, double y) {
 		super(game);
 		setHealth(2);
 		setCooldown(500);

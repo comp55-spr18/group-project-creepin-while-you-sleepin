@@ -1,7 +1,7 @@
 import acm.graphics.GObject;
 
 public abstract class Object {
-	protected MainApplication game;
+	protected Game game;
 	protected GObject sprite;
 	protected double xDir;
 	protected double yDir;
@@ -13,10 +13,10 @@ public abstract class Object {
 	public void checkCollision() {}
 	public void onCollision() {}
 	public void update() {}
-	public MainApplication getGame() {
+	public Game getGame() {
 		return game;
 	}
-	public void setGame(MainApplication game) {
+	public void setGame(Game game) {
 		this.game = game;
 	}
 	public GObject getSprite() {

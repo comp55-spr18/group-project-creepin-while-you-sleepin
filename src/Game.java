@@ -10,7 +10,7 @@ import acm.graphics.GImage;
 import acm.graphics.GLabel;
 
 @SuppressWarnings("serial")
-public class MainApplication extends GraphicsApplication {
+public class Game extends GraphicsApplication {
 	private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	final int WINDOW_WIDTH = (int) screenSize.getWidth();
 	final int WINDOW_HEIGHT = (int) screenSize.getHeight();

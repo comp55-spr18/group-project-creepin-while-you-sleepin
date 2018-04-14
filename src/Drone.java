@@ -1,3 +1,4 @@
+
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
@@ -6,7 +7,7 @@ public class Drone extends BasicEnemy {
 	private double topBot;
 	private double droneCurve;
 	
-	public Drone(MainApplication game, double y) {
+	public Drone(Game game, double y) {
 		super(game, y);
 		setMaxHealth(1);				// They're weak enemies
 		setCooldown(920);			// I want them to fire once then never again, dealt with by long cd

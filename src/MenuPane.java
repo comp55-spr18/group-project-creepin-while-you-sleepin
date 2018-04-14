@@ -4,14 +4,14 @@ import acm.graphics.GImage;
 import acm.graphics.GObject;
 
 public class MenuPane extends GraphicsPane {
-	private MainApplication program; // you will use program to get access to
+	private Game program; // you will use program to get access to
 	// all of the GraphicsProgram calls
 	private GButton rect;
 	private GButton rect2;
 	private GButton rect3;
 	private GImage background;
 
-	public MenuPane(MainApplication app) {
+	public MenuPane(Game app) {
 		super();
 		program = app;
 		double scaleX = program.WINDOW_WIDTH/(1920/100.0);

@@ -1,10 +1,12 @@
+
 import java.awt.Color;
+
 
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
-public class Kamikazi extends Ship {
-	public Kamikazi(MainApplication game, double y) {
+public class Kamikaze extends Ship {
+	public Kamikaze(Game game, double y) {
 		super(game);
 		setMaxHealth(2);
 		setCooldown(325);

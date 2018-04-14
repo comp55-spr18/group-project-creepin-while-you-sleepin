@@ -4,14 +4,14 @@ import acm.graphics.GLabel;
 import acm.graphics.GObject;
 
 public class EndPane extends GraphicsPane {
-	private MainApplication program; // you will use program to get access to
+	private Game program; // you will use program to get access to
 	// all of the GraphicsProgram calls
 	private GButton rect;
 	private GButton rect2;
 	private GLabel endLabel;
 //	private GImage background;
 
-	public EndPane(MainApplication app) {
+	public EndPane(Game app) {
 		super();
 		program = app;
 		double scaleX = program.WINDOW_WIDTH/(1920/100.0);

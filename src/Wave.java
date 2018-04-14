@@ -4,7 +4,7 @@ import acm.graphics.GLabel;
 import acm.graphics.GLine;
 
 public class Wave {
-	private MainApplication game;			// The game
+	private Game game;			// The game
 	private Level level;
 	private int counter;					// Counter to keep track of time between waves
 	private int enemyToSpawn;				// The next enemy the wave wants to spawn
@@ -109,32 +109,31 @@ public class Wave {
 				}
 			} else {							// If the wave difficulty is hard
 				switch(selectedWave) {			// Switch statement for all the hard waves
-//				case 0:
-//					hard1();
-//				
-//					break;
-//				case 1:
-//					hard2();
-//					
-//					break;
-//				case 2:
-//					hard3();
-//					
-//					break;
-//				case 3:
-//					hard4();
-//					
-//					break;
-//				case 4:
-//					hard5();
-//					
-//					break;
-//				case 5:
-//					hard6();
-//					break;
-//				case 6:
-//					hard7();
-//					break;
+				case 0:
+					hard1();
+					break;
+				case 1:
+					hard2();
+					
+					break;
+				case 2:
+					hard3();
+					
+					break;
+				case 3:
+					hard4();
+					
+					break;
+				case 4:
+					hard5();
+					
+					break;
+				case 5:
+					hard6();
+					break;
+				case 6:
+					hard7();
+					break;
 				default:
 					hard8();
 				}
@@ -229,7 +228,7 @@ public class Wave {
 				delay = 100;
 				break;
 			case 2:
-				new Kamikazi(game, 900);
+				new Kamikaze(game, 900);
 				break;
 			case 3:
 				new SprayBall(game, 300, 1000);
@@ -397,7 +396,7 @@ public class Wave {
 			new HomingEnemy(game, 700);
 			break;
 		case 4:
-			new Kamikazi(game, 200);
+			new Kamikaze(game, 200);
 			break;
 		case 5:
 			new SprayBall(game, 1080/2, 1920/2);
@@ -490,7 +489,7 @@ public class Wave {
 					case 1:					// Otherwise spawn this one (note that this one gets called first)
 						new Drone(game, 100);
 						if(enemyToSpawn%5 == 0) {
-							new Kamikazi(game, 1080/2);
+							new Kamikaze(game, 1080/2);
 						}
 						break;
 				}
@@ -639,10 +638,10 @@ public class Wave {
 			delay = 300;
 			break;
 		case 6:			
-			new Kamikazi(game, 100);
-			new Kamikazi(game, 300);
-			new Kamikazi(game, 500);
-			new Kamikazi(game, 700);
+			new Kamikaze(game, 100);
+			new Kamikaze(game, 300);
+			new Kamikaze(game, 500);
+			new Kamikaze(game, 700);
 			break;
 		}
 	}
@@ -663,7 +662,7 @@ public class Wave {
 			delay=100;
 			break;
 		case 3:
-			new Kamikazi(game,600);
+			new Kamikaze(game,600);
 			break;
 		case 4: 
 			new HeavyWeightEnemy(game,400);
@@ -756,11 +755,11 @@ public class Wave {
 		this.bossWave = bossWave;
 	}
 
-	public MainApplication getGame() {
+	public Game getGame() {
 		return game;
 	}
 
-	public void setGame(MainApplication game) {
+	public void setGame(Game game) {
 		this.game = game;
 	}
 }

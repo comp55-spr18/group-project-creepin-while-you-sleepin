@@ -6,13 +6,13 @@ import acm.graphics.GLabel;
 import acm.graphics.GObject;
 
 public class BetweenPane extends GraphicsPane {
-	private MainApplication program;
+	private Game program;
 	private GButton rect;
 	private GButton rect2;
 	private GLabel levelLabel;
 	private GImage background;
 
-	public BetweenPane(MainApplication app) {
+	public BetweenPane(Game app) {
 		super();
 		program = app;
 		double scaleX = program.WINDOW_WIDTH/(1920/100.0);

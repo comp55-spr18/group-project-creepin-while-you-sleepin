@@ -1,3 +1,4 @@
+
 import acm.graphics.GImage;
 import acm.graphics.GObject;
 
@@ -6,7 +7,7 @@ public class Seeker extends BasicEnemy {
 	private double playerx;
 	private double playery;
 	
-	public Seeker(MainApplication game, double y) {
+	public Seeker(Game game, double y) {
 		super(game, y);
 		setMaxHealth(6);				// They're tough enemies			
 		setSprite(new GImage("sprites/enemy2.png", getGame().WINDOW_WIDTH, y));

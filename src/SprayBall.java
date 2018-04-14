@@ -1,3 +1,4 @@
+
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
@@ -6,7 +7,7 @@ public class SprayBall extends BasicEnemy {
 	private int delay = 0;
 	private double ballDet = getGame().WINDOW_WIDTH/3; //recommended detonation point
 	
-	public SprayBall(MainApplication game, double y, double detonation) {
+	public SprayBall(Game game, double y, double detonation) {
 		super(game, y);
 		setMaxHealth(50);
 		setCooldown(700); 

@@ -1,11 +1,13 @@
+
 import java.awt.Color;
+
 
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
 public class Bouncer extends Ship {
 
-	public Bouncer(MainApplication game, double y) {
+	public Bouncer(Game game, double y) {
 		super(game);
 		setShots(2);
 		setMaxHealth(5);

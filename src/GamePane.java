@@ -5,11 +5,11 @@ import acm.graphics.GImage;
 import acm.graphics.GLabel;
 
 public class GamePane extends GraphicsPane {
-	private MainApplication program;
+	private Game program;
 	private GImage background;
 	private GLabel pauseLabel;
 
-	public GamePane(MainApplication app) {
+	public GamePane(Game app) {
 		this.program = app;
 		pauseLabel = new GLabel("PAUSED (Click on player ship to resume)");
 		pauseLabel.setFont("Arial-Bold-40");
