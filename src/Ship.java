@@ -33,6 +33,7 @@ public abstract class Ship {
 	private int beamWarningDuration;
 	private int beamDamage;
 	private int shots;
+	private boolean eventEnemy;
 	
 	// These attributes only apply to enemy ships
 	private double xDir;			// Since each move() is different for each ship, these do whatever you make them do
@@ -41,7 +42,10 @@ public abstract class Ship {
 	
 	Ship(MainApplication game) {
 		setGame(game);
-		game.enemies.add(this);
+		setEventEnemy(false);
+		if(!(this instanceof PlayerShip)) {
+			game.enemies.add(this);
+		}
 		setDestroyed(false);
 		setInvincible(false);
 		setIframe(0);				// Iframes for any ship but the player only effect beam damage detection
@@ -451,5 +455,13 @@ public abstract class Ship {
 
 	public void setBeamWarningDuration(int beamWarningDuration) {
 		this.beamWarningDuration = beamWarningDuration;
+	}
+
+	public boolean isEventEnemy() {
+		return eventEnemy;
+	}
+
+	public void setEventEnemy(boolean eventEnemy) {
+		this.eventEnemy = eventEnemy;
 	}
 }

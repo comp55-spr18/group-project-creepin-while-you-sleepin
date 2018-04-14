@@ -31,7 +31,7 @@ public class BetweenPane extends GraphicsPane {
 	@Override
 	public void showContents() {
 		program.add(background);
-		levelLabel.setLabel("LEVEL " + program.wave.getLevel());
+		levelLabel.setLabel("LEVEL " + program.currLevel);
 		levelLabel.setLocation(program.WINDOW_WIDTH/2 - levelLabel.getWidth()/2, program.WINDOW_HEIGHT/2 - levelLabel.getHeight()/2);
 		program.add(levelLabel);
 		program.add(rect);
@@ -51,7 +51,6 @@ public class BetweenPane extends GraphicsPane {
 		GObject obj = program.getElementAt(e.getX(), e.getY());
 		if (obj == rect) {
 			program.switchToGame();
-			program.playerControl = true;
 			program.player.move(e);
 			program.timer.start();
 		}

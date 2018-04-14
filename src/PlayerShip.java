@@ -15,8 +15,8 @@ public class PlayerShip extends Ship {
 		shooting = false;
 		shootingAlt = false;
 		canShootAlt = false;
-		altCooldown = 225;
-		altMaxCooldown = 250;
+		altCooldown = 325;
+		altMaxCooldown = 350;
 		setIframe(0);
 		setMaxIframe(50);
 		setShots(1);
@@ -40,8 +40,9 @@ public class PlayerShip extends Ship {
 		getGame().add(getSprite());
 		setTrail(new FireTrail(this));
 	}
+
 	public void move(MouseEvent e) {		// Moves the player's gun location to the location of the ship
-		if(!isDestroyed() && getGame().playerControl) {
+		if(!isDestroyed() && !getGame().level.isFinished()) {
 			getSprite().setLocation(new GPoint(e.getX() - getSprite().getWidth()/2, e.getY() - getSprite().getHeight()/2));
 			double x = getSprite().getX();
 			double y = getSprite().getY();

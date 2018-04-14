@@ -27,15 +27,6 @@ public class Boss2 extends Ship {
 		setBulletSize(80);
 		setBulletSpeed(10);
 		setSelectedGun(0);
-		switch(game.wave.getLevel()) {
-			case 2:
-				setMaxHealth(300);
-				setBulletDamage(3);
-				setBulletSize(80);
-				setShielded(true);
-				setShieldCooldown(0);
-				setShieldMaxCooldown(500);
-		}
 		setTrail(new FireTrail(this));
 	}
 	
