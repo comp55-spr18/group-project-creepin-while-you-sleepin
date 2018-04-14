@@ -179,6 +179,9 @@ public class Wave {
 					return false;
 				}
 			}
+			if(enemyToSpawn <= size) {
+				return false;
+			}
 			return true;
 		} else {
 			return false;
