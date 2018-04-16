@@ -11,7 +11,9 @@ public class MenuPane extends GraphicsPane {
 	private GButton rect;
 	private GButton rect2;
 	private GButton rect3;
+	private GButton rect4;
 	private GImage background;
+	private GImage instructions;
 
 	public MenuPane(Game app) {
 		super();
@@ -21,11 +23,15 @@ public class MenuPane extends GraphicsPane {
 		rect = new GButton("EASY", 4*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
 		rect3 = new GButton("EXIT", .5*scaleX, .5*scaleY, scaleX, scaleY);
 		rect2 = new GButton("HARD", 13*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
+		rect4 = new GButton("HARD", 7*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
 		rect.setFillColor(Color.GREEN);
 		rect2.setFillColor(Color.RED);
 		rect3.setFillColor(Color.WHITE);
+		rect4.setFillColor(Color.PINK);
 		background = new GImage("mainmenu.jpg");
 		background.setSize(program.getWidth(), program.getHeight());
+		instructions = new GImage("instructionspage.jpg");
+		instructions.setSize(program.getWidth(), program.getHeight());
 	}
 
 	@Override
@@ -34,6 +40,7 @@ public class MenuPane extends GraphicsPane {
 		program.add(rect);
 		program.add(rect2);
 		program.add(rect3);
+		program.add(rect4);
 	}
 
 	@Override
@@ -42,6 +49,7 @@ public class MenuPane extends GraphicsPane {
 		program.remove(rect);
 		program.remove(rect2);
 		program.remove(rect3);
+		program.remove(rect4);
 	}
 	
 	@Override
@@ -59,6 +67,11 @@ public class MenuPane extends GraphicsPane {
 		}
 		if (obj == rect3) {
 			System.exit(0);
+		}
+		if (obj == rect4) {
+			program.add(instructions);
+			//REMOVE??
+			//program.switchToMenu();
 		}
 	}
 }
