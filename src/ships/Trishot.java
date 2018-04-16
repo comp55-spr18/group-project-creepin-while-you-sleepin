@@ -29,7 +29,6 @@ public class Trishot extends BasicEnemy {
 			new Bullet(this, getGunLocation()[0], -1, 0);
 			new Bullet(this, getGunLocation()[0], -1, .2);
 			getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);
-			//getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);
 		} else {
 			setCooldown(getCooldown() + 1);
 			if(getCooldown() == getMaxCooldown()) {

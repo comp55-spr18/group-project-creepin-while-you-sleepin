@@ -44,6 +44,8 @@ public class PlayerShip extends Ship {
 		setPoints(0);
 		getGame().add(getSprite());
 		setShielded(true);
+		setShieldCooldown(0);
+		setShieldMaxCooldown(500);
 		setTrail(new FireTrail(this));
 	}
 
