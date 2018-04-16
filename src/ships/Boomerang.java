@@ -19,7 +19,6 @@ public class Boomerang extends Ship {
 		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT / (1080 / y)));
 		setBulletColor(Color.RED);
 		setSize(50, 50);
-		getSprite().setLocation(getSprite().getX(), getSprite().getY() - getSprite().getHeight() / 2);
 		setxDir(-1);
 		setyDir(0);
 		setSpeed(5);

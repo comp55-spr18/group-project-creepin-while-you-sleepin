@@ -4,29 +4,31 @@ import java.awt.Color;
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 import game.Game;
+import projectiles.Bullet;
 import projectiles.FireTrail;
-import projectiles.HomingBullet;
 
-public class HomingEnemy extends Ship {
-	public HomingEnemy(Game game, double y) {
+//Very similar to BasicEnemy, except I can tweak it without breaking other premade waves
+public class SimpleEnemy extends Ship {
+	public SimpleEnemy(Game game, double y) {
 		super(game);
-		setCooldown(500);
-		setMaxCooldown(575);
+		setCooldown(50);
+		setMaxCooldown(125);
+		setSpeed(4); //A little slower than normal		
+		setMaxHealth(2);
 		setCanShoot(false);
+		setGunLocation(new GPoint[] {new GPoint()});
 		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
 		setBulletColor(Color.RED);
-		setGunLocation(new GPoint[] {new GPoint()});
+		setSize(50, 50);
 		setxDir(-1);
 		setyDir(0);
-		setBulletSize(40);
-		setBulletDamage(2);
-		setBulletSpeed(8);
-		setMaxHealth(4);
-		setSpeed(4);
-		setPoints(200);
+		setPoints(100);
+		setBulletDamage(1);
+		setBulletSpeed(10);
+		setBulletSize(15);
 		setTrail(new FireTrail(this));
 	}
-
+	//Most basic move and shoot
 	@Override
 	public void move() {
 		getSprite().move(getxDir()*getSpeed(), getyDir()*getSpeed());
@@ -37,12 +39,12 @@ public class HomingEnemy extends Ship {
 			setDestroyed(true);
 		}
 	}
-
 	@Override
 	public void shoot() {
 		if(canShoot()) {
 			setCanShoot(false);
-			new HomingBullet(this, getGunLocation()[0], -1, 0);
+			Bullet newProj = new Bullet(this, getGunLocation()[0], -1, 0);
+			newProj.aimAtPlayer();
 			getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);
 		} else {
 			setCooldown(getCooldown() + 1);

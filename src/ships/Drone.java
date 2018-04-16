@@ -1,19 +1,20 @@
 package ships;
 
+import java.awt.Color;
+
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 import game.Game;
 import projectiles.Bullet;
 import projectiles.FireTrail;
-import projectiles.Projectile;
 
-public class Drone extends BasicEnemy {
-	private int lifetime = 0;
-	private double topBot;
-	private double droneCurve;
+public class Drone extends Ship {
+	private int lifetime = 0;	//They get removed based on lifetime being incremented
+	private double topBot;		//Decides if it's curving up or down
+	private double droneCurve;	//Set in constructor to determine curve amount
 	
 	public Drone(Game game, double y) {
-		super(game, y);
+		super(game);
 		setMaxHealth(1);				// They're weak enemies
 		setCooldown(920);			// I want them to fire once then never again, dealt with by long cd
 		setSprite(new GImage("sprites/enemy2.png", getGame().WINDOW_WIDTH, y));
@@ -34,7 +35,10 @@ public class Drone extends BasicEnemy {
 		else {
 			setyDir(-.3);
 		}
-		topBot = y;
+		topBot = y;						
+		setCanShoot(false);		
+		setBulletColor(Color.RED);		
+		setxDir(-1);								
 	}
 	// tweaked bullet speed
 	@Override

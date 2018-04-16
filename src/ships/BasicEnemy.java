@@ -7,14 +7,13 @@ import acm.graphics.GPoint;
 import game.Game;
 import projectiles.Bullet;
 import projectiles.FireTrail;
-import projectiles.Projectile;
 
 public class BasicEnemy extends Ship {
 	double i = -1.5;
 	double j = -0.05;
 	public BasicEnemy(Game game, double y) {
 		super(game);
-		setHealth(2);
+		setMaxHealth(2);
 		setCooldown(500);
 		setMaxCooldown(575);
 		setCanShoot(false);
@@ -22,7 +21,6 @@ public class BasicEnemy extends Ship {
 		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
 		setBulletColor(Color.RED);
 		setSize(50, 50);
-		getSprite().setLocation(getSprite().getX(), getSprite().getY() - getSprite().getHeight()/2);
 		setxDir(-1);
 		setyDir(0);
 		setSpeed(5);

@@ -18,6 +18,7 @@ public class Level {
 	public void update() {
 		if(wave == null) {
 			wave = new Wave(this);
+			prevWave = wave.getSelectedWave();
 		}
 		if(wave.isFinished()) {					// If all enemies have been spawned and the screen is clear
 			if(currWave == totalWaves) {		// If it is the final wave (as in the player beat the boss)
