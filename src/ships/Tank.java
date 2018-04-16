@@ -13,7 +13,8 @@ public class Tank extends BasicEnemy {
 		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, y));
 		setSize(100, 100);
 		setSpeed(5);			//slowish
-		setTrail(new FireTrail(this));
+		setTrail(null);
+//		setTrail(new FireTrail(this));
 		setPoints(150);			//worth no points
 	}
 
