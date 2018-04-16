@@ -158,7 +158,7 @@ public class Wave {
 				case 7:
 					hard8();
 					break;
-				default:
+				case 8:
 					hard9();
 				}
 			}
@@ -719,7 +719,7 @@ public class Wave {
 		public void hard9() {
 			switch(enemyToSpawn) {
 			case 0:
-				size = 6;
+				size = 5;
 				delay = 70;
 				break;
 			case 1:
@@ -769,11 +769,9 @@ public class Wave {
 				new Tank(game, 700);
 				new Tank(game, 800);
 				new Tank(game, 900);
+				delay = 150;
 				break;
 			case 5:
-				
-				break;
-			case 6:
 				new SprayBall(game,500, 500);
 				break;
 			
