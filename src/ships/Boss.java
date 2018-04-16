@@ -8,7 +8,6 @@ import game.Game;
 import projectiles.Beam;
 import projectiles.Bullet;
 import projectiles.FireTrail;
-import projectiles.Projectile;
 
 public class Boss extends Ship {
 	private int counter;

@@ -5,7 +5,6 @@ import acm.graphics.GPoint;
 import game.Game;
 import projectiles.Bullet;
 import projectiles.FireTrail;
-import projectiles.Projectile;
 
 public class Drone extends BasicEnemy {
 	private int lifetime = 0;

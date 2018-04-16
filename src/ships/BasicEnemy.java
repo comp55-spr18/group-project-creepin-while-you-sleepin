@@ -7,7 +7,6 @@ import acm.graphics.GPoint;
 import game.Game;
 import projectiles.Bullet;
 import projectiles.FireTrail;
-import projectiles.Projectile;
 
 public class BasicEnemy extends Ship {
 	double i = -1.5;

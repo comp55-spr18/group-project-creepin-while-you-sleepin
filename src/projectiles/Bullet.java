@@ -8,11 +8,6 @@ import ships.PlayerShip;
 import ships.Ship;
 
 public class Bullet extends Projectile {
-		private Ship ship;
-		private boolean isPlayerProjectile;			// Check if the projectile belongs to player
-		private boolean isDestructable;				// Check if this projectile can be destroyed by the player's projectile
-
-		// Constructor that every projectile should use
 		public Bullet(Ship ship, GPoint gunLoc, double xD, double yD) {
 			super(ship, gunLoc, xD, yD);
 			setShip(ship);
