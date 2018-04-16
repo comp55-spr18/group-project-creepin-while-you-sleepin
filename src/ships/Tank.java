@@ -10,7 +10,7 @@ public class Tank extends BasicEnemy {
 	public Tank(Game game, double y) {
 		super(game, y);
 		setMaxHealth(30);		// They soak damage for other ships
-		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, y));
+		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
 		setSize(100, 100);
 		setSpeed(5);			//slowish
 		setTrail(null);

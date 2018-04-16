@@ -13,7 +13,7 @@ public class SwarmCaller extends BasicEnemy {
 		super(game, y);
 		setMaxHealth(20);		//very tough			
 		setCooldown(0);			
-		setSprite(new GImage("sprites/enemy5.png", getGame().WINDOW_WIDTH, y));
+		setSprite(new GImage("sprites/enemy5.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
 		setSize(80, 80);
 		setTrail(new FireTrail(this));
 		setMaxCooldown(5); //spawns two more swarmBots when called

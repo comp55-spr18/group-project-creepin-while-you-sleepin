@@ -69,7 +69,7 @@ public class Wave {
 			}
 		} else {													// If the wave is hard
 			while(selectedWave == level.getPrevWave()) {
-				selectedWave = Math.abs(game.rgen.nextInt(9));		// Randomly select one of the hard waves (currently only easy1())
+				selectedWave = Math.abs(game.rgen.nextInt(1)+8);		// Randomly select one of the hard waves (currently only easy1())
 			}
 		}
 	}
@@ -731,7 +731,6 @@ public class Wave {
 				new Tank(game, 600);
 				new Tank(game, 700);
 				new Tank(game, 800);
-				new Tank(game, 900);
 				break;
 			case 2:
 				new Tank(game, 100);
@@ -741,7 +740,6 @@ public class Wave {
 				new Tank(game, 500);
 				new Tank(game, 600);
 				new Tank(game, 700);
-				new Tank(game, 800);
 				new Tank(game, 0);
 				new Trishot(game, 200);
 				new Trishot(game, 500);
@@ -756,7 +754,6 @@ public class Wave {
 				new Tank(game, 600);
 				new Tank(game, 700);
 				new Tank(game, 800);
-				new Tank(game, 900);
 				new SawedOff(game,520);
 				break;
 			case 4: 
@@ -767,8 +764,6 @@ public class Wave {
 				new Tank(game, 0);
 				new Tank(game, 600);
 				new Tank(game, 700);
-				new Tank(game, 800);
-				new Tank(game, 900);
 				delay = 150;
 				break;
 			case 5:

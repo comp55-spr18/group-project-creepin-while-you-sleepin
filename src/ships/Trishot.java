@@ -11,7 +11,7 @@ public class Trishot extends BasicEnemy {
 	public Trishot(Game game, double y) {
 		super(game, y);
 		setMaxHealth(8);		// fairly tanky
-		setSprite(new GImage("sprites/enemy4.png", getGame().WINDOW_WIDTH, y));
+		setSprite(new GImage("sprites/enemy4.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
 		setSize(80, 80);
 		setSpeed(5);			//Normal speed
 		setTrail(new FireTrail(this));
