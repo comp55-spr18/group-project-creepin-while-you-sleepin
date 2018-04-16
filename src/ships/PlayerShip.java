@@ -20,12 +20,12 @@ public class PlayerShip extends Ship {
 		shooting = false;
 		shootingAlt = false;
 		canShootAlt = false;
-		altCooldown = 225;
-		altMaxCooldown = 250;
+		altCooldown = 325;
+		altMaxCooldown = 350;
 		setIframe(0);
 		setMaxIframe(50);
-		setShots(2);
-		setMaxHealth(25);
+		setShots(1);
+		setMaxHealth(5);
 		setCooldown(0);
 		setMaxCooldown(20);
 		setCanShoot(false);
@@ -43,9 +43,6 @@ public class PlayerShip extends Ship {
 		setBeamWarningDuration(0);
 		setPoints(0);
 		getGame().add(getSprite());
-		setShielded(true);
-		setShieldCooldown(0);
-		setShieldMaxCooldown(500);
 		setTrail(new FireTrail(this));
 	}
 

@@ -69,7 +69,7 @@ public class Wave {
 			}
 		} else {													// If the wave is hard
 			while(selectedWave == level.getPrevWave()) {
-				selectedWave = Math.abs(game.rgen.nextInt(1)+8);		// Randomly select one of the hard waves (currently only easy1())
+				selectedWave = Math.abs(game.rgen.nextInt(9));		// Randomly select one of the hard waves (currently only easy1())
 			}
 		}
 	}
