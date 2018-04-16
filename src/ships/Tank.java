@@ -28,7 +28,7 @@ public class Tank extends BasicEnemy {
 		double x = getSprite().getLocation().getX();
 		double y = getSprite().getLocation().getY();
 		setGunLocation(new GPoint[] { new GPoint(x, y + getSprite().getHeight() / 2) });
-		if (getSprite().getLocation().getX() < -300) {
+		if (getSprite().getLocation().getX() < -200) {
 			setDestroyed(true);
 		}
 		

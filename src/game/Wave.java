@@ -69,7 +69,7 @@ public class Wave {
 			}
 		} else {													// If the wave is hard
 			while(selectedWave == level.getPrevWave()) {
-				selectedWave = Math.abs(game.rgen.nextInt(8));		// Randomly select one of the hard waves (currently only easy1())
+				selectedWave = Math.abs(game.rgen.nextInt(9));		// Randomly select one of the hard waves (currently only easy1())
 			}
 		}
 	}
@@ -155,8 +155,11 @@ public class Wave {
 				case 6:
 					hard7();
 					break;
-				default:
+				case 7:
 					hard8();
+					break;
+				default:
+					hard9();
 				}
 			}
 		} else if(upgradeWave) {
@@ -711,6 +714,71 @@ public class Wave {
 		
 			
 		}
+	}
+		
+		public void hard9() {
+			switch(enemyToSpawn) {
+			case 0:
+				size = 6;
+				delay = 70;
+				break;
+			case 1:
+				new Tank(game, 100);
+				new Tank(game, 200);
+				new Tank(game, 300);
+				new Tank(game, 400);
+				new Tank(game, 500);
+				new Tank(game, 600);
+				new Tank(game, 700);
+				new Tank(game, 800);
+				new Tank(game, 900);
+				break;
+			case 2:
+				new Tank(game, 100);
+				new Tank(game, 200);
+				new Tank(game, 300);
+				new Tank(game, 400);
+				new Tank(game, 500);
+				new Tank(game, 600);
+				new Tank(game, 700);
+				new Tank(game, 800);
+				new Tank(game, 0);
+				new Trishot(game, 200);
+				new Trishot(game, 500);
+				new Trishot(game, 800);
+				break;
+			case 3:
+				new Tank(game, 100);
+				new Tank(game, 200);
+				new Tank(game, 300);
+				new Tank(game, 400);
+				new Tank(game, 500);
+				new Tank(game, 600);
+				new Tank(game, 700);
+				new Tank(game, 800);
+				new Tank(game, 900);
+				new SawedOff(game,520);
+				break;
+			case 4: 
+				new Tank(game, 100);
+				new Tank(game, 200);
+				new Tank(game, 300);
+				new Tank(game, 400);
+				new Tank(game, 0);
+				new Tank(game, 600);
+				new Tank(game, 700);
+				new Tank(game, 800);
+				new Tank(game, 900);
+				break;
+			case 5:
+				
+				break;
+			case 6:
+				new SprayBall(game,500, 500);
+				break;
+			
+				
+			}
 		
 	}
 
