@@ -1,15 +1,17 @@
 package ships;
 
+import java.awt.Color;
+
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 import game.Game;
 import projectiles.Bullet;
 import projectiles.FireTrail;
 
-public class Trishot extends BasicEnemy {
+public class Trishot extends Ship {
 	
 	public Trishot(Game game, double y) {
-		super(game, y);
+		super(game);
 		setMaxHealth(8);		// fairly tanky
 		setSprite(new GImage("sprites/enemy4.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
 		setSize(80, 80);
@@ -17,7 +19,15 @@ public class Trishot extends BasicEnemy {
 		setTrail(new FireTrail(this));
 		setPoints(150);	
 		setCooldown(5); 
-		setMaxCooldown(100);
+		setMaxCooldown(100);				
+		setCanShoot(false);
+		setGunLocation(new GPoint[] {new GPoint()});
+		setBulletColor(Color.RED);
+		setxDir(-1);
+		setyDir(0);
+		setBulletDamage(1);
+		setBulletSpeed(10);
+		setBulletSize(15);
 	}
 
 	// shoots three at medium speed

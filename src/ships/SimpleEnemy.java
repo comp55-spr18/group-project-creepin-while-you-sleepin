@@ -1,14 +1,32 @@
 package ships;
+import java.awt.Color;
+
+import acm.graphics.GImage;
+import acm.graphics.GPoint;
 import game.Game;
 import projectiles.Bullet;
+import projectiles.FireTrail;
 
-//Very similar to BasicEnemy, except I can tweak it without breaking other ships
-public class SimpleEnemy extends BasicEnemy {
+//Very similar to BasicEnemy, except I can tweak it without breaking other premade waves
+public class SimpleEnemy extends Ship {
 	public SimpleEnemy(Game game, double y) {
-		super(game, y);
+		super(game);
 		setCooldown(50);
 		setMaxCooldown(125);
-		setSpeed(4); //A little slower than normal
+		setSpeed(4); //A little slower than normal		
+		setMaxHealth(2);
+		setCanShoot(false);
+		setGunLocation(new GPoint[] {new GPoint()});
+		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
+		setBulletColor(Color.RED);
+		setSize(50, 50);
+		setxDir(-1);
+		setyDir(0);
+		setPoints(100);
+		setBulletDamage(1);
+		setBulletSpeed(10);
+		setBulletSize(15);
+		setTrail(new FireTrail(this));
 	}
 	//Most basic move and shoot
 	@Override

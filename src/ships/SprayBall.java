@@ -1,5 +1,7 @@
 package ships;
 
+import java.awt.Color;
+
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 import game.Game;
@@ -7,13 +9,13 @@ import projectiles.Bullet;
 import projectiles.FireTrail;
 import projectiles.Projectile;
 
-public class SprayBall extends BasicEnemy {
+public class SprayBall extends Ship {
 	private int firing = 0;
 	private int delay = 0;
 	private double ballDet = getGame().WINDOW_WIDTH/3; //recommended detonation point
 	
 	public SprayBall(Game game, double y, double detonation) {
-		super(game, y);
+		super(game);
 		setMaxHealth(50);
 		setCooldown(700); 
 		setSprite(new GImage("sprites/enemy4.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
@@ -27,7 +29,11 @@ public class SprayBall extends BasicEnemy {
 		setBulletDamage(1);
 		setMaxCooldown(1000);
 		setPoints(1000);
-		ballDet = game.WINDOW_WIDTH/(1920/detonation);
+		ballDet = game.WINDOW_WIDTH/(1920/detonation);		
+		setCanShoot(false);
+		setBulletColor(Color.RED);
+		setxDir(-1);
+		setyDir(0);						
 	}
 	// Once the ship has paused, fires bullets from 4 cannons turning 180 degrees (hopefully)
 	@Override

@@ -4,13 +4,13 @@ import acm.graphics.GImage;
 import game.Game;
 import projectiles.FireTrail;
 
-public class SwarmCaller extends BasicEnemy {
+public class SwarmCaller extends Ship {
 	
 	private int waveCall;
 	private double playery;
 	
 	public SwarmCaller(Game game, double y) {
-		super(game, y);
+		super(game);
 		setMaxHealth(20);		//very tough			
 		setCooldown(0);			
 		setSprite(new GImage("sprites/enemy5.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
@@ -18,7 +18,11 @@ public class SwarmCaller extends BasicEnemy {
 		setTrail(new FireTrail(this));
 		setMaxCooldown(5); //spawns two more swarmBots when called
 		waveCall = 0;//Calls another swarm when big enough
-		setPoints(300);
+		setPoints(300);		
+		setCanShoot(false);				
+		setxDir(-1);
+		setyDir(0);
+		setSpeed(5);				
 	}
 	
 	@Override
