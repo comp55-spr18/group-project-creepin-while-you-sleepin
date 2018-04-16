@@ -1,10 +1,6 @@
 package ships;
-
-import acm.graphics.GImage;
-import acm.graphics.GPoint;
 import game.Game;
 import projectiles.Bullet;
-import projectiles.FireTrail;
 
 //Very similar to BasicEnemy, except I can tweak it without breaking other ships
 public class SimpleEnemy extends BasicEnemy {
