@@ -20,7 +20,6 @@ public class SprayBall extends BasicEnemy {
 		//pretty sure this line is pointless
 		setGunLocation(new GPoint[] {}); 
 		setSize(120, 120);
-		getSprite().setLocation(getSprite().getX(), getSprite().getY() - getSprite().getHeight()/2);
 		setSpeed(6);
 		setTrail(new FireTrail(this));
 		setBulletSpeed(12);

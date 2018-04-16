@@ -1,19 +1,30 @@
 package ships;
+import java.awt.Color;
 
+import acm.graphics.GImage;
 import acm.graphics.GPoint;
 import game.Game;
+import projectiles.FireTrail;
 import projectiles.HomingBullet;
 
-public class HomingEnemy extends BasicEnemy {
+public class HomingEnemy extends Ship {
 	public HomingEnemy(Game game, double y) {
-		super(game, y);
+		super(game);
+		setCooldown(500);
+		setMaxCooldown(575);
+		setCanShoot(false);
+		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
+		setBulletColor(Color.RED);
 		setGunLocation(new GPoint[] {new GPoint()});
+		setxDir(-1);
+		setyDir(0);
 		setBulletSize(40);
 		setBulletDamage(2);
 		setBulletSpeed(8);
 		setMaxHealth(4);
 		setSpeed(4);
 		setPoints(200);
+		setTrail(new FireTrail(this));
 	}
 
 	@Override
