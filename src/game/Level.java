@@ -10,35 +10,36 @@ public class Level {
 	public Level(Game g) {
 		game = g;
 		currWave = 1;
-		totalWaves = 7;
+		totalWaves = 1;
 		prevWave = -1;
 		upgradeMod = 3;
+		getNewWave();
 	}
 
 	public void update() {
-		if(wave == null) {
-			wave = new Wave(this);
-			prevWave = wave.getSelectedWave();
-		}
 		if(wave.isFinished()) {					// If all enemies have been spawned and the screen is clear
 			if(currWave == totalWaves) {		// If it is the final wave (as in the player beat the boss)
 				setFinished(true);
 			} else if(!game.lose){				// If it was not the final wave (and the player is not dead), get the next wave
 				currWave++;
-				wave = new Wave(this);
-				if(currWave%upgradeMod == 0) {
-					wave.setUpgradeWave(true);
-				} else {
-					wave.setUpgradeWave(false);
-					prevWave = wave.getSelectedWave();
-				}
-				if(currWave == totalWaves) {
-					wave.setUpgradeWave(false);
-					wave.setBossWave(true);
-				}
+				getNewWave();
 			}
 		}
 		wave.update();
+	}
+
+	void getNewWave() {
+		wave = new Wave(this);
+		if(currWave%upgradeMod == 0) {
+			wave.setUpgradeWave(true);
+		} else {
+			wave.setUpgradeWave(false);
+			prevWave = wave.getSelectedWave();
+		}
+		if(currWave == totalWaves) {
+			wave.setUpgradeWave(false);
+			wave.setBossWave(true);
+		}
 	}
 
 	public Game getGame() {
