@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import acm.graphics.GLabel;
 import acm.graphics.GLine;
+import misc.Heart;
 import projectiles.Projectile;
 import ships.BasicEnemy;
 import ships.Boomerang;
@@ -65,7 +66,7 @@ public class Wave {
 		selectedWave = level.getPrevWave();
 		if(game.easy) {							// If the difficulty of the new wave is easy
 			while(selectedWave == level.getPrevWave()) {
-				selectedWave = Math.abs(game.rgen.nextInt(10));	// Randomly select one of the easy waves (currently hard1() and Drone())
+				selectedWave = Math.abs(game.rgen.nextInt(1));	// Randomly select one of the easy waves (currently hard1() and Drone())
 			}
 		} else {													// If the wave is hard
 			while(selectedWave == level.getPrevWave()) {
@@ -220,7 +221,7 @@ public class Wave {
 				delay = 50;
 				break;
 			case 1:
-				new BasicEnemy(game, 150);		// This is the first enemy it spawns
+				new Heart(game, 1000);		// This is the first enemy it spawns
 				delay = 100;											// Sets the new delay between enemy spawns to be 100
 				break;
 			case 2:

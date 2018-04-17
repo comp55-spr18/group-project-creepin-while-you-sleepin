@@ -18,6 +18,7 @@ import misc.MenuPane;
 import projectiles.Projectile;
 import ships.PlayerShip;
 import ships.Ship;
+import misc.Object;
 
 @SuppressWarnings("serial")
 public class Game extends GraphicsApplication {
@@ -48,6 +49,7 @@ public class Game extends GraphicsApplication {
 	public ArrayList<Ship> enemies = new ArrayList<Ship>();
 	public ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	public ArrayList<PowerUp> powers = new ArrayList<PowerUp>();
+	public ArrayList<Object> objects = new ArrayList<Object>();
 	public PlayerShip player;
 	public int score = 0;
 	public GLabel scoreBoard = new GLabel("SCORE: " + score, 10, 25);
@@ -146,6 +148,9 @@ public class Game extends GraphicsApplication {
 			}
 			for(Projectile proj : projectiles) {
 				proj.update();
+			}
+			for(Object obj : objects) {
+				obj.update();
 			}
 			for(int i = projectiles.size() - 1;i >= 0;i--) {	// This for loop iterates backwards thru the projectiles arraylist to avoid exceptions
 				if(projectiles.get(i).isDestroyed()) {			// If the projectile is destroyed

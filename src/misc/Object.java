@@ -1,6 +1,8 @@
 package misc;
+import acm.graphics.GImage;
 import acm.graphics.GObject;
 import game.Game;
+
 
 public abstract class Object {
 	protected Game game;
@@ -12,9 +14,18 @@ public abstract class Object {
 	protected boolean isDestroyed;
 	
 	public void move() {}
-	public void checkCollision() {}
+	public void checkCollision() {
+		if(getSprite().getBounds().intersects(game.player.getSprite().getBounds())) {
+			game.player.dealDamage(getCollisionDamage());
+		}
+	}
 	public void onCollision() {}
-	public void update() {}
+	
+	public void update() {
+			move();
+			checkCollision();
+		}
+	
 	public Game getGame() {
 		return game;
 	}
@@ -26,6 +37,9 @@ public abstract class Object {
 	}
 	public void setSprite(GObject sprite) {
 		this.sprite = sprite;
+	}
+	public void setSize(double x, double y) {
+		((GImage) getSprite()).setSize(getGame().WINDOW_WIDTH/(1920/x), getGame().WINDOW_HEIGHT/(1080/y));
 	}
 	public double getxDir() {
 		return xDir;
