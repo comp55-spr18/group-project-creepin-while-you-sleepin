@@ -12,7 +12,6 @@ public class Tank extends Ship {
 		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
 		setSize(100, 100);
 		setSpeed(5);			//slowish
-		setTrail(null);
 		setPoints(150);			//worth no points						
 		setCanShoot(false);
 		setGunLocation(new GPoint[] {new GPoint()});		
