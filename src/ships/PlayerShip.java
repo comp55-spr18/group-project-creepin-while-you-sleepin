@@ -119,14 +119,12 @@ public class PlayerShip extends Ship {
 			// If the player is invincible, increment their invincibility timer
 			if(isInvincible()) {
 				if(getIframe() == 0) {
-					getSprite().setImage("truck.png");
-					getSprite().setSize(getGame().WINDOW_WIDTH/(1920/50), getGame().WINDOW_HEIGHT/(1080/50));
+					changeSprite("truck.png");
 				}
 				setIframe(getIframe() + 1);
 				// If the player's iframe count hits 100, make them vulnerable again
 				if(getIframe() == getMaxIframe()) {
-					getSprite().setImage("sprites/playermodel.png");
-					getSprite().setSize(getGame().WINDOW_WIDTH/(1920/50), getGame().WINDOW_HEIGHT/(1080/50));
+					changeSprite("sprites/playermodel.png");
 					setInvincible(false);
 					setIframe(0);
 				}
