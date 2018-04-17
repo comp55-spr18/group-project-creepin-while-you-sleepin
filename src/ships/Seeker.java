@@ -5,21 +5,23 @@ import acm.graphics.GObject;
 import game.Game;
 import projectiles.FireTrail;
 
-public class Seeker extends BasicEnemy {
+public class Seeker extends Ship {
 	private int seek = 0;
 	private double playerx;
 	private double playery;
 	
 	public Seeker(Game game, double y) {
-		super(game, y);
+		super(game);
 		setMaxHealth(6);				// They're tough enemies			
-		setSprite(new GImage("sprites/enemy2.png", getGame().WINDOW_WIDTH, y));
+		setSprite(new GImage("sprites/enemy2.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
 		setSize(100, 100);
 		setSpeed(15);
 		setTrail(new FireTrail(this));
 		setPoints(200);
 		setxDir(0);
-		setyDir(0);		
+		setyDir(0);							
+		setCanShoot(false);
+		
 	}
 	// tweaked bullet speed
 	@Override

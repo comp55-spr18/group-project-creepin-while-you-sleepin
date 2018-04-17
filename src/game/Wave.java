@@ -17,10 +17,12 @@ import ships.Kamikaze;
 import ships.SawedOff;
 import ships.Seeker;
 import ships.Ship;
+import ships.SimpleEnemy;
 import ships.SprayBall;
 import ships.Squeeze;
 import ships.SwarmCaller;
 import ships.Tank;
+import ships.Trishot;
 
 public class Wave {
 	private Game game;			// The game
@@ -67,7 +69,7 @@ public class Wave {
 			}
 		} else {													// If the wave is hard
 			while(selectedWave == level.getPrevWave()) {
-				selectedWave = Math.abs(game.rgen.nextInt(7));		// Randomly select one of the hard waves (currently only easy1())
+				selectedWave = Math.abs(game.rgen.nextInt(9));		// Randomly select one of the hard waves (currently only easy1())
 			}
 		}
 	}
@@ -83,7 +85,7 @@ public class Wave {
 			game.remove(upgradeLabel);
 			setFinished(true);
 		}
-		if(game.rgen.nextInt(3500) == 0 && event == null) {
+		if(game.rgen.nextInt(3500) == 0 && event == null && !upgradeWave && !bossWave) {
 			event = new Event(this);
 		}
 		if(event != null) {
@@ -153,8 +155,11 @@ public class Wave {
 				case 6:
 					hard7();
 					break;
-				default:
+				case 7:
 					hard8();
+					break;
+				case 8:
+					hard9();
 				}
 			}
 		} else if(upgradeWave) {
@@ -514,20 +519,33 @@ public class Wave {
 				}
 		}
 	}
-	public void hard3() {			// Generates a basic bouncy wave
+	public void hard3() {			// Generates a Trishot wave with a meat shield
 		switch(enemyToSpawn) {
 			case 0:
-				size = 3;
-				delay = 100;
+				size = 4;
+				delay = 50;
 				break;
 			case 1:
-				new SawedOff(game, 200);
+				new Tank(game, 100);
+				new Tank(game, 350);
+				new Tank(game, 600);
+				new Tank(game, 850);
 				break;
 			case 2:
-				new Bouncer(game, 100);
+				new SimpleEnemy(game, 145);
+				new SimpleEnemy(game, 395);
+				new SimpleEnemy(game, 645);
+				new SimpleEnemy(game, 895);
+				delay = 100;
 				break;
 			case 3:
-				new Bouncer(game, 500);
+				new Trishot(game, 200);
+				new Trishot(game, 500);
+				new Trishot(game, 800);
+				break;
+			case 4:
+				new SprayBall(game, 300, 450);
+				new SprayBall(game, 600, 450);
 				break;
 		}
 	}
@@ -696,6 +714,64 @@ public class Wave {
 		
 			
 		}
+	}
+		
+		public void hard9() {
+			switch(enemyToSpawn) {
+			case 0:
+				size = 5;
+				delay = 70;
+				break;
+			case 1:
+				new Tank(game, 100);
+				new Tank(game, 200);
+				new Tank(game, 300);
+				new Tank(game, 400);
+				new Tank(game, 500);
+				new Tank(game, 600);
+				new Tank(game, 700);
+				new Tank(game, 800);
+				break;
+			case 2:
+				new Tank(game, 100);
+				new Tank(game, 200);
+				new Tank(game, 300);
+				new Tank(game, 400);
+				new Tank(game, 500);
+				new Tank(game, 600);
+				new Tank(game, 700);
+				new Tank(game, 0);
+				new Trishot(game, 200);
+				new Trishot(game, 500);
+				new Trishot(game, 800);
+				break;
+			case 3:
+				new Tank(game, 100);
+				new Tank(game, 200);
+				new Tank(game, 300);
+				new Tank(game, 400);
+				new Tank(game, 500);
+				new Tank(game, 600);
+				new Tank(game, 700);
+				new Tank(game, 800);
+				new SawedOff(game,520);
+				break;
+			case 4: 
+				new Tank(game, 100);
+				new Tank(game, 200);
+				new Tank(game, 300);
+				new Tank(game, 400);
+				new Tank(game, 0);
+				new Tank(game, 600);
+				new Tank(game, 700);
+				delay = 150;
+				break;
+			case 5:
+				new SprayBall(game,500, 500);
+				break;
+			
+				
+			}
 		
 	}
 

@@ -4,10 +4,10 @@ import acm.graphics.GImage;
 import game.Game;
 import projectiles.FireTrail;
 
-public class SwarmBot extends BasicEnemy {
+public class SwarmBot extends Ship {
 	private double upDown;
 	public SwarmBot(Game game, double y, int spawnPos) {
-		super(game, y);
+		super(game);
 		setMaxHealth(1);		// They're weak enemies, but its a swarm so it doesn't matter
 		setSprite(new GImage("sprites/enemy3.png", getGame().WINDOW_WIDTH, y));
 		setSize(40, 40);
@@ -20,7 +20,9 @@ public class SwarmBot extends BasicEnemy {
 		else {
 			setyDir(-.25);
 		}
-		upDown = spawnPos;	
+		upDown = spawnPos;							
+		setCanShoot(false);		
+		setxDir(-1);						
 	}
 
 	// Can't shoot

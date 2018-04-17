@@ -8,7 +8,6 @@ import game.Game;
 import projectiles.Beam;
 import projectiles.Bullet;
 import projectiles.FireTrail;
-import projectiles.Projectile;
 
 public class Boss extends Ship {
 	private int counter;
@@ -65,7 +64,7 @@ public class Boss extends Ship {
 			Bullet newProj = new Bullet(this, getGunLocation()[getSelectedGun()], -1, 0);
 			newProj.aimAtPlayer();
 			setSelectedGun((getSelectedGun() + 1)%2);
-			if(getHealth() < 50 && counter%10 == 0) {
+			if(getHealth() < 100 && counter%7 == 0) {
 				new Beam(this, getGunLocation()[2]);
 			}
 			counter++;
