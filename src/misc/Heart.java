@@ -1,8 +1,6 @@
 package misc;
 
 import acm.graphics.GImage;
-import acm.graphics.GObject;
-import acm.graphics.GPoint;
 import game.Game;
 
 public class Heart extends Object {

@@ -88,6 +88,7 @@ public class Game extends GraphicsApplication {
 	}
 
 	public void startGame() {
+		paused = false;
 		healthBar = new ArrayList<GImage>();
 		player = new PlayerShip(this);			// Initiate the game with a new player ship
 		level = new Level(this);

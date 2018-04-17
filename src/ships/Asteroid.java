@@ -31,7 +31,7 @@ public class Asteroid extends Ship {
 		getSprite().move(getxDir() * getSpeed(), getyDir() * getSpeed());
 		double x = getSprite().getLocation().getX();
 		double y = getSprite().getLocation().getY();
-		setGunLocation(new GPoint[] { new GPoint(x, y + getSprite().getHeight() / 2) });
+		setGunLocation(new GPoint[] {new GPoint(x, y + getSprite().getHeight()/2)});
 		if (getSprite().getLocation().getY() > getGame().WINDOW_HEIGHT + 100) {
 			setDestroyed(true);
 		}

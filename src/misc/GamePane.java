@@ -15,7 +15,7 @@ public class GamePane extends GraphicsPane {
 
 	public GamePane(Game app) {
 		this.program = app;
-		pauseLabel = new GLabel("PAUSED (Click on player ship to resume)");
+		pauseLabel = new GLabel("PAUSED (Click on player ship to resume or press ESCAPE to go back to menu)");
 		pauseLabel.setFont("Arial-Bold-40");
 		pauseLabel.setColor(Color.WHITE);
 		pauseLabel.setLocation(program.WINDOW_WIDTH/2 - pauseLabel.getWidth()/2, program.WINDOW_HEIGHT/2 - program.getHeight()/2);
@@ -118,6 +118,12 @@ public class GamePane extends GraphicsPane {
 			if(!program.paused) {
 				program.paused = true;
 				program.add(pauseLabel);
+			}
+		}
+		if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+			if(program.paused) {
+				program.remove(pauseLabel);
+				program.switchToMenu();
 			}
 		}
 	}

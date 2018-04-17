@@ -6,24 +6,7 @@ import acm.graphics.GLabel;
 import acm.graphics.GLine;
 import misc.Heart;
 import projectiles.Projectile;
-import ships.BasicEnemy;
-import ships.Boomerang;
-import ships.Boss;
-import ships.Boss2;
-import ships.Bouncer;
-import ships.Drone;
-import ships.HeavyWeightEnemy;
-import ships.HomingEnemy;
-import ships.Kamikaze;
-import ships.SawedOff;
-import ships.Seeker;
-import ships.Ship;
-import ships.SimpleEnemy;
-import ships.SprayBall;
-import ships.Squeeze;
-import ships.SwarmCaller;
-import ships.Tank;
-import ships.Trishot;
+import ships.*;
 
 public class Wave {
 	private Game game;			// The game
