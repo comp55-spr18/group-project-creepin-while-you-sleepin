@@ -35,12 +35,12 @@ public class FireTrail {
 			xDir = 1;
 			yDir = -1;
 			xOffset = 0;
-			length = 0.15;
+			length = 0.115;
 			speed = 1;
 			size = (int) (ship.getSprite().getWidth());
 		} else {
 			xDir = 1;
-			length = 0.25;
+			length = 0.22;
 			speed = 1;
 			xOffset = size/2;
 		}
@@ -70,12 +70,6 @@ public class FireTrail {
 			ship.getGame().remove(tr.getSprite());
 			tr.setDestroyed(true);
 			trail.remove(tr);
-		}
-		for(int i = trail.size() - 1;i >= 0;i--) {	// This for loop iterates backwards thru the projectiles arraylist to avoid exceptions
-			if(trail.get(i).isDestroyed() || trail.get(i).getSprite().getWidth() < 3) {			// If the projectile is destroyed
-				ship.getGame().remove(trail.get(i).getSprite());
-				trail.remove(i);						// Remove it from the arraylist
-			}
 		}
 		ship.getSprite().sendToFront();
 	}
