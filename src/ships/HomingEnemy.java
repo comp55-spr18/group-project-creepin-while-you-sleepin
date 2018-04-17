@@ -1,5 +1,4 @@
 package ships;
-import java.awt.Color;
 
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
@@ -14,7 +13,6 @@ public class HomingEnemy extends Ship {
 		setMaxCooldown(575);
 		setCanShoot(false);
 		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
-		setBulletColor(Color.RED);
 		setGunLocation(new GPoint[] {new GPoint()});
 		setxDir(-1);
 		setyDir(0);

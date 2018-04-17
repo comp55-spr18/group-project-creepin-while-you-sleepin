@@ -1,7 +1,4 @@
 package ships;
-
-import java.awt.Color;
-
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 import game.Game;
@@ -37,7 +34,6 @@ public class Drone extends Ship {
 		}
 		topBot = y;						
 		setCanShoot(false);		
-		setBulletColor(Color.RED);		
 		setxDir(-1);								
 	}
 	// tweaked bullet speed

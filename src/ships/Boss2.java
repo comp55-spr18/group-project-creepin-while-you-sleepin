@@ -21,7 +21,6 @@ public class Boss2 extends Ship {
 		setSprite(new GImage("boss 1.png", game.WINDOW_WIDTH, game.WINDOW_HEIGHT/(1080/y)));
 		setBulletColor(Color.white);
 		setSize(350, 350);
-		setBulletColor(Color.RED);
 		setExplosion(new GImage("explosion.png"));
 		setDestroyed(false);
 		setDestroyedCounter(0);

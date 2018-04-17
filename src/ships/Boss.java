@@ -41,7 +41,7 @@ public class Boss extends Ship {
 	
 	public void move() { //boss will spawn in and then bounce up and down on the screen
 		getSprite().move(getxDir()*getSpeed(), getyDir()*getSpeed());
-		if(getSprite().getX() <= 1000 && getyDir() == 0) {
+		if(getSprite().getX() <= getGame().WINDOW_WIDTH/(1920/1400.0) && getyDir() == 0) {
 			setxDir(0);
 			setyDir(-1);
 		}

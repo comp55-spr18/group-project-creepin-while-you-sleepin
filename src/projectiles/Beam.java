@@ -32,7 +32,7 @@ public class Beam extends Projectile {
 		}
 		getGame().projectiles.add(this);
 		getGame().add(sprite);
-		getBeamSprite().setColor(Color.RED);
+		getBeamSprite().setColor(Color.CYAN);
 		getBeamSprite().setFilled(true);
 		getBeamSprite().setFillColor(sprite.getColor());
 	}
@@ -67,8 +67,8 @@ public class Beam extends Projectile {
 	public void onCollision(Ship target) {
 		if((isPlayerProjectile() && !(target instanceof PlayerShip)) || (!isPlayerProjectile() && target instanceof PlayerShip)) {
 			if(!target.isInvincible()) {
-				target.setInvincible(true);
 				target.dealDamage(getCollisionDamage());
+				target.setInvincible(true);
 			}
 		}
 	}
