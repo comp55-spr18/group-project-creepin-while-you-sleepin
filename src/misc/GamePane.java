@@ -17,7 +17,7 @@ public class GamePane extends GraphicsPane {
 	public GamePane(Game app) {
 		this.program = app;
 		pauseLabel = new GLabel("PAUSED (Click on player ship to resume or press ESCAPE to go back to menu)");
-		pauseLabel.setFont("Arial-Bold-40");
+		pauseLabel.setFont("Arial-Bold-22");
 		pauseLabel.setColor(Color.WHITE);
 		pauseLabel.setLocation(program.WINDOW_WIDTH/2 - pauseLabel.getWidth()/2, program.WINDOW_HEIGHT/2 - program.getHeight()/2);
 		program.scoreBoard.setFont("Arial-Bold-22");
@@ -69,11 +69,6 @@ public class GamePane extends GraphicsPane {
 		for(PowerUp p : program.powers) {
 			program.remove(p.getSprite());
 		}
-		program.enemies.clear();								// Clear the enemies arraylist
-		program.projectiles.clear();							// Clear the projectiles arraylist
-		program.healthBar.clear();
-		program.objects.clear();
-		program.powers.clear();
 	}
 
 	@Override
