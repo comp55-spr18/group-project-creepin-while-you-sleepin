@@ -175,4 +175,16 @@ public class PlayerShip extends Ship {
 	public void setCanShootAlt(boolean canShootAlt) {
 		this.canShootAlt = canShootAlt;
 	}
+	public int getAltCooldown() {
+		return altCooldown;
+	}
+	public void setAltCooldown(int altCooldown) {
+		this.altCooldown = altCooldown;
+	}
+	public int getAltMaxCooldown() {
+		return altMaxCooldown;
+	}
+	public void setAltMaxCooldown(int altMaxCooldown) {
+		this.altMaxCooldown = altMaxCooldown;
+	}
 }

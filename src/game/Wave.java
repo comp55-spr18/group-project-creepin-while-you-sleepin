@@ -49,7 +49,7 @@ public class Wave {
 		selectedWave = level.getPrevWave();
 		if(game.easy) {							// If the difficulty of the new wave is easy
 			while(selectedWave == level.getPrevWave()) {
-				selectedWave = Math.abs(game.rgen.nextInt(1));	// Randomly select one of the easy waves (currently hard1() and Drone())
+				selectedWave = Math.abs(game.rgen.nextInt(10));	// Randomly select one of the easy waves (currently hard1() and Drone())
 			}
 		} else {													// If the wave is hard
 			while(selectedWave == level.getPrevWave()) {
@@ -69,7 +69,7 @@ public class Wave {
 			game.remove(upgradeLabel);
 			setFinished(true);
 		}
-		if(game.rgen.nextInt(3500) == 0 && event == null && !upgradeWave && !bossWave) {
+		if(game.rgen.nextInt(2000) == 0 && event == null && !upgradeWave && !bossWave) {
 			event = new Event(this);
 		}
 		if(event != null) {
@@ -204,8 +204,8 @@ public class Wave {
 				delay = 50;
 				break;
 			case 1:
-				new Heart(game, 1000);		// This is the first enemy it spawns
-				delay = 100;											// Sets the new delay between enemy spawns to be 100
+				new BasicEnemy(game, 1000);		// This is the first enemy it spawns
+				delay = 100;					// Sets the new delay between enemy spawns to be 100
 				break;
 			case 2:
 				new BasicEnemy(game, 250);		// The second and so on

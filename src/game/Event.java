@@ -26,7 +26,6 @@ public class Event {
 				break;
 			default:
 				Asteroid a = new Asteroid(game, game.rgen.nextInt()%500 + 1500);
-				a.setEventEnemy(true);
 				break;
 		}
 	}

@@ -433,7 +433,7 @@ public abstract class Ship extends Object {
 		return beamHeight;
 	}
 
-	public double getBeamDuration() {
+	public int getBeamDuration() {
 		return beamDuration;
 	}
 

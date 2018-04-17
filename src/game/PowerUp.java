@@ -69,6 +69,12 @@ class FireRateUp extends PowerUp {
 		if(getGame().player.getMaxCooldown() <= 0) {
 			getGame().player.setMaxCooldown(1);
 		}
+		getGame().player.setCanShootAlt(true);
+		getGame().player.setAltCooldown(0);
+		getGame().player.setAltMaxCooldown(getGame().player.getAltMaxCooldown() - getGame().player.getAltMaxCooldown()/4);
+		if(getGame().player.getAltMaxCooldown() <= 0) {
+			getGame().player.setAltMaxCooldown(1);
+		}
 	}
 }
 
@@ -79,7 +85,7 @@ class BulletSizeUp extends PowerUp {
 		double yPos = game.WINDOW_HEIGHT/(1080/y);
 		double scaleX = game.WINDOW_WIDTH/(1920/width);
 		double scaleY = game.WINDOW_HEIGHT/(1080/height);
-		setSprite(new GButton("Bullet Size", xPos, yPos, scaleX, scaleY));
+		setSprite(new GButton("Bullet/Beam Size", xPos, yPos, scaleX, scaleY));
 		getSprite().setFillColor(Color.BLUE);
 		getGame().powers.add(this);
 		getGame().add(getSprite());
@@ -87,6 +93,7 @@ class BulletSizeUp extends PowerUp {
 	
 	public void onCollision() {
 		getGame().player.setBulletSize(getGame().player.getBulletSize() + 15);
+		getGame().player.setBeamHeight(getGame().player.getBeamHeight() + 15);
 	}
 }
 
@@ -97,7 +104,7 @@ class BulletSpeedUp extends PowerUp {
 		double yPos = game.WINDOW_HEIGHT/(1080/y);
 		double scaleX = game.WINDOW_WIDTH/(1920/width);
 		double scaleY = game.WINDOW_HEIGHT/(1080/height);
-		setSprite(new GButton("Bullet Speed", xPos, yPos, scaleX, scaleY));
+		setSprite(new GButton("Bullet Speed/Beam Duration", xPos, yPos, scaleX, scaleY));
 		getSprite().setFillColor(Color.GREEN);
 		getGame().powers.add(this);
 		getGame().add(getSprite());
@@ -105,6 +112,7 @@ class BulletSpeedUp extends PowerUp {
 	
 	public void onCollision() {
 		getGame().player.setBulletSpeed(getGame().player.getBulletSpeed() + 15);
+		getGame().player.setBeamDuration(getGame().player.getBeamDuration() + 15);
 	}
 }
 
@@ -115,7 +123,7 @@ class BulletDamageUp extends PowerUp {
 		double yPos = game.WINDOW_HEIGHT/(1080/y);
 		double scaleX = game.WINDOW_WIDTH/(1920/width);
 		double scaleY = game.WINDOW_HEIGHT/(1080/height);
-		setSprite(new GButton("Bullet Damage", xPos, yPos, scaleX, scaleY));
+		setSprite(new GButton("Bullet/Beam Damage", xPos, yPos, scaleX, scaleY));
 		getSprite().setFillColor(Color.YELLOW);
 		getGame().powers.add(this);
 		getGame().add(getSprite());
@@ -123,6 +131,7 @@ class BulletDamageUp extends PowerUp {
 	
 	public void onCollision() {
 		getGame().player.setBulletDamage(getGame().player.getBulletDamage() + 1);
+		getGame().player.setBeamDamage(getGame().player.getBeamDamage() + 1);
 	}
 }
 

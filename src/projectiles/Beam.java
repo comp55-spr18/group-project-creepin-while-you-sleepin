@@ -38,7 +38,7 @@ public class Beam extends Projectile {
 	}
 	
 	public void move() {
-		if(getShip().isDestroyed()) {
+		if(getShip().isDestroyed() || getGame().getLevel().isFinished()) {
 			setDestroyed(true);
 			getGame().remove(sprite);
 		}

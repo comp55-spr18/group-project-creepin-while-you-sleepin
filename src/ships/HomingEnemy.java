@@ -14,6 +14,7 @@ public class HomingEnemy extends Ship {
 		setCanShoot(false);
 		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
 		setGunLocation(new GPoint[] {new GPoint()});
+		setSize(50,50);
 		setxDir(-1);
 		setyDir(0);
 		setBulletSize(40);

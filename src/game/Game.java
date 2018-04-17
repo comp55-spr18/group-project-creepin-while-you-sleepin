@@ -162,6 +162,7 @@ public class Game extends GraphicsApplication {
 				level.update();										// Update the level
 			} else {
 				player.setShooting(false);
+				player.setShootingAlt(false);
 				player.move();
 				if(player.getSprite().getX() > WINDOW_WIDTH + 300) {
 					if(currLevel == maxLevel) {
@@ -185,5 +186,9 @@ public class Game extends GraphicsApplication {
 				return;
 			}
 		}
+	}
+
+	public Level getLevel() {
+		return level;
 	}
 }
