@@ -25,6 +25,17 @@ public class Trishot extends Ship {
 		setBulletDamage(1);
 		setBulletSpeed(10);
 		setBulletSize(15);
+
+		switch(game.currLevel) {
+		case 3:
+			setMaxHealth(15);
+			setMaxCooldown(60);
+			break;
+		case 2:
+			setMaxHealth(11);
+			setMaxCooldown(80);
+			break;
+		}
 	}
 
 	// shoots three at medium speed

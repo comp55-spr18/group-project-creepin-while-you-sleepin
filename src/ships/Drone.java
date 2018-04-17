@@ -34,7 +34,15 @@ public class Drone extends Ship {
 		}
 		topBot = y;						
 		setCanShoot(false);		
-		setxDir(-1);								
+		setxDir(-1);
+
+		switch(game.currLevel) {
+		case 3:
+			setCooldown(20);
+			setMaxCooldown(50);
+		case 2:
+			setShielded(true);
+		}
 	}
 	// tweaked bullet speed
 	@Override

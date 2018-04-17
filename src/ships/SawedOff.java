@@ -31,6 +31,18 @@ public class SawedOff extends Ship {
 		setCollisionDamage(1);
 		setTrail(new FireTrail(this));
 		triggered = false;
+
+		switch(game.currLevel) {
+		case 3:
+			setMaxHealth(10);
+			setBulletDamage(2);
+			setBulletSpeed(12);
+			break;
+		case 2:
+			setMaxHealth(7);
+			setBulletSpeed(12);
+			break;
+		}
 	}
 	@Override
 	public void move() {
@@ -44,7 +56,7 @@ public class SawedOff extends Ship {
 	}
 	@Override
 	public void shoot() {
-		if(getHealth() < 3 && !triggered) {
+		if(getHealth() < 0.7*getMaxHealth() && !triggered) {
 			setShots(3);
 			setSpeed(5);
 			getSprite().setImage("sprites/enemy5.png");

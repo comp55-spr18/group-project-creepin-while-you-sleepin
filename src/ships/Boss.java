@@ -37,6 +37,17 @@ public class Boss extends Ship {
 		setBeamDamage(1);
 		setSelectedGun(0);
 		setTrail(new FireTrail(this));
+
+		switch(game.currLevel) {
+		case 3:
+			setMaxHealth(800);
+			setMaxCooldown(30);
+			break;
+		case 2:
+			setMaxHealth(350);
+			setMaxCooldown(40);
+			break;
+		}
 	}
 	
 	public void move() { //boss will spawn in and then bounce up and down on the screen
@@ -64,7 +75,7 @@ public class Boss extends Ship {
 			Bullet newProj = new Bullet(this, getGunLocation()[getSelectedGun()], -1, 0);
 			newProj.aimAtPlayer();
 			setSelectedGun((getSelectedGun() + 1)%2);
-			if(getHealth() < 100 && counter%7 == 0) {
+			if(getHealth() <= 0.5*getMaxHealth() && counter%8 == 0) {
 				new Beam(this, getGunLocation()[2]);
 			}
 			counter++;

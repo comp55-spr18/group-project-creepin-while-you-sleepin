@@ -24,6 +24,18 @@ public class HomingEnemy extends Ship {
 		setSpeed(4);
 		setPoints(200);
 		setTrail(new FireTrail(this));
+
+		switch(game.currLevel) {
+		case 3:
+			setMaxHealth(10);
+			setCooldown(100);
+			setMaxCooldown(175);
+		case 2:
+			setMaxHealth(7);
+			setCooldown(300);
+			setMaxCooldown(375);
+			setBulletSpeed(10);
+		}
 	}
 
 	@Override

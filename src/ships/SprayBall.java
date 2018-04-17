@@ -14,10 +14,9 @@ public class SprayBall extends Ship {
 	
 	public SprayBall(Game game, double y, double detonation) {
 		super(game);
-		setMaxHealth(50);
+		setMaxHealth(30);
 		setCooldown(700); 
 		setSprite(new GImage("sprites/enemy4.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
-		//pretty sure this line is pointless
 		setGunLocation(new GPoint[] {}); 
 		setSize(120, 120);
 		setSpeed(6);
@@ -26,11 +25,21 @@ public class SprayBall extends Ship {
 		setBulletSize(20);
 		setBulletDamage(1);
 		setMaxCooldown(1000);
-		setPoints(1000);
-		ballDet = game.WINDOW_WIDTH/(1920/detonation);		
+		setPoints(500);
+		ballDet = game.WINDOW_WIDTH/(1920/detonation);
 		setCanShoot(false);
 		setxDir(-1);
-		setyDir(0);						
+		setyDir(0);
+
+		switch(game.currLevel) {
+		case 3:
+			setMaxHealth(75);
+			setBulletDamage(2);
+			break;
+		case 2:
+			setMaxHealth(50);
+			break;
+		}
 	}
 	// Once the ship has paused, fires bullets from 4 cannons turning 180 degrees (hopefully)
 	@Override

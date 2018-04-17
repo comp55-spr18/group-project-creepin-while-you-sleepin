@@ -18,11 +18,20 @@ public class SwarmCaller extends Ship {
 		setTrail(new FireTrail(this));
 		setMaxCooldown(5); //spawns two more swarmBots when called
 		waveCall = 0;//Calls another swarm when big enough
-		setPoints(300);		
-		setCanShoot(false);				
+		setPoints(300);
+		setCanShoot(false);
 		setxDir(-1);
 		setyDir(0);
-		setSpeed(5);				
+		setSpeed(5);
+
+		switch(game.currLevel) {
+		case 3:
+			setMaxHealth(50);
+			break;
+		case 2:
+			setMaxHealth(35);
+			break;
+		}
 	}
 	
 	@Override

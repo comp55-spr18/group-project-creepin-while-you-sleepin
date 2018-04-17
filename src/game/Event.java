@@ -25,7 +25,7 @@ public class Event {
 				eventDelay = 50;
 				break;
 			default:
-				Asteroid a = new Asteroid(game, game.rgen.nextInt()%500 + 1500);
+				new Asteroid(game, game.rgen.nextInt()%500 + 1500);
 				break;
 		}
 	}

@@ -29,6 +29,20 @@ public class Bouncer extends Ship {
 		setCollisionDamage(1);
 		setTrail(new FireTrail(this));
 
+		switch(game.currLevel) {
+		case 3:
+			setMaxHealth(12);
+			setCooldown(100);
+			setMaxCooldown(175);
+			setBulletSpeed(14);
+			break;
+		case 2:
+			setMaxHealth(8);
+			setCooldown(300);
+			setMaxCooldown(375);
+			setBulletSpeed(14);
+			break;
+		}
 	}
 
 	@Override

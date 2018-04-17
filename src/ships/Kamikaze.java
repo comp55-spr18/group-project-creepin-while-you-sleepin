@@ -24,6 +24,16 @@ public class Kamikaze extends Ship {
 		setPoints(100);
 		setCollisionDamage(2);
 		setTrail(new FireTrail(this));
+
+		switch(game.currLevel) {
+		case 3:
+			setMaxHealth(6);
+			setSpeed(10);
+			break;
+		case 2:
+			setMaxHealth(4);
+			break;
+		}
 	}
 	@Override
 	public void move() {

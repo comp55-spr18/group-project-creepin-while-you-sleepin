@@ -18,6 +18,15 @@ public class Tank extends Ship {
 		setGunLocation(new GPoint[] {new GPoint()});		
 		setxDir(-1);
 		setyDir(0);
+
+		switch(game.currLevel) {
+		case 3:
+			setMaxHealth(70);
+			break;
+		case 2:
+			setMaxHealth(45);
+			break;
+		}
 	}
 
 	// Can't shoot

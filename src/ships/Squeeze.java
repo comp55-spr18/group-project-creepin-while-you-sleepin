@@ -26,6 +26,18 @@ public class Squeeze extends Ship {
 		setBeamDuration(80);
 		setBeamWarningDuration(75);
 		setBeamDamage(1);
+
+		switch(game.currLevel) {
+		case 3:
+			setMaxHealth(10);
+			setBeamDamage(2);
+			setBeamHeight(125);
+			break;
+		case 2:
+			setMaxHealth(7);
+			setBeamHeight(125);
+			break;
+		}
 	}
 	@Override
 	public void move() {
