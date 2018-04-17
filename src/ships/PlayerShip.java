@@ -32,7 +32,6 @@ public class PlayerShip extends Ship {
 		setSprite(new GImage("sprites/playermodel.png", 0, 0));
 		setBulletColor(Color.GREEN);
 		setSize(50, 50);
-		setExplosion(new GImage("explosion.png"));
 		setBulletSize(15);
 		setBulletSpeed(25);
 		setBulletDamage(1);
