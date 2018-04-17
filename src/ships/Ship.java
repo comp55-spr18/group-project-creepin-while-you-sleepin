@@ -139,13 +139,6 @@ public abstract class Ship extends Object {
 		game.add(trail);
 	}
 
-	public void changeSprite(String sprite) {
-		double sizeX = getSprite().getWidth();
-		double sizeY = getSprite().getHeight();
-		getSprite().setImage(sprite);
-		getSprite().setSize(sizeX, sizeY);
-	}
-
 	public GImage getSprite() {
 		return (GImage) sprite;
 	}
