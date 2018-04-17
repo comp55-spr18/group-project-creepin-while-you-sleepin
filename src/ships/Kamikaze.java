@@ -42,8 +42,11 @@ public class Kamikaze extends Ship {
 			setDestroyed(true);
 		}
 	}
+
+	public void checkCollision() {
+		if(getSprite().getBounds().intersects(game.player.getSprite().getBounds())) {
+			game.player.dealDamage(getCollisionDamage());
+			setDestroyed(true);
+		}
+	}
 }
-
-
-
-
