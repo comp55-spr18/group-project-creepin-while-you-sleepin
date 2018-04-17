@@ -23,7 +23,7 @@ public class MenuPane extends GraphicsPane {
 		rect = new GButton("EASY", 4*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
 		rect3 = new GButton("EXIT", .5*scaleX, .5*scaleY, scaleX, scaleY);
 		rect2 = new GButton("HARD", 13*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
-		rect4 = new GButton("INSTRUCTIONS", 8.5*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
+		rect4 = new GButton("Instructions", 8.5*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
 		rect.setFillColor(Color.GREEN);
 		rect2.setFillColor(Color.RED);
 		rect3.setFillColor(Color.WHITE);
