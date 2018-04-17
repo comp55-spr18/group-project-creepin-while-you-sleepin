@@ -1,4 +1,5 @@
 package game;
+import misc.Heart;
 import ships.Asteroid;
 
 public class Event {
@@ -29,6 +30,17 @@ public class Event {
 				break;
 		}
 	}
+//	public void HeartEvent() {
+//		switch (eventTrigger) {
+//		case 0:
+//			eventSize = 1;
+//			eventDelay = 50;
+//			break;
+//		default:
+//			new Heart(game,game.rgen.nextInt()%500 +1500);
+//			break;
+//		}
+//	}
 
 	public void update() {
 		if(counter%eventDelay == 0 && eventTrigger < eventSize && !wave.onlyEvent()) {		// If an asteroid wave is triggered, and the delay satisfies
