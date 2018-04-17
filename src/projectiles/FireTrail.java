@@ -40,11 +40,11 @@ public class FireTrail {
 			size = (int) (ship.getSprite().getWidth());
 		} else {
 			xDir = 1;
-			length = 0.3;
+			length = 0.25;
 			speed = 1;
 			xOffset = size/2;
 		}
-		projCount = 15;
+		projCount = 10;
 		colorScale = 25;
 		trail = new ArrayList<Emitter>();
 	}
