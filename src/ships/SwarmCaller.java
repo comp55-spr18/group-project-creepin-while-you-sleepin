@@ -2,6 +2,7 @@ package ships;
 
 import acm.graphics.GImage;
 import game.Game;
+import projectiles.FireTrail;
 
 public class SwarmCaller extends Ship {
 	
@@ -14,6 +15,7 @@ public class SwarmCaller extends Ship {
 		setCooldown(0);			
 		setSprite(new GImage("sprites/enemy5.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
 		setSize(80, 80);
+		setTrail(new FireTrail(this));
 		setMaxCooldown(5); //spawns two more swarmBots when called
 		waveCall = 0;//Calls another swarm when big enough
 		setPoints(300);
@@ -63,7 +65,6 @@ public class SwarmCaller extends Ship {
 	public void move() {
 		if (getSprite().getLocation().getX() > getGame().WINDOW_WIDTH/1.2) {
 			getSprite().move(getxDir()*getSpeed(), getyDir()*getSpeed());
-			getTrail().setLocation(getSprite().getX(), getSprite().getY());
 		}
 	}
 }

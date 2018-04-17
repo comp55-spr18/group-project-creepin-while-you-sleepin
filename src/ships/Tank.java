@@ -36,7 +36,6 @@ public class Tank extends Ship {
 	@Override
 	public void move() {		
 		getSprite().move(getxDir() * getSpeed(), getyDir() * getSpeed());
-		getTrail().setLocation(getSprite().getX(), getSprite().getY());
 		double x = getSprite().getLocation().getX();
 		double y = getSprite().getLocation().getY();
 		setGunLocation(new GPoint[] { new GPoint(x, y + getSprite().getHeight() / 2) });

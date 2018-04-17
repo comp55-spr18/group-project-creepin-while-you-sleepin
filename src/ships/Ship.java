@@ -4,6 +4,7 @@ import java.awt.*;
 import acm.graphics.*;
 import game.Game;
 import misc.Object;
+import projectiles.FireTrail;
 
 public abstract class Ship extends Object {
 	private GPoint[] gunLocation;		// The points that will be used to fire projectiles, if any
@@ -24,7 +25,7 @@ public abstract class Ship extends Object {
 	private int shieldCooldown;
 	private int shieldMaxCooldown;
 	private GImage explosion;
-	public GImage trail;
+	private FireTrail trail;
 	private double bulletSize;
 	private double bulletSpeed;
 	private int bulletDamage;
@@ -106,7 +107,6 @@ public abstract class Ship extends Object {
 			if(getDestroyedCounter() == 0) {
 				explosion.setLocation(getSprite().getLocation());
 				getGame().remove(getSprite());		// Remove the ship sprite
-				getGame().remove(getTrail());
 				game.add(explosion);
 				if(explosion.getX() > 0 && explosion.getX() < getGame().WINDOW_WIDTH && !getGame().lose && !getGame().win && explosion.getY() <= getGame().WINDOW_HEIGHT) {
 					getGame().shipDeathCount = getGame().playSound("shipdeath", getGame().shipDeathCount);
@@ -130,13 +130,6 @@ public abstract class Ship extends Object {
 	public void setSize(double x, double y) {
 		getSprite().setSize(getGame().WINDOW_WIDTH/(1920/x), getGame().WINDOW_HEIGHT/(1080/y));
 		getExplosion().setSize(getSprite().getSize());
-		if(this instanceof PlayerShip) {
-			setTrail(new GImage("playerfire.gif", getSprite().getX(), getSprite().getY()));
-		} else {
-			setTrail(new GImage("fire.gif", getSprite().getX(), getSprite().getY()));
-		}
-		trail.setSize(sprite.getWidth()*2.5, sprite.getHeight());
-		game.add(trail);
 	}
 
 	public GImage getSprite() {
@@ -343,11 +336,11 @@ public abstract class Ship extends Object {
 		this.explosion = explosion;
 	}
 
-	public GImage getTrail() {
+	public FireTrail getTrail() {
 		return trail;
 	}
 
-	public void setTrail(GImage trail) {
+	public void setTrail(FireTrail trail) {
 		this.trail = trail;
 	}
 

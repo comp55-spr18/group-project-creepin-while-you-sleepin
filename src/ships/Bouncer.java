@@ -4,6 +4,7 @@ import acm.graphics.GImage;
 import acm.graphics.GPoint;
 import game.Game;
 import projectiles.Bullet;
+import projectiles.FireTrail;
 
 public class Bouncer extends Ship {
 
@@ -26,6 +27,7 @@ public class Bouncer extends Ship {
 		setBulletSpeed(10);
 		setBulletSize(20);
 		setCollisionDamage(1);
+		setTrail(new FireTrail(this));
 
 		if(game.currLevel >= 2) {
 			setMaxHealth(10);
@@ -44,7 +46,6 @@ public class Bouncer extends Ship {
 	@Override
 	public void move() {
 		getSprite().move(getxDir(), getyDir());
-		getTrail().setLocation(getSprite().getX(), getSprite().getY());
 		double x = getSprite().getLocation().getX();
 		double y = getSprite().getLocation().getY();
 		getGunLocation()[0].setLocation(x,y+getSprite().getHeight()/2);

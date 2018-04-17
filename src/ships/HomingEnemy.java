@@ -3,6 +3,7 @@ package ships;
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 import game.Game;
+import projectiles.FireTrail;
 import projectiles.HomingBullet;
 
 public class HomingEnemy extends Ship {
@@ -22,6 +23,7 @@ public class HomingEnemy extends Ship {
 		setBulletSpeed(8);
 		setSpeed(4);
 		setPoints(200);
+		setTrail(new FireTrail(this));
 
 		if(game.currLevel >= 2) {
 			setMaxHealth(8);
@@ -40,7 +42,6 @@ public class HomingEnemy extends Ship {
 	@Override
 	public void move() {
 		getSprite().move(getxDir()*getSpeed(), getyDir()*getSpeed());
-		getTrail().setLocation(getSprite().getX(), getSprite().getY());
 		double x = getSprite().getLocation().getX();
 		double y = getSprite().getLocation().getY();
 		getGunLocation()[0].setLocation(x,y+getSprite().getHeight()/2);

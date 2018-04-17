@@ -3,6 +3,7 @@ import acm.graphics.GImage;
 import acm.graphics.GPoint;
 import game.Game;
 import projectiles.Bullet;
+import projectiles.FireTrail;
 
 public class Drone extends Ship {
 	private int lifetime = 0;	//They get removed based on lifetime being incremented
@@ -17,6 +18,7 @@ public class Drone extends Ship {
 		setSize(40, 40);
 		setSpeed(10);
 		setGunLocation(new GPoint[] {new GPoint()});
+		setTrail(new FireTrail(this));
 		setMaxCooldown(1000);
 		setPoints(25);
 		setBulletSize(20);
@@ -88,7 +90,6 @@ public class Drone extends Ship {
 		}
 		lifetime++;
 		getSprite().move(getxDir()*getSpeed(), getyDir()*getSpeed());
-		getTrail().setLocation(getSprite().getX(), getSprite().getY());
 		double x = getSprite().getLocation().getX();
 		double y = getSprite().getLocation().getY();
 		getGunLocation()[0].setLocation(x,y+getSprite().getHeight()/2);

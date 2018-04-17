@@ -4,6 +4,7 @@ import acm.graphics.GImage;
 import acm.graphics.GPoint;
 import game.Game;
 import projectiles.Beam;
+import projectiles.FireTrail;
 
 public class Squeeze extends Ship {
 	public Squeeze(Game game, double y) {
@@ -20,6 +21,7 @@ public class Squeeze extends Ship {
 		setSpeed(2);
 		setPoints(100);
 		setCollisionDamage(1);
+		setTrail(new FireTrail(this));
 		setBeamHeight(100);
 		setBeamDuration(80);
 		setBeamWarningDuration(75);
@@ -38,7 +40,6 @@ public class Squeeze extends Ship {
 	@Override
 	public void move() {
 		getSprite().move(getxDir()*getSpeed(), getyDir()*getSpeed());
-		getTrail().setLocation(getSprite().getX(), getSprite().getY());
 		double x = getSprite().getLocation().getX();
 		double y = getSprite().getLocation().getY();
 		getGunLocation()[0].setLocation(x,y+getSprite().getHeight()/2);

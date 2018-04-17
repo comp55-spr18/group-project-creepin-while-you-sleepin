@@ -5,6 +5,7 @@ import java.awt.Color;
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 import game.Game;
+import projectiles.FireTrail;
 
 public class Kamikaze extends Ship {
 	public Kamikaze(Game game, double y) {
@@ -22,6 +23,7 @@ public class Kamikaze extends Ship {
 		setSpeed(8);
 		setPoints(100);
 		setCollisionDamage(2);
+		setTrail(new FireTrail(this));
 
 		if(game.currLevel >= 2) {
 			setMaxHealth(4);
@@ -36,7 +38,6 @@ public class Kamikaze extends Ship {
 	public void move() {
 		aimAtPlayer();
 		vectorMove();
-		getTrail().setLocation(getSprite().getX(), getSprite().getY());
 		if(getSprite().getLocation().getX() < -300) {
 			setDestroyed(true);
 		}

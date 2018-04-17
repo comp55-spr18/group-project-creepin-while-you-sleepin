@@ -2,6 +2,7 @@ package ships;
 
 import acm.graphics.GImage;
 import game.Game;
+import projectiles.FireTrail;
 
 public class SwarmBot extends Ship {
 	private double upDown;
@@ -11,6 +12,7 @@ public class SwarmBot extends Ship {
 		setSprite(new GImage("sprites/enemy3.png", getGame().WINDOW_WIDTH, y));
 		setSize(40, 40);
 		setSpeed(25);			//fast
+		setTrail(new FireTrail(this));
 		setPoints(0);			//worth no points
 		if (spawnPos == 1) {
 			setyDir(.25);
@@ -46,7 +48,6 @@ public class SwarmBot extends Ship {
 		}
 			
 		getSprite().move(getxDir()*getSpeed(), getyDir()*getSpeed());
-		getTrail().setLocation(getSprite().getX(), getSprite().getY());
 		if(getSprite().getLocation().getX() < -100) {
 			setDestroyed(true);
 		}

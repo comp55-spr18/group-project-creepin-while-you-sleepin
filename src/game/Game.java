@@ -135,8 +135,12 @@ public class Game extends GraphicsApplication {
 	public void actionPerformed(ActionEvent e) {
 		if(!paused) {
 			player.update();									// These lines just call the update function of the player
+			player.getTrail().update();
 			for(int i = enemies.size() - 1;i >= 0;i--) {							// and all of the enemy ships and projectiles
 				enemies.get(i).update();
+				if(enemies.get(i).getTrail() != null) {
+					enemies.get(i).getTrail().update();
+				}
 			}
 			for(PowerUp power : powers) {
 				if(power.checkCollision()) {

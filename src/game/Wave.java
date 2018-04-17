@@ -69,7 +69,7 @@ public class Wave {
 			game.remove(upgradeLabel);
 			setFinished(true);
 		}
-		if(game.rgen.nextInt(3500) == 0 && event == null && !upgradeWave && !bossWave) {
+		if(game.rgen.nextInt(2000) == 0 && event == null && !upgradeWave && !bossWave) {
 			event = new Event(this);
 		}
 		if(event != null) {
