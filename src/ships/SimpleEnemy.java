@@ -3,7 +3,6 @@ import acm.graphics.GImage;
 import acm.graphics.GPoint;
 import game.Game;
 import projectiles.Bullet;
-import projectiles.FireTrail;
 
 //Very similar to BasicEnemy, except I can tweak it without breaking other premade waves
 public class SimpleEnemy extends Ship {
@@ -23,12 +22,12 @@ public class SimpleEnemy extends Ship {
 		setBulletDamage(1);
 		setBulletSpeed(10);
 		setBulletSize(15);
-		setTrail(new FireTrail(this));
 	}
 	//Most basic move and shoot
 	@Override
 	public void move() {
 		getSprite().move(getxDir()*getSpeed(), getyDir()*getSpeed());
+		getTrail().setLocation(getSprite().getX(), getSprite().getY());
 		double x = getSprite().getLocation().getX();
 		double y = getSprite().getLocation().getY();
 		getGunLocation()[0].setLocation(x,y+getSprite().getHeight()/2);

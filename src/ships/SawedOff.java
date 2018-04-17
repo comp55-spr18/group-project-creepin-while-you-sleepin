@@ -6,7 +6,6 @@ import acm.graphics.GImage;
 import acm.graphics.GPoint;
 import game.Game;
 import projectiles.Bullet;
-import projectiles.FireTrail;
 
 public class SawedOff extends Ship {
 	private boolean triggered;
@@ -29,7 +28,6 @@ public class SawedOff extends Ship {
 		setBulletSpeed(10);
 		setBulletSize(15);
 		setCollisionDamage(1);
-		setTrail(new FireTrail(this));
 		triggered = false;
 
 		if(game.currLevel >= 2) {
@@ -45,6 +43,7 @@ public class SawedOff extends Ship {
 	@Override
 	public void move() {
 		getSprite().move(getxDir()*getSpeed(), getyDir()*getSpeed());
+		getTrail().setLocation(getSprite().getX(), getSprite().getY());
 		double x = getSprite().getLocation().getX();
 		double y = getSprite().getLocation().getY();
 		getGunLocation()[0].setLocation(x,y+getSprite().getHeight()/2);
@@ -62,7 +61,7 @@ public class SawedOff extends Ship {
 			setCooldown(0);
 			setMaxCooldown(50);
 			triggered = true;
-			}
+		}
 		if(canShoot()) {
 			setCanShoot(false);
 			getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);

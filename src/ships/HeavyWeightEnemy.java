@@ -6,7 +6,6 @@ import acm.graphics.GImage;
 import acm.graphics.GPoint;
 import game.Game;
 import projectiles.Bullet;
-import projectiles.FireTrail;
 
 public class HeavyWeightEnemy extends Ship {
 	public HeavyWeightEnemy(Game game, double y) {
@@ -27,11 +26,11 @@ public class HeavyWeightEnemy extends Ship {
 		setBulletDamage(3);
 		setBulletSpeed(10);
 		setBulletSize(200);
-		setTrail(new FireTrail(this));
 	}
 	@Override
 	public void move() {
 		getSprite().move(getxDir()*getSpeed(), getyDir()*getSpeed());
+		getTrail().setLocation(getSprite().getX(), getSprite().getY());
 		double x = getSprite().getLocation().getX();
 		double y = getSprite().getLocation().getY();
 		getGunLocation()[0].setLocation(x,y+getSprite().getHeight()/2);

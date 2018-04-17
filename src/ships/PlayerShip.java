@@ -7,7 +7,6 @@ import acm.graphics.GPoint;
 import game.Game;
 import projectiles.Beam;
 import projectiles.Bullet;
-import projectiles.FireTrail;
 
 public class PlayerShip extends Ship {
 	private boolean shooting;
@@ -43,7 +42,6 @@ public class PlayerShip extends Ship {
 		setBeamWarningDuration(0);
 		setPoints(0);
 		getGame().add(getSprite());
-		setTrail(new FireTrail(this));
 	}
 
 	public void move(MouseEvent e) {		// Moves the player's gun location to the location of the ship
@@ -51,6 +49,7 @@ public class PlayerShip extends Ship {
 			getSprite().setLocation(new GPoint(e.getX() - getSprite().getWidth()/2, e.getY() - getSprite().getHeight()/2));
 			double x = getSprite().getX();
 			double y = getSprite().getY();
+			getTrail().setLocation(x - getTrail().getWidth() + getSprite().getWidth(), y + 1);
 			getGunLocation()[0].setLocation(x + getSprite().getWidth(), y + getSprite().getHeight()/2);
 			if(isShielded()) {
 				getShield().setLocation(x, y);
@@ -60,6 +59,7 @@ public class PlayerShip extends Ship {
 	@Override
 	public void move() {
 		getSprite().move(10, 0);
+		getTrail().setLocation(getSprite().getX() - getTrail().getWidth() + getSprite().getWidth(), getSprite().getY() + 1);
 		if(isShielded()) {
 			getShield().move(10, 0);
 		}
@@ -120,13 +120,13 @@ public class PlayerShip extends Ship {
 			if(isInvincible()) {
 				if(getIframe() == 0) {
 					getSprite().setImage("truck.png");
-					setSize(50, 50);
+					getSprite().setSize(getGame().WINDOW_WIDTH/(1920/50), getGame().WINDOW_HEIGHT/(1080/50));
 				}
 				setIframe(getIframe() + 1);
 				// If the player's iframe count hits 100, make them vulnerable again
 				if(getIframe() == getMaxIframe()) {
 					getSprite().setImage("sprites/playermodel.png");
-					setSize(50, 50);
+					getSprite().setSize(getGame().WINDOW_WIDTH/(1920/50), getGame().WINDOW_HEIGHT/(1080/50));
 					setInvincible(false);
 					setIframe(0);
 				}
@@ -142,6 +142,7 @@ public class PlayerShip extends Ship {
 		} else {
 			if(getDestroyedCounter() == 0) {
 				getExplosion().setLocation(getSprite().getLocation());
+				getGame().remove(getTrail());
 				getGame().remove(getSprite());		// Remove the ship sprite
 				getGame().add(getExplosion());
 				if(getExplosion().getX() > 0 && getExplosion().getX() < getGame().WINDOW_WIDTH) {

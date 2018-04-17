@@ -4,7 +4,6 @@ import acm.graphics.GImage;
 import acm.graphics.GPoint;
 import game.Game;
 import projectiles.Bullet;
-import projectiles.FireTrail;
 
 public class Trishot extends Ship {
 	
@@ -14,7 +13,6 @@ public class Trishot extends Ship {
 		setSprite(new GImage("sprites/enemy4.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
 		setSize(80, 80);
 		setSpeed(5);			//Normal speed
-		setTrail(new FireTrail(this));
 		setPoints(150);	
 		setCooldown(5); 
 		setMaxCooldown(100);				
@@ -60,6 +58,7 @@ public class Trishot extends Ship {
 	public void move() {
 		if (getSprite().getLocation().getX() > getGame().WINDOW_WIDTH/1.1) {
 			getSprite().move(getxDir()*getSpeed(), getyDir()*getSpeed());
+			getTrail().setLocation(getSprite().getX(), getSprite().getY());
 		}
 		double x = getSprite().getLocation().getX();
 		double y = getSprite().getLocation().getY();

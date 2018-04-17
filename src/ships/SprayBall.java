@@ -4,7 +4,6 @@ import acm.graphics.GImage;
 import acm.graphics.GPoint;
 import game.Game;
 import projectiles.Bullet;
-import projectiles.FireTrail;
 import projectiles.Projectile;
 
 public class SprayBall extends Ship {
@@ -20,7 +19,6 @@ public class SprayBall extends Ship {
 		setGunLocation(new GPoint[] {}); 
 		setSize(120, 120);
 		setSpeed(6);
-		setTrail(new FireTrail(this));
 		setBulletSpeed(12);
 		setBulletSize(20);
 		setBulletDamage(1);
@@ -111,6 +109,7 @@ public class SprayBall extends Ship {
 		}
 		else {
 			getSprite().move(getxDir()*getSpeed(), getyDir()*getSpeed());
+			getTrail().setLocation(getSprite().getX(), getSprite().getY());
 			//moving all 4 gun locations, 1=front 2=top, 3=back, 4=bot
 			setGunLocation(new GPoint[] {new GPoint(x,y+getSprite().getHeight()/2), new GPoint(x+getSprite().getWidth()/2,y), new GPoint(x+getSprite().getWidth(),y+getSprite().getHeight()/2), new GPoint(x+getSprite().getWidth()/2,y+getSprite().getHeight())});
 		}

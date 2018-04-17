@@ -4,7 +4,6 @@ import acm.graphics.GImage;
 import acm.graphics.GPoint;
 import game.Game;
 import projectiles.Bullet;
-import projectiles.FireTrail;
 
 public class BasicEnemy extends Ship {
 	double i = -1.5;
@@ -25,7 +24,8 @@ public class BasicEnemy extends Ship {
 		setBulletDamage(1);
 		setBulletSpeed(10);
 		setBulletSize(15);
-		setTrail(new FireTrail(this));
+		getSprite().sendToFront();
+//		setTrail(new FireTrail(this));
 
 		if(game.currLevel >= 2) {
 			setMaxHealth(4);
@@ -50,6 +50,7 @@ public class BasicEnemy extends Ship {
 			j *= -1;
 		}
 		getSprite().move(getxDir()*getSpeed(), getyDir());
+		getTrail().setLocation(getSprite().getX(), getSprite().getY());
 		double x = getSprite().getLocation().getX();
 		double y = getSprite().getLocation().getY();
 		getGunLocation()[0].setLocation(x,y+getSprite().getHeight()/2);

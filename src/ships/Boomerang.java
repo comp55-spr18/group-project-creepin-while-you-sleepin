@@ -4,7 +4,6 @@ import acm.graphics.GImage;
 import acm.graphics.GPoint;
 import game.Game;
 import projectiles.BoomerangBullet;
-import projectiles.FireTrail;
 
 public class Boomerang extends Ship {
 	public Boomerang(Game game, double y) {
@@ -23,12 +22,12 @@ public class Boomerang extends Ship {
 		setBulletDamage(1);
 		setBulletSpeed(20);
 		setBulletSize(15);
-		setTrail(new FireTrail(this));
 	}
 
 	@Override
 	public void move() {
 		getSprite().move(getxDir() * getSpeed(), getyDir() * getSpeed());
+		getTrail().setLocation(getSprite().getX(), getSprite().getY());
 		double x = getSprite().getLocation().getX();
 		double y = getSprite().getLocation().getY();
 		setGunLocation(new GPoint[] { new GPoint(x, y + getSprite().getHeight() / 2) });

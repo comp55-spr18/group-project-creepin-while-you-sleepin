@@ -6,7 +6,6 @@ import acm.graphics.GImage;
 import acm.graphics.GPoint;
 import game.Game;
 import projectiles.Bullet;
-import projectiles.FireTrail;
 import projectiles.Projectile;
 
 public class Boss2 extends Ship {
@@ -33,7 +32,6 @@ public class Boss2 extends Ship {
 		setBulletSize(80);
 		setBulletSpeed(10);
 		setSelectedGun(0);
-		setTrail(new FireTrail(this));
 	}
 	
 	public void move() { //boss again will spawn in and bounce up and down on screen

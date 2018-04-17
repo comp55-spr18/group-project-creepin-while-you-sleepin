@@ -4,7 +4,6 @@ import java.awt.Color;
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 import game.Game;
-import projectiles.FireTrail;
 
 public class Asteroid extends Ship {
 	public Asteroid(Game game, double x) {
@@ -19,7 +18,6 @@ public class Asteroid extends Ship {
 		setxDir(-1);
 		setyDir(1);
 		setSpeed(8);
-		setTrail(new FireTrail(this));
 		setEventEnemy(true);
 //		getGame().fallCount = getGame().playSound("fall", getGame().fallCount);
 	}	
