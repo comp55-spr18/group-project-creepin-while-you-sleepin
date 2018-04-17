@@ -149,8 +149,8 @@ public class Game extends GraphicsApplication {
 			for(Projectile proj : projectiles) {
 				proj.update();
 			}
-			for(Object obj : objects) {
-				obj.update();
+			for(int i = objects.size() - 1;i >= 0;i--) {
+				objects.get(i).update();
 			}
 			for(int i = projectiles.size() - 1;i >= 0;i--) {	// This for loop iterates backwards thru the projectiles arraylist to avoid exceptions
 				if(projectiles.get(i).isDestroyed()) {			// If the projectile is destroyed

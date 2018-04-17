@@ -20,11 +20,11 @@ public class Heart extends Object {
 	@Override
 	public void checkCollision() {
 		if(getSprite().getBounds().intersects(game.player.getSprite().getBounds())) {
-			game.player.dealDamage(-1);
+			game.player.setHealth(game.player.getHealth() + 1);
 			setDestroyed(true);
 			if(isDestroyed) {
 				getGame().remove(getSprite());
-				
+				getGame().objects.remove(this);
 			}
 			
 			
