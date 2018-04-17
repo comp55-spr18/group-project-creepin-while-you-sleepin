@@ -36,9 +36,7 @@ public class Wave {
 		upgradeLabel.setFont("arial-22-bold");
 		upgradeLabel.setLocation(game.WINDOW_WIDTH/(1920/1050.0), game.WINDOW_HEIGHT/2 - upgradeLabel.getHeight()/2);
 		upgradeLabel.setColor(Color.RED);
-		if(game.enemies != null) {				// If enemies is not null
-			game.enemies.clear();				// Clear it
-		}
+		game.enemies.clear();					// Clear it
 		game.enemies = new ArrayList<Ship>();	// Make enemies a new arraylist
 		prevSize = 0;
 		currSize = 0;

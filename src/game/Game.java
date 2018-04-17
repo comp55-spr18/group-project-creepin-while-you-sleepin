@@ -46,10 +46,10 @@ public class Game extends GraphicsApplication {
 	public boolean paused = false;
 	public Random rgen = new Random();
 	public AudioPlayer audio;
-	public ArrayList<Ship> enemies = new ArrayList<Ship>();
-	public ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
-	public ArrayList<PowerUp> powers = new ArrayList<PowerUp>();
-	public ArrayList<Object> objects = new ArrayList<Object>();
+	public ArrayList<Ship> enemies;
+	public ArrayList<Projectile> projectiles;
+	public ArrayList<PowerUp> powers;
+	public ArrayList<Object> objects;
 	public PlayerShip player;
 	public int score = 0;
 	public GLabel scoreBoard = new GLabel("SCORE: " + score, 10, 25);
@@ -90,6 +90,10 @@ public class Game extends GraphicsApplication {
 	public void startGame() {
 		paused = false;
 		healthBar = new ArrayList<GImage>();
+		enemies = new ArrayList<Ship>();
+		projectiles = new ArrayList<Projectile>();
+		objects = new ArrayList<Object>();
+		powers = new ArrayList<PowerUp>();
 		player = new PlayerShip(this);			// Initiate the game with a new player ship
 		level = new Level(this);
 		score = 0;								// Reset score

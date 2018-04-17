@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import acm.graphics.GImage;
 import acm.graphics.GLabel;
 import game.Game;
+import game.PowerUp;
 import ships.Ship;
 
 public class GamePane extends GraphicsPane {
@@ -65,8 +66,14 @@ public class GamePane extends GraphicsPane {
 		for(GImage heart : program.healthBar) {
 			program.remove(heart);
 		}
+		for(PowerUp p : program.powers) {
+			program.remove(p.getSprite());
+		}
 		program.enemies.clear();								// Clear the enemies arraylist
 		program.projectiles.clear();							// Clear the projectiles arraylist
+		program.healthBar.clear();
+		program.objects.clear();
+		program.powers.clear();
 	}
 
 	@Override
