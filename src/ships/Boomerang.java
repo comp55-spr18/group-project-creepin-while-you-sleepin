@@ -1,7 +1,5 @@
 package ships;
 
-import java.awt.Color;
-
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 import game.Game;
@@ -17,7 +15,6 @@ public class Boomerang extends Ship {
 		setCanShoot(false);
 		setGunLocation(new GPoint[] { new GPoint(50, 15) });
 		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT / (1080 / y)));
-		setBulletColor(Color.RED);
 		setSize(50, 50);
 		setxDir(-1);
 		setyDir(0);

@@ -50,6 +50,7 @@ public abstract class Ship extends Object {
 		setShielded(false);
 		setCollisionDamage(1);
 		setExplosion(new GImage("explosion.png"));
+		setBulletColor(Color.RED);
 	}
 	
 	//vector move does the angle math for you.

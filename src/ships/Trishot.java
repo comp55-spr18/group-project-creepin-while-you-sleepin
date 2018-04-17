@@ -1,7 +1,5 @@
 package ships;
 
-import java.awt.Color;
-
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 import game.Game;
@@ -22,7 +20,6 @@ public class Trishot extends Ship {
 		setMaxCooldown(100);				
 		setCanShoot(false);
 		setGunLocation(new GPoint[] {new GPoint()});
-		setBulletColor(Color.RED);
 		setxDir(-1);
 		setyDir(0);
 		setBulletDamage(1);

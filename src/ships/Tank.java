@@ -1,7 +1,5 @@
 package ships;
 
-import java.awt.Color;
-
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 import game.Game;
@@ -18,7 +16,6 @@ public class Tank extends Ship {
 		setPoints(150);			//worth no points						
 		setCanShoot(false);
 		setGunLocation(new GPoint[] {new GPoint()});		
-		setBulletColor(Color.RED);
 		setxDir(-1);
 		setyDir(0);
 	}

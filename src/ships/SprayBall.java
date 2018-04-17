@@ -1,7 +1,5 @@
 package ships;
 
-import java.awt.Color;
-
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
 import game.Game;
@@ -31,7 +29,6 @@ public class SprayBall extends Ship {
 		setPoints(1000);
 		ballDet = game.WINDOW_WIDTH/(1920/detonation);		
 		setCanShoot(false);
-		setBulletColor(Color.RED);
 		setxDir(-1);
 		setyDir(0);						
 	}
