@@ -9,6 +9,7 @@ import projectiles.HomingBullet;
 public class HomingEnemy extends Ship {
 	public HomingEnemy(Game game, double y) {
 		super(game);
+		setMaxHealth(4);
 		setCooldown(500);
 		setMaxCooldown(575);
 		setCanShoot(false);
@@ -20,21 +21,21 @@ public class HomingEnemy extends Ship {
 		setBulletSize(40);
 		setBulletDamage(2);
 		setBulletSpeed(8);
-		setMaxHealth(4);
 		setSpeed(4);
 		setPoints(200);
 		setTrail(new FireTrail(this));
 
-		switch(game.currLevel) {
-		case 3:
-			setMaxHealth(10);
-			setCooldown(100);
-			setMaxCooldown(175);
-		case 2:
-			setMaxHealth(7);
+		if(game.currLevel >= 2) {
+			setMaxHealth(8);
 			setCooldown(300);
 			setMaxCooldown(375);
 			setBulletSpeed(10);
+		}
+
+		if(game.currLevel >= 3) {
+			setMaxHealth(16);
+			setCooldown(100);
+			setMaxCooldown(175);
 		}
 	}
 

@@ -12,7 +12,7 @@ public class Level {
 		currWave = 1;
 		totalWaves = 7;
 		prevWave = -1;
-		upgradeMod = 2;
+		upgradeMod = 3;
 		getNewWave();
 	}
 

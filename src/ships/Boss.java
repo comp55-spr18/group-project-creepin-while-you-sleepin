@@ -38,15 +38,18 @@ public class Boss extends Ship {
 		setSelectedGun(0);
 		setTrail(new FireTrail(this));
 
-		switch(game.currLevel) {
-		case 3:
-			setMaxHealth(800);
-			setMaxCooldown(30);
-			break;
-		case 2:
-			setMaxHealth(350);
-			setMaxCooldown(40);
-			break;
+		if(game.currLevel >= 2) {
+			setMaxHealth(400);
+			setMaxCooldown(35);
+			setSpeed(6);
+			setBulletSpeed(11);
+		}
+
+		if(game.currLevel >= 3) {
+			setMaxHealth(1500);
+			setMaxCooldown(20);
+			setBeamDuration(30);
+			setBeamDamage(2);
 		}
 	}
 	

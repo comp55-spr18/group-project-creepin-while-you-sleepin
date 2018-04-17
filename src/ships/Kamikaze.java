@@ -25,14 +25,13 @@ public class Kamikaze extends Ship {
 		setCollisionDamage(2);
 		setTrail(new FireTrail(this));
 
-		switch(game.currLevel) {
-		case 3:
-			setMaxHealth(6);
-			setSpeed(10);
-			break;
-		case 2:
+		if(game.currLevel >= 2) {
 			setMaxHealth(4);
-			break;
+		}
+
+		if(game.currLevel >= 3) {
+			setMaxHealth(8);
+			setSpeed(10);
 		}
 	}
 	@Override

@@ -24,13 +24,12 @@ public class SwarmCaller extends Ship {
 		setyDir(0);
 		setSpeed(5);
 
-		switch(game.currLevel) {
-		case 3:
-			setMaxHealth(50);
-			break;
-		case 2:
-			setMaxHealth(35);
-			break;
+		if(game.currLevel >= 2) {
+			setMaxHealth(40);
+		}
+
+		if(game.currLevel >= 3) {
+			setMaxHealth(80);
 		}
 	}
 	

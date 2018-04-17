@@ -32,16 +32,14 @@ public class SawedOff extends Ship {
 		setTrail(new FireTrail(this));
 		triggered = false;
 
-		switch(game.currLevel) {
-		case 3:
+		if(game.currLevel >= 2) {
 			setMaxHealth(10);
+		}
+
+		if(game.currLevel >= 3) {
+			setMaxHealth(20);
 			setBulletDamage(2);
 			setBulletSpeed(12);
-			break;
-		case 2:
-			setMaxHealth(7);
-			setBulletSpeed(12);
-			break;
 		}
 	}
 	@Override

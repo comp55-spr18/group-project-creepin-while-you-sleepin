@@ -27,21 +27,18 @@ public class BasicEnemy extends Ship {
 		setBulletSize(15);
 		setTrail(new FireTrail(this));
 
-		switch(game.currLevel) {
-		case 3:
-			setMaxHealth(5);
-			setCooldown(100);
-			setMaxCooldown(175);
-			setSpeed(6);
-			setBulletSpeed(11);
-			break;
-		case 2:
+		if(game.currLevel >= 2) {
 			setMaxHealth(4);
 			setCooldown(300);
 			setMaxCooldown(375);
 			setSpeed(6);
 			setBulletSpeed(11);
-			break;
+		}
+
+		if(game.currLevel >= 3) {
+			setMaxHealth(8);
+			setCooldown(100);
+			setMaxCooldown(175);
 		}
 	}
 	@Override

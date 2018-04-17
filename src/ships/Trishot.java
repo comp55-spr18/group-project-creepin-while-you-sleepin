@@ -26,15 +26,14 @@ public class Trishot extends Ship {
 		setBulletSpeed(10);
 		setBulletSize(15);
 
-		switch(game.currLevel) {
-		case 3:
-			setMaxHealth(15);
-			setMaxCooldown(60);
-			break;
-		case 2:
-			setMaxHealth(11);
+		if(game.currLevel >= 2) {
+			setMaxHealth(16);
 			setMaxCooldown(80);
-			break;
+		}
+
+		if(game.currLevel >= 3) {
+			setMaxHealth(32);
+			setMaxCooldown(60);
 		}
 	}
 

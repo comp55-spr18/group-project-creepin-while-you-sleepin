@@ -204,7 +204,7 @@ public class Wave {
 				delay = 50;
 				break;
 			case 1:
-				new BasicEnemy(game, 1000);		// This is the first enemy it spawns
+				new BasicEnemy(game, 800);		// This is the first enemy it spawns
 				delay = 100;					// Sets the new delay between enemy spawns to be 100
 				break;
 			case 2:

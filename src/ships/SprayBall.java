@@ -31,14 +31,13 @@ public class SprayBall extends Ship {
 		setxDir(-1);
 		setyDir(0);
 
-		switch(game.currLevel) {
-		case 3:
-			setMaxHealth(75);
+		if(game.currLevel >= 2) {
+			setMaxHealth(60);
+		}
+
+		if(game.currLevel >= 3) {
+			setMaxHealth(120);
 			setBulletDamage(2);
-			break;
-		case 2:
-			setMaxHealth(50);
-			break;
 		}
 	}
 	// Once the ship has paused, fires bullets from 4 cannons turning 180 degrees (hopefully)

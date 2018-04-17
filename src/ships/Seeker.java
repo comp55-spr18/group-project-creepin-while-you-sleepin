@@ -22,13 +22,15 @@ public class Seeker extends Ship {
 		setyDir(0);							
 		setCanShoot(false);
 
-		switch(game.currLevel) {
-		case 3:
-			setMaxHealth(10);
-		case 2:
+		if(game.currLevel >= 2) {
+			setMaxHealth(12);
 			setShielded(true);
 			setShieldCooldown(0);
 			setShieldMaxCooldown(200);
+		}
+
+		if(game.currLevel >= 3) {
+			setMaxHealth(24);
 		}
 	}
 	// tweaked bullet speed
