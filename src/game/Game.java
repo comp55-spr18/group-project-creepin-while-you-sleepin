@@ -142,10 +142,10 @@ public class Game extends GraphicsApplication {
 			player.update();									// Update the player
 			player.getTrail().update();							// Update the player trail
 			for(int i = enemies.size() - 1;i >= 0;i--) {		// Update all enemies and their trails (if they have one)
-				enemies.get(i).update();
 				if(enemies.get(i).getTrail() != null) {
 					enemies.get(i).getTrail().update();
 				}
+				enemies.get(i).update();
 			}
 			for(PowerUp power : powers) {						// Check collision on all powerups (if there are any)
 				if(power.checkCollision()) {

@@ -149,17 +149,12 @@ public class Wave {
 	}
 	
 	public boolean isClear() {				// This function checks to see if all enemies/projectiles/powerups are gone from the screen (so the game knows when to start the next wave)
-		for(int i = game.enemies.size() - 1;i >= 0;i--) {	// Check to see if any enemy explosions are still visible (they are hidden when the ship is destroyed)
-			if(game.enemies.get(i).getExplosion().isVisible()) {			// If an enemy explosion is not hidden (still alive)
-				return false;								// Return false
-			}
-		}
 		for(Projectile proj : game.projectiles) {			// For all projectiles in the game
 			if(!proj.isPlayerProjectile()) {				// If it is hostile
 				return false;								// Return false
 			}
 		}
-		if(!game.powers.isEmpty()) {						// If there are powerups in the game
+		if(!game.powers.isEmpty() || !game.enemies.isEmpty()) {						// If there are powerups in the game
 			return false;									// Return false
 		}
 		return true;										// Otherwise it is empty and returns true
@@ -168,7 +163,7 @@ public class Wave {
 	public boolean onlyEvent() {		// This function checks to see if event enemies are the only thing left on the screen
 		if(!isClear()) {				// If the wave is not clear
 			for(int i = game.enemies.size() - 1;i >= 0;i--) {	// For all enemies
-				if(game.enemies.get(i).getExplosion().isVisible() && !game.enemies.get(i).isEventEnemy()) {		// If an enemy is alive and it is not an event enemy
+				if(!game.enemies.get(i).isDestroyed() && !game.enemies.get(i).isEventEnemy()) {		// If an enemy is alive and it is not an event enemy
 					return false;
 				}
 			}
