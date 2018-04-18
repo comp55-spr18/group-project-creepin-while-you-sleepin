@@ -21,7 +21,7 @@ public class Event {
 	public void AsteroidEvent() {
 		switch(eventTrigger) {
 			case 0:
-				eventSize = 100;
+				eventSize = 10;
 				eventDelay = 50;
 				break;
 			default:
