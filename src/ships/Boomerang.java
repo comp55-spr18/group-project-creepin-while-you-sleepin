@@ -23,6 +23,7 @@ public class Boomerang extends Ship {
 		setBulletDamage(1);
 		setBulletSpeed(20);
 		setBulletSize(15);
+		getGame().add(getSprite());
 		setTrail(new FireTrail(this));
 	}
 

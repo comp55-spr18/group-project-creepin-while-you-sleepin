@@ -23,6 +23,7 @@ public class SimpleEnemy extends Ship {
 		setBulletDamage(1);
 		setBulletSpeed(10);
 		setBulletSize(15);
+		getGame().add(getSprite());
 		setTrail(new FireTrail(this));
 	}
 	//Most basic move and shoot

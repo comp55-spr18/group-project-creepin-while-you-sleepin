@@ -22,7 +22,8 @@ public class SwarmBot extends Ship {
 		}
 		upDown = spawnPos;							
 		setCanShoot(false);		
-		setxDir(-1);						
+		setxDir(-1);
+		getGame().add(getSprite());
 	}
 
 	// Can't shoot

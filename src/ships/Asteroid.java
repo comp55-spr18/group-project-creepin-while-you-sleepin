@@ -19,6 +19,7 @@ public class Asteroid extends Ship {
 		setxDir(-1);
 		setyDir(1);
 		setSpeed(8);
+		getGame().add(getSprite());
 		setTrail(new FireTrail(this));
 		setEventEnemy(true);
 //		getGame().fallCount = getGame().playSound("fall", getGame().fallCount);

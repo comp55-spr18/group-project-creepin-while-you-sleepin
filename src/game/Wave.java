@@ -9,8 +9,8 @@ import projectiles.Projectile;
 import ships.*;
 
 public class Wave {
-	private Game game;			// The game
-	private Level level;
+	private Game game;						// The game
+	private Level level;					// The level object this wave belongs to
 	private int counter;					// Counter to keep track of time between waves
 	private int enemyToSpawn;				// The next enemy the wave wants to spawn
 	private int delay;						// The delay before the next enemy spawns
@@ -18,40 +18,37 @@ public class Wave {
 	private int selectedWave;				// The rgen value of the current wave
 	private GLine upgradeLine;				// The line that appears if the player is on the right side of the screen at the start of an upgrade wave
 	private GLabel upgradeLabel;			// The label telling the player to fly past the line to spawn the upgrades
-	private int prevSize;					// The previous size of game.enemies
-	private int currSize;					// The current size of game.enemies
-	private boolean upgradeWave;
-	private boolean bossWave;
-	private boolean finished;
-	private Event event;
+	private boolean upgradeWave;			// Boolean to check whether this is an upgrade wave or not
+	private boolean bossWave;				// Boolean to check whether this is a boss wave or not
+	private boolean finished;				// Boolean to check whether this wave has finished or not
+	private Event event;					// The event object that may trigger during this wave
 
 	public Wave(Level lev) {
 		level = lev;
 		game = level.getGame();
+		upgradeWave = false;
+		bossWave = false;
 		setFinished(false);
 		selectedWave = -1;
 		upgradeLine = new GLine(game.WINDOW_WIDTH/(1920/1000.0), 0, game.WINDOW_WIDTH/(1920/1000.0), game.WINDOW_HEIGHT);
-		upgradeLine.setColor(Color.RED);
+		upgradeLine.setColor(Color.CYAN);
 		upgradeLabel = new GLabel("Fly behind this line to see the upgrades");
 		upgradeLabel.setFont("arial-22-bold");
-		upgradeLabel.setLocation(game.WINDOW_WIDTH/(1920/1050.0), game.WINDOW_HEIGHT/2 - upgradeLabel.getHeight()/2);
-		upgradeLabel.setColor(Color.RED);
-		game.enemies.clear();					// Clear it
-		game.enemies = new ArrayList<Ship>();	// Make enemies a new arraylist
-		prevSize = 0;
-		currSize = 0;
-		counter = 0;							// Reset the counter
-		enemyToSpawn = 0;						// Reset the enemy to spawn
-		size = 0;
-		delay = 1;
-		selectedWave = level.getPrevWave();
-		if(game.easy) {							// If the difficulty of the new wave is easy
-			while(selectedWave == level.getPrevWave()) {
-				selectedWave = Math.abs(game.rgen.nextInt(10));	// Randomly select one of the easy waves (currently hard1() and Drone())
+		upgradeLabel.setLocation(game.WINDOW_WIDTH/(1920/1050.0), 200);
+		upgradeLabel.setColor(Color.CYAN);
+		counter = 0;							// Initialize the counter
+		enemyToSpawn = 0;						// Initialize the enemy to spawn
+		delay = 1;								// Initialize the delay with 1 (no delay)
+		size = 0;								// Default the size of the wave to 0
+		game.enemies.clear();					// Clear the enemies arraylist
+		selectedWave = level.getPrevWave();		// Initialize selectedWave as the previous wave played in Level
+		if(game.easy) {							// If the difficulty is easy
+			while(selectedWave == level.getPrevWave()) {		// While the selected wave is equal to the previous wave played (to prevent getting the same wave twice)
+				selectedWave = Math.abs(game.rgen.nextInt(10));	// Randomly select one of the easy waves
 			}
-		} else {													// If the wave is hard
-			while(selectedWave == level.getPrevWave()) {
-				selectedWave = Math.abs(game.rgen.nextInt(9));		// Randomly select one of the hard waves (currently only easy1())
+		} else {												// If the difficulty is hard
+			while(selectedWave == level.getPrevWave()) {		// While the selected wave is equal to the previous wave played (to prevent getting the same wave twice)
+				selectedWave = Math.abs(game.rgen.nextInt(9));	// Randomly select one of the hard waves
 			}
 		}
 	}
@@ -61,23 +58,22 @@ public class Wave {
 		if(counter%delay == 0 && enemyToSpawn <= size) {		// After counter advances 'delay' number of frames, and if there are more enemies to spawn
 			getNextEnemy();										// call getNextEnemy() to add the next enemy to game.enemies
 		}
-		addEnemies();											// Add any new enemy sprites
 		if (enemyToSpawn > size && isClear()) {					// If all enemies have been spawned and the screen is clear
 			game.remove(upgradeLine);							// Remove any labels that may have shown during a powerup wave
 			game.remove(upgradeLabel);
-			setFinished(true);
+			setFinished(true);									// Flag the wave as finished
 		}
-		if(game.rgen.nextInt(2000) == 0 && event == null && !upgradeWave && !bossWave) {
-			event = new Event(this);
+		if(game.rgen.nextInt(2000) == 0 && event == null && !upgradeWave && !bossWave) {	// At random, if there has been no other event this wave and it is not a boss or upgrade wave
+			event = new Event(this);							// Trigger a new event
 		}
-		if(event != null) {
-			event.update();
+		if(event != null) {										// If an event has been triggered
+			event.update();										// Update event
 		}
 	}
 
 	public void getNextEnemy() {				// Generates the next enemy in the wave
-		if(!upgradeWave && !bossWave) {			// If it is not the final wave
-			if(game.easy) {		// If the wave difficulty is easy
+		if(!upgradeWave && !bossWave) {			// If this wave is not a boss wave or upgrade wave
+			if(game.easy) {						// If the difficulty is easy
 				switch(selectedWave) {			// Switch statement for all the easy waves
 				case 0:
 					easy1();
@@ -110,7 +106,7 @@ public class Wave {
 					easy10();
 					break;
 				}
-			} else {							// If the wave difficulty is hard
+			} else {							// If the difficulty is hard
 				switch(selectedWave) {			// Switch statement for all the hard waves
 				case 0:
 					hard1();
@@ -144,22 +140,12 @@ public class Wave {
 					hard9();
 				}
 			}
-		} else if(upgradeWave) {
+		} else if(bossWave) {					// If this wave is a boss wave
+			firstBossWave();					// Call the boss wave
+		} else {								// If this wave is an upgrade wave
 			upgradeWave();						// Call the upgrade wave
-		} else {								// If it is the final wave
-			firstBossWave();						// Call the boss wave
 		}
 		enemyToSpawn++;							// Increment the enemyToSpawn
-	}
-
-	public void addEnemies() {
-		currSize = game.enemies.size();					// Get current size of enemies
-		if(currSize > prevSize) {						// If an enemy was created
-			for(int i = prevSize;i < currSize;i++) {	// Add the sprite of all new enemies
-				game.add(game.enemies.get(i).getSprite());
-			}
-			prevSize = currSize;						// Update prevSize
-		}
 	}
 	
 	public boolean isClear() {				// This function checks to see if all enemies/projectiles/powerups are gone from the screen (so the game knows when to start the next wave)
@@ -180,21 +166,22 @@ public class Wave {
 	}
 
 	public boolean onlyEvent() {		// This function checks to see if event enemies are the only thing left on the screen
-		if(!isClear()) {
-			for(int i = game.enemies.size() - 1;i >= 0;i--) {
-				if(game.enemies.get(i).getExplosion().isVisible() && !game.enemies.get(i).isEventEnemy()) {
+		if(!isClear()) {				// If the wave is not clear
+			for(int i = game.enemies.size() - 1;i >= 0;i--) {	// For all enemies
+				if(game.enemies.get(i).getExplosion().isVisible() && !game.enemies.get(i).isEventEnemy()) {		// If an enemy is alive and it is not an event enemy
 					return false;
 				}
 			}
-			if(enemyToSpawn <= size) {
+			if(enemyToSpawn <= size) {	// If the wave has not finished generating
 				return false;
 			}
-			return true;
+			return true;				// Otherwise there are only event enemies alive, return true
 		} else {
-			return false;
+			return false;				// If the wave is clear, return false
 		}
 	}
 
+	// All functions beyond here are hard-coded waves for the game
 	public void easy1() {			// Generates a basic easy wave
 		switch(enemyToSpawn) {
 			case 0:
@@ -799,7 +786,8 @@ public class Wave {
 			game.add(upgradeLabel);
 		}
 	}
-	// Getters
+
+	// Getters and setters
 	public boolean isFinished() {
 		return finished;
 	}

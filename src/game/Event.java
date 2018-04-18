@@ -3,19 +3,19 @@ import misc.Heart;
 import ships.Asteroid;
 
 public class Event {
-	Game game;
-	Wave wave;
-	private int selectedEvent;
-	private int eventSize;
-	private int eventDelay = 50;
-	private int eventTrigger = 0;
-	private int counter;
+	Game game;										// The game
+	Wave wave;										// The wave this event belongs to
+	private int selectedEvent;						// The selected event
+	private int eventSize;							// The size of the selected event (how many times it is triggered)
+	private int eventDelay = 50;					// The delay between triggers of the event
+	private int eventTrigger = 0;					// The event trigger (used as a switch)
+	private int counter;							// A basic counter
 	public Event(Wave w) {
 		wave = w;
 		game = wave.getGame();
-		selectedEvent = game.rgen.nextInt(1);
+		selectedEvent = game.rgen.nextInt(1);		// Randomly select one of the events
 		counter = 0;
-		getNext();
+		getNext();									// Initialize the event (or if it a one time event, this just triggers it)
 	}
 
 	public void AsteroidEvent() {
@@ -43,13 +43,13 @@ public class Event {
 //	}
 
 	public void update() {
-		if(counter%eventDelay == 0 && eventTrigger < eventSize && !wave.onlyEvent()) {		// If an asteroid wave is triggered, and the delay satisfies
-			getNext();
+		if(counter%eventDelay == 0 && eventTrigger < eventSize && !wave.onlyEvent()) {		// If the counter meets the delay and there are more events to be triggered and there are not only event enemies left in the wave
+			getNext();																		// Trigger the next event
 		}
-		counter++;
+		counter++;																			// Increment the counter
 	}
 
-	public void getNext() {
+	public void getNext() {		// This function goes thru all of the possible events in a switch, calls the respective event, and then increments the trigger
 		switch(selectedEvent) {
 			case 0:
 				AsteroidEvent();

@@ -23,6 +23,7 @@ public class SwarmCaller extends Ship {
 		setxDir(-1);
 		setyDir(0);
 		setSpeed(5);
+		getGame().add(getSprite());
 
 		if(game.currLevel >= 2) {
 			setMaxHealth(40);

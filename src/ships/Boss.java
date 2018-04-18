@@ -36,6 +36,7 @@ public class Boss extends Ship {
 		setBeamWarningDuration(60);
 		setBeamDamage(1);
 		setSelectedGun(0);
+		getGame().add(getSprite());
 		setTrail(new FireTrail(this));
 
 		if(game.currLevel >= 2) {

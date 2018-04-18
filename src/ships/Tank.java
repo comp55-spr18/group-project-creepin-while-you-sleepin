@@ -18,6 +18,7 @@ public class Tank extends Ship {
 		setGunLocation(new GPoint[] {new GPoint()});		
 		setxDir(-1);
 		setyDir(0);
+		getGame().add(getSprite());
 
 		if(game.currLevel >= 2) {
 			setMaxHealth(45);
