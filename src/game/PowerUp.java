@@ -29,8 +29,7 @@ public class PowerUp {
 		return false;
 	}
 	
-	public void onCollision() {
-	}
+	public void onCollision() {}
 
 	public Game getGame() {
 		return game;

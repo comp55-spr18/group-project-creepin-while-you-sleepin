@@ -6,7 +6,7 @@ public class Level {
 	private int prevWave;					// The previous wave that was generated
 	private int upgradeMod;					// How often upgrade waves occur
 	private Wave wave;						// The wave object generating waves
-	private boolean finished;
+	private boolean finished;				// Boolean to check if the level is completed
 	public Level(Game g) {
 		game = g;
 		currWave = 1;
@@ -19,26 +19,24 @@ public class Level {
 	public void update() {
 		if(wave.isFinished()) {					// If all enemies have been spawned and the screen is clear
 			if(currWave == totalWaves) {		// If it is the final wave (as in the player beat the boss)
-				setFinished(true);
+				setFinished(true);				// Flag this wave as finished
 			} else if(!game.lose){				// If it was not the final wave (and the player is not dead), get the next wave
-				currWave++;
-				getNewWave();
+				currWave++;						// Increment the current wave
+				getNewWave();					// Get a new wave
 			}
 		}
-		wave.update();
+		wave.update();							// Update the wave
 	}
 
-	void getNewWave() {
-		wave = new Wave(this);
-		if(currWave%upgradeMod == 0) {
-			wave.setUpgradeWave(true);
-		} else {
-			wave.setUpgradeWave(false);
-			prevWave = wave.getSelectedWave();
+	void getNewWave() {								// This function generates a new wave
+		wave = new Wave(this);						// Create a new wave object
+		if(currWave%upgradeMod == 0) {				// If this is an upgrade wave
+			wave.setUpgradeWave(true);				// Set upgradeWave to true
+		} else {									// Otherwise
+			prevWave = wave.getSelectedWave();		// Set the previous wave to the current selected wave
 		}
-		if(currWave == totalWaves) {
-			wave.setUpgradeWave(false);
-			wave.setBossWave(true);
+		if(currWave == totalWaves) {				// If this is the last wave
+			wave.setBossWave(true);					// Set bossWave to true
 		}
 	}
 

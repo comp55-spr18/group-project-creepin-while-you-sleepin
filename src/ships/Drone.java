@@ -24,6 +24,7 @@ public class Drone extends Ship {
 		setBulletSize(20);
 		setBulletSpeed(12);
 		setBulletDamage(1);
+		getGame().add(getSprite());
 		//This sets the arc of the drones based on the height of the player's screen. Can also be altered to change the drone's curve
 		droneCurve = 43.2/getGame().WINDOW_HEIGHT;
 		if (y <= getGame().WINDOW_HEIGHT/2) {

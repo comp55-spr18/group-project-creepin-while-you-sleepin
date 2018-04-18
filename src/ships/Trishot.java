@@ -25,6 +25,7 @@ public class Trishot extends Ship {
 		setBulletDamage(1);
 		setBulletSpeed(10);
 		setBulletSize(15);
+		getGame().add(getSprite());
 
 		if(game.currLevel >= 2) {
 			setMaxHealth(16);

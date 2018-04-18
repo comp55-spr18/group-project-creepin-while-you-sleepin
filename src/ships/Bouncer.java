@@ -27,6 +27,7 @@ public class Bouncer extends Ship {
 		setBulletSpeed(10);
 		setBulletSize(20);
 		setCollisionDamage(1);
+		getGame().add(getSprite());
 		setTrail(new FireTrail(this));
 
 		if(game.currLevel >= 2) {

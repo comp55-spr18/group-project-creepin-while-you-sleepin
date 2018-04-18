@@ -23,6 +23,7 @@ public class Kamikaze extends Ship {
 		setSpeed(8);
 		setPoints(100);
 		setCollisionDamage(2);
+		getGame().add(getSprite());
 		setTrail(new FireTrail(this));
 
 		if(game.currLevel >= 2) {

@@ -27,6 +27,7 @@ public class HeavyWeightEnemy extends Ship {
 		setBulletDamage(3);
 		setBulletSpeed(10);
 		setBulletSize(200);
+		getGame().add(getSprite());
 		setTrail(new FireTrail(this));
 	}
 	@Override

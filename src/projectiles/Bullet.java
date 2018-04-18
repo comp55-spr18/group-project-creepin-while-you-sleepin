@@ -36,7 +36,6 @@ public class Bullet extends Projectile {
 			getSprite().move(Math.cos(Math.atan(getyDir()/getxDir()))*getSpeed()*dx, Math.sin(Math.atan(getyDir()/getxDir()))*getSpeed()*dx);
 			if(getGame() != null && (getSprite().getX() < -getSprite().getWidth() || getSprite().getX() > getGame().WINDOW_WIDTH || getSprite().getY() < -getSprite().getHeight() || getSprite().getY() > getGame().WINDOW_HEIGHT)) {
 				setDestroyed(true);
-				getGame().remove(getSprite());
 			}
 		}
 		
@@ -45,7 +44,6 @@ public class Bullet extends Projectile {
 		public void onCollision(Ship target) {
 			if((isPlayerProjectile() && !(target instanceof PlayerShip)) || (!isPlayerProjectile() && target instanceof PlayerShip)) {
 				setDestroyed(true);
-				getGame().remove(getSprite());
 				target.dealDamage(getCollisionDamage());
 			}
 		}
@@ -55,8 +53,6 @@ public class Bullet extends Projectile {
 			if(isPlayerProjectile() && !missile.isPlayerProjectile()) {
 				setDestroyed(true);
 				missile.setDestroyed(true);
-				getGame().remove(getSprite());
-				getGame().remove(missile.getSprite());
 				getGame().enemyHitCount = getGame().playSound("enemyhit", getGame().enemyHitCount);
 			}
 		}
@@ -103,17 +99,21 @@ public class Bullet extends Projectile {
 		
 		// This is a helper function that returns true if the circular sprite of the projectile collides with the rectangular sprite of the ship
 		public boolean isColliding(GObject projectile, GObject ship) {
-			double circleDistanceX = Math.abs(projectile.getX() + projectile.getWidth()/2 - ship.getX());
-			double circleDistanceY = Math.abs(projectile.getY() + projectile.getHeight()/2 - ship.getY());
+			double width = 4*ship.getWidth()/5.0;
+			double height = 2*(ship.getHeight()/5.0);
+			double xC = ship.getX() + ship.getWidth()/2;
+			double yC = ship.getY() + ship.getHeight()/2;
+			double circleDistanceX = Math.abs(projectile.getX() + projectile.getWidth()/2 - xC);
+			double circleDistanceY = Math.abs(projectile.getY() + projectile.getHeight()/2 - yC);
 
-			if (circleDistanceX > (ship.getWidth()/2 + projectile.getWidth()/2)) { return false; }
-			if (circleDistanceY > (ship.getHeight()/2 + projectile.getWidth()/2)) { return false; }
+			if (circleDistanceX > (width/2 + projectile.getWidth()/2)) { return false; }
+			if (circleDistanceY > (height/2 + projectile.getWidth()/2)) { return false; }
 
-			if (circleDistanceX <= (ship.getWidth()/2)) { return true; } 
-			if (circleDistanceY <= (ship.getHeight()/2)) { return true; }
+			if (circleDistanceX <= (width/2)) { return true; }
+			if (circleDistanceY <= (height/2)) { return true; }
 
-			double cornerDistance_sq = Math.pow(circleDistanceX - ship.getWidth()/2, 2) +
-					Math.pow(circleDistanceY - ship.getHeight()/2, 2);
+			double cornerDistance_sq = Math.pow(circleDistanceX - width/2, 2) +
+					Math.pow(circleDistanceY - height/2, 2);
 			return (cornerDistance_sq <= Math.pow(projectile.getWidth()/2, 2));
 		}
 

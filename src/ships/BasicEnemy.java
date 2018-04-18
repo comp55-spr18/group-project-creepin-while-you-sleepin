@@ -25,6 +25,7 @@ public class BasicEnemy extends Ship {
 		setBulletDamage(1);
 		setBulletSpeed(10);
 		setBulletSize(15);
+		getGame().add(getSprite());
 		setTrail(new FireTrail(this));
 
 		if(game.currLevel >= 2) {
