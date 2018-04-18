@@ -36,7 +36,6 @@ public class Bullet extends Projectile {
 			getSprite().move(Math.cos(Math.atan(getyDir()/getxDir()))*getSpeed()*dx, Math.sin(Math.atan(getyDir()/getxDir()))*getSpeed()*dx);
 			if(getGame() != null && (getSprite().getX() < -getSprite().getWidth() || getSprite().getX() > getGame().WINDOW_WIDTH || getSprite().getY() < -getSprite().getHeight() || getSprite().getY() > getGame().WINDOW_HEIGHT)) {
 				setDestroyed(true);
-				getGame().remove(getSprite());
 			}
 		}
 		
@@ -45,8 +44,6 @@ public class Bullet extends Projectile {
 		public void onCollision(Ship target) {
 			if((isPlayerProjectile() && !(target instanceof PlayerShip)) || (!isPlayerProjectile() && target instanceof PlayerShip)) {
 				setDestroyed(true);
-				getGame().remove(getSprite());
-				getGame().projectiles.remove(this);
 				target.dealDamage(getCollisionDamage());
 			}
 		}
@@ -56,10 +53,6 @@ public class Bullet extends Projectile {
 			if(isPlayerProjectile() && !missile.isPlayerProjectile()) {
 				setDestroyed(true);
 				missile.setDestroyed(true);
-				getGame().projectiles.remove(this);
-				getGame().projectiles.remove(missile);
-				getGame().remove(getSprite());
-				getGame().remove(missile.getSprite());
 				getGame().enemyHitCount = getGame().playSound("enemyhit", getGame().enemyHitCount);
 			}
 		}
