@@ -29,7 +29,7 @@ public class FireTrail {
 		if(ship instanceof PlayerShip) {
 			xDir = -1;
 			xOffset = -size/2;
-			length = 0.25;
+			length = 0.28;
 			speed = 2;
 		} else if(ship instanceof Asteroid) {
 			xDir = 1;

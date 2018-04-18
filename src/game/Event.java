@@ -37,7 +37,7 @@ public class Event {
 //			eventDelay = 50;
 //			break;
 //		default:
-//			new Heart(game,game.rgen.nextInt()%500 +1500);
+//			new Heart(game, game.rgen.nextInt()%500 +1500);
 //			break;
 //		}
 //	}
