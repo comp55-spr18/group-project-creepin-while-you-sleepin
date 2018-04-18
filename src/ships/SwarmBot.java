@@ -49,9 +49,8 @@ public class SwarmBot extends Ship {
 		}
 			
 		getSprite().move(getxDir()*getSpeed(), getyDir()*getSpeed());
-		if(getSprite().getLocation().getX() < -100) {
+		if(getSprite().getX() < -100) {
 			setDestroyed(true);
 		}
-		
 	}
 }

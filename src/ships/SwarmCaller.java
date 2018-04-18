@@ -16,8 +16,8 @@ public class SwarmCaller extends Ship {
 		setSprite(new GImage("sprites/enemy5.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
 		setSize(80, 80);
 		setTrail(new FireTrail(this));
-		setMaxCooldown(5); //spawns two more swarmBots when called
-		waveCall = 0;//Calls another swarm when big enough
+		setMaxCooldown(5);		//spawns two more swarmBots when called
+		waveCall = 0;			//Calls another swarm when big enough
 		setPoints(300);
 		setCanShoot(false);
 		setxDir(-1);
@@ -44,8 +44,8 @@ public class SwarmCaller extends Ship {
 			}
 			if (waveCall >= 150) {
 				//spawns enemies targeting the player's location
-				getGame().enemies.add(new SwarmBot(getGame(), playery-getGame().player.getSprite().getHeight()/2, 1));
-				getGame().enemies.add(new SwarmBot(getGame(), playery+getGame().player.getSprite().getHeight()/2, 2));
+				new SwarmBot(getGame(), playery-getGame().player.getSprite().getHeight()/2, 1);
+				new SwarmBot(getGame(), playery+getGame().player.getSprite().getHeight()/2, 2);
 			}
 			if(waveCall >= 205) {
 				waveCall = 0;
