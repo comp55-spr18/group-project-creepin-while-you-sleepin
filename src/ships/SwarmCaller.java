@@ -39,7 +39,7 @@ public class SwarmCaller extends Ship {
 		if(canShoot()) {
 			setCanShoot(false);
 			if (waveCall == 150) {
-				getGame().playSound("r2d", 2);
+				getGame().r2dCount = getGame().playSound("r2d", getGame().r2dCount);
 				playery = getGame().player.getSprite().getY() + getGame().player.getSprite().getHeight()/2;
 			}
 			if (waveCall >= 150) {

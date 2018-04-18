@@ -40,6 +40,7 @@ public class Game extends GraphicsApplication {
 	public int shieldRegenCount;
 	public int beamCount;
 	public int fallCount;
+	public int r2dCount;
 	public int fps = 65;				// How many updates are called per second
 	public boolean win = false;			// Notice that we have both win and lose booleans; default state is that both are false (the player hasn't won or lost but is playing)
 	public boolean lose = false;		// this means we need to be explicit and can't assume that because win = false that the player lost
@@ -106,6 +107,7 @@ public class Game extends GraphicsApplication {
 		enemyHitCount = 0;
 		shieldHitCount = 0;
 		shieldRegenCount = 0;
+		r2dCount = 0;
 		fallCount = 0;
 		lose = false;							// Reset the lose/win booleans
 		win = false;
@@ -120,8 +122,12 @@ public class Game extends GraphicsApplication {
 	public int playSound(String sound, int count) {			// This sound takes a sound file, plays the file with the "count" number at the end, then returns the next number
 		audio.playSound("sounds", sound + count + ".mp3");	// This function was created so we can have the same sound being played multiple times in our game
 		count++;
-		if(sound == "lowshoot") {	// Lowshoot has 20 variations
-			if(count == 20) {
+		if(sound == "lowshoot") {	// Lowshoot has 25 variations
+			if(count == 25) {
+				count = 0;
+			}
+		} else if(sound == "playershoot") {   // Playershoot has 8 variations
+			if(count == 8) {
 				count = 0;
 			}
 		} else if(count == 5) {		// Every other sound has 5 variations

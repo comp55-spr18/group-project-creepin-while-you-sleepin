@@ -48,7 +48,7 @@ public class Wave {
 			}
 		} else {												// If the difficulty is hard
 			while(selectedWave == level.getPrevWave()) {		// While the selected wave is equal to the previous wave played (to prevent getting the same wave twice)
-				selectedWave = Math.abs(game.rgen.nextInt(1)+8);	// Randomly select one of the hard waves
+				selectedWave = Math.abs(game.rgen.nextInt(9));	// Randomly select one of the hard waves
 			}
 		}
 	}
@@ -734,7 +734,7 @@ public class Wave {
 				delay = 200;
 				break;
 			case 5:
-				new SprayBall(game,500, 500);
+				new SprayBall(game,500, 550);
 				break;
 			
 				
