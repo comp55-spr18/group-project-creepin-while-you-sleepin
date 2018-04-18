@@ -13,9 +13,9 @@ public class Beam extends Projectile {
 	private double duration;	// The duration the beam freezes at maxHeight
 	private double counter;		// The counter that counts up to the duration
 	private double maxHeight;	// The maximum height of the beam
-	private GPoint location;
-	private int warningDuration;
-	private int soundCounter;
+	private GPoint location;	// Location that the beam is tied to
+	private int warningDuration;	// The number of frames that the warning laser shows
+	private int soundCounter;	// Counter for the beam sound effectt
 	public Beam(Ship ship, GPoint gunLoc) {
 		super(ship, gunLoc, 0, 0);
 		warningDuration = ship.getBeamWarningDuration();
@@ -51,7 +51,7 @@ public class Beam extends Projectile {
 				setDestroyed(true);
 				getGame().remove(sprite);
 			}
-			if(soundCounter%20 == 0) {
+			if(soundCounter%20 == 0 && counter < duration) {
 				getGame().beamCount = getGame().playSound("beam", getGame().beamCount);
 			}
 			soundCounter++;
