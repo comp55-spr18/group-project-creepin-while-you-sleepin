@@ -46,6 +46,7 @@ public class Bullet extends Projectile {
 			if((isPlayerProjectile() && !(target instanceof PlayerShip)) || (!isPlayerProjectile() && target instanceof PlayerShip)) {
 				setDestroyed(true);
 				getGame().remove(getSprite());
+				getGame().projectiles.remove(this);
 				target.dealDamage(getCollisionDamage());
 			}
 		}
@@ -55,6 +56,8 @@ public class Bullet extends Projectile {
 			if(isPlayerProjectile() && !missile.isPlayerProjectile()) {
 				setDestroyed(true);
 				missile.setDestroyed(true);
+				getGame().projectiles.remove(this);
+				getGame().projectiles.remove(missile);
 				getGame().remove(getSprite());
 				getGame().remove(missile.getSprite());
 				getGame().enemyHitCount = getGame().playSound("enemyhit", getGame().enemyHitCount);

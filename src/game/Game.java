@@ -151,8 +151,8 @@ public class Game extends GraphicsApplication {
 					break;
 				}
 			}
-			for(Projectile proj : projectiles) {
-				proj.update();
+			for(int i = projectiles.size() - 1;i >= 0;i--) {							// and all of the enemy ships and projectiles
+				projectiles.get(i).update();
 			}
 			for(int i = objects.size() - 1;i >= 0;i--) {
 				objects.get(i).update();
