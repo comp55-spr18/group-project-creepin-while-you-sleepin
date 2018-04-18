@@ -90,7 +90,10 @@ public class Beam extends Projectile {
 					onCollision(enemy);
 				}
 			}
-			if(getGame().player.getSprite().getBounds().intersects(hitbox)) {
+			GRectangle playerHitbox = getGame().player.getSprite().getBounds();
+			playerHitbox.setSize(playerHitbox.getWidth(), (4.0/5.0)*playerHitbox.getHeight());
+			playerHitbox.setLocation(playerHitbox.getX(), getGame().player.getSprite().getY() + (0.5/5.0)*getGame().player.getSprite().getHeight());
+			if(playerHitbox.intersects(hitbox)) {
 				onCollision(getGame().player);
 			}
 			for(Projectile proj : getGame().projectiles) {
