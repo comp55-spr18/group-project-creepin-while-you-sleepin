@@ -15,6 +15,7 @@ public class Beam extends Projectile {
 	private double maxHeight;	// The maximum height of the beam
 	private GPoint location;
 	private int warningDuration;
+	private int soundCounter;
 	public Beam(Ship ship, GPoint gunLoc) {
 		super(ship, gunLoc, 0, 0);
 		warningDuration = ship.getBeamWarningDuration();
@@ -50,6 +51,10 @@ public class Beam extends Projectile {
 				setDestroyed(true);
 				getGame().remove(sprite);
 			}
+			if(soundCounter%20 == 0) {
+				getGame().beamCount = getGame().playSound("beam", getGame().beamCount);
+			}
+			soundCounter++;
 		} else {
 			warningDuration--;
 		}

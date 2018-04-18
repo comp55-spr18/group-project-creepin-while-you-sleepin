@@ -102,7 +102,6 @@ public class PlayerShip extends Ship {
 		}
 		if(canShootAlt && shootingAlt) {
 			canShootAlt = false;
-			getGame().playerShootCount = getGame().playSound("playershoot", getGame().playerShootCount);
 			new Beam(this, getGunLocation()[0]);
 		} else if(!canShootAlt) {
 			altCooldown++;

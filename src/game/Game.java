@@ -38,6 +38,7 @@ public class Game extends GraphicsApplication {
 	public int playerHitCount;
 	public int shieldHitCount;
 	public int shieldRegenCount;
+	public int beamCount;
 	public int fallCount;
 	public int fps = 65;				// How many updates are called per second
 	public boolean win = false;			// Notice that we have both win and lose booleans; default state is that both are false (the player hasn't won or lost but is playing)
