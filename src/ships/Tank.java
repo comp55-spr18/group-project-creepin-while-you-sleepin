@@ -6,11 +6,11 @@ import game.Game;
 
 public class Tank extends Ship {
 	
-	public Tank(Game game, double y) {
+	public Tank(Game game, double y, int height) {
 		super(game);
 		setMaxHealth(30);		// They soak damage for other ships
 		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
-		setSize(100, 100);
+		setSize(100, height);
 		setSpeed(5);			//slowish
 		setTrail(null);
 		setPoints(150);			//worth no points						
