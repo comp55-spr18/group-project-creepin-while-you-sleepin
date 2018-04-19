@@ -11,7 +11,7 @@ import projectiles.FireTrail;
 
 public class Boss extends Ship {
 	private int counter;
-	private int currentAttack = 3;
+	private int currentAttack;
 	private boolean attackTrigger;
 	public Boss(Game game, double y) {
 		super(game);
@@ -104,8 +104,16 @@ public class Boss extends Ship {
 				counter--;
 				primary();
 				break;
+			case 5:
+				beam();
+				break;
+			case 6:
+				squeeze();
+				counter--;
+				primary();
+				break;
 			}
-			if(currentAttack > 3) {
+			if(currentAttack > 6) {
 				currentAttack = 0;
 			}
 		}
