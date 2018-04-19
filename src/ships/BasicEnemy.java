@@ -9,8 +9,10 @@ import projectiles.FireTrail;
 public class BasicEnemy extends Ship {
 	double i = -1.5;
 	double j = -0.05;
+	double maxY;
 	public BasicEnemy(Game game, double y) {
 		super(game);
+		maxY = getGame().WINDOW_WIDTH/(1920/3);
 		setMaxHealth(2);
 		setCooldown(500);
 		setMaxCooldown(575);

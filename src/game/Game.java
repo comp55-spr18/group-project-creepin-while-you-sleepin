@@ -24,7 +24,7 @@ import misc.Object;
 public class Game extends GraphicsApplication {
 	private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	public final int WINDOW_WIDTH = (int) screenSize.getWidth();
-	public final int WINDOW_HEIGHT = (int) screenSize.getHeight();
+	public final int WINDOW_HEIGHT = (int) (9*WINDOW_WIDTH/16);
 	private GamePane gamePane;
 	private MenuPane menu;
 	private BetweenPane betweenPane;
