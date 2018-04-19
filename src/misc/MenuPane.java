@@ -15,7 +15,8 @@ public class MenuPane extends GraphicsPane {
 	private GButton shootTestButton;
 	private GImage background;
 	private GImage instructions;
-
+	public AudioPlayer audio;
+	
 	public MenuPane(Game app) {
 		super();
 		program = app;
@@ -39,6 +40,8 @@ public class MenuPane extends GraphicsPane {
 		background.setSize(program.getWidth(), program.getHeight());
 		instructions = new GImage("instructionspage.jpg");
 		instructions.setSize(program.getWidth(), program.getHeight());
+		//audio = AudioPlayer.getInstance();
+		//audio.playSound("music", "08-Apotos ~ Windmill Isle Day.mp3");
 	}
 
 	@Override

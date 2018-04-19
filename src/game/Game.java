@@ -74,7 +74,7 @@ public class Game extends GraphicsApplication {
 		betweenPane = new BetweenPane(this);
 		mute = false;
 		audio = AudioPlayer.getInstance();
-		audio.playSound("sounds", "r2d2.mp3");	// The audio player needs time to "wake up" when it gets used the first time
+		audio.playSound("sounds", "r2d2.mp3");  // The audio player needs time to "wake up" when it gets used the first time
 		pause(2000);							// Give the audio player time to wake up
 		switchToMenu();							// Then switch to the menu screen
 	}
