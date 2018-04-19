@@ -46,6 +46,10 @@ public class shootTest extends GraphicsPane {
 		program.remove(spaceBackground);
 	}
 	
+	public void enemyBlaster(){
+		//has enemy spawn on screen
+		//has enemy fire when shoot button is pressed
+	}
 	
 	public void mousePressed(MouseEvent e) {
 		GObject obj = program.getElementAt(e.getX(), e.getY());
@@ -59,7 +63,7 @@ public class shootTest extends GraphicsPane {
 			//goes to next enemy in list? (better way to organize enemy types then list???)
 		}
 		if (obj == enemyFire) {
-			//current enemy on screen will fire
+			//enemyBlaster();
 		}
 	}
 	
