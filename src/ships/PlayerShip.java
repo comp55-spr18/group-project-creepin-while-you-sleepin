@@ -30,7 +30,7 @@ public class PlayerShip extends Ship {
 		setMaxCooldown(20);
 		setCanShoot(false);
 		setGunLocation(new GPoint[] {new GPoint()});
-		setSprite(new GImage("sprites/playermodel.png", 0, 0));
+		setSprite(new GImage("sprites/playership.png", 0, 0));
 		setBulletColor(Color.GREEN);
 		setSize(50, 50);
 		setExplosion(new GImage("explosion.png"));
@@ -102,7 +102,6 @@ public class PlayerShip extends Ship {
 		}
 		if(canShootAlt && shootingAlt) {
 			canShootAlt = false;
-			getGame().playerShootCount = getGame().playSound("playershoot", getGame().playerShootCount);
 			new Beam(this, getGunLocation()[0]);
 		} else if(!canShootAlt) {
 			altCooldown++;
@@ -125,7 +124,7 @@ public class PlayerShip extends Ship {
 				setIframe(getIframe() + 1);
 				// If the player's iframe count hits 100, make them vulnerable again
 				if(getIframe() == getMaxIframe()) {
-					getSprite().setImage("sprites/playermodel.png");
+					getSprite().setImage("sprites/playership.png");
 					setSize(50, 50);
 					setInvincible(false);
 					setIframe(0);

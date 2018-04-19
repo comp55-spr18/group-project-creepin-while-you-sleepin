@@ -6,12 +6,12 @@ import acm.graphics.GObject;
 import game.Game;
 
 public class MenuPane extends GraphicsPane {
-	private Game program; // you will use program to get access to
-	// all of the GraphicsProgram calls
-	private GButton rect;
-	private GButton rect2;
-	private GButton rect3;
-	private GButton rect4;
+	private GButton easyButton;
+	private GButton hardButton;
+	private GButton exitButton;
+	private GButton infoButton;
+	private GButton muteButton;
+	private GButton unmuteButton;
 	private GImage background;
 	private GImage instructions;
 
@@ -20,14 +20,18 @@ public class MenuPane extends GraphicsPane {
 		program = app;
 		double scaleX = program.WINDOW_WIDTH/(1920/100.0);
 		double scaleY = program.WINDOW_HEIGHT/(1080/100.0);
-		rect = new GButton("EASY", 4*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
-		rect3 = new GButton("EXIT", .5*scaleX, .5*scaleY, scaleX, scaleY);
-		rect2 = new GButton("HARD", 13*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
-		rect4 = new GButton("Instructions", 8.5*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
-		rect.setFillColor(Color.GREEN);
-		rect2.setFillColor(Color.RED);
-		rect3.setFillColor(Color.WHITE);
-		rect4.setFillColor(Color.CYAN);
+		easyButton = new GButton("EASY", 4*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
+		exitButton = new GButton("EXIT", .5*scaleX, .5*scaleY, scaleX, scaleY);
+		hardButton = new GButton("HARD", 13*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
+		infoButton = new GButton("Instructions", 8.5*scaleX, 6*scaleY, 2*scaleX, 1*scaleY);
+		muteButton = new GButton("Mute", 8.5*scaleX, 7*scaleY, 2*scaleX, 1*scaleY);
+		unmuteButton = new GButton("Unmute", 8.5*scaleX, 7*scaleY, 2*scaleX, 1*scaleY);
+		easyButton.setFillColor(Color.GREEN);
+		hardButton.setFillColor(Color.RED);
+		exitButton.setFillColor(Color.WHITE);
+		infoButton.setFillColor(Color.CYAN);
+		muteButton.setFillColor(Color.LIGHT_GRAY);
+		unmuteButton.setFillColor(Color.LIGHT_GRAY);
 		background = new GImage("mainmenu.jpg");
 		background.setSize(program.getWidth(), program.getHeight());
 		instructions = new GImage("instructionspage.jpg");
@@ -37,39 +41,58 @@ public class MenuPane extends GraphicsPane {
 	@Override
 	public void showContents() {
 		program.add(background);
-		program.add(rect);
-		program.add(rect2);
-		program.add(rect3);
-		program.add(rect4);
+		program.add(easyButton);
+		program.add(hardButton);
+		program.add(exitButton);
+		program.add(infoButton);
+		if(!program.mute) {
+			program.add(unmuteButton);
+			program.add(muteButton);
+		} else {
+			program.add(muteButton);
+			program.add(unmuteButton);
+		}
 	}
 
 	@Override
 	public void hideContents() {
 		program.remove(background);
-		program.remove(rect);
-		program.remove(rect2);
-		program.remove(rect3);
-		program.remove(rect4);
+		program.remove(easyButton);
+		program.remove(hardButton);
+		program.remove(exitButton);
+		program.remove(infoButton);
+		program.remove(muteButton);
+		program.remove(unmuteButton);
 	}
 	
 	@Override
 	public void mousePressed(MouseEvent e) {
 		GObject obj = program.getElementAt(e.getX(), e.getY());
-		if (obj == rect) {
+		if (obj == easyButton) {
 			program.easy = true;
 			program.startGame();
 			program.player.move(e);
 		}
-		if (obj == rect2) {
+		if (obj == hardButton) {
 			program.easy = false;
 			program.startGame();
 			program.player.move(e);
 		}
-		if (obj == rect3) {
+		if (obj == exitButton) {
 			System.exit(0);
 		}
-		if (obj == rect4) {
+		if (obj == infoButton) {
 			program.add(instructions);
+		}
+		if (obj == muteButton) {
+			program.mute = true;
+			unmuteButton.sendToFront();
+			mouseMoved(e);
+		}
+		if (obj == unmuteButton) {
+			program.mute = false;
+			muteButton.sendToFront();
+			mouseMoved(e);
 		}
 		if (obj == instructions) {
 			program.remove(instructions);

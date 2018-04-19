@@ -22,15 +22,16 @@ public class PowerUp {
 				}
 				getGame().remove(getGame().alreadyHave);
 				getGame().powers.clear();
-				getGame().audio.playSound("sounds", "pickup.mp3");
+				if(!getGame().mute) {
+					getGame().audio.playSound("sounds", "pickup.mp3");
+				}
 				return true;
 			}
 		}
 		return false;
 	}
 	
-	public void onCollision() {
-	}
+	public void onCollision() {}
 
 	public Game getGame() {
 		return game;

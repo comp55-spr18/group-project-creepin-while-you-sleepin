@@ -29,6 +29,7 @@ public class SawedOff extends Ship {
 		setBulletSpeed(10);
 		setBulletSize(15);
 		setCollisionDamage(1);
+		getGame().add(getSprite());
 		setTrail(new FireTrail(this));
 		triggered = false;
 

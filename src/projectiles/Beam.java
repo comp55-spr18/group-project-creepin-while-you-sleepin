@@ -13,8 +13,9 @@ public class Beam extends Projectile {
 	private double duration;	// The duration the beam freezes at maxHeight
 	private double counter;		// The counter that counts up to the duration
 	private double maxHeight;	// The maximum height of the beam
-	private GPoint location;
-	private int warningDuration;
+	private GPoint location;	// Location that the beam is tied to
+	private int warningDuration;	// The number of frames that the warning laser shows
+	private int soundCounter;	// Counter for the beam sound effectt
 	public Beam(Ship ship, GPoint gunLoc) {
 		super(ship, gunLoc, 0, 0);
 		warningDuration = ship.getBeamWarningDuration();
@@ -38,10 +39,6 @@ public class Beam extends Projectile {
 	}
 	
 	public void move() {
-		if(getShip().isDestroyed() || getGame().getLevel().isFinished()) {
-			setDestroyed(true);
-			getGame().remove(sprite);
-		}
 		if(warningDuration < 0) {
 			if(sprite.getHeight() + rate > 0) {
 				if(counter >= duration || rate > 0) {
@@ -54,6 +51,10 @@ public class Beam extends Projectile {
 				setDestroyed(true);
 				getGame().remove(sprite);
 			}
+			if(soundCounter%20 == 0 && counter < duration) {
+				getGame().beamCount = getGame().playSound("beam", getGame().beamCount);
+			}
+			soundCounter++;
 		} else {
 			warningDuration--;
 		}
@@ -90,7 +91,10 @@ public class Beam extends Projectile {
 					onCollision(enemy);
 				}
 			}
-			if(getGame().player.getSprite().getBounds().intersects(hitbox)) {
+			GRectangle playerHitbox = getGame().player.getSprite().getBounds();
+			playerHitbox.setSize(playerHitbox.getWidth(), (4.0/5.0)*playerHitbox.getHeight());
+			playerHitbox.setLocation(playerHitbox.getX(), getGame().player.getSprite().getY() + (0.5/5.0)*getGame().player.getSprite().getHeight());
+			if(playerHitbox.intersects(hitbox)) {
 				onCollision(getGame().player);
 			}
 			for(Projectile proj : getGame().projectiles) {

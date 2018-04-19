@@ -25,6 +25,13 @@ public abstract class Projectile extends Object {
 	public void update() {
 		move();
 		checkCollision();
+		if(this instanceof Beam && ship.isDestroyed()) {
+			setDestroyed(true);
+		}
+		if(isDestroyed()) {
+			getGame().remove(sprite);
+			getGame().projectiles.remove(this);
+		}
 	}
 	// Getters and setters
 	public boolean isPlayerProjectile() {

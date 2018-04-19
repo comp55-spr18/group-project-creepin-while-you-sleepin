@@ -10,7 +10,6 @@ import game.PowerUp;
 import ships.Ship;
 
 public class GamePane extends GraphicsPane {
-	private Game program;
 	private GImage background;
 	private GLabel pauseLabel;
 

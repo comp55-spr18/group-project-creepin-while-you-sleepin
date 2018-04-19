@@ -116,6 +116,7 @@ public abstract class Ship extends Object {
 			if(getDestroyedCounter() == 50) {		// When the counter hits 50
 				getGame().remove(explosion);
 				explosion.setVisible(false);
+				getGame().enemies.remove(this);
 			}
 		}
 	}
