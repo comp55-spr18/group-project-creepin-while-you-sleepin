@@ -91,7 +91,7 @@ public class GamePane extends GraphicsPane {
 			GImage playerSprite = program.player.getSprite();
 			if(e.getX() >= playerSprite.getX() && e.getX() <= playerSprite.getX() + playerSprite.getWidth() && e.getY() >= playerSprite.getY() && e.getY() <= playerSprite.getY() + playerSprite.getHeight()) {
 				program.paused = false;
-				if(!program.mute) {
+				if(!program.musicMute) {
 					program.audio.playSound("music", "level" + program.currLevel + ".mp3");
 				}
 				program.remove(pauseLabel);
@@ -121,7 +121,7 @@ public class GamePane extends GraphicsPane {
 		if(e.getKeyCode() == KeyEvent.VK_SPACE) {
 			if(!program.paused) {
 				program.paused = true;
-				if(!program.mute) {
+				if(!program.musicMute) {
 					program.audio.pauseSound("music", "level" + program.currLevel + ".mp3");
 				}
 				program.add(pauseLabel);

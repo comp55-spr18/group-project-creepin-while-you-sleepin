@@ -12,6 +12,8 @@ public class MenuPane extends GraphicsPane {
 	private GButton infoButton;
 	private GButton muteButton;
 	private GButton unmuteButton;
+	private GButton musicMuteButton;
+	private GButton musicUnmuteButton;
 	private GButton shootTestButton;
 	private GImage background;
 	private GImage instructions;
@@ -25,8 +27,10 @@ public class MenuPane extends GraphicsPane {
 		exitButton = new GButton("EXIT", .5*scaleX, .5*scaleY, scaleX, scaleY);
 		hardButton = new GButton("HARD", 13*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
 		infoButton = new GButton("Instructions", 8.5*scaleX, 6*scaleY, 2*scaleX, 1*scaleY);
-		muteButton = new GButton("Mute", 8.5*scaleX, 7*scaleY, 2*scaleX, 1*scaleY);
-		unmuteButton = new GButton("Unmute", 8.5*scaleX, 7*scaleY, 2*scaleX, 1*scaleY);
+		muteButton = new GButton("Mute Sound", 8.5*scaleX, 7*scaleY, 2*scaleX, 1*scaleY);
+		unmuteButton = new GButton("Unmute Sound", 8.5*scaleX, 7*scaleY, 2*scaleX, 1*scaleY);
+		musicMuteButton = new GButton("Mute Music", 8.5*scaleX, 8*scaleY, 2*scaleX, 1*scaleY);
+		musicUnmuteButton = new GButton("Unmute Music", 8.5*scaleX, 8*scaleY, 2*scaleX, 1*scaleY);
 		shootTestButton = new GButton("TEST", 17.5*scaleX, .5*scaleY, scaleX, scaleY);
 		easyButton.setFillColor(Color.GREEN);
 		hardButton.setFillColor(Color.RED);
@@ -34,6 +38,8 @@ public class MenuPane extends GraphicsPane {
 		infoButton.setFillColor(Color.CYAN);
 		muteButton.setFillColor(Color.LIGHT_GRAY);
 		unmuteButton.setFillColor(Color.LIGHT_GRAY);
+		musicMuteButton.setFillColor(Color.LIGHT_GRAY);
+		musicUnmuteButton.setFillColor(Color.LIGHT_GRAY);
 		shootTestButton.setFillColor(Color.PINK);
 		background = new GImage("newmainmenu.jpg");
 		background.setSize(program.getWidth(), program.getHeight());
@@ -56,6 +62,13 @@ public class MenuPane extends GraphicsPane {
 			program.add(muteButton);
 			program.add(unmuteButton);
 		}
+		if(!program.musicMute) {
+			program.add(musicUnmuteButton);
+			program.add(musicMuteButton);
+		} else {
+			program.add(musicMuteButton);
+			program.add(musicUnmuteButton);
+		}
 	}
 
 	@Override
@@ -67,6 +80,8 @@ public class MenuPane extends GraphicsPane {
 		program.remove(infoButton);
 		program.remove(muteButton);
 		program.remove(unmuteButton);
+		program.remove(musicMuteButton);
+		program.remove(musicUnmuteButton);
 		program.remove(shootTestButton);
 		program.audio.stopSound("music", "menu.mp3");
 	}
@@ -92,14 +107,24 @@ public class MenuPane extends GraphicsPane {
 		}
 		if (obj == muteButton) {
 			program.mute = true;
-			program.audio.pauseSound("music", "menu.mp3");
 			unmuteButton.sendToFront();
 			mouseMoved(e);
 		}
 		if (obj == unmuteButton) {
 			program.mute = false;
-			program.audio.playSound("music", "menu.mp3", true);
 			muteButton.sendToFront();
+			mouseMoved(e);
+		}
+		if (obj == musicMuteButton) {
+			program.musicMute = true;
+			program.audio.pauseSound("music", "menu.mp3");
+			musicUnmuteButton.sendToFront();
+			mouseMoved(e);
+		}
+		if (obj == musicUnmuteButton) {
+			program.musicMute = false;
+			program.audio.playSound("music", "menu.mp3", true);
+			musicMuteButton.sendToFront();
 			mouseMoved(e);
 		}
 		if (obj == instructions) {

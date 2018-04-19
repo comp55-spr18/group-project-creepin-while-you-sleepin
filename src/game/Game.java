@@ -30,6 +30,7 @@ public class Game extends GraphicsApplication {
 	private BetweenPane betweenPane;
 	private EndPane endPane;
 	public boolean mute;
+	public boolean musicMute;
 	
 	// Variables for game loop
 	public int lowShootCount;			// These variables are just telling the audio player which sound to play
@@ -80,7 +81,7 @@ public class Game extends GraphicsApplication {
 	}
 
 	public void switchToMenu() {
-		if(!mute) {
+		if(!musicMute) {
 			audio.playSound("music", "menu.mp3", true);
 		}
 		switchToScreen(menu);
@@ -91,7 +92,7 @@ public class Game extends GraphicsApplication {
 	}
 	
 	public void switchToGame() {
-		if(!mute) {
+		if(!musicMute) {
 			audio.playSound("music", "level" + currLevel + ".mp3", true);
 		}
 		switchToScreen(gamePane);
