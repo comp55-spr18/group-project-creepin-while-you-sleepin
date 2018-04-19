@@ -35,7 +35,7 @@ public class MenuPane extends GraphicsPane {
 		muteButton.setFillColor(Color.LIGHT_GRAY);
 		unmuteButton.setFillColor(Color.LIGHT_GRAY);
 		shootTestButton.setFillColor(Color.PINK);
-		background = new GImage("mainmenu.jpg");
+		background = new GImage("newmainmenu.jpg");
 		background.setSize(program.getWidth(), program.getHeight());
 		instructions = new GImage("instructionspage.jpg");
 		instructions.setSize(program.getWidth(), program.getHeight());

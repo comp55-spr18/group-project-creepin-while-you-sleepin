@@ -49,7 +49,7 @@ public abstract class Ship extends Object {
 		setDestroyedCounter(0);
 		setShielded(false);
 		setCollisionDamage(1);
-		setExplosion(new GImage("explosion.png"));
+		setExplosion(new GImage("sprites/explosion.png"));
 		setBulletColor(Color.RED);
 	}
 	
@@ -240,7 +240,7 @@ public abstract class Ship extends Object {
 		} else {
 			for(int i = size;i < healthChange + size;i++) {
 				if(i >= 0) {
-					GImage toAdd = new GImage("heart.png", 10 + 25*i, 30);
+					GImage toAdd = new GImage("sprites/heart.png", 10 + 25*i, 30);
 					toAdd.setSize(20, 20);
 					game.healthBar.add(toAdd);
 					game.add(toAdd);
