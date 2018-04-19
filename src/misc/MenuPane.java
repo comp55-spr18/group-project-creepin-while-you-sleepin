@@ -12,6 +12,7 @@ public class MenuPane extends GraphicsPane {
 	private GButton infoButton;
 	private GButton muteButton;
 	private GButton unmuteButton;
+	private GButton shootTestButton;
 	private GImage background;
 	private GImage instructions;
 
@@ -26,12 +27,14 @@ public class MenuPane extends GraphicsPane {
 		infoButton = new GButton("Instructions", 8.5*scaleX, 6*scaleY, 2*scaleX, 1*scaleY);
 		muteButton = new GButton("Mute", 8.5*scaleX, 7*scaleY, 2*scaleX, 1*scaleY);
 		unmuteButton = new GButton("Unmute", 8.5*scaleX, 7*scaleY, 2*scaleX, 1*scaleY);
+		shootTestButton = new GButton("TEST", 17.5*scaleX, .5*scaleY, scaleX, scaleY);
 		easyButton.setFillColor(Color.GREEN);
 		hardButton.setFillColor(Color.RED);
 		exitButton.setFillColor(Color.WHITE);
 		infoButton.setFillColor(Color.CYAN);
 		muteButton.setFillColor(Color.LIGHT_GRAY);
 		unmuteButton.setFillColor(Color.LIGHT_GRAY);
+		shootTestButton.setFillColor(Color.PINK);
 		background = new GImage("mainmenu.jpg");
 		background.setSize(program.getWidth(), program.getHeight());
 		instructions = new GImage("instructionspage.jpg");
@@ -45,6 +48,7 @@ public class MenuPane extends GraphicsPane {
 		program.add(hardButton);
 		program.add(exitButton);
 		program.add(infoButton);
+		program.add(shootTestButton);
 		if(!program.mute) {
 			program.add(unmuteButton);
 			program.add(muteButton);
@@ -63,6 +67,7 @@ public class MenuPane extends GraphicsPane {
 		program.remove(infoButton);
 		program.remove(muteButton);
 		program.remove(unmuteButton);
+		program.remove(shootTestButton);
 	}
 	
 	@Override
@@ -97,5 +102,8 @@ public class MenuPane extends GraphicsPane {
 		if (obj == instructions) {
 			program.remove(instructions);
 		}
+		// (obj == shootTestButton) {
+		//	program.shootTest;
+		//}
 	}
 }
