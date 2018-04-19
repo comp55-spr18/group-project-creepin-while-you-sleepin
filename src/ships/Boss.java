@@ -12,6 +12,7 @@ import projectiles.FireTrail;
 public class Boss extends Ship {
 	private int counter;
 	private int currentAttack;
+	private boolean attackTrigger;
 	public Boss(Game game, double y) {
 		super(game);
 		counter = 0;
@@ -23,7 +24,7 @@ public class Boss extends Ship {
 		setBulletColor(Color.RED);
 		setxDir(-1);
 		setyDir(0);
-		setSpeed(6);
+		setSpeed(4);
 		setPoints(100);
 		setCollisionDamage(2);
 		setBulletDamage(2);
@@ -89,14 +90,14 @@ public class Boss extends Ship {
 	}
 
 	public void primary() {
-		if(counter%20 == 0) {
+		if(counter%40 == 0) {
 			Bullet newProj = new Bullet(this, getGunLocation()[getSelectedGun()], -1, 0);
 			newProj.aimAtPlayer();
 			setSelectedGun((getSelectedGun() + 1)%2);
 			getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);
 		}
 		counter++;
-		if(counter%200 == 0) {
+		if(counter%600 == 0) {
 			counter = 0;
 			currentAttack++;
 		}
@@ -115,13 +116,23 @@ public class Boss extends Ship {
 
 	public void squeeze() {
 		if(counter == 0) {
-			new Beam(this, getGunLocation()[0], 50, 200, 1);
-			new Beam(this, getGunLocation()[1], 50, 200, 1);
+			new Beam(this, getGunLocation()[0], 50, 500, 1);
+			new Beam(this, getGunLocation()[1], 50, 500, 1);
 		}
 		counter++;
 		if(counter == 300) {
+			attackTrigger = true;
+			setSpeed(0);
+		}
+		if(counter == 600) {
+			setSpeed(4);
 			counter = 0;
 			currentAttack++;
+		}
+		if(counter%30 == 0 && attackTrigger) {
+			Bullet newProj = new Bullet(this, getGunLocation()[2], -1, 0);
+			newProj.aimAtPlayer();
+			getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);
 		}
 	}
 }
