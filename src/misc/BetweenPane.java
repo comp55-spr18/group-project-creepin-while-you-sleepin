@@ -25,7 +25,7 @@ public class BetweenPane extends GraphicsPane {
 		levelLabel = new GLabel("");
 		levelLabel.setFont("Arial-Bold-100");
 		levelLabel.setColor(Color.WHITE);
-		background = new GImage("levels/testspacelevel.jpg");
+		background = new GImage("levels/betweenbackground.jpg");
 		background.setSize(program.getWidth(), program.getHeight());
 	}
 

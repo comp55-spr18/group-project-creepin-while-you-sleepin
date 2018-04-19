@@ -26,11 +26,11 @@ public class MenuPane extends GraphicsPane {
 		easyButton = new GButton("EASY", 4*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
 		exitButton = new GButton("EXIT", .5*scaleX, .5*scaleY, scaleX, scaleY);
 		hardButton = new GButton("HARD", 13*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
-		infoButton = new GButton("Instructions", 8.5*scaleX, 6*scaleY, 2*scaleX, 2*scaleY/3);
-		muteButton = new GButton("Mute Sound", 8.5*scaleX, infoButton.getY() + 2*scaleY/3, 2*scaleX, 2*scaleY/3);
-		unmuteButton = new GButton("Unmute Sound", muteButton.getX(), muteButton.getY(), muteButton.getWidth(), muteButton.getHeight());
-		musicMuteButton = new GButton("Mute Music", 8.5*scaleX, muteButton.getY() + 2*scaleY/3, 2*scaleX, 2*scaleY/3);
-		musicUnmuteButton = new GButton("Unmute Music", musicMuteButton.getX(), musicMuteButton.getY(), musicMuteButton.getWidth(), musicMuteButton.getHeight());
+		infoButton = new GButton("INSTRUCTIONS", 8.5*scaleX, 6*scaleY, 2*scaleX, 2*scaleY/3);
+		muteButton = new GButton("MUTE SOUND", 8.5*scaleX, infoButton.getY() + 2*scaleY/3, 2*scaleX, 2*scaleY/3);
+		unmuteButton = new GButton("UNMUTE SOUND", muteButton.getX(), muteButton.getY(), muteButton.getWidth(), muteButton.getHeight());
+		musicMuteButton = new GButton("MUTE MUSIC", 8.5*scaleX, muteButton.getY() + 2*scaleY/3, 2*scaleX, 2*scaleY/3);
+		musicUnmuteButton = new GButton("UNMUTE MUSIC", musicMuteButton.getX(), musicMuteButton.getY(), musicMuteButton.getWidth(), musicMuteButton.getHeight());
 		shootTestButton = new GButton("TEST", 17.5*scaleX, .5*scaleY, scaleX, scaleY);
 		easyButton.setFillColor(Color.GREEN);
 		hardButton.setFillColor(Color.RED);
@@ -83,7 +83,6 @@ public class MenuPane extends GraphicsPane {
 		program.remove(musicMuteButton);
 		program.remove(musicUnmuteButton);
 		program.remove(shootTestButton);
-		program.audio.stopSound("music", "menu.mp3");
 	}
 	
 	@Override

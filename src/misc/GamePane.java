@@ -24,7 +24,7 @@ public class GamePane extends GraphicsPane {
 		program.alreadyHave.setFont("arial-22-bold");
 		program.alreadyHave.setColor(Color.RED);
 		program.alreadyHave.setLocation(program.WINDOW_WIDTH/2 - program.alreadyHave.getWidth()/2, program.WINDOW_HEIGHT/2 - program.getHeight()/2);
-		background = new GImage("levels/test.gif");
+		background = new GImage("levels/background.gif");
 		background.setSize(program.getWidth()+ 500, program.getHeight());
 	}
 
