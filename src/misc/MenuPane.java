@@ -68,6 +68,7 @@ public class MenuPane extends GraphicsPane {
 		program.remove(muteButton);
 		program.remove(unmuteButton);
 		program.remove(shootTestButton);
+		program.audio.stopSound("music", "menu.mp3");
 	}
 	
 	@Override
@@ -91,11 +92,13 @@ public class MenuPane extends GraphicsPane {
 		}
 		if (obj == muteButton) {
 			program.mute = true;
+			program.audio.pauseSound("music", "menu.mp3");
 			unmuteButton.sendToFront();
 			mouseMoved(e);
 		}
 		if (obj == unmuteButton) {
 			program.mute = false;
+			program.audio.playSound("music", "menu.mp3", true);
 			muteButton.sendToFront();
 			mouseMoved(e);
 		}

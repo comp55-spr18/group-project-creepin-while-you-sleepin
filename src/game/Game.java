@@ -80,6 +80,9 @@ public class Game extends GraphicsApplication {
 	}
 
 	public void switchToMenu() {
+		if(!mute) {
+			audio.playSound("music", "menu.mp3", true);
+		}
 		switchToScreen(menu);
 	}
 	
@@ -88,6 +91,9 @@ public class Game extends GraphicsApplication {
 	}
 	
 	public void switchToGame() {
+		if(!mute) {
+			audio.playSound("music", "level" + currLevel + ".mp3", true);
+		}
 		switchToScreen(gamePane);
 	}
 
@@ -114,7 +120,7 @@ public class Game extends GraphicsApplication {
 		lose = false;							// Reset the lose/win booleans
 		win = false;
 		timer.start();							// Start the game
-		switchToScreen(gamePane);				// Switch to the game screen
+		switchToGame();				// Switch to the game screen
 	}
 	
 	public int playSound(String sound, int count) {			// This sound takes a sound file, plays the file with the "count" number at the end, then returns the next number
@@ -167,6 +173,7 @@ public class Game extends GraphicsApplication {
 			if(!level.isFinished()) {							// If the level is not finished
 				level.update();									// Update the level
 			} else {											// If the level is finished
+				audio.stopSound("music", "level" + currLevel + ".mp3");		// Stop the music for the level
 				player.setShooting(false);						// Prevent the player from shooting
 				player.setShootingAlt(false);
 				player.move();									// Call the player's move() function (they fly to the right)
