@@ -16,7 +16,7 @@ public class Boss extends Ship {
 	public Boss(Game game, double y) {
 		super(game);
 		counter = 0;
-		setMaxHealth(150);
+		setMaxHealth(250);
 		setGunLocation(new GPoint[] {new GPoint(), new GPoint(), new GPoint()});
 		setSprite(new GImage("boss 1.png", game.WINDOW_WIDTH, game.WINDOW_HEIGHT/(1080/y)));
 		setBulletColor(Color.white);
@@ -25,7 +25,7 @@ public class Boss extends Ship {
 		setxDir(-1);
 		setyDir(0);
 		setSpeed(4);
-		setPoints(100);
+		setPoints(1000);
 		setCollisionDamage(2);
 		setBulletDamage(2);
 		setBulletSize(60);
@@ -36,17 +36,13 @@ public class Boss extends Ship {
 		setTrail(new FireTrail(this));
 
 		if(game.currLevel >= 2) {
-			setMaxHealth(400);
-			setMaxCooldown(35);
-			setSpeed(6);
-			setBulletSpeed(11);
+			setMaxHealth(500);
+			setBulletSpeed(12);
 		}
 
 		if(game.currLevel >= 3) {
-			setMaxHealth(1500);
-			setMaxCooldown(20);
-			setBeamDuration(30);
-			setBeamDamage(2);
+			setMaxHealth(1000);
+			setBulletSpeed(18);
 		}
 	}
 
