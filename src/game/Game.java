@@ -91,6 +91,7 @@ public class Game extends GraphicsApplication {
 	
 	public void switchToGame() {
 		if(!musicMute) {
+			audio.stopSound("music", "menu.mp3");
 			audio.playSound("music", "level" + currLevel + ".mp3", true);
 		}
 		switchToScreen(gamePane);

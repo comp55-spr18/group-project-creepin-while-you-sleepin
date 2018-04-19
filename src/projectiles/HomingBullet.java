@@ -24,6 +24,7 @@ public class HomingBullet extends Bullet {
 		if(getGame() != null && (getSprite().getX() < -50 || getSprite().getX() > getGame().WINDOW_WIDTH || getSprite().getY() < -50 || getSprite().getY() > getGame().WINDOW_HEIGHT)) {
 			setDestroyed(true);
 		}
+		gracePeriod++;
 	}
 	
 	// I also had to redefine onCollision since this projectile type can hit any ship after it's launched - including the ship that fired it
@@ -38,18 +39,6 @@ public class HomingBullet extends Bullet {
 					getGame().updateScoreBoard(300);
 				}
 			}
-		}
-	}
-	
-	// I had to redefine the actionPerformed since I need to increment gracePeriod every time the timer is called
-	@Override
-	public void update() {
-		move();
-		checkCollision();
-		gracePeriod++;
-		if(isDestroyed()) {
-			getGame().remove(sprite);
-			getGame().projectiles.remove(this);
 		}
 	}
 }
