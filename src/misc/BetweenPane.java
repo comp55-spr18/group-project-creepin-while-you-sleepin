@@ -53,6 +53,7 @@ public class BetweenPane extends GraphicsPane {
 		if (obj == rect) {
 			program.switchToGame();
 			program.player.move(e);
+			program.audio = AudioPlayer.getInstance();
 			program.timer.start();
 		}
 		if (obj == rect2) {
