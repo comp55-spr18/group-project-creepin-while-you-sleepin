@@ -15,7 +15,7 @@ public class PlayerShip extends Ship {
 	private boolean canShootAlt;
 	private int altCooldown;
 	private int altMaxCooldown;
-	public boolean canMove;
+	private boolean canMove;
 	public PlayerShip(Game game) {
 		super(game);
 		canMove = true;
@@ -48,9 +48,11 @@ public class PlayerShip extends Ship {
 	}
 
 	public void move(MouseEvent e) {		// Moves the player's gun location to the location of the ship
-		if(e.getX() > 0 && e.getY() > 0 && e.getX() < getGame().WINDOW_WIDTH && e.getY() < getGame().WINDOW_HEIGHT - getGame().WINDOW_HEIGHT/10) {
-			if(getGame().getElementAt(e.getX(), e.getY()) == getSprite()) {
-				canMove = true;
+		if(!canMove) {
+			if(e.getX() > 0 && e.getY() > 0 && e.getX() < getGame().WINDOW_WIDTH && e.getY() < getGame().WINDOW_HEIGHT - getGame().WINDOW_HEIGHT/10) {
+				if(getGame().getElementAt(e.getX(), e.getY()) == getSprite()) {
+					canMove = true;
+				}
 			}
 		}
 		if(!isDestroyed() && !getGame().level.isFinished() && canMove) {
@@ -191,5 +193,9 @@ public class PlayerShip extends Ship {
 	}
 	public void setAltMaxCooldown(int altMaxCooldown) {
 		this.altMaxCooldown = altMaxCooldown;
+	}
+
+	public void setCanMove(boolean canMove) {
+		this.canMove = canMove;
 	}
 }

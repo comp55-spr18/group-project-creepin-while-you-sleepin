@@ -118,7 +118,7 @@ public class GamePane extends GraphicsPane {
 	}
 	@Override
 	public void mouseExited(MouseEvent e) {
-		program.player.canMove = false;
+		program.player.setCanMove(false);
 	}
 	@Override
 	public void keyPressed(KeyEvent e) {
