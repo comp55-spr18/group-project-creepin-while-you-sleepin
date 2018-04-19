@@ -16,6 +16,9 @@ public class PowerUp {
 					getGame().add(getGame().alreadyHave);
 					return false;
 				}
+				if(this instanceof ShieldUp && game.player.getShieldMaxCooldown() <= 100) {
+					getGame().add(getGame().alreadyHave);
+				}
 				onCollision();
 				for(PowerUp power : getGame().powers) {
 					getGame().remove(power.getSprite());
@@ -93,8 +96,8 @@ class BulletSizeUp extends PowerUp {
 	}
 	
 	public void onCollision() {
-		getGame().player.setBulletSize(getGame().player.getBulletSize() + 15);
-		getGame().player.setBeamHeight(getGame().player.getBeamHeight() + 15);
+		getGame().player.setBulletSize(getGame().player.getBulletSize() + 20);
+		getGame().player.setBeamHeight(getGame().player.getBeamHeight() + 25);
 	}
 }
 
@@ -113,7 +116,7 @@ class BulletSpeedUp extends PowerUp {
 	
 	public void onCollision() {
 		getGame().player.setBulletSpeed(getGame().player.getBulletSpeed() + 15);
-		getGame().player.setBeamDuration(getGame().player.getBeamDuration() + 15);
+		getGame().player.setBeamDuration(getGame().player.getBeamDuration() + 25);
 	}
 }
 
@@ -191,10 +194,10 @@ class ShieldUp extends PowerUp {
 		if(!getGame().player.isShielded()) {
 			getGame().player.setShielded(true);
 			getGame().player.setShieldCooldown(0);
-			getGame().player.setShieldMaxCooldown(500);
+			getGame().player.setShieldMaxCooldown(400);
 		} else {
 			getGame().player.setShieldCooldown(0);
-			getGame().player.setShieldMaxCooldown(getGame().player.getShieldMaxCooldown() - 50);
+			getGame().player.setShieldMaxCooldown(getGame().player.getShieldMaxCooldown() - 100);
 		}
 	}
 }
