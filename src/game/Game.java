@@ -173,11 +173,11 @@ public class Game extends GraphicsApplication {
 			if(!level.isFinished()) {							// If the level is not finished
 				level.update();									// Update the level
 			} else {											// If the level is finished
-				audio.stopSound("music", "level" + currLevel + ".mp3");		// Stop the music for the level
 				player.setShooting(false);						// Prevent the player from shooting
 				player.setShootingAlt(false);
 				player.move();									// Call the player's move() function (they fly to the right)
 				if(player.getSprite().getX() > WINDOW_WIDTH + 300) {	// Once they exit the screen to the right
+					audio.stopSound("music", "level" + currLevel + ".mp3");		// Stop the music for the level
 					if(currLevel == maxLevel) {					// If this was the last level
 						win = true;								// Set win to true
 						switchToScreen(endPane);				// Switch to endPane for the win screen
