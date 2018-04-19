@@ -11,7 +11,7 @@ import projectiles.FireTrail;
 
 public class Boss extends Ship {
 	private int counter;
-	private int currentAttack;
+	private int currentAttack = 3;
 	private boolean attackTrigger;
 	public Boss(Game game, double y) {
 		super(game);
@@ -70,27 +70,49 @@ public class Boss extends Ship {
 	}
 
 	public void shoot() { 			//shoot is constructed to shoot multiple straight bullets at the player
-		switch(currentAttack) {
-		case 0:
-			primary();
-			break;
-		case 1:
-			beam();
-			break;
-		case 2:
-			primary();
-			break;
-		case 3:
-			squeeze();
-			break;
-		}
-		if(currentAttack == 4) {
-			currentAttack = 0;
+		if(getGame().easy) {
+			switch(currentAttack) {
+			case 0:
+				primary();
+				break;
+			case 1:
+				beam();
+				break;
+			case 2:
+				primary();
+				break;
+			case 3:
+				squeeze();
+				break;
+			}
+			if(currentAttack > 3) {
+				currentAttack = 0;
+			}
+		} else {
+			switch(currentAttack) {
+			case 0:
+				primary();
+				break;
+			case 1:
+				beam();
+				break;
+			case 2:
+				primary();
+				break;
+			case 3:
+				squeeze();
+				counter--;
+				primary();
+				break;
+			}
+			if(currentAttack > 3) {
+				currentAttack = 0;
+			}
 		}
 	}
 
 	public void primary() {
-		if(counter%40 == 0) {
+		if(counter%30 == 0) {
 			Bullet newProj = new Bullet(this, getGunLocation()[getSelectedGun()], -1, 0);
 			newProj.aimAtPlayer();
 			setSelectedGun((getSelectedGun() + 1)%2);
@@ -105,10 +127,10 @@ public class Boss extends Ship {
 
 	public void beam() {
 		if(counter == 0) {
-			new Beam(this, getGunLocation()[2], 250, 65, 2);
+			new Beam(this, getGunLocation()[2], 250, 200, 2);
 		}
 		counter++;
-		if(counter == 165) {
+		if(counter == 300) {
 			counter = 0;
 			currentAttack++;
 		}
