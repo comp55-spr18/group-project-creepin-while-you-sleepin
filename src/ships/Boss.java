@@ -128,6 +128,8 @@ public class Boss extends Ship {
 			setSpeed(4);
 			counter = 0;
 			currentAttack++;
+			attackTrigger = false;
+			return;
 		}
 		if(counter%30 == 0 && attackTrigger) {
 			Bullet newProj = new Bullet(this, getGunLocation()[2], -1, 0);
