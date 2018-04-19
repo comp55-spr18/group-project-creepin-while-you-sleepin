@@ -15,8 +15,10 @@ public class PlayerShip extends Ship {
 	private boolean canShootAlt;
 	private int altCooldown;
 	private int altMaxCooldown;
+	public boolean canMove;
 	public PlayerShip(Game game) {
 		super(game);
+		canMove = true;
 		shooting = false;
 		shootingAlt = false;
 		canShootAlt = false;
@@ -46,7 +48,12 @@ public class PlayerShip extends Ship {
 	}
 
 	public void move(MouseEvent e) {		// Moves the player's gun location to the location of the ship
-		if(!isDestroyed() && !getGame().level.isFinished()) {
+		if(e.getX() > 0 && e.getY() > 0 && e.getX() < getGame().WINDOW_WIDTH && e.getY() < getGame().WINDOW_HEIGHT - getGame().WINDOW_HEIGHT/10) {
+			if(getGame().getElementAt(e.getX(), e.getY()) == getSprite()) {
+				canMove = true;
+			}
+		}
+		if(!isDestroyed() && !getGame().level.isFinished() && canMove) {
 			getSprite().setLocation(new GPoint(e.getX() - getSprite().getWidth()/2, e.getY() - getSprite().getHeight()/2));
 			double x = getSprite().getX();
 			double y = getSprite().getY();

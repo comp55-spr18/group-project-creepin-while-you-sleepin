@@ -194,6 +194,7 @@ public class Game extends GraphicsApplication {
 				}
 			}
 			if(lose) {											// If lose = true (which happens when PlayerShip is destroyed)
+				audio.stopSound("music", "level" + currLevel + ".mp3");
 				switchToScreen(endPane);						// Switch to the endPane for the lose screen
 				timer.stop();									// Stop the game timer
 				return;											// Exit

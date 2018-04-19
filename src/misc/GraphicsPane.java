@@ -99,4 +99,7 @@ public abstract class GraphicsPane implements Interfaceable {
 		// TODO Auto-generated method stub
 	}
 
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+	}
 }

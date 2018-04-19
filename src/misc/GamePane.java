@@ -117,6 +117,10 @@ public class GamePane extends GraphicsPane {
 		}
 	}
 	@Override
+	public void mouseExited(MouseEvent e) {
+		program.player.canMove = false;
+	}
+	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_SPACE) {
 			if(!program.paused) {
