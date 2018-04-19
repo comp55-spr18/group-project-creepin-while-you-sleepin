@@ -75,7 +75,7 @@ class FireRateUp extends PowerUp {
 		}
 		getGame().player.setCanShootAlt(true);
 		getGame().player.setAltCooldown(0);
-		getGame().player.setAltMaxCooldown(getGame().player.getAltMaxCooldown() - getGame().player.getAltMaxCooldown()/4);
+		getGame().player.setAltMaxCooldown(getGame().player.getAltMaxCooldown() - getGame().player.getAltMaxCooldown()/8);
 		if(getGame().player.getAltMaxCooldown() <= 0) {
 			getGame().player.setAltMaxCooldown(1);
 		}
@@ -135,7 +135,7 @@ class BulletDamageUp extends PowerUp {
 	
 	public void onCollision() {
 		getGame().player.setBulletDamage(getGame().player.getBulletDamage() + 1);
-		getGame().player.setBeamDamage(getGame().player.getBeamDamage() + 1);
+		getGame().player.setBeamDamage(getGame().player.getBeamDamage() + 2);
 	}
 }
 
