@@ -8,7 +8,6 @@ import acm.graphics.GObject;
 import game.Game;
 
 public class BetweenPane extends GraphicsPane {
-	private Game program;
 	private GButton rect;
 	private GButton rect2;
 	private GLabel levelLabel;

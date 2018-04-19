@@ -6,12 +6,12 @@ import acm.graphics.GObject;
 import game.Game;
 
 public class MenuPane extends GraphicsPane {
-	private Game program; // you will use program to get access to
-	// all of the GraphicsProgram calls
 	private GButton rect;
 	private GButton rect2;
 	private GButton rect3;
 	private GButton rect4;
+	private GButton rect5;
+	private GButton rect6;
 	private GImage background;
 	private GImage instructions;
 
@@ -23,11 +23,15 @@ public class MenuPane extends GraphicsPane {
 		rect = new GButton("EASY", 4*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
 		rect3 = new GButton("EXIT", .5*scaleX, .5*scaleY, scaleX, scaleY);
 		rect2 = new GButton("HARD", 13*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
-		rect4 = new GButton("Instructions", 8.5*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
+		rect4 = new GButton("Instructions", 8.5*scaleX, 6*scaleY, 2*scaleX, 1*scaleY);
+		rect5 = new GButton("Mute", 8.5*scaleX, 7*scaleY, 2*scaleX, 1*scaleY);
+		rect6 = new GButton("Unmute", 8.5*scaleX, 7*scaleY, 2*scaleX, 1*scaleY);
 		rect.setFillColor(Color.GREEN);
 		rect2.setFillColor(Color.RED);
 		rect3.setFillColor(Color.WHITE);
 		rect4.setFillColor(Color.CYAN);
+		rect5.setFillColor(Color.CYAN);
+		rect6.setFillColor(Color.CYAN);
 		background = new GImage("mainmenu.jpg");
 		background.setSize(program.getWidth(), program.getHeight());
 		instructions = new GImage("instructionspage.jpg");
@@ -41,6 +45,13 @@ public class MenuPane extends GraphicsPane {
 		program.add(rect2);
 		program.add(rect3);
 		program.add(rect4);
+		if(!program.mute) {
+			program.add(rect6);
+			program.add(rect5);
+		} else {
+			program.add(rect5);
+			program.add(rect6);
+		}
 	}
 
 	@Override
@@ -50,6 +61,8 @@ public class MenuPane extends GraphicsPane {
 		program.remove(rect2);
 		program.remove(rect3);
 		program.remove(rect4);
+		program.remove(rect5);
+		program.remove(rect6);
 	}
 	
 	@Override
@@ -70,6 +83,14 @@ public class MenuPane extends GraphicsPane {
 		}
 		if (obj == rect4) {
 			program.add(instructions);
+		}
+		if (obj == rect5) {
+			program.mute = true;
+			rect6.sendToFront();
+		}
+		if (obj == rect6) {
+			program.mute = false;
+			rect5.sendToFront();
 		}
 		if (obj == instructions) {
 			program.remove(instructions);

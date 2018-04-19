@@ -6,8 +6,6 @@ import acm.graphics.GObject;
 import game.Game;
 
 public class EndPane extends GraphicsPane {
-	private Game program; // you will use program to get access to
-	// all of the GraphicsProgram calls
 	private GButton rect;
 	private GButton rect2;
 	private GLabel endLabel;

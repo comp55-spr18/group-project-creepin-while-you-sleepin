@@ -29,6 +29,7 @@ public class Game extends GraphicsApplication {
 	private MenuPane menu;
 	private BetweenPane betweenPane;
 	private EndPane endPane;
+	public boolean mute;
 	
 	// Variables for game loop
 	public int lowShootCount;			// These variables are just telling the audio player which sound to play
@@ -71,8 +72,9 @@ public class Game extends GraphicsApplication {
 		menu = new MenuPane(this);
 		endPane = new EndPane(this);
 		betweenPane = new BetweenPane(this);
+		mute = false;
 		audio = AudioPlayer.getInstance();
-		playRandomSound();						// The audio player needs time to "wake up" when it gets used the first time
+		audio.playSound("sounds", "r2d2.mp3");	// The audio player needs time to "wake up" when it gets used the first time
 		pause(2000);							// Give the audio player time to wake up
 		switchToMenu();							// Then switch to the menu screen
 	}
@@ -114,24 +116,22 @@ public class Game extends GraphicsApplication {
 		timer.start();							// Start the game
 		switchToScreen(gamePane);				// Switch to the game screen
 	}
-
-	private void playRandomSound() {
-		audio.playSound("sounds", "r2d2.mp3");
-	}
 	
 	public int playSound(String sound, int count) {			// This sound takes a sound file, plays the file with the "count" number at the end, then returns the next number
-		audio.playSound("sounds", sound + count + ".mp3");	// This function was created so we can have the same sound being played multiple times in our game
-		count++;
-		if(sound == "lowshoot") {	// Lowshoot has 25 variations
-			if(count == 25) {
+		if(!mute) {
+			audio.playSound("sounds", sound + count + ".mp3");	// This function was created so we can have the same sound being played multiple times in our game
+			count++;
+			if(sound == "lowshoot") {	// Lowshoot has 25 variations
+				if(count == 25) {
+					count = 0;
+				}
+			} else if(sound == "playershoot") {   // Playershoot has 8 variations
+				if(count == 8) {
+					count = 0;
+				}
+			} else if(count == 5) {		// Every other sound has 5 variations
 				count = 0;
 			}
-		} else if(sound == "playershoot") {   // Playershoot has 8 variations
-			if(count == 8) {
-				count = 0;
-			}
-		} else if(count == 5) {		// Every other sound has 5 variations
-			count = 0;
 		}
 		return count;				// Return the count so it can be stored in its respective variable
 	}

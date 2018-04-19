@@ -64,6 +64,10 @@ public class GButton extends GCompound {
 		rect.setFillColor(col);
 	}
 
+	public Color getFillColor() {
+		return rect.getFillColor();
+	}
+
 	public void setColor(Color col) {
 		message.setColor(col);
 	}
