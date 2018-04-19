@@ -50,7 +50,7 @@ public class Bouncer extends Ship {
 		double x = getSprite().getLocation().getX();
 		double y = getSprite().getLocation().getY();
 		getGunLocation()[0].setLocation(x,y+getSprite().getHeight()/2);
-		if (getSprite().getY() <= 0 || getSprite().getY() + getSprite().getHeight() >= getGame().WINDOW_HEIGHT-100) {
+		if (getSprite().getY() <= 0 || getSprite().getY() + getSprite().getHeight() >= getGame().WINDOW_HEIGHT - getGame().WINDOW_HEIGHT/10) {
 			setyDir(getyDir() * -1);
 		}
 		if (getSprite().getLocation().getX() < -300) {

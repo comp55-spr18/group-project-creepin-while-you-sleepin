@@ -65,7 +65,7 @@ public class Game extends GraphicsApplication {
 	public int maxLevel = 3;							// The maximum number of levels
 
 	public void init() {
-		setSize(WINDOW_WIDTH, WINDOW_HEIGHT - 100);
+		setSize(WINDOW_WIDTH, WINDOW_HEIGHT - WINDOW_HEIGHT/10);
 	}
 
 	public void run() {
