@@ -23,16 +23,13 @@ public class Boss extends Ship {
 		setBulletColor(Color.RED);
 		setxDir(-1);
 		setyDir(0);
-		setSpeed(4);
+		setSpeed(6);
 		setPoints(100);
 		setCollisionDamage(2);
 		setBulletDamage(2);
-		setBulletSize(40);
-		setBulletSpeed(14);
-		setBeamHeight(250);
-		setBeamDuration(65);
+		setBulletSize(60);
+		setBulletSpeed(10);
 		setBeamWarningDuration(60);
-		setBeamDamage(1);
 		setSelectedGun(0);
 		getGame().add(getSprite());
 		setTrail(new FireTrail(this));
@@ -58,7 +55,7 @@ public class Boss extends Ship {
 			setxDir(0);
 			setyDir(-1);
 		}
-		if(getSprite().getY() <= 0 || getSprite().getY() + getSprite().getHeight() >= getGame().WINDOW_HEIGHT - 100) {
+		if(getSprite().getY() <= -75 || getSprite().getY() + getSprite().getHeight() >= getGame().WINDOW_HEIGHT - 25) {
 			setyDir(getyDir() * -1);
 		}
 		double x = getSprite().getLocation().getX();
@@ -107,10 +104,10 @@ public class Boss extends Ship {
 
 	public void beam() {
 		if(counter == 0) {
-			new Beam(this, getGunLocation()[2]);
+			new Beam(this, getGunLocation()[2], 250, 65, 2);
 		}
 		counter++;
-		if(counter == 160) {
+		if(counter == 165) {
 			counter = 0;
 			currentAttack++;
 		}
@@ -118,17 +115,11 @@ public class Boss extends Ship {
 
 	public void squeeze() {
 		if(counter == 0) {
-			new Beam(this, getGunLocation()[0], 20);
-			new Beam(this, getGunLocation()[1], 20);
-		}
-		if(counter%5 == 0) {
-			new Bullet(this, getGunLocation()[0], -1, -0.5);
-			new Bullet(this, getGunLocation()[1], -1, 0.5);
-			new Bullet(this, getGunLocation()[0], -1, -0.2);
-			new Bullet(this, getGunLocation()[1], -1, 0.2);
+			new Beam(this, getGunLocation()[0], 50, 200, 1);
+			new Beam(this, getGunLocation()[1], 50, 200, 1);
 		}
 		counter++;
-		if(counter == 160) {
+		if(counter == 300) {
 			counter = 0;
 			currentAttack++;
 		}

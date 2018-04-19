@@ -38,11 +38,13 @@ public class Beam extends Projectile {
 		getBeamSprite().setFillColor(sprite.getColor());
 	}
 
-	public Beam(Ship ship, GPoint gunLoc, double height) {
+	public Beam(Ship ship, GPoint gunLoc, double height, double dur, int damage) {
 		this(ship, gunLoc);
 		maxHeight = height;
 		rateChange = maxHeight/120;
 		rate = 15*rateChange;
+		duration = dur;
+		setCollisionDamage(damage);
 	}
 	
 	public void move() {
