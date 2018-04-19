@@ -141,7 +141,7 @@ public class Wave {
 				}
 			}
 		} else if(bossWave) {					// If this wave is a boss wave
-			firstBossWave();					// Call the boss wave
+			bossWave();					// Call the boss wave
 		} else {								// If this wave is an upgrade wave
 			upgradeWave();						// Call the upgrade wave
 		}
@@ -742,7 +742,7 @@ public class Wave {
 		
 	}
 
-	public void firstBossWave() {			// Implements easy mode of a boss wave into the program
+	public void bossWave() {			// Implements easy mode of a boss wave into the program
 		switch(enemyToSpawn) {
 			case 0:
 				size = 1;
@@ -750,16 +750,6 @@ public class Wave {
 				break;
 			default:
 				new Boss(game, 200);
-		}
-	}
-	
-	public void secondBossWave() {          // Implements hard mode of the boss wave into the program
-		switch(enemyToSpawn) {
-		case 0:
-			size = 1;
-			delay = 1;
-		default:
-			new Boss2(game,200);
 		}
 	}
 

@@ -201,15 +201,17 @@ public abstract class Ship extends Object {
 	}
 
 	public void dealDamage(int damage) {
-		if(isShielded()) {
-			if(!getShield().isVisible() && !isInvincible()) {
-				calculateDamage(damage);
+		if(!isInvincible() || !(this instanceof PlayerShip)) {
+			if(isShielded()) {
+				if(!getShield().isVisible()) {
+					calculateDamage(damage);
+				} else {
+					getGame().shieldHitCount = getGame().playSound("shieldhit", getGame().shieldHitCount);
+					getShield().setVisible(false);
+				}
 			} else {
-				getGame().shieldHitCount = getGame().playSound("shieldhit", getGame().shieldHitCount);
-				getShield().setVisible(false);
+				calculateDamage(damage);
 			}
-		} else if(!isInvincible() || !(this instanceof PlayerShip)) {
-			calculateDamage(damage);
 		}
 	}
 	
