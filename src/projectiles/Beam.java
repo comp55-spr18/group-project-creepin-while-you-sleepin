@@ -37,6 +37,13 @@ public class Beam extends Projectile {
 		getBeamSprite().setFilled(true);
 		getBeamSprite().setFillColor(sprite.getColor());
 	}
+
+	public Beam(Ship ship, GPoint gunLoc, double height) {
+		this(ship, gunLoc);
+		maxHeight = height;
+		rateChange = maxHeight/120;
+		rate = 15*rateChange;
+	}
 	
 	public void move() {
 		if(warningDuration < 0) {

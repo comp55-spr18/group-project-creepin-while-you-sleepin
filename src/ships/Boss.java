@@ -11,13 +11,11 @@ import projectiles.FireTrail;
 
 public class Boss extends Ship {
 	private int counter;
+	private int currentAttack;
 	public Boss(Game game, double y) {
 		super(game);
 		counter = 0;
 		setMaxHealth(150);
-		setCooldown(0);
-		setMaxCooldown(50);
-		setCanShoot(false);
 		setGunLocation(new GPoint[] {new GPoint(), new GPoint(), new GPoint()});
 		setSprite(new GImage("boss 1.png", game.WINDOW_WIDTH, game.WINDOW_HEIGHT/(1080/y)));
 		setBulletColor(Color.white);
@@ -30,7 +28,7 @@ public class Boss extends Ship {
 		setCollisionDamage(2);
 		setBulletDamage(2);
 		setBulletSize(40);
-		setBulletSpeed(8);
+		setBulletSpeed(14);
 		setBeamHeight(250);
 		setBeamDuration(65);
 		setBeamWarningDuration(60);
@@ -53,8 +51,8 @@ public class Boss extends Ship {
 			setBeamDamage(2);
 		}
 	}
-	
-	public void move() { //boss will spawn in and then bounce up and down on the screen
+
+	public void move() { 			//boss will spawn in and then bounce up and down on the screen
 		getSprite().move(getxDir()*getSpeed(), getyDir()*getSpeed());
 		if(getSprite().getX() <= getGame().WINDOW_WIDTH/(1920/1400.0) && getyDir() == 0) {
 			setxDir(0);
@@ -72,24 +70,67 @@ public class Boss extends Ship {
 			setDestroyed(true);
 		}
 	}
-	
-	public void shoot() { //shoot is constructed to shoot multiple straight bullets at the player
-		if(canShoot()) {
-			setCanShoot(false);
+
+	public void shoot() { 			//shoot is constructed to shoot multiple straight bullets at the player
+		switch(currentAttack) {
+		case 0:
+			primary();
+			break;
+		case 1:
+			beam();
+			break;
+		case 2:
+			primary();
+			break;
+		case 3:
+			squeeze();
+			break;
+		}
+		if(currentAttack == 4) {
+			currentAttack = 0;
+		}
+	}
+
+	public void primary() {
+		if(counter%20 == 0) {
 			Bullet newProj = new Bullet(this, getGunLocation()[getSelectedGun()], -1, 0);
 			newProj.aimAtPlayer();
 			setSelectedGun((getSelectedGun() + 1)%2);
-			if(getHealth() <= 0.5*getMaxHealth() && counter%8 == 0) {
-				new Beam(this, getGunLocation()[2]);
-			}
-			counter++;
 			getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);
-		} else {
-			setCooldown(getCooldown() + 1);
-			if(getCooldown() == getMaxCooldown()) {
-				setCooldown(0);
-				setCanShoot(true);
-			}
+		}
+		counter++;
+		if(counter%200 == 0) {
+			counter = 0;
+			currentAttack++;
+		}
+	}
+
+	public void beam() {
+		if(counter == 0) {
+			new Beam(this, getGunLocation()[2]);
+		}
+		counter++;
+		if(counter == 160) {
+			counter = 0;
+			currentAttack++;
+		}
+	}
+
+	public void squeeze() {
+		if(counter == 0) {
+			new Beam(this, getGunLocation()[0], 20);
+			new Beam(this, getGunLocation()[1], 20);
+		}
+		if(counter%5 == 0) {
+			new Bullet(this, getGunLocation()[0], -1, -0.5);
+			new Bullet(this, getGunLocation()[1], -1, 0.5);
+			new Bullet(this, getGunLocation()[0], -1, -0.2);
+			new Bullet(this, getGunLocation()[1], -1, 0.2);
+		}
+		counter++;
+		if(counter == 160) {
+			counter = 0;
+			currentAttack++;
 		}
 	}
 }

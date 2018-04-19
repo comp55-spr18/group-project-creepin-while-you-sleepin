@@ -10,7 +10,7 @@ public class Level {
 	public Level(Game g) {
 		game = g;
 		currWave = 1;
-		totalWaves = 7;
+		totalWaves = 1;
 		prevWave = -1;
 		upgradeMod = 3;
 		getNewWave();
