@@ -37,11 +37,7 @@ public class shootTest extends GraphicsPane {
 	
 	public shootTest(Game app) {
 		super();
-		shipz = new ArrayList<Ship>();
-		glabels = new ArrayList<GLabel>();
 		program = app;
-		setShips();
-		setGlabels();
 		double scaleX = program.WINDOW_WIDTH/(1920/100.0);
 		double scaleY = program.WINDOW_HEIGHT/(1080/100.0);
 		previous = new GButton("PREV", 4*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
@@ -63,8 +59,8 @@ public class shootTest extends GraphicsPane {
 		program.add(next);
 		program.add(enemyFire);
 		program.add(returnToMenu);
-		program.add(glabels.get(selected));
 		program.add(shipz.get(selected).getSprite());
+		program.add(glabels.get(selected));
 	}
 	
 	public void hideContents() {
@@ -73,6 +69,8 @@ public class shootTest extends GraphicsPane {
 		program.remove(enemyFire);
 		program.remove(returnToMenu);
 		program.remove(spaceBackground);
+		program.remove(shipz.get(selected).getSprite());
+		program.remove(glabels.get(selected));
 	}
 	
 	public void setShips() {  //sets the ships into the array list
@@ -94,7 +92,7 @@ public class shootTest extends GraphicsPane {
 		shipz.add(new Tank(program, 0));
 		shipz.add(new SwarmBot(program, 0, 0));
 		for(int i = 0;i < shipz.size();i++) {
-			shipz.get(i).getSprite().setLocation(program.WINDOW_WIDTH/2 - shipz.get(i).getSprite().getWidth()/2, program.WINDOW_HEIGHT/4);
+			shipz.get(i).getSprite().setLocation(program.WINDOW_WIDTH/2, program.WINDOW_HEIGHT/2);
 			program.remove(shipz.get(i).getSprite());
 		}
 	}
@@ -117,6 +115,10 @@ public class shootTest extends GraphicsPane {
 		glabels.add(swarmBot = new GLabel("Swarmbots: A DNA shaped sequence of enemies that attacks the player."));
 		glabels.add(tank = new GLabel("Tank: Bigger enemy that has a large amount of health and damaging spread."));
 		glabels.add(trishot = new GLabel("Trishot: Enemy that has a bullet with a triple spread."));
+		for(int i = 0;i < glabels.size();i++) {
+			glabels.get(i).setLocation(program.WINDOW_WIDTH/2, program.WINDOW_HEIGHT/2);
+			program.remove(glabels.get(i));
+		}
 	}
 
 	public void enemyBlaster(){  //has enemy fire when shoot button is pressed
@@ -127,20 +129,27 @@ public class shootTest extends GraphicsPane {
 		GObject obj = program.getElementAt(e.getX(), e.getY());
 		if (obj == returnToMenu) {
 			hideContents();
-			program.switchToMenu();
 		}
 		if (obj == previous) {
+			program.remove(shipz.get(selected).getSprite());
+			program.remove(glabels.get(selected));
 			selected--;
 			if (selected < 0) {
-				selected = 0;
+			selected = 0;
 			}
-		}
+			program.add(shipz.get(selected).getSprite());
+			program.add(glabels.get(selected));
+			}
 		if (obj == next) {
+			program.remove(shipz.get(selected).getSprite());
+			program.remove(glabels.get(selected));
 			selected++;
 			if (selected > 15) {
-				selected = 15;
+			selected = 15;
 			}
-		}
+			program.add(shipz.get(selected).getSprite());
+			program.add(glabels.get(selected));
+			}
 		if (obj == enemyFire) {
 			enemyBlaster();
 		}
