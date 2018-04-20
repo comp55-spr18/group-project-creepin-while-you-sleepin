@@ -12,6 +12,12 @@ import ships.Ship;
 public class GamePane extends GraphicsPane {
 	private GImage background;
 	private GLabel pauseLabel;
+	private int[] sequence = {KeyEvent.VK_UP, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT,KeyEvent.VK_B, KeyEvent.VK_A};
+	private int currentButton = 0;
+	//private double playerx = game.player.getSprite().getX();
+	//private double playery = game.player.getSprite().getY();
+	
+	
 
 	public GamePane(Game app) {
 		this.program = app;
@@ -136,6 +142,28 @@ public class GamePane extends GraphicsPane {
 				program.remove(pauseLabel);
 				program.switchToMenu();
 			}
+		
 		}
+		if(checkKonami(e.getKeyCode())) {
+			System.out.println("CHEAT CODE ACTIVATED");
+			//new BulletUp(program,10,20);
+		
+		}
+	}
+	
+
+	boolean checkKonami(int keyPressed) {
+	    if(keyPressed == sequence[currentButton]) {
+	        currentButton++;
+	        if(currentButton == sequence.length) {
+	            currentButton = 0;
+
+	            return true;
+	        }
+	    }
+	    else {
+	        currentButton = 0;
+	    }
+	    return false;
 	}
 }
