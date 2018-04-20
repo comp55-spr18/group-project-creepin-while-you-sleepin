@@ -136,6 +136,10 @@ public class Archive extends GraphicsPane implements ActionListener {
 			}
 			program.add(ships.get(selected).getSprite());
 			program.add(descriptions.get(selected));
+			for(int i = program.projectiles.size() - 1;i >= 0;i--) {
+				program.remove(program.projectiles.get(i).getSprite());
+			}
+			program.projectiles.clear();
 		}
 		if (obj == next) {
 			program.remove(ships.get(selected).getSprite());
@@ -146,6 +150,10 @@ public class Archive extends GraphicsPane implements ActionListener {
 			}
 			program.add(ships.get(selected).getSprite());
 			program.add(descriptions.get(selected));
+			for(int i = program.projectiles.size() - 1;i >= 0;i--) {
+				program.remove(program.projectiles.get(i).getSprite());
+			}
+			program.projectiles.clear();
 		}
 		if (obj == enemyFire) {
 			ships.get(selected).setCanShoot(true);
