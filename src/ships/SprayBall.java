@@ -8,9 +8,9 @@ import projectiles.FireTrail;
 import projectiles.Projectile;
 
 public class SprayBall extends Ship {
-	private int firing = 0;
-	private int delay = 0;
-	private double ballDet = getGame().WINDOW_WIDTH/3; //recommended detonation point
+	private int firing = 0;								//counter for number of bullets fired. Used in several equations
+	private int delay = 0;								//Pause before firing after movement stops
+	private double ballDet = getGame().WINDOW_WIDTH/3; 	//recommended detonation point
 	
 	public SprayBall(Game game, double y, double detonation) {
 		super(game);
@@ -26,12 +26,12 @@ public class SprayBall extends Ship {
 		setBulletDamage(1);
 		setMaxCooldown(1000);
 		setPoints(500);
-		ballDet = game.WINDOW_WIDTH/(1920/detonation);
+		ballDet = game.WINDOW_WIDTH/(1920/detonation);		//This chooses at what point on the map the ball detonates
 		setCanShoot(false);
 		setxDir(-1);
 		setyDir(0);
 		getGame().add(getSprite());
-
+		//level buffs
 		if(game.currLevel >= 2) {
 			setMaxHealth(70);
 		}
@@ -41,7 +41,7 @@ public class SprayBall extends Ship {
 			setBulletDamage(2);
 		}
 	}
-	// Once the ship has paused, fires bullets from 4 cannons turning 180 degrees (hopefully)
+	// Once the ship has paused, fires bullets from 4 cannons turning 180 degrees 
 	@Override
 	public void shoot() {
 		if(canShoot()) {
@@ -53,10 +53,12 @@ public class SprayBall extends Ship {
 				setGunLocation(new GPoint[] {new GPoint(x,y+getSprite().getHeight()/2), new GPoint(x+getSprite().getWidth()/2,y), new GPoint(x+getSprite().getWidth(),y+getSprite().getHeight()/2), new GPoint(x+getSprite().getWidth()/2,y+getSprite().getHeight())});
 				firing = 0;
 			}
+			//Spawns the bullets from the 4 gunports
 			Projectile newProj = new Bullet(this, getGunLocation()[0], -1, 0);
 			Projectile newProj1 = new Bullet(this, getGunLocation()[1], 0, -1);
 			Projectile newProj2 = new Bullet(this, getGunLocation()[2], 1, 0);
 			Projectile newProj3 = new Bullet(this, getGunLocation()[3], 0, 1);
+			//First set of equations that determine bullet direction and gunport movement
 			if (firing < 10) {
 				newProj.setxDir(-1+firing*(.1));
 				newProj.setyDir(0-firing*(.1));
@@ -72,6 +74,7 @@ public class SprayBall extends Ship {
 				new GPoint(x+getSprite().getWidth()-(getSprite().getWidth()/200)*Math.pow(firing,2),y+(getSprite().getHeight()/2)+(getSprite().getHeight()/2)-(getSprite().getHeight()/200)*Math.pow(firing-10,2)), 
 				new GPoint(x+getSprite().getWidth()/2-(getSprite().getWidth()/2)+(getSprite().getWidth()/200)*Math.pow(firing-10,2),y+getSprite().getHeight()-(getSprite().getHeight()/200)*Math.pow(firing,2))});
 			}
+			//Second set of equations for after the gunports have rotated 90 degrees
 			else {
 				newProj.setxDir(-1+firing*(.1));
 				newProj.setyDir(-2+firing*(.1));
@@ -102,7 +105,7 @@ public class SprayBall extends Ship {
 		}
 	}
 
-	//moves 2/3 of map, pauses for firing, then leaves
+	//moves across a portion of map, pauses for firing, then leaves
 	@Override
 	public void move() {
 		double x = getSprite().getLocation().getX();

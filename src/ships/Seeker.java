@@ -12,17 +12,17 @@ public class Seeker extends Ship {
 	
 	public Seeker(Game game, double y) {
 		super(game);
-		setMaxHealth(6);				// They're tough enemies			
+		setMaxHealth(6);				//they're medium tankiness		
 		setSprite(new GImage("sprites/enemy2.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
-		setSize(100, 100);
-		setSpeed(15);
+		setSize(100, 100);				//kinda large
+		setSpeed(15);					//pretty fast
 		getGame().add(getSprite());
 		setTrail(new FireTrail(this));
-		setPoints(200);
+		setPoints(200);					//worth a decent amount
 		setxDir(0);
 		setyDir(0);							
 		setCanShoot(false);
-
+		//level buffs
 		if(game.currLevel >= 2) {
 			setMaxHealth(12);
 			setShielded(true);
@@ -37,11 +37,11 @@ public class Seeker extends Ship {
 			setSpeed(18);
 		}
 	}
-	// tweaked bullet speed
+	//No shoot function
 	@Override
 	public void shoot() {}
 
-	//moves the drone until part-way down the screen, where it curves back the way it came
+	//Dashes towards the player's previous position, then delays before going to the player's new position. 
 	@Override
 	public void move() {
 		//if the delay is over, get new target coordinates, start moving towards them, and reset the timer

@@ -26,7 +26,7 @@ public class Trishot extends Ship {
 		setBulletSpeed(10);
 		setBulletSize(15);
 		getGame().add(getSprite());
-
+		//level buffs
 		if(game.currLevel >= 2) {
 			setMaxHealth(16);
 			setMaxCooldown(80);

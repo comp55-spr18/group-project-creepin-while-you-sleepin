@@ -13,13 +13,13 @@ public class Tank extends Ship {
 		setSize(100, 100);
 		setSpeed(5);			//slowish
 		setTrail(null);
-		setPoints(150);			//worth no points						
+		setPoints(150);			//worth a decent amount of points, but hard to kill					
 		setCanShoot(false);
 		setGunLocation(new GPoint[] {new GPoint()});		
 		setxDir(-1);
 		setyDir(0);
 		getGame().add(getSprite());
-
+		//level buffs
 		if(game.currLevel >= 2) {
 			setMaxHealth(60);
 		}
@@ -33,7 +33,7 @@ public class Tank extends Ship {
 	@Override
 	public void shoot() {}
 
-	//DNA helix movement with other SwarmBots
+	//Simple right to left movement
 	@Override
 	public void move() {		
 		getSprite().move(getxDir() * getSpeed(), getyDir() * getSpeed());
