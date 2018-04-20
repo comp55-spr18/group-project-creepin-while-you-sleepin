@@ -60,6 +60,7 @@ public class Game extends GraphicsApplication {
 	public boolean paused = false;		// Initialize the game as unpaused
 	public Random rgen = new Random();
 	public AudioPlayer audio;
+	public AudioPlayer music;
 	public ArrayList<Ship> enemies;				// Arraylist for enemies
 	public ArrayList<Projectile> projectiles;	// Arraylist for projectiles
 	public ArrayList<PowerUp> powers;			// Arraylist for powerups
@@ -93,12 +94,13 @@ public class Game extends GraphicsApplication {
 		}
 		mute = false;
 		audio = AudioPlayer.getInstance();
+		music = AudioPlayer.getInstance();
 		switchToMenu();							// Then switch to the menu screen
 	}
 
 	public void switchToMenu() {
 		if(!musicMute) {
-			audio.playSound("music", "menu.mp3", true);
+			music.playSound("music", "menu.mp3", true);
 		}
 		switchToScreen(menu);
 	}
@@ -116,8 +118,8 @@ public class Game extends GraphicsApplication {
 	
 	public void switchToGame() {
 		if(!musicMute) {
-			audio.stopSound("music", "menu.mp3");
-			audio.playSound("music", "level" + currLevel + ".mp3", true);
+			music.stopSound("music", "menu.mp3");
+			music.playSound("music", "level" + currLevel + ".mp3", true);
 		}
 		switchToScreen(gamePane);
 	}
@@ -213,7 +215,7 @@ public class Game extends GraphicsApplication {
 				player.setShootingAlt(false);
 				player.move();									// Call the player's move() function (they fly to the right)
 				if(player.getSprite().getX() > WINDOW_WIDTH + 300) {	// Once they exit the screen to the right
-					audio.stopSound("music", "level" + currLevel + ".mp3");		// Stop the music for the level
+					music.stopSound("music", "level" + currLevel + ".mp3");		// Stop the music for the level
 					if(currLevel == maxLevel) {					// If this was the last level
 						win = true;								// Set win to true
 						switchToScreen(endPane);				// Switch to endPane for the win screen
@@ -230,7 +232,7 @@ public class Game extends GraphicsApplication {
 				}
 			}
 			if(lose) {											// If lose = true (which happens when PlayerShip is destroyed)
-				audio.stopSound("music", "level" + currLevel + ".mp3");
+				music.stopSound("music", "level" + currLevel + ".mp3");
 				switchToScreen(endPane);						// Switch to the endPane for the lose screen
 				timer.stop();	
 				System.out.println(score);
