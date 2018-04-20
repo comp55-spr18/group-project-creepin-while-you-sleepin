@@ -150,17 +150,6 @@ public class shootTest extends GraphicsPane {
 			program.add(shipz.get(selected).getSprite());
 			program.add(glabels.get(selected));
 			}
-		
-		if (obj == next) {
-			program.remove(shipz.get(selected).getSprite());
-			program.remove(glabels.get(selected));
-			selected++;
-			if (selected > 15) {
-				selected = 0;
-			}
-			program.add(shipz.get(selected).getSprite());
-			program.add(glabels.get(selected));
-		}
 		if (obj == enemyFire) {
 			enemyBlaster();
 		}
