@@ -100,20 +100,20 @@ public class Archive extends GraphicsPane implements ActionListener {
 	
 	public void setGlabels() {
 		descriptions.add(new GLabel("Asteroids: A field of asteroids that will damage anything it touches."));
-		descriptions.add(new GLabel("Basic Enemy: Pretty self explanatory."));
-		descriptions.add(new GLabel("Boomerang: Enemy that moves in a boomerang like arc."));
+		descriptions.add(new GLabel("Basic Enemy: Moves up and down and its shot tracks the player."));
+		descriptions.add(new GLabel("Boomerang: Enemy that shoot bullets which reverse direction."));
 		descriptions.add(new GLabel("Bouncer: Enemy type that pinballs on the vertical axis of the screen."));
-		descriptions.add(new GLabel("Drone: A drone that hovers on top attacking the player."));
-		descriptions.add(new GLabel("Heavy Weight Enemy: Enemy that is massive and does extra damage then normal."));
-		descriptions.add(new GLabel("Homing Enemy: Enemy that homes onto player."));
-		descriptions.add(new GLabel("Kamikaze: Enemy type that will home onto player till destruction."));
-		descriptions.add(new GLabel("Sawed-Off: Enemy type that has an attack spread that spirals like a saw."));
-		descriptions.add(new GLabel("Seeker: Enemy that tries to home onto the player."));
-		descriptions.add(new GLabel("Simple Enemy: Generic enemy type."));
-		descriptions.add(new GLabel("Squeeze: An enemy type that attempts to corner the player."));
-		descriptions.add(new GLabel("Trishot: Enemy that has a bullet with a triple spread."));
-		descriptions.add(new GLabel("Sprayball: An enemy with a constant attack spray."));
-		descriptions.add(new GLabel("Tank: Bigger enemy that has a large amount of health and damaging spread."));
+		descriptions.add(new GLabel("Drone: A drone that follows a curved path on and off the screen. Fires a tracking bullet."));
+		descriptions.add(new GLabel("Heavy Weight Enemy: Enemy that shoots a massive bullet at the player."));
+		descriptions.add(new GLabel("Homing Enemy: Enemy that fires homing bullets."));
+		descriptions.add(new GLabel("Kamikaze: Enemy type that will suicidally collide with the player."));
+		descriptions.add(new GLabel("Sawed-Off: Enemy type that has more bullets after it is damaged."));
+		descriptions.add(new GLabel("Seeker: Enemy that periodically flies towards the player's location."));
+		descriptions.add(new GLabel("Simple Enemy: Moves only from right to left. Fires a tracking bullet."));
+		descriptions.add(new GLabel("Squeeze: An enemy type that restricts player movement through lasers."));
+		descriptions.add(new GLabel("Trishot: Enemy that has a bullet with a triple spread. Hovers at the edge of the screen."));
+		descriptions.add(new GLabel("Sprayball: An enemy that fires a spiraling barrage of bullets."));
+		descriptions.add(new GLabel("Tank: Bigger enemy that has a large amount of health but can't shoot."));
 		descriptions.add(new GLabel("Swarmbot: A DNA shaped sequence of enemies that attacks the player."));
 		descriptions.add(new GLabel("???: ?????????"));
 		for(int i = 0;i < descriptions.size();i++) {
