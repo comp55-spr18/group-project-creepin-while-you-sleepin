@@ -20,6 +20,7 @@ public class Heart extends Object {
 		if(getSprite().getBounds().intersects(game.player.getSprite().getBounds())) {
 			game.player.setHealth(game.player.getHealth() + 1);
 			setDestroyed(true);
+			game.playSound("heart", 1);
 			if(isDestroyed) {
 				getGame().remove(getSprite());
 				getGame().objects.remove(this);

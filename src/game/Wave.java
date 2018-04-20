@@ -44,7 +44,7 @@ public class Wave {
 		selectedWave = level.getPrevWave();		// Initialize selectedWave as the previous wave played in Level
 		if(game.easy) {							// If the difficulty is easy
 			while(selectedWave == level.getPrevWave()) {		// While the selected wave is equal to the previous wave played (to prevent getting the same wave twice)
-				selectedWave = Math.abs(game.rgen.nextInt(2)+4);	// Randomly select one of the easy waves
+				selectedWave = Math.abs(game.rgen.nextInt(10));	// Randomly select one of the easy waves
 			}
 		} else {												// If the difficulty is hard
 			while(selectedWave == level.getPrevWave()) {		// While the selected wave is equal to the previous wave played (to prevent getting the same wave twice)
@@ -391,22 +391,26 @@ public class Wave {
 	void easy8() {
 		switch(enemyToSpawn) {
 		case 0:
-			size = 5;
+			size = 4;
 			delay = 100;
 			break;
 		case 1:
-			new SawedOff(game, 1080/2);
-			break;
-		case 2:
-			new Bouncer(game, 400);
-			break;
-		case 3:
+			new HomingEnemy(game, 100);
+			new HomingEnemy(game, 400);
 			new HomingEnemy(game, 700);
 			break;
-		case 4:
-			new Kamikaze(game, 200);
+		case 2:
+			new Boomerang(game, 100);
+			new Boomerang(game, 250);
+			new Boomerang(game, 400);
 			break;
-		case 5:
+		case 3:
+			new Boomerang(game, 550);
+			new Boomerang(game, 700);
+			new Boomerang(game, 850);
+			break;
+		case 4:
+			new Kamikaze(game, 0);
 			new SprayBall(game, 1080/2, 1920/2);
 			break;
 		}
@@ -753,7 +757,7 @@ public class Wave {
 				new Tank(game, 520);
 				new Tank(game, 660);
 				new Tank(game, 800);
-				new Tank(game, 940);
+				new Tank(game, 920);
 				new SawedOff(game,520);
 				break;
 			case 4: 
@@ -771,6 +775,14 @@ public class Wave {
 				break;
 			}
 	}
+		public void hard10() {
+			switch(enemyToSpawn) {
+			case 0:
+				size = 5;
+				delay = 100;
+			case 1:
+			}
+		}
 
 	public void bossWave() {			// Implements easy mode of a boss wave into the program
 		switch(enemyToSpawn) {
