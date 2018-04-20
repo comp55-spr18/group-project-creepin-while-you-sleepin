@@ -52,7 +52,7 @@ public class Boss extends Ship {
 			setxDir(0);
 			setyDir(-1);
 		}
-		if(getSprite().getY() <= -getGame().WINDOW_HEIGHT/10 || getSprite().getY() + getSprite().getHeight() >= getGame().WINDOW_HEIGHT) {
+		if(getSprite().getY() <= -getGame().WINDOW_HEIGHT/20 || getSprite().getY() + getSprite().getHeight() >= getGame().WINDOW_HEIGHT - getGame().WINDOW_HEIGHT/20) {
 			setyDir(getyDir() * -1);
 		}
 		double x = getSprite().getLocation().getX();
