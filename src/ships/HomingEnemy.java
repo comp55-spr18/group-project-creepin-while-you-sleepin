@@ -34,6 +34,7 @@ public class HomingEnemy extends Ship {
 		}
 
 		if(game.currLevel >= 3) {
+			setBulletDamage(3);
 			setMaxHealth(16);
 			setCooldown(100);
 			setMaxCooldown(175);
