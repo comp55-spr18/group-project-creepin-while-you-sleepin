@@ -60,7 +60,7 @@ public class Beam extends Projectile {
 				setDestroyed(true);
 				getGame().remove(sprite);
 			}
-			if(soundCounter%20 == 0 && counter < duration) {
+			if(soundCounter%30 == 0 && counter < duration) {
 				getGame().beamCount = getGame().playSound("beam", getGame().beamCount);
 			}
 			soundCounter++;
