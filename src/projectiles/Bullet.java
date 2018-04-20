@@ -37,6 +37,7 @@ public class Bullet extends Projectile {
 		if(getGame() != null && (getSprite().getX() < -getSprite().getWidth() || getSprite().getX() > getGame().WINDOW_WIDTH || getSprite().getY() < -getSprite().getHeight() || getSprite().getY() > getGame().WINDOW_HEIGHT)) {
 			setDestroyed(true);
 		}
+		getSprite().sendToFront();
 	}
 
 	// The default function for onCollision checks to see if the projectile and the thing it collides with are enemies of eachother and makes sure it is not invincible
