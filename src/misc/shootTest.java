@@ -14,7 +14,7 @@ public class shootTest extends GraphicsPane {
 	private GButton enemyFire;
 	private GButton returnToMenu;
 	private GImage spaceBackground;
-	public ArrayList<Ship> ships;
+	public ArrayList<Ship> shipz;
 	public ArrayList<GLabel> glabels;
 	private int selected;
 	public GLabel asteroid = new GLabel("Asteroids: A field of asteroids that will damage anything it touches.");
@@ -59,37 +59,39 @@ public class shootTest extends GraphicsPane {
 		program.add(next);
 		program.add(enemyFire);
 		program.add(returnToMenu);
+		shipz.get(selected);
+		shipz.get(selected);
 	}
 	
 	public void hideContents() {
-		program.add(previous);
-		program.add(next);
-		program.add(enemyFire);
-		program.add(returnToMenu);
+		program.remove(previous);
+		program.remove(next);
+		program.remove(enemyFire);
+		program.remove(returnToMenu);
 		program.remove(spaceBackground);
 	}
 	
 	public void setShips() {  //sets the ships into the array list
-		ships.add(new Asteroid(program,0));
-		ships.add(new BasicEnemy(program, 0));
-		ships.add(new Boomerang(program, 0));
-		ships.add(new Boss(program,0));
-		ships.add(new Bouncer(program,0));
-		ships.add(new Drone(program, 0));
-		ships.add(new HeavyWeightEnemy(program, 0));
-		ships.add(new HomingEnemy(program, 0));
-		ships.add(new Kamikaze(program, 0));
-		ships.add(new SawedOff(program, 0));
-		ships.add(new Seeker(program, 0));
-		ships.add(new SimpleEnemy(program, 0));
-		ships.add(new Squeeze(program, 0));
-		ships.add(new Trishot(program, 0)); 
-		ships.add(new SprayBall(program, 0, 0));
-		ships.add(new Tank(program, 0));
-		ships.add(new SwarmBot(program, 0, 0));
-		for(int i = 0;i < ships.size();i++) {
-			ships.get(i).getSprite().setLocation(program.WINDOW_WIDTH/2, program.WINDOW_HEIGHT/2);
-			program.remove(ships.get(i).getSprite());
+		shipz.add(new Asteroid(program,0));
+		shipz.add(new BasicEnemy(program, 0));
+		shipz.add(new Boomerang(program, 0));
+		shipz.add(new Boss(program,0));
+		shipz.add(new Bouncer(program,0));
+		shipz.add(new Drone(program, 0));
+		shipz.add(new HeavyWeightEnemy(program, 0));
+		shipz.add(new HomingEnemy(program, 0));
+		shipz.add(new Kamikaze(program, 0));
+		shipz.add(new SawedOff(program, 0));
+		shipz.add(new Seeker(program, 0));
+		shipz.add(new SimpleEnemy(program, 0));
+		shipz.add(new Squeeze(program, 0));
+		shipz.add(new Trishot(program, 0)); 
+		shipz.add(new SprayBall(program, 0, 0));
+		shipz.add(new Tank(program, 0));
+		shipz.add(new SwarmBot(program, 0, 0));
+		for(int i = 0;i < shipz.size();i++) {
+			shipz.get(i).getSprite().setLocation(program.WINDOW_WIDTH/2, program.WINDOW_HEIGHT/2);
+			program.remove(shipz.get(i).getSprite());
 		}
 	}
 	
@@ -114,7 +116,7 @@ public class shootTest extends GraphicsPane {
 	}
 
 	public void enemyBlaster(){  //has enemy fire when shoot button is pressed
-		ships.get(selected).shoot();
+		shipz.get(selected).shoot();
 	}
 	
 	public void mousePressed(MouseEvent e) {
