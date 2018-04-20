@@ -1,9 +1,12 @@
 package misc;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
 import acm.graphics.GImage;
 import acm.graphics.GObject;
 import game.Game;
+import ships.*;
 
 public class shootTest extends GraphicsPane {
 	private GButton previous;
@@ -11,6 +14,8 @@ public class shootTest extends GraphicsPane {
 	private GButton enemyFire;
 	private GButton returnToMenu;
 	private GImage spaceBackground;
+	public ArrayList<Ship> ships;
+	private int selected;
 	double i = 400;
 	double j = 400;
 	
@@ -29,6 +34,7 @@ public class shootTest extends GraphicsPane {
 		returnToMenu.setFillColor(Color.WHITE);
 		spaceBackground = new GImage("testspacelevel.jpg");
 		spaceBackground.setSize(program.getWidth(), program.getHeight());
+		selected = 0;
 	}
 	public void showContents() {
 		program.add(previous);
@@ -46,8 +52,35 @@ public class shootTest extends GraphicsPane {
 		program.remove(spaceBackground);
 	}
 	
-	public void enemyBlaster(){
+	public void setShips() {
+		ships.add(new Asteroid(program,0));
+		ships.add(new BasicEnemy(program, 0));
+		ships.add(new Boomerang(program, 0));
+		ships.add(new Boss(program,0));
+		ships.add(new Bouncer(program,0));
+		ships.add(new Drone(program, 0));
+		ships.add(new HeavyWeightEnemy(program, 0));
+		ships.add(new HomingEnemy(program, 0));
+		ships.add(new Kamikaze(program, 0));
+		ships.add(new SawedOff(program, 0));
+		ships.add(new Seeker(program, 0));
+		ships.add(new SimpleEnemy(program, 0));
+		ships.add(new Squeeze(program, 0));
+		ships.add(new Trishot(program, 0));  //Tank, swarm, and spray are not called because they do not fire.
+		for(int i = 0;i < ships.size();i++) {
+			ships.get(i).getSprite().setLocation(program.WINDOW_WIDTH/2, program.WINDOW_HEIGHT/2);
+			program.remove(ships.get(i).getSprite());
+		}
+		//sets the ships into the array list
+	}
+	
+	public void enemySpawn() {
+		
 		//has enemy spawn on screen
+	}
+	
+	public void enemyBlaster(){
+		ships.get(selected).shoot();
 		//has enemy fire when shoot button is pressed
 	}
 	
