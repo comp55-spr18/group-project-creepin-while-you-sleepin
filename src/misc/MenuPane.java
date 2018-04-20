@@ -141,5 +141,8 @@ public class MenuPane extends GraphicsPane {
 		// (obj == shootTestButton) {
 		//	program.shootTest;
 		//}
+		if (obj == shootTestButton) {
+			program.switchToShoottest();
+		}
 	}
 }

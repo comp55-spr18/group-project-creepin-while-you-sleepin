@@ -21,7 +21,7 @@ public class Beam extends Projectile {
 		warningDuration = ship.getBeamWarningDuration();
 		setCollisionDamage(ship.getBeamDamage());
 		location = gunLoc;
-		maxHeight = ship.getBeamHeight();
+		maxHeight = getGame().WINDOW_HEIGHT/(1080/ship.getBeamHeight());
 		counter = 0;
 		duration = ship.getBeamDuration();
 		rateChange = maxHeight/120;
@@ -40,7 +40,7 @@ public class Beam extends Projectile {
 
 	public Beam(Ship ship, GPoint gunLoc, double height, double dur, int damage) {
 		this(ship, gunLoc);
-		maxHeight = height;
+		maxHeight = getGame().WINDOW_HEIGHT/(1080/height);
 		rateChange = maxHeight/120;
 		rate = 15*rateChange;
 		duration = dur;
@@ -60,7 +60,7 @@ public class Beam extends Projectile {
 				setDestroyed(true);
 				getGame().remove(sprite);
 			}
-			if(soundCounter%20 == 0 && counter < duration) {
+			if(soundCounter%30 == 0 && counter < duration) {
 				getGame().beamCount = getGame().playSound("beam", getGame().beamCount);
 			}
 			soundCounter++;

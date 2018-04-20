@@ -26,6 +26,7 @@ import ships.PlayerShip;
 import ships.Ship;
 import misc.Object;
 import misc.LeaderBoardPane;
+import misc.shootTest;
 
 @SuppressWarnings("serial")
 public class Game extends GraphicsApplication {
@@ -37,6 +38,7 @@ public class Game extends GraphicsApplication {
 	private BetweenPane betweenPane;
 	private EndPane endPane;
 	private LeaderBoardPane leaderboard;
+	private shootTest shootTest;
 	public boolean mute;
 	public boolean musicMute;
 	
@@ -77,6 +79,7 @@ public class Game extends GraphicsApplication {
 	}
 
 	public void run() {
+		enemies = new ArrayList<Ship>();
 		gamePane = new GamePane(this);
 		menu = new MenuPane(this);
 		endPane = new EndPane(this);
@@ -87,6 +90,7 @@ public class Game extends GraphicsApplication {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		shootTest = new shootTest(this);
 		mute = false;
 		audio = AudioPlayer.getInstance();
 		switchToMenu();							// Then switch to the menu screen
@@ -100,6 +104,10 @@ public class Game extends GraphicsApplication {
 	}
 	public void switchToLeaderBoard() {
 		switchToScreen(leaderboard);
+	}
+	
+	public void switchToShoottest() {
+		switchToScreen(shootTest);
 	}
 	
 	public void switchToBetween() {
@@ -239,4 +247,5 @@ public class Game extends GraphicsApplication {
 	public Level getLevel() {
 		return level;
 	}
+
 }
