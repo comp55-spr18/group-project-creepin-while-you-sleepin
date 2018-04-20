@@ -563,6 +563,7 @@ public class Wave {
 				break;
 		}
 	}
+	// drone and basic spam with sprayball/seeker
 	public void hard6() {
 		switch(enemyToSpawn) {
 		case 0:
@@ -605,14 +606,12 @@ public class Wave {
 			break;
 		case 1:
 			new Tank(game, 100, 100);
-			new Tank(game, 200, 100);
-			new Tank(game, 300, 100);
-			new Tank(game, 400, 100);
-			new Tank(game, 500, 100);
-			new Tank(game, 600, 100);
-			new Tank(game, 700, 100);
+			new Tank(game, 240, 100);
+			new Tank(game, 380, 100);
+			new Tank(game, 520, 100);
+			new Tank(game, 660, 100);
 			new Tank(game, 800, 100);
-			new Tank(game, 900, 100);
+			new Tank(game, 920, 100);
 			break;
 		case 2:
 			new BasicEnemy(game, 200);
@@ -646,6 +645,7 @@ public class Wave {
 			break;
 		}
 	}
+	//wave with squeeze enemies
 	public void hard8() {
 		switch(enemyToSpawn) {
 		case 0:
@@ -688,21 +688,17 @@ public class Wave {
 				break;
 			case 1:
 				new Tank(game, 200, 100);
-				new Tank(game, 300, 100);
-				new Tank(game, 400, 100);
-				new Tank(game, 500, 100);
-				new Tank(game, 600, 100);
-				new Tank(game, 700, 100);
-				new Tank(game, 800, 100);
+				new Tank(game, 340, 100);
+				new Tank(game, 480, 100);
+				new Tank(game, 620, 100);
+				new Tank(game, 760, 100);
 				new Tank(game, 900, 100);
 				break;
 			case 2:
-				new Tank(game, 100, 100);
-				new Tank(game, 200, 100);
-				new Tank(game, 300, 100);
-				new Tank(game, 400, 100);
-				new Tank(game, 500, 100);
-				new Tank(game, 600, 100);
+				new Tank(game, 140, 100);
+				new Tank(game, 280, 100);
+				new Tank(game, 420, 100);
+				new Tank(game, 560, 100);
 				new Tank(game, 700, 100);
 				new Tank(game, 0, 100);
 				new Trishot(game, 200);
@@ -711,26 +707,22 @@ public class Wave {
 				break;
 			case 3:
 				new Tank(game, 100, 100);
-				new Tank(game, 200, 100);
-				new Tank(game, 300, 100);
-				new Tank(game, 400, 100);
-				new Tank(game, 500, 100);
-				new Tank(game, 600, 100);
-				new Tank(game, 700, 100);
+				new Tank(game, 240, 100);
+				new Tank(game, 380, 100);
+				new Tank(game, 520, 100);
+				new Tank(game, 660, 100);
 				new Tank(game, 800, 100);
-				new Tank(game, 900, 100);
+				new Tank(game, 940, 100);
 				new SawedOff(game,520);
 				break;
 			case 4: 
-				new Tank(game, 100, 100);
-				new Tank(game, 200, 100);
-				new Tank(game, 300, 100);
+				new Tank(game, 133, 100);
+				new Tank(game, 266, 100);
 				new Tank(game, 400, 100);
 				new Tank(game, 0, 100);
 				new Tank(game, 600, 100);
-				new Tank(game, 700, 100);
-				new Tank(game, 800, 100);
-				new Tank(game, 900, 100);
+				new Tank(game, 740, 100);
+				new Tank(game, 880, 100);
 				delay = 200;
 				break;
 			case 5:
