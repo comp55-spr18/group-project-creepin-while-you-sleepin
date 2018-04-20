@@ -15,11 +15,18 @@ public class Emitter extends Bullet {
 		getSprite().setLocation(gunLoc.getX() - getSprite().getWidth()/2, gunLoc.getY() - getSprite().getHeight()/2);
 		setCollisionDamage(0);
 	}
-	
+
+	public void move() {
+		int dx = 1;
+		if(getxDir() < 0) dx = -1;
+		getSprite().move(Math.cos(Math.atan(getyDir()/getxDir()))*getSpeed()*dx, Math.sin(Math.atan(getyDir()/getxDir()))*getSpeed()*dx);
+		if(getGame() != null && (getSprite().getX() < -getSprite().getWidth() || getSprite().getX() > getGame().WINDOW_WIDTH || getSprite().getY() < -getSprite().getHeight() || getSprite().getY() > getGame().WINDOW_HEIGHT)) {
+			setDestroyed(true);
+		}
+	}
+
 	// I had to redefine checkCollision and onCollision here since this projectile type does nothing but add aesthetics
-	public void checkCollision() {
-	}
-	
-	public void onCollision(Ship target) {
-	}
+	public void checkCollision() {}
+
+	public void onCollision(Ship target) {}
 }
