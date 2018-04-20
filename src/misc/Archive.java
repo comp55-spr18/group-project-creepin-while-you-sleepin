@@ -76,7 +76,6 @@ public class Archive extends GraphicsPane implements ActionListener {
 		ships.add(new Asteroid(program,0));
 		ships.add(new BasicEnemy(program, 0));
 		ships.add(new Boomerang(program, 0));
-		ships.add(new Boss(program,0));
 		ships.add(new Bouncer(program,0));
 		ships.add(new Drone(program, 0, 0));
 		ships.add(new HeavyWeightEnemy(program, 0));
@@ -90,6 +89,7 @@ public class Archive extends GraphicsPane implements ActionListener {
 		ships.add(new SprayBall(program, 0, 0));
 		ships.add(new Tank(program, 0));
 		ships.add(new SwarmBot(program, 0, 0));
+		ships.add(new Boss(program,0));
 		for(int i = 0;i < ships.size();i++) {
 			ships.get(i).getSprite().setLocation(program.WINDOW_WIDTH/2 - ships.get(i).getSprite().getWidth()/2, program.WINDOW_HEIGHT/4 - ships.get(i).getSprite().getHeight()/2);
 			program.remove(ships.get(i).getSprite());
@@ -102,7 +102,6 @@ public class Archive extends GraphicsPane implements ActionListener {
 		descriptions.add(new GLabel("Asteroids: A field of asteroids that will damage anything it touches."));
 		descriptions.add(new GLabel("Basic Enemy: Pretty self explanatory."));
 		descriptions.add(new GLabel("Boomerang: Enemy that moves in a boomerang like arc."));
-		descriptions.add(new GLabel("???: ?????????"));
 		descriptions.add(new GLabel("Bouncer: Enemy type that pinballs on the vertical axis of the screen."));
 		descriptions.add(new GLabel("Drone: A drone that hovers on top attacking the player."));
 		descriptions.add(new GLabel("Heavy Weight Enemy: Enemy that is massive and does extra damage then normal."));
@@ -111,11 +110,12 @@ public class Archive extends GraphicsPane implements ActionListener {
 		descriptions.add(new GLabel("Sawed-Off: Enemy type that has an attack spread that spirals like a saw."));
 		descriptions.add(new GLabel("Seeker: Enemy that tries to home onto the player."));
 		descriptions.add(new GLabel("Simple Enemy: Generic enemy type."));
-		descriptions.add(new GLabel("Sprayball: An enemy with a constant attack spray."));
 		descriptions.add(new GLabel("Squeeze: An enemy type that attempts to corner the player."));
-		descriptions.add(new GLabel("Swarmbots: A DNA shaped sequence of enemies that attacks the player."));
-		descriptions.add(new GLabel("Tank: Bigger enemy that has a large amount of health and damaging spread."));
 		descriptions.add(new GLabel("Trishot: Enemy that has a bullet with a triple spread."));
+		descriptions.add(new GLabel("Sprayball: An enemy with a constant attack spray."));
+		descriptions.add(new GLabel("Tank: Bigger enemy that has a large amount of health and damaging spread."));
+		descriptions.add(new GLabel("Swarmbot: A DNA shaped sequence of enemies that attacks the player."));
+		descriptions.add(new GLabel("???: ?????????"));
 		for(int i = 0;i < descriptions.size();i++) {
 			descriptions.get(i).setFont("arial-40-bold");
 			descriptions.get(i).setLocation(program.WINDOW_WIDTH/2 - descriptions.get(i).getWidth()/2, 4*program.WINDOW_HEIGHT/5);
