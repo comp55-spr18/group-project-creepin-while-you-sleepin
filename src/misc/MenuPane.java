@@ -14,7 +14,7 @@ public class MenuPane extends GraphicsPane {
 	private GButton unmuteButton;
 	private GButton musicMuteButton;
 	private GButton musicUnmuteButton;
-	private GButton shootTestButton;
+	private GButton archiveButton;
 	private GImage background;
 	private GImage instructions;
 	
@@ -31,7 +31,7 @@ public class MenuPane extends GraphicsPane {
 		unmuteButton = new GButton("UNMUTE SOUND", muteButton.getX(), muteButton.getY(), muteButton.getWidth(), muteButton.getHeight());
 		musicMuteButton = new GButton("MUTE MUSIC", 8.5*scaleX, muteButton.getY() + 2*scaleY/3, 2*scaleX, 2*scaleY/3);
 		musicUnmuteButton = new GButton("UNMUTE MUSIC", musicMuteButton.getX(), musicMuteButton.getY(), musicMuteButton.getWidth(), musicMuteButton.getHeight());
-		shootTestButton = new GButton("TEST", 17.5*scaleX, .5*scaleY, scaleX, scaleY);
+		archiveButton = new GButton("ARCHIVES", 17.5*scaleX, .5*scaleY, scaleX, scaleY);
 		easyButton.setFillColor(Color.GREEN);
 		hardButton.setFillColor(Color.RED);
 		exitButton.setFillColor(Color.WHITE);
@@ -40,7 +40,7 @@ public class MenuPane extends GraphicsPane {
 		unmuteButton.setFillColor(Color.LIGHT_GRAY);
 		musicMuteButton.setFillColor(Color.LIGHT_GRAY);
 		musicUnmuteButton.setFillColor(Color.LIGHT_GRAY);
-		shootTestButton.setFillColor(Color.PINK);
+		archiveButton.setFillColor(Color.PINK);
 		background = new GImage("newmainmenu.jpg");
 		background.setSize(program.getWidth(), program.getHeight());
 		instructions = new GImage("instructionspage.jpg");
@@ -54,7 +54,7 @@ public class MenuPane extends GraphicsPane {
 		program.add(hardButton);
 		program.add(exitButton);
 		program.add(infoButton);
-		program.add(shootTestButton);
+		program.add(archiveButton);
 		if(!program.mute) {
 			program.add(unmuteButton);
 			program.add(muteButton);
@@ -82,7 +82,7 @@ public class MenuPane extends GraphicsPane {
 		program.remove(unmuteButton);
 		program.remove(musicMuteButton);
 		program.remove(musicUnmuteButton);
-		program.remove(shootTestButton);
+		program.remove(archiveButton);
 	}
 	
 	@Override
@@ -129,8 +129,8 @@ public class MenuPane extends GraphicsPane {
 		if (obj == instructions) {
 			program.remove(instructions);
 		}
-		if (obj == shootTestButton) {
-			program.switchToShoottest();
+		if (obj == archiveButton) {
+			program.switchToArchive();
 		}
 	}
 }

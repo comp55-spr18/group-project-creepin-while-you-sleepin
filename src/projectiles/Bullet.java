@@ -60,15 +60,17 @@ public class Bullet extends Projectile {
 
 	// This can be called by any projectile subclass, it just tells the projectile to set it's move vector towards the player
 	public void aimAtPlayer() {
-		GObject shipSprite = getGame().player.getSprite();
-		setxDir((shipSprite.getX()+shipSprite.getWidth()/2) - getSprite().getX() - getSprite().getWidth()/2);
-		setyDir((shipSprite.getY()+shipSprite.getHeight()/2) - getSprite().getY() - getSprite().getHeight()/2);
+		if(getGame().player != null) {
+			GObject shipSprite = getGame().player.getSprite();
+			setxDir((shipSprite.getX()+shipSprite.getWidth()/2) - getSprite().getX() - getSprite().getWidth()/2);
+			setyDir((shipSprite.getY()+shipSprite.getHeight()/2) - getSprite().getY() - getSprite().getHeight()/2);
+		}
 	}
 
 	// The default checkCollision creates three GPoints at the top, center, and bottom of the projectile
 	// If these points collide with an enemy or player, onCollision() is called
 	public void checkCollision() {
-		if(getGame() != null) {
+		if(getGame() != null && getGame().player != null) {
 			GRectangle hitbox = getSprite().getBounds();
 			hitbox.setSize(getSpeed(), hitbox.getHeight());
 			for(int i = getGame().enemies.size() - 1;i >= 0;i--) {

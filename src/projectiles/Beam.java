@@ -92,7 +92,7 @@ public class Beam extends Projectile {
 	}
 
 	public void checkCollision() {
-		if(getGame() != null && warningDuration < 0) {
+		if(getGame() != null && warningDuration < 0 && getGame().player != null) {
 			GRectangle hitbox = sprite.getBounds();
 			for(int i = getGame().enemies.size() - 1;i >= 0;i--) {
 				Ship enemy = getGame().enemies.get(i);

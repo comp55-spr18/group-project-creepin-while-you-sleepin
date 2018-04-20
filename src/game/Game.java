@@ -19,7 +19,7 @@ import projectiles.Projectile;
 import ships.PlayerShip;
 import ships.Ship;
 import misc.Object;
-import misc.shootTest;
+import misc.Archive;
 
 @SuppressWarnings("serial")
 public class Game extends GraphicsApplication {
@@ -30,7 +30,7 @@ public class Game extends GraphicsApplication {
 	private MenuPane menu;
 	private BetweenPane betweenPane;
 	private EndPane endPane;
-	private shootTest shootTest;
+	private Archive archive;
 	public boolean mute;
 	public boolean musicMute;
 	
@@ -72,11 +72,12 @@ public class Game extends GraphicsApplication {
 
 	public void run() {
 		enemies = new ArrayList<Ship>();
+		projectiles = new ArrayList<Projectile>();
 		gamePane = new GamePane(this);
 		menu = new MenuPane(this);
 		endPane = new EndPane(this);
 		betweenPane = new BetweenPane(this);
-		shootTest = new shootTest(this);
+		archive = new Archive(this);
 		mute = false;
 		audio = AudioPlayer.getInstance();
 		switchToMenu();							// Then switch to the menu screen
@@ -89,8 +90,8 @@ public class Game extends GraphicsApplication {
 		switchToScreen(menu);
 	}
 	
-	public void switchToShoottest() {
-		switchToScreen(shootTest);
+	public void switchToArchive() {
+		switchToScreen(archive);
 	}
 	
 	public void switchToBetween() {

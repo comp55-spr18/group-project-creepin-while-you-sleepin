@@ -42,7 +42,7 @@ public class Seeker extends Ship {
 	@Override
 	public void move() {
 		//if the delay is over, get new target coordinates, start moving towards them, and reset the timer
-		if(seek == 0) {
+		if(seek == 0 && getGame().player != null) {
 			GObject shipSprite = getGame().player.getSprite();
 			playerx = shipSprite.getX() + shipSprite.getWidth()/2;
 			playery = shipSprite.getY() + shipSprite.getHeight()/2;

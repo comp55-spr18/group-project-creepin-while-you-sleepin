@@ -62,9 +62,11 @@ public abstract class Ship extends Object {
 
 	// Use this if you want to aim at the player with your ship path.
 	public void aimAtPlayer() {
-		GObject shipSprite = getGame().player.getSprite();
-		setxDir((shipSprite.getX()+shipSprite.getWidth()/2) - getSprite().getX() - getSprite().getWidth()/2);
-		setyDir((shipSprite.getY()+shipSprite.getHeight()/2) - getSprite().getY() - getSprite().getHeight()/2);
+		if(getGame().player != null) {
+			GObject shipSprite = getGame().player.getSprite();
+			setxDir((shipSprite.getX()+shipSprite.getWidth()/2) - getSprite().getX() - getSprite().getWidth()/2);
+			setyDir((shipSprite.getY()+shipSprite.getHeight()/2) - getSprite().getY() - getSprite().getHeight()/2);
+		}
 	}
 
 	public void move() {		// Declare a new move() in each new Ship subclass
