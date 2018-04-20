@@ -9,8 +9,9 @@ public class Drone extends Ship {
 	private int lifetime = 0;	//They get removed based on lifetime being incremented
 	private double topBot;		//Decides if it's curving up or down
 	private double droneCurve;	//Set in constructor to determine curve amount
+	private double curveLimit;
 	
-	public Drone(Game game, double y) {
+	public Drone(Game game, double y, double curvy) {
 		super(game);
 		setMaxHealth(1);				// They're weak enemies
 		setCooldown(920);			// I want them to fire once then never again, dealt with by long cd
@@ -25,6 +26,8 @@ public class Drone extends Ship {
 		setBulletSpeed(12);
 		setBulletDamage(1);
 		getGame().add(getSprite());
+		//sets where the drone will start to curve back at
+		curveLimit = curvy;
 		//This sets the arc of the drones based on the height of the player's screen. Can also be altered to change the drone's curve
 		droneCurve = 43.2/getGame().WINDOW_HEIGHT;
 		if (y <= getGame().WINDOW_HEIGHT/2) {
@@ -66,7 +69,7 @@ public class Drone extends Ship {
 	//moves the drone until part-way down the screen, where it curves back the way it came
 	@Override
 	public void move() {
-		if(getSprite().getLocation().getX() < (getGame().WINDOW_WIDTH) / 1.5) {
+		if(getSprite().getLocation().getX() < curveLimit) {
 			if (getxDir() != 1) {
 				if(topBot <= getGame().WINDOW_HEIGHT/2) {
 					if(getxDir() <= 0) {

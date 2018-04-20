@@ -78,7 +78,7 @@ public class Archive extends GraphicsPane implements ActionListener {
 		ships.add(new Boomerang(program, 0));
 		ships.add(new Boss(program,0));
 		ships.add(new Bouncer(program,0));
-		ships.add(new Drone(program, 0));
+		ships.add(new Drone(program, 0, 0));
 		ships.add(new HeavyWeightEnemy(program, 0));
 		ships.add(new HomingEnemy(program, 0));
 		ships.add(new Kamikaze(program, 0));

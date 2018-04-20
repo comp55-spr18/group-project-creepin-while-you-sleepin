@@ -11,7 +11,7 @@ import projectiles.FireTrail;
 public class HeavyWeightEnemy extends Ship {
 	public HeavyWeightEnemy(Game game, double y) {
 		super(game);
-		setMaxHealth(5);
+		setMaxHealth(6);
 		setCooldown(325);
 		setMaxCooldown(400);
 		setCanShoot(false);
