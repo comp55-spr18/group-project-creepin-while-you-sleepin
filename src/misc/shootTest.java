@@ -1,5 +1,6 @@
 package misc;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -79,6 +80,8 @@ public class shootTest extends GraphicsPane implements ActionListener {
 		program.remove(enemyFire);
 		program.remove(returnToMenu);
 		program.remove(spaceBackground);
+		program.remove(ships.get(selected).getSprite());
+		program.remove(descriptions.get(selected));
 	}
 	
 	public void setShips() {  //sets the ships into the array list
@@ -133,14 +136,13 @@ public class shootTest extends GraphicsPane implements ActionListener {
 		GObject obj = program.getElementAt(e.getX(), e.getY());
 		if (obj == returnToMenu) {
 			hideContents();
-			program.switchToMenu();
 		}
 		if (obj == previous) {
 			program.remove(ships.get(selected).getSprite());
 			program.remove(descriptions.get(selected));
 			selected--;
 			if (selected < 0) {
-				selected = 15;
+			selected = 0;
 			}
 			program.add(ships.get(selected).getSprite());
 			program.add(descriptions.get(selected));
@@ -150,7 +152,7 @@ public class shootTest extends GraphicsPane implements ActionListener {
 			program.remove(descriptions.get(selected));
 			selected++;
 			if (selected > 15) {
-				selected = 0;
+			selected = 15;
 			}
 			program.add(ships.get(selected).getSprite());
 			program.add(descriptions.get(selected));
@@ -159,5 +161,11 @@ public class shootTest extends GraphicsPane implements ActionListener {
 			enemyBlaster();
 		}
 	}
-	
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		for(int i = program.projectiles.size() - 1;i >= 0;i--) {	// Update all projectiles
+			program.projectiles.get(i).update();
+		}
+	}
 }
