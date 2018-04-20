@@ -48,7 +48,7 @@ public class Wave {
 			}
 		} else {												// If the difficulty is hard
 			while(selectedWave == level.getPrevWave()) {		// While the selected wave is equal to the previous wave played (to prevent getting the same wave twice)
-				selectedWave = Math.abs(game.rgen.nextInt(9));	// Randomly select one of the hard waves
+				selectedWave = Math.abs(game.rgen.nextInt(1)+7);	// Randomly select one of the hard waves
 			}
 		}
 	}
@@ -260,13 +260,13 @@ public class Wave {
 			default:
 				switch(enemyToSpawn%2) {
 					case 0:
-						new Drone(game, game.WINDOW_HEIGHT - 200);
+						new Drone(game, game.WINDOW_HEIGHT - 200, game.WINDOW_WIDTH/1.5);
 						if(enemyToSpawn == 20) {
 							delay = 200;
 						}
 						break;
 					case 1:
-						new Drone(game, 100);
+						new Drone(game, 100, game.WINDOW_WIDTH/1.5);
 						break;
 				}
 		}
@@ -302,10 +302,10 @@ public class Wave {
 		default:
 			switch(enemyToSpawn%3) {
 			case 0:
-				new Drone(game, game.WINDOW_HEIGHT - 200);
+				new Drone(game, game.WINDOW_HEIGHT - 200, game.WINDOW_WIDTH/1.5);
 				break;
 			case 1:
-				new Drone(game, 100);
+				new Drone(game, 100, game.WINDOW_WIDTH/1.5);
 				break;
 			case 2:
 				new BasicEnemy(game, 1080/2);
@@ -472,10 +472,10 @@ public class Wave {
 			default:						// This means that if enemyToSpawn is anything other than 0, this will trigger
 				switch(enemyToSpawn%2) {	// Mod enemyToSpawn by 2 to turn it into a 0 or 1
 					case 0:					// If enemyToSpawn is even, spawn this one
-						new Drone(game, game.WINDOW_HEIGHT - 200);
+						new Drone(game, game.WINDOW_HEIGHT - 200, game.WINDOW_WIDTH/1.5);
 						break;
 					case 1:					// Otherwise spawn this one (note that this one gets called first)
-						new Drone(game, 100);
+						new Drone(game, 100, game.WINDOW_WIDTH/1.5);
 						if(enemyToSpawn%5 == 0) {
 							new Kamikaze(game, 1080/2);
 						}
@@ -577,7 +577,7 @@ public class Wave {
 					new BasicEnemy(game, 250);
 					}
 					else {
-					new Drone(game, game.WINDOW_HEIGHT - 200);
+					new Drone(game, game.WINDOW_HEIGHT - 200, game.WINDOW_WIDTH/1.5);
 					}
 					if ((enemyToSpawn == 8) || (enemyToSpawn == 24)) {
 						new Seeker(game, 1080/2);
@@ -588,7 +588,7 @@ public class Wave {
 					new BasicEnemy(game, 850);
 					}
 					else {
-					new Drone(game, 100);
+					new Drone(game, 100, game.WINDOW_WIDTH/1.5);
 					}
 					if(enemyToSpawn == 11) {
 						new SprayBall(game, 1080/2, 500);
@@ -645,41 +645,62 @@ public class Wave {
 			break;
 		}
 	}
-	//wave with squeeze enemies
+	//squeeze enemies wave while spamming bullets and ships into the enclosed space
 	public void hard8() {
 		switch(enemyToSpawn) {
 		case 0:
-			size = 6;
+			size = 32;
 			delay = 100;
 			break;
-		case 1:
-			new Squeeze(game,100);
-			new Squeeze(game,800);
-			delay = 200;
-			break;
-		case 2:
-			new Boomerang(game,400);
-			new Boomerang (game,600);
-			delay=100;
-			break;
-		case 3:
-			new Kamikaze(game,600);
-			break;
-		case 4: 
-			new HeavyWeightEnemy(game,400);
-			new HeavyWeightEnemy(game,700);
-			break;
-		case 5:
-			new SprayBall(game,400,500);
-			break;
-		case 6:
-			new SwarmCaller(game,400);
-			break;
-		
+		default:
+			switch(enemyToSpawn%4) {
 			
+				case 0:
+					if (enemyToSpawn == 4) {
+						new SprayBall(game,400,800);
+					}
+					else {
+						new Drone(game, game.WINDOW_HEIGHT, game.WINDOW_WIDTH/1.5);
+					}
+					break;	
+				//This gets called first, but I wanted the cases from 0-3	
+				case 1:					
+					if (enemyToSpawn == 1) {
+						new Squeeze(game,100);
+						new Squeeze(game,800);
+					}
+					else {
+						new Drone(game, 0, game.WINDOW_WIDTH/1.5);
+						delay = 3;
+					}
+					break;
+				case 2:
+					if (enemyToSpawn == 2) {
+						new Tank(game,300);
+						new Tank(game,600);
+						new SwarmCaller(game,450);
+					}
+					else {
+						new Drone(game, game.WINDOW_HEIGHT - 300, game.WINDOW_WIDTH/1.2);
+					}
+					break;
+				case 3:
+					if (enemyToSpawn == 3) {
+						new Kamikaze(game,0);
+						new Kamikaze(game,300);
+						new Kamikaze(game,600);
+						new Kamikaze(game,900);
+						new HeavyWeightEnemy(game,250);
+						new HeavyWeightEnemy(game,550);
+					}
+					else {
+						new Drone(game, 300, game.WINDOW_WIDTH/1.2);
+					}
+					break;
+			}
 		}
 	}
-		
+	//the maze wave	
 		public void hard9() {
 			switch(enemyToSpawn) {
 			case 0:

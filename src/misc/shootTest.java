@@ -81,7 +81,7 @@ public class shootTest extends GraphicsPane {
 		shipz.add(new Boomerang(program, 0));
 		shipz.add(new Boss(program,0));
 		shipz.add(new Bouncer(program,0));
-		shipz.add(new Drone(program, 0));
+		shipz.add(new Drone(program, 0, program.WINDOW_WIDTH/1.5));
 		shipz.add(new HeavyWeightEnemy(program, 0));
 		shipz.add(new HomingEnemy(program, 0));
 		shipz.add(new Kamikaze(program, 0));
