@@ -16,8 +16,6 @@ public class GamePane extends GraphicsPane {
 	private int currentButton = 0;
 	public GLabel konami;
 	
-	
-
 	public GamePane(Game app) {
 		this.program = app;
 		pauseLabel = new GLabel("PAUSED (Click on player ship to resume or press ESCAPE to go back to menu)");
@@ -36,7 +34,6 @@ public class GamePane extends GraphicsPane {
 		konami.setFont("Arial-Bold-30");
 		konami.setColor(Color.green);
 	}
-
 	@Override
 	public void showContents() {
 		program.add(background);
@@ -50,7 +47,6 @@ public class GamePane extends GraphicsPane {
 		}
 		background.sendToBack();
 	}
-
 	@Override
 	public void hideContents() {
 		program.remove(program.scoreBoard);
@@ -145,28 +141,23 @@ public class GamePane extends GraphicsPane {
 				program.remove(pauseLabel);
 				program.switchToMenu();
 			}
-		
 		}
 		if(checkKonami(e.getKeyCode())) {
 			program.add(konami);
 			program.playSound("KonamiSound",1);
 			program.player.setInvincible(true);
 			program.player.setIframe(1000000000);
-			
-		
 		}
 		if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 			program.remove(konami);
 		}
 	}
 	
-
 	boolean checkKonami(int keyPressed) {
 	    if(keyPressed == sequence[currentButton]) {
 	        currentButton++;
 	        if(currentButton == sequence.length) {
 	            currentButton = 0;
-
 	            return true;
 	        }
 	    }
