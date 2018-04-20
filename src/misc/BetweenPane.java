@@ -8,7 +8,6 @@ import acm.graphics.GObject;
 import game.Game;
 
 public class BetweenPane extends GraphicsPane {
-	private Game program;
 	private GButton rect;
 	private GButton rect2;
 	private GLabel levelLabel;
@@ -20,13 +19,13 @@ public class BetweenPane extends GraphicsPane {
 		double scaleX = program.WINDOW_WIDTH/(1920/100.0);
 		double scaleY = program.WINDOW_HEIGHT/(1080/100.0);
 		rect = new GButton("CONTINUE", 4*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
-		rect2 = new GButton("QUIT", 13*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
+		rect2 = new GButton("EXIT", 13*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
 		rect.setFillColor(Color.RED);
 		rect2.setFillColor(Color.RED);
 		levelLabel = new GLabel("");
 		levelLabel.setFont("Arial-Bold-100");
 		levelLabel.setColor(Color.WHITE);
-		background = new GImage("levels/testspacelevel.jpg");
+		background = new GImage("levels/betweenbackground.jpg");
 		background.setSize(program.getWidth(), program.getHeight());
 	}
 
@@ -54,6 +53,7 @@ public class BetweenPane extends GraphicsPane {
 		if (obj == rect) {
 			program.switchToGame();
 			program.player.move(e);
+			program.audio = AudioPlayer.getInstance();
 			program.timer.start();
 		}
 		if (obj == rect2) {

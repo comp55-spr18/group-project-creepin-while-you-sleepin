@@ -30,6 +30,7 @@ public class SprayBall extends Ship {
 		setCanShoot(false);
 		setxDir(-1);
 		setyDir(0);
+		getGame().add(getSprite());
 
 		if(game.currLevel >= 2) {
 			setMaxHealth(60);

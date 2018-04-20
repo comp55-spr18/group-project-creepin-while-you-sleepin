@@ -23,6 +23,7 @@ public class HomingEnemy extends Ship {
 		setBulletSpeed(8);
 		setSpeed(4);
 		setPoints(200);
+		getGame().add(getSprite());
 		setTrail(new FireTrail(this));
 
 		if(game.currLevel >= 2) {

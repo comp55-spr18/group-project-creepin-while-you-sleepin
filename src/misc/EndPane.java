@@ -1,17 +1,17 @@
 package misc;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
+
+import acm.graphics.GImage;
 import acm.graphics.GLabel;
 import acm.graphics.GObject;
 import game.Game;
 
 public class EndPane extends GraphicsPane {
-	private Game program; // you will use program to get access to
-	// all of the GraphicsProgram calls
 	private GButton rect;
 	private GButton rect2;
 	private GLabel endLabel;
-//	private GImage background;
+	private GImage background;
 
 	public EndPane(Game app) {
 		super();
@@ -24,13 +24,14 @@ public class EndPane extends GraphicsPane {
 		rect2.setFillColor(Color.RED);
 		endLabel = new GLabel("");
 		endLabel.setFont("Arial-Bold-100");
-//		background = new GImage("mainmenu.jpg");
-//		background.setSize(program.getWidth(), program.getHeight());
+		endLabel.setColor(Color.WHITE);
+		background = new GImage("levels/betweenbackground.jpg");
+		background.setSize(program.getWidth(), program.getHeight());
 	}
 
 	@Override
 	public void showContents() {
-//		program.add(background);
+		program.add(background);
 		if(program.lose) {
 			endLabel.setLabel("You lose!");
 		} else {
@@ -44,7 +45,7 @@ public class EndPane extends GraphicsPane {
 
 	@Override
 	public void hideContents() {
-//		program.remove(background);
+		program.remove(background);
 		program.remove(endLabel);
 		program.remove(rect);
 		program.remove(rect2);

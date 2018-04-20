@@ -15,8 +15,10 @@ public class PlayerShip extends Ship {
 	private boolean canShootAlt;
 	private int altCooldown;
 	private int altMaxCooldown;
+	private boolean canMove;
 	public PlayerShip(Game game) {
 		super(game);
+		canMove = true;
 		shooting = false;
 		shootingAlt = false;
 		canShootAlt = false;
@@ -30,10 +32,9 @@ public class PlayerShip extends Ship {
 		setMaxCooldown(20);
 		setCanShoot(false);
 		setGunLocation(new GPoint[] {new GPoint()});
-		setSprite(new GImage("sprites/playermodel.png", 0, 0));
+		setSprite(new GImage("sprites/playership.png", 0, 0));
 		setBulletColor(Color.GREEN);
 		setSize(50, 50);
-		setExplosion(new GImage("explosion.png"));
 		setBulletSize(15);
 		setBulletSpeed(25);
 		setBulletDamage(1);
@@ -47,7 +48,14 @@ public class PlayerShip extends Ship {
 	}
 
 	public void move(MouseEvent e) {		// Moves the player's gun location to the location of the ship
-		if(!isDestroyed() && !getGame().level.isFinished()) {
+		if(!canMove) {
+			if(e.getX() > 0 && e.getY() > 0 && e.getX() < getGame().WINDOW_WIDTH && e.getY() < getGame().WINDOW_HEIGHT - getGame().WINDOW_HEIGHT/10) {
+				if(getGame().getElementAt(e.getX(), e.getY()) == getSprite()) {
+					canMove = true;
+				}
+			}
+		}
+		if(!isDestroyed() && !getGame().level.isFinished() && canMove) {
 			getSprite().setLocation(new GPoint(e.getX() - getSprite().getWidth()/2, e.getY() - getSprite().getHeight()/2));
 			double x = getSprite().getX();
 			double y = getSprite().getY();
@@ -102,7 +110,6 @@ public class PlayerShip extends Ship {
 		}
 		if(canShootAlt && shootingAlt) {
 			canShootAlt = false;
-			getGame().playerShootCount = getGame().playSound("playershoot", getGame().playerShootCount);
 			new Beam(this, getGunLocation()[0]);
 		} else if(!canShootAlt) {
 			altCooldown++;
@@ -119,13 +126,13 @@ public class PlayerShip extends Ship {
 			// If the player is invincible, increment their invincibility timer
 			if(isInvincible()) {
 				if(getIframe() == 0) {
-					getSprite().setImage("truck.png");
+					getSprite().setImage("sprites/playershipdamaged.png");
 					setSize(50, 50);
 				}
 				setIframe(getIframe() + 1);
 				// If the player's iframe count hits 100, make them vulnerable again
 				if(getIframe() == getMaxIframe()) {
-					getSprite().setImage("sprites/playermodel.png");
+					getSprite().setImage("sprites/playership.png");
 					setSize(50, 50);
 					setInvincible(false);
 					setIframe(0);
@@ -186,5 +193,9 @@ public class PlayerShip extends Ship {
 	}
 	public void setAltMaxCooldown(int altMaxCooldown) {
 		this.altMaxCooldown = altMaxCooldown;
+	}
+
+	public void setCanMove(boolean canMove) {
+		this.canMove = canMove;
 	}
 }

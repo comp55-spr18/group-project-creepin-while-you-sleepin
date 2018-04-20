@@ -16,21 +16,25 @@ public class PowerUp {
 					getGame().add(getGame().alreadyHave);
 					return false;
 				}
+				if(this instanceof ShieldUp && game.player.getShieldMaxCooldown() <= 100) {
+					getGame().add(getGame().alreadyHave);
+				}
 				onCollision();
 				for(PowerUp power : getGame().powers) {
 					getGame().remove(power.getSprite());
 				}
 				getGame().remove(getGame().alreadyHave);
 				getGame().powers.clear();
-				getGame().audio.playSound("sounds", "pickup.mp3");
+				if(!getGame().mute) {
+					getGame().audio.playSound("sounds", "pickup.mp3");
+				}
 				return true;
 			}
 		}
 		return false;
 	}
 	
-	public void onCollision() {
-	}
+	public void onCollision() {}
 
 	public Game getGame() {
 		return game;
@@ -71,7 +75,7 @@ class FireRateUp extends PowerUp {
 		}
 		getGame().player.setCanShootAlt(true);
 		getGame().player.setAltCooldown(0);
-		getGame().player.setAltMaxCooldown(getGame().player.getAltMaxCooldown() - getGame().player.getAltMaxCooldown()/4);
+		getGame().player.setAltMaxCooldown(getGame().player.getAltMaxCooldown() - getGame().player.getAltMaxCooldown()/8);
 		if(getGame().player.getAltMaxCooldown() <= 0) {
 			getGame().player.setAltMaxCooldown(1);
 		}
@@ -92,8 +96,8 @@ class BulletSizeUp extends PowerUp {
 	}
 	
 	public void onCollision() {
-		getGame().player.setBulletSize(getGame().player.getBulletSize() + 15);
-		getGame().player.setBeamHeight(getGame().player.getBeamHeight() + 15);
+		getGame().player.setBulletSize(getGame().player.getBulletSize() + 20);
+		getGame().player.setBeamHeight(getGame().player.getBeamHeight() + 25);
 	}
 }
 
@@ -112,7 +116,7 @@ class BulletSpeedUp extends PowerUp {
 	
 	public void onCollision() {
 		getGame().player.setBulletSpeed(getGame().player.getBulletSpeed() + 15);
-		getGame().player.setBeamDuration(getGame().player.getBeamDuration() + 15);
+		getGame().player.setBeamDuration(getGame().player.getBeamDuration() + 25);
 	}
 }
 
@@ -131,7 +135,7 @@ class BulletDamageUp extends PowerUp {
 	
 	public void onCollision() {
 		getGame().player.setBulletDamage(getGame().player.getBulletDamage() + 1);
-		getGame().player.setBeamDamage(getGame().player.getBeamDamage() + 1);
+		getGame().player.setBeamDamage(getGame().player.getBeamDamage() + 2);
 	}
 }
 
@@ -190,10 +194,10 @@ class ShieldUp extends PowerUp {
 		if(!getGame().player.isShielded()) {
 			getGame().player.setShielded(true);
 			getGame().player.setShieldCooldown(0);
-			getGame().player.setShieldMaxCooldown(500);
+			getGame().player.setShieldMaxCooldown(400);
 		} else {
 			getGame().player.setShieldCooldown(0);
-			getGame().player.setShieldMaxCooldown(getGame().player.getShieldMaxCooldown() - 50);
+			getGame().player.setShieldMaxCooldown(getGame().player.getShieldMaxCooldown() - 100);
 		}
 	}
 }

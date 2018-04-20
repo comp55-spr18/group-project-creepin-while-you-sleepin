@@ -10,7 +10,6 @@ import game.PowerUp;
 import ships.Ship;
 
 public class GamePane extends GraphicsPane {
-	private Game program;
 	private GImage background;
 	private GLabel pauseLabel;
 
@@ -25,7 +24,7 @@ public class GamePane extends GraphicsPane {
 		program.alreadyHave.setFont("arial-22-bold");
 		program.alreadyHave.setColor(Color.RED);
 		program.alreadyHave.setLocation(program.WINDOW_WIDTH/2 - program.alreadyHave.getWidth()/2, program.WINDOW_HEIGHT/2 - program.getHeight()/2);
-		background = new GImage("levels/test.gif");
+		background = new GImage("levels/background.gif");
 		background.setSize(program.getWidth()+ 500, program.getHeight());
 	}
 
@@ -92,6 +91,9 @@ public class GamePane extends GraphicsPane {
 			GImage playerSprite = program.player.getSprite();
 			if(e.getX() >= playerSprite.getX() && e.getX() <= playerSprite.getX() + playerSprite.getWidth() && e.getY() >= playerSprite.getY() && e.getY() <= playerSprite.getY() + playerSprite.getHeight()) {
 				program.paused = false;
+				if(!program.musicMute) {
+					program.audio.playSound("music", "level" + program.currLevel + ".mp3");
+				}
 				program.remove(pauseLabel);
 				program.player.move(e);
 			}
@@ -115,10 +117,17 @@ public class GamePane extends GraphicsPane {
 		}
 	}
 	@Override
+	public void mouseExited(MouseEvent e) {
+		program.player.setCanMove(false);
+	}
+	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_SPACE) {
 			if(!program.paused) {
 				program.paused = true;
+				if(!program.musicMute) {
+					program.audio.pauseSound("music", "level" + program.currLevel + ".mp3");
+				}
 				program.add(pauseLabel);
 			}
 		}

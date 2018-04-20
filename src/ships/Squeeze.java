@@ -21,6 +21,7 @@ public class Squeeze extends Ship {
 		setSpeed(2);
 		setPoints(100);
 		setCollisionDamage(1);
+		getGame().add(getSprite());
 		setTrail(new FireTrail(this));
 		setBeamHeight(100);
 		setBeamDuration(80);

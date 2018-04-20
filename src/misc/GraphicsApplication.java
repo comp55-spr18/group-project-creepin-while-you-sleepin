@@ -93,6 +93,13 @@ public abstract class GraphicsApplication extends GraphicsProgram {
 	}
 	
 	@Override
+	public void mouseExited(MouseEvent e) {
+		if(curScreen != null) {
+			curScreen.mouseExited(e);
+		}
+	}
+	
+	@Override
 	public void keyPressed(KeyEvent e) {
 		if(curScreen != null) {
 			curScreen.keyPressed(e);

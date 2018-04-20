@@ -49,7 +49,7 @@ public abstract class Ship extends Object {
 		setDestroyedCounter(0);
 		setShielded(false);
 		setCollisionDamage(1);
-		setExplosion(new GImage("explosion.png"));
+		setExplosion(new GImage("sprites/explosion.png"));
 		setBulletColor(Color.RED);
 	}
 	
@@ -116,6 +116,7 @@ public abstract class Ship extends Object {
 			if(getDestroyedCounter() == 50) {		// When the counter hits 50
 				getGame().remove(explosion);
 				explosion.setVisible(false);
+				getGame().enemies.remove(this);
 			}
 		}
 	}
@@ -200,15 +201,17 @@ public abstract class Ship extends Object {
 	}
 
 	public void dealDamage(int damage) {
-		if(isShielded()) {
-			if(!getShield().isVisible() && !isInvincible()) {
-				calculateDamage(damage);
+		if(!isInvincible() || !(this instanceof PlayerShip)) {
+			if(isShielded()) {
+				if(!getShield().isVisible()) {
+					calculateDamage(damage);
+				} else {
+					getGame().shieldHitCount = getGame().playSound("shieldhit", getGame().shieldHitCount);
+					getShield().setVisible(false);
+				}
 			} else {
-				getGame().shieldHitCount = getGame().playSound("shieldhit", getGame().shieldHitCount);
-				getShield().setVisible(false);
+				calculateDamage(damage);
 			}
-		} else if(!isInvincible() || !(this instanceof PlayerShip)) {
-			calculateDamage(damage);
 		}
 	}
 	
@@ -239,7 +242,7 @@ public abstract class Ship extends Object {
 		} else {
 			for(int i = size;i < healthChange + size;i++) {
 				if(i >= 0) {
-					GImage toAdd = new GImage("heart.png", 10 + 25*i, 30);
+					GImage toAdd = new GImage("sprites/heart.png", 10 + 25*i, 30);
 					toAdd.setSize(20, 20);
 					game.healthBar.add(toAdd);
 					game.add(toAdd);

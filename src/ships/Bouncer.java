@@ -19,14 +19,15 @@ public class Bouncer extends Ship {
 		setSprite(new GImage("sprites/enemy2.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT / (1080 / y)));
 		setBulletColor(Color.yellow);
 		setSize(100, 100);
-		setxDir(-2);
-		setyDir(-4);
-		setSpeed(10);
+		setxDir(-1);
+		setyDir(-1);
+		setSpeed(2);
 		setPoints(100);
 		setBulletDamage(1);
 		setBulletSpeed(10);
 		setBulletSize(20);
 		setCollisionDamage(1);
+		getGame().add(getSprite());
 		setTrail(new FireTrail(this));
 
 		if(game.currLevel >= 2) {
@@ -45,11 +46,11 @@ public class Bouncer extends Ship {
 
 	@Override
 	public void move() {
-		getSprite().move(getxDir(), getyDir());
+		getSprite().move(getxDir()*getSpeed(), getyDir()*getSpeed()*2);
 		double x = getSprite().getLocation().getX();
 		double y = getSprite().getLocation().getY();
 		getGunLocation()[0].setLocation(x,y+getSprite().getHeight()/2);
-		if (getSprite().getY() <= 0 || getSprite().getY() + getSprite().getHeight() >= getGame().WINDOW_HEIGHT-100) {
+		if (getSprite().getY() <= 0 || getSprite().getY() + getSprite().getHeight() >= getGame().WINDOW_HEIGHT - getGame().WINDOW_HEIGHT/10) {
 			setyDir(getyDir() * -1);
 		}
 		if (getSprite().getLocation().getX() < -300) {

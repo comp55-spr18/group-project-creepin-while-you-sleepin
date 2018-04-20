@@ -16,6 +16,7 @@ public class Seeker extends Ship {
 		setSprite(new GImage("sprites/enemy2.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
 		setSize(100, 100);
 		setSpeed(15);
+		getGame().add(getSprite());
 		setTrail(new FireTrail(this));
 		setPoints(200);
 		setxDir(0);
