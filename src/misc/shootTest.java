@@ -64,7 +64,10 @@ public class shootTest extends GraphicsPane {
 		ships.add(new Seeker(program, 0));
 		ships.add(new SimpleEnemy(program, 0));
 		ships.add(new Squeeze(program, 0));
-		ships.add(new Trishot(program, 0));  //Tank, swarm, and spray are not called because they do not fire.
+		ships.add(new Trishot(program, 0)); 
+		//ships.add(new SprayBall(program, 0, ??));
+		//ships.add(new Tank(program, 0, ??));
+		//ships.add(new SwarmBot(program, 0, ???));
 		for(int i = 0;i < ships.size();i++) {
 			ships.get(i).getSprite().setLocation(program.WINDOW_WIDTH/2, program.WINDOW_HEIGHT/2);
 			program.remove(ships.get(i).getSprite());
@@ -78,6 +81,7 @@ public class shootTest extends GraphicsPane {
 	public void mousePressed(MouseEvent e) {
 		GObject obj = program.getElementAt(e.getX(), e.getY());
 		if (obj == returnToMenu) {
+			hideContents();
 			program.switchToMenu();
 		}
 		if (obj == previous) {
