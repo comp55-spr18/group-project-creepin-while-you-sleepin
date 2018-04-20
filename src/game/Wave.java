@@ -490,10 +490,10 @@ public class Wave {
 				delay = 50;
 				break;
 			case 1:
-				new Tank(game, 100, 100);
-				new Tank(game, 350, 100);
-				new Tank(game, 600, 100);
-				new Tank(game, 850, 100);
+				new Tank(game, 100);
+				new Tank(game, 350);
+				new Tank(game, 600);
+				new Tank(game, 850);
 				break;
 			case 2:
 				new SimpleEnemy(game, 145);
@@ -604,15 +604,15 @@ public class Wave {
 			delay = 100;
 			break;
 		case 1:
-			new Tank(game, 100, 100);
-			new Tank(game, 200, 100);
-			new Tank(game, 300, 100);
-			new Tank(game, 400, 100);
-			new Tank(game, 500, 100);
-			new Tank(game, 600, 100);
-			new Tank(game, 700, 100);
-			new Tank(game, 800, 100);
-			new Tank(game, 900, 100);
+			new Tank(game, 100);
+			new Tank(game, 200);
+			new Tank(game, 300);
+			new Tank(game, 400);
+			new Tank(game, 500);
+			new Tank(game, 600);
+			new Tank(game, 700);
+			new Tank(game, 800);
+			new Tank(game, 900);
 			break;
 		case 2:
 			new BasicEnemy(game, 200);
@@ -687,50 +687,50 @@ public class Wave {
 				delay = 70;
 				break;
 			case 1:
-				new Tank(game, 200, 100);
-				new Tank(game, 300, 100);
-				new Tank(game, 400, 100);
-				new Tank(game, 500, 100);
-				new Tank(game, 600, 100);
-				new Tank(game, 700, 100);
-				new Tank(game, 800, 100);
-				new Tank(game, 900, 100);
+				new Tank(game, 200);
+				new Tank(game, 300);
+				new Tank(game, 400);
+				new Tank(game, 500);
+				new Tank(game, 600);
+				new Tank(game, 700);
+				new Tank(game, 800);
+				new Tank(game, 900);
 				break;
 			case 2:
-				new Tank(game, 100, 100);
-				new Tank(game, 200, 100);
-				new Tank(game, 300, 100);
-				new Tank(game, 400, 100);
-				new Tank(game, 500, 100);
-				new Tank(game, 600, 100);
-				new Tank(game, 700, 100);
-				new Tank(game, 0, 100);
+				new Tank(game, 100);
+				new Tank(game, 200);
+				new Tank(game, 300);
+				new Tank(game, 400);
+				new Tank(game, 500);
+				new Tank(game, 600);
+				new Tank(game, 700);
+				new Tank(game, 0);
 				new Trishot(game, 200);
 				new Trishot(game, 500);
 				new Trishot(game, 800);
 				break;
 			case 3:
-				new Tank(game, 100, 100);
-				new Tank(game, 200, 100);
-				new Tank(game, 300, 100);
-				new Tank(game, 400, 100);
-				new Tank(game, 500, 100);
-				new Tank(game, 600, 100);
-				new Tank(game, 700, 100);
-				new Tank(game, 800, 100);
-				new Tank(game, 900, 100);
+				new Tank(game, 100);
+				new Tank(game, 200);
+				new Tank(game, 300);
+				new Tank(game, 400);
+				new Tank(game, 500);
+				new Tank(game, 600);
+				new Tank(game, 700);
+				new Tank(game, 800);
+				new Tank(game, 900);
 				new SawedOff(game,520);
 				break;
 			case 4: 
-				new Tank(game, 100, 100);
-				new Tank(game, 200, 100);
-				new Tank(game, 300, 100);
-				new Tank(game, 400, 100);
-				new Tank(game, 0, 100);
-				new Tank(game, 600, 100);
-				new Tank(game, 700, 100);
-				new Tank(game, 800, 100);
-				new Tank(game, 900, 100);
+				new Tank(game, 100);
+				new Tank(game, 200);
+				new Tank(game, 300);
+				new Tank(game, 400);
+				new Tank(game, 0);
+				new Tank(game, 600);
+				new Tank(game, 700);
+				new Tank(game, 800);
+				new Tank(game, 900);
 				delay = 200;
 				break;
 			case 5:

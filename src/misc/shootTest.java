@@ -84,9 +84,9 @@ public class shootTest extends GraphicsPane {
 		ships.add(new SimpleEnemy(program, 0));
 		ships.add(new Squeeze(program, 0));
 		ships.add(new Trishot(program, 0)); 
-		//ships.add(new SprayBall(program, 0, ??));
-		//ships.add(new Tank(program, 0, ??));
-		//ships.add(new SwarmBot(program, 0, ???));
+		ships.add(new SprayBall(program, 0, 0));
+		ships.add(new Tank(program, 0));
+		ships.add(new SwarmBot(program, 0, 0));
 		for(int i = 0;i < ships.size();i++) {
 			ships.get(i).getSprite().setLocation(program.WINDOW_WIDTH/2, program.WINDOW_HEIGHT/2);
 			program.remove(ships.get(i).getSprite());
