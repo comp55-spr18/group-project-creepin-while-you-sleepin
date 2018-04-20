@@ -49,8 +49,9 @@ public class SprayBall extends Ship {
 			double x = getSprite().getLocation().getX();
 			double y = getSprite().getLocation().getY();
 			//resets the gun locations when the ship starts shooting
-			if (firing == 0) {
+			if (firing == 21) {
 				setGunLocation(new GPoint[] {new GPoint(x,y+getSprite().getHeight()/2), new GPoint(x+getSprite().getWidth()/2,y), new GPoint(x+getSprite().getWidth(),y+getSprite().getHeight()/2), new GPoint(x+getSprite().getWidth()/2,y+getSprite().getHeight())});
+				firing = 0;
 			}
 			Projectile newProj = new Bullet(this, getGunLocation()[0], -1, 0);
 			Projectile newProj1 = new Bullet(this, getGunLocation()[1], 0, -1);
@@ -91,7 +92,6 @@ public class SprayBall extends Ship {
 			if (firing == 21) {
 				setCanShoot(false);
 				setCooldown(0);
-				firing = 0;
 			}
 		} else {
 			setCooldown(getCooldown() + 1);
