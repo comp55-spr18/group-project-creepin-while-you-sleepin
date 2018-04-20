@@ -180,27 +180,36 @@ public class Wave {
 	public void easy1() {			// Generates a basic easy wave
 		switch(enemyToSpawn) {
 			case 0:
-				size = 6;
+				size = 7;
 				delay = 50;
 				break;
 			case 1:
 				new BasicEnemy(game, 800);		// This is the first enemy it spawns
+				new BasicEnemy(game, 400);
 				delay = 100;					// Sets the new delay between enemy spawns to be 100
 				break;
 			case 2:
 				new BasicEnemy(game, 250);		// The second and so on
+				new BasicEnemy(game, 600);
 				break;
 			case 3:
 				new BasicEnemy(game, 300);
+				new BasicEnemy(game, 100);
 				break;
 			case 4:
 				new BasicEnemy(game, 500);
+				new BasicEnemy(game, 700);
 				break;
 			case 5:
 				new BasicEnemy(game, 250);
+				new BasicEnemy(game, 400);
 				break;
 			case 6:
 				new SprayBall(game, 450, game.WINDOW_WIDTH/3);
+				break;
+			case 7:
+				new Boomerang(game, 200);
+				new Boomerang(game, 800);
 				break;
 		}
 	}
@@ -213,24 +222,30 @@ public class Wave {
 				break;
 			case 1:
 				new BasicEnemy(game, 500);
+				new Kamikaze(game, 100);
 				delay = 100;
 				break;
 			case 2:
+				new BasicEnemy(game, 200);
 				new Kamikaze(game, 900);
 				break;
 			case 3:
 				new SprayBall(game, 300, 1000);
+				new Kamikaze(game, 100);
 				delay = 300;
 				break;
 			case 4:
 				new HomingEnemy(game, 500);
+				new Kamikaze(game, 100);
 				delay = 100;
 				break;
 			case 5:
 				new HomingEnemy(game, 200);
+				new Kamikaze(game, 900);
 				break;
 			case 6:
 				new SprayBall(game, 450, 1920/3);
+				new Kamikaze(game, 100);
 				break;
 		}
 	}
