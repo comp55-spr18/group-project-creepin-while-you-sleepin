@@ -764,10 +764,7 @@ public class Wave {
 			case 5:
 				new SprayBall(game,500, 550);
 				break;
-			
-				
 			}
-		
 	}
 
 	public void bossWave() {			// Implements easy mode of a boss wave into the program
