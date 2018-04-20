@@ -17,23 +17,23 @@ public class shootTest extends GraphicsPane {
 	public ArrayList<Ship> shipz;
 	public ArrayList<GLabel> glabels;
 	private int selected;
-	public GLabel asteroid = new GLabel("Asteroids: A field of asteroids that will damage anything it touches.");
-	public GLabel basicEnemy = new GLabel("Basic Enemy: Pretty self explanatory.");
-	public GLabel boomerang = new GLabel("Boomerang: Enemy that moves in a boomerang like arc.");
-	public GLabel boss = new GLabel("???: ?????????");
-	public GLabel bouncer = new GLabel("Bouncer: Enemy type that pinballs on the vertical axis of the screen.");
-	public GLabel drone = new GLabel("Drone: A drone that hovers on top attacking the player.");
-	public GLabel heavyWeightEnemy = new GLabel("Heavy Weight Enemy: Enemy that is massive and does extra damage then normal.");
-	public GLabel homingEnemy = new GLabel("Homing Enemy: Enemy that homes onto player.");
-	public GLabel kamikaze = new GLabel("Kamikaze: Enemy type that will home onto player till destruction.");
-	public GLabel sawedOff = new GLabel("Sawed-Off: Enemy type that has an attack spread that spirals like a saw.");
-	public GLabel seeker = new GLabel("Seeker: Enemy that tries to home onto the player.");
-	public GLabel simpleEnemy = new GLabel("Simple Enemy: Generic enemy type.");
-	public GLabel sprayBall = new GLabel("Sprayball: An enemy with a constant attack spray.");
-	public GLabel squeeze = new GLabel("Squeeze: An enemy type that attempts to corner the player.");
-	public GLabel swarmBot = new GLabel("Swarmbots: A DNA shaped sequence of enemies that attacks the player.");
-	public GLabel tank = new GLabel("Tank: Bigger enemy that has a large amount of health and damaging spread.");
-	public GLabel trishot = new GLabel("Trishot: Enemy that has a bullet with a triple spread.");
+	public GLabel asteroid;
+	public GLabel basicEnemy;
+	public GLabel boomerang;
+	public GLabel boss;
+	public GLabel bouncer;
+	public GLabel drone;
+	public GLabel heavyWeightEnemy;
+	public GLabel homingEnemy;
+	public GLabel kamikaze;
+	public GLabel sawedOff;
+	public GLabel seeker;
+	public GLabel simpleEnemy;
+	public GLabel sprayBall;
+	public GLabel squeeze;
+	public GLabel swarmBot;
+	public GLabel tank;
+	public GLabel trishot;
 	
 	public shootTest(Game app) {
 		super();
@@ -59,8 +59,8 @@ public class shootTest extends GraphicsPane {
 		program.add(next);
 		program.add(enemyFire);
 		program.add(returnToMenu);
-		shipz.get(selected);
-		shipz.get(selected);
+		program.add(shipz.get(selected).getSprite());
+		program.add(glabels.get(selected));
 	}
 	
 	public void hideContents() {
