@@ -14,11 +14,8 @@ public class GamePane extends GraphicsPane {
 	private GLabel pauseLabel;
 	private int[] sequence = {KeyEvent.VK_UP, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT,KeyEvent.VK_B, KeyEvent.VK_A};
 	private int currentButton = 0;
-	//private double playerx = game.player.getSprite().getX();
-	//private double playery = game.player.getSprite().getY();
+	public GLabel konami;
 	
-	
-
 	public GamePane(Game app) {
 		this.program = app;
 		pauseLabel = new GLabel("PAUSED (Click on player ship to resume or press ESCAPE to go back to menu)");
@@ -32,8 +29,11 @@ public class GamePane extends GraphicsPane {
 		program.alreadyHave.setLocation(program.WINDOW_WIDTH/2 - program.alreadyHave.getWidth()/2, program.WINDOW_HEIGHT/2 - program.getHeight()/2);
 		background = new GImage("levels/background.gif");
 		background.setSize(program.getWidth()+ 500, program.getHeight());
+		konami = new GLabel("KONAMI CODE ACTIVATED: INVINCIBILITY"+"\n"+" PRESS ENTER");
+		konami.setLocation(program.WINDOW_WIDTH/2 - konami.getWidth() ,program.WINDOW_HEIGHT/2 - konami.getHeight());
+		konami.setFont("Arial-Bold-30");
+		konami.setColor(Color.green);
 	}
-
 	@Override
 	public void showContents() {
 		program.add(background);
@@ -47,7 +47,6 @@ public class GamePane extends GraphicsPane {
 		}
 		background.sendToBack();
 	}
-
 	@Override
 	public void hideContents() {
 		program.remove(program.scoreBoard);
@@ -142,22 +141,23 @@ public class GamePane extends GraphicsPane {
 				program.remove(pauseLabel);
 				program.switchToMenu();
 			}
-		
 		}
 		if(checkKonami(e.getKeyCode())) {
-			System.out.println("CHEAT CODE ACTIVATED");
-			//new BulletUp(program,10,20);
-		
+			program.add(konami);
+			program.playSound("KonamiSound",1);
+			program.player.setInvincible(true);
+			program.player.setIframe(1000000000);
+		}
+		if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+			program.remove(konami);
 		}
 	}
 	
-
 	boolean checkKonami(int keyPressed) {
 	    if(keyPressed == sequence[currentButton]) {
 	        currentButton++;
 	        if(currentButton == sequence.length) {
 	            currentButton = 0;
-
 	            return true;
 	        }
 	    }
