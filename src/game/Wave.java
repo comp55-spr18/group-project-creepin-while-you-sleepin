@@ -771,6 +771,14 @@ public class Wave {
 				break;
 			}
 	}
+		public void hard10() {
+			switch(enemyToSpawn) {
+			case 0:
+				size = 5;
+				delay = 100;
+			case 1:
+			}
+		}
 
 	public void bossWave() {			// Implements easy mode of a boss wave into the program
 		switch(enemyToSpawn) {
