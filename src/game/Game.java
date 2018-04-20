@@ -97,6 +97,11 @@ public class Game extends GraphicsApplication {
 		switchToMenu();							// Then switch to the menu screen
 	}
 
+	public Game() {
+		init();
+		run();
+	}
+
 	public void switchToMenu() {
 		if(!musicMute) {
 			music.playSound("music", "menu.mp3", true);
