@@ -35,11 +35,11 @@ public class SawedOff extends Ship {
 
 		if(game.currLevel >= 2) {
 			setMaxHealth(10);
+			setBulletDamage(2);
 		}
 
 		if(game.currLevel >= 3) {
 			setMaxHealth(20);
-			setBulletDamage(2);
 			setBulletSpeed(12);
 		}
 	}

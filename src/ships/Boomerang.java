@@ -25,6 +25,19 @@ public class Boomerang extends Ship {
 		setBulletSize(15);
 		getGame().add(getSprite());
 		setTrail(new FireTrail(this));
+
+		if(game.currLevel >= 2) {
+			setMaxHealth(4);
+			setBulletDamage(2);
+		}
+
+		if(game.currLevel >= 3) {
+			setBulletDamage(3);
+			setMaxHealth(8);
+			setMaxCooldown(50);
+			setBulletSize(25);
+			
+		}
 	}
 
 	@Override

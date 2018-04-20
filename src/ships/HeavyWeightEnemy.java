@@ -29,6 +29,20 @@ public class HeavyWeightEnemy extends Ship {
 		setBulletSize(200);
 		getGame().add(getSprite());
 		setTrail(new FireTrail(this));
+
+		if(game.currLevel >= 2) {
+			setMaxHealth(12);
+			setCooldown(300);
+			setMaxCooldown(375);
+			setBulletSpeed(11);
+		}
+
+		if(game.currLevel >= 3) {
+			setBulletDamage(4);
+			setMaxHealth(24);
+			setCooldown(275);
+			setMaxCooldown(350);
+		}
 	}
 	@Override
 	public void move() {

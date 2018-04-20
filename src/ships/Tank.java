@@ -21,11 +21,11 @@ public class Tank extends Ship {
 		getGame().add(getSprite());
 
 		if(game.currLevel >= 2) {
-			setMaxHealth(45);
+			setMaxHealth(60);
 		}
 
 		if(game.currLevel >= 3) {
-			setMaxHealth(70);
+			setMaxHealth(100);
 		}
 	}
 

@@ -24,6 +24,17 @@ public class SwarmBot extends Ship {
 		setCanShoot(false);		
 		setxDir(-1);
 		getGame().add(getSprite());
+		
+
+		if(game.currLevel >= 2) {
+			setMaxHealth(2);
+			setCollisionDamage(2);
+		}
+
+		if(game.currLevel >= 3) {
+			setMaxHealth(4);
+			setCollisionDamage(3);
+		}
 	}
 
 	// Can't shoot

@@ -25,6 +25,21 @@ public class SimpleEnemy extends Ship {
 		setBulletSize(15);
 		getGame().add(getSprite());
 		setTrail(new FireTrail(this));
+
+		if(game.currLevel >= 2) {
+			setMaxHealth(4);
+			setShielded(true);
+			setShieldCooldown(0);
+			setShieldMaxCooldown(200);
+			setBulletDamage(2);
+		}
+
+		if(game.currLevel >= 3) {
+			setMaxHealth(8);
+			setCollisionDamage(3);
+			setBulletSpeed(12);
+			setMaxCooldown(100);
+		}
 	}
 	//Most basic move and shoot
 	@Override

@@ -14,7 +14,7 @@ public class SprayBall extends Ship {
 	
 	public SprayBall(Game game, double y, double detonation) {
 		super(game);
-		setMaxHealth(30);
+		setMaxHealth(35);
 		setCooldown(700); 
 		setSprite(new GImage("sprites/enemy4.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
 		setGunLocation(new GPoint[] {}); 
@@ -33,11 +33,11 @@ public class SprayBall extends Ship {
 		getGame().add(getSprite());
 
 		if(game.currLevel >= 2) {
-			setMaxHealth(60);
+			setMaxHealth(70);
 		}
 
 		if(game.currLevel >= 3) {
-			setMaxHealth(120);
+			setMaxHealth(140);
 			setBulletDamage(2);
 		}
 	}

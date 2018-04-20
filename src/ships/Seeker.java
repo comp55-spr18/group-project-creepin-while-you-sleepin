@@ -34,6 +34,7 @@ public class Seeker extends Ship {
 		if(game.currLevel >= 3) {
 			setMaxHealth(24);
 			setCollisionDamage(3);
+			setSpeed(18);
 		}
 	}
 	// tweaked bullet speed

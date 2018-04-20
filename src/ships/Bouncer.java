@@ -33,16 +33,14 @@ public class Bouncer extends Ship {
 		if(game.currLevel >= 2) {
 			setMaxHealth(10);
 			setBulletDamage(2);
-			setCooldown(300);
-			setMaxCooldown(375);
+			setMaxCooldown(125);
 			setBulletSpeed(14);
 		}
 
 		if(game.currLevel >= 3) {
 			setBulletDamage(3);
 			setMaxHealth(20);
-			setCooldown(100);
-			setMaxCooldown(175);
+			setMaxCooldown(100);
 		}
 	}
 
