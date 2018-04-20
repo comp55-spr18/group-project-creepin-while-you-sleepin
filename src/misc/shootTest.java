@@ -2,7 +2,6 @@ package misc;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-
 import acm.graphics.GImage;
 import acm.graphics.GLabel;
 import acm.graphics.GObject;
@@ -94,11 +93,26 @@ public class shootTest extends GraphicsPane {
 		}
 	}
 	
-	//public void setGlabels() {
-		
-		
-	//}
-	
+	public void setGlabels() {
+		glabels.add(asteroid = new GLabel("Asteroids: A field of asteroids that will damage anything it touches."));
+		glabels.add(basicEnemy = new GLabel("Basic Enemy: Pretty self explanatory."));
+		glabels.add(boomerang = new GLabel("Boomerang: Enemy that moves in a boomerang like arc."));
+		glabels.add(boss = new GLabel("???: ?????????"));
+		glabels.add(bouncer = new GLabel("Bouncer: Enemy type that pinballs on the vertical axis of the screen."));
+		glabels.add(drone = new GLabel("Drone: A drone that hovers on top attacking the player."));
+		glabels.add(heavyWeightEnemy = new GLabel("Heavy Weight Enemy: Enemy that is massive and does extra damage then normal."));
+		glabels.add(homingEnemy = new GLabel("Homing Enemy: Enemy that homes onto player."));
+		glabels.add(kamikaze = new GLabel("Kamikaze: Enemy type that will home onto player till destruction."));
+		glabels.add(sawedOff = new GLabel("Sawed-Off: Enemy type that has an attack spread that spirals like a saw."));
+		glabels.add(seeker = new GLabel("Seeker: Enemy that tries to home onto the player."));
+		glabels.add(simpleEnemy = new GLabel("Simple Enemy: Generic enemy type."));
+		glabels.add(sprayBall = new GLabel("Sprayball: An enemy with a constant attack spray."));
+		glabels.add(squeeze = new GLabel("Squeeze: An enemy type that attempts to corner the player."));
+		glabels.add(swarmBot = new GLabel("Swarmbots: A DNA shaped sequence of enemies that attacks the player."));
+		glabels.add(tank = new GLabel("Tank: Bigger enemy that has a large amount of health and damaging spread."));
+		glabels.add(trishot = new GLabel("Trishot: Enemy that has a bullet with a triple spread."));
+	}
+
 	public void enemyBlaster(){  //has enemy fire when shoot button is pressed
 		ships.get(selected).shoot();
 	}
@@ -112,13 +126,13 @@ public class shootTest extends GraphicsPane {
 		if (obj == previous) {
 			selected--;
 			if (selected < 0) {
-				//System.out.println("You are at the beginning of the ships list!");
+				selected = 0;
 			}
 		}
 		if (obj == next) {
 			selected++;
 			if (selected > 15) {
-				//System.out.println("You are at the end of the ships list!");
+				selected = 15;
 			}
 		}
 		if (obj == enemyFire) {
