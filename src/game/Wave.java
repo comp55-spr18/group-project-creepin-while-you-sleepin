@@ -267,9 +267,13 @@ public class Wave {
 				new BasicEnemy(game, 500);
 				break;
 			case 24:
+				new SimpleEnemy(game, 100);
+				new SimpleEnemy(game, 900);
 				new BasicEnemy(game, 550);
 				break;
 			case 25:
+				new SimpleEnemy(game, 100);
+				new SimpleEnemy(game, 900);
 				new BasicEnemy(game, 500);
 				break;
 			default:
@@ -297,11 +301,12 @@ public class Wave {
 				switch(enemyToSpawn%2) {
 				case 0:
 					new Bouncer(game, game.WINDOW_HEIGHT - 300);
-					if(enemyToSpawn == 20) {
-						delay = 200;
-					}
+					new BasicEnemy(game, 200);
+					new BasicEnemy(game, 400);
 					break;
 				case 1:
+					new BasicEnemy(game, 600);
+					new BasicEnemy(game, 800);
 					new Bouncer(game, 300);
 					break;
 			}
