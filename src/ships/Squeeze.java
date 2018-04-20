@@ -53,7 +53,6 @@ public class Squeeze extends Ship {
 		if(canShoot()) {
 			setCanShoot(false);
 		 new Beam(this, getGunLocation()[0]);
-			getGame().lowShootCount = getGame().playSound("lowshoot", getGame().lowShootCount);
 		} else {
 			setCooldown(getCooldown() + 1);
 			if(getCooldown() == getMaxCooldown()) {
