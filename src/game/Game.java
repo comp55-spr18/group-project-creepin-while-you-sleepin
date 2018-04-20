@@ -71,6 +71,7 @@ public class Game extends GraphicsApplication {
 	}
 
 	public void run() {
+		enemies = new ArrayList<Ship>();
 		gamePane = new GamePane(this);
 		menu = new MenuPane(this);
 		endPane = new EndPane(this);

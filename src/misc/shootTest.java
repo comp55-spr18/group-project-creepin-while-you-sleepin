@@ -37,7 +37,11 @@ public class shootTest extends GraphicsPane {
 	
 	public shootTest(Game app) {
 		super();
+		shipz = new ArrayList<Ship>();
+		glabels = new ArrayList<GLabel>();
 		program = app;
+		setShips();
+		setGlabels();
 		double scaleX = program.WINDOW_WIDTH/(1920/100.0);
 		double scaleY = program.WINDOW_HEIGHT/(1080/100.0);
 		previous = new GButton("PREV", 4*scaleX, 6*scaleY, 2*scaleX, 2*scaleY);
@@ -59,8 +63,8 @@ public class shootTest extends GraphicsPane {
 		program.add(next);
 		program.add(enemyFire);
 		program.add(returnToMenu);
-		program.add(shipz.get(selected).getSprite());
 		program.add(glabels.get(selected));
+		program.add(shipz.get(selected).getSprite());
 	}
 	
 	public void hideContents() {
@@ -90,7 +94,7 @@ public class shootTest extends GraphicsPane {
 		shipz.add(new Tank(program, 0));
 		shipz.add(new SwarmBot(program, 0, 0));
 		for(int i = 0;i < shipz.size();i++) {
-			shipz.get(i).getSprite().setLocation(program.WINDOW_WIDTH/2, program.WINDOW_HEIGHT/2);
+			shipz.get(i).getSprite().setLocation(program.WINDOW_WIDTH/2 - shipz.get(i).getSprite().getWidth()/2, program.WINDOW_HEIGHT/4);
 			program.remove(shipz.get(i).getSprite());
 		}
 	}
