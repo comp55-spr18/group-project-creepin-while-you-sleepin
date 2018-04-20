@@ -23,7 +23,7 @@ public class BasicEnemy extends Ship {
 		setxDir(-1);
 		setyDir(0);
 		setSpeed(5);
-		setPoints(100);
+		setPoints(50);
 		setBulletDamage(1);
 		setBulletSpeed(10);
 		setBulletSize(15);

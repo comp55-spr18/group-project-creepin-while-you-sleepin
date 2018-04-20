@@ -25,8 +25,8 @@ import projectiles.Projectile;
 import ships.PlayerShip;
 import ships.Ship;
 import misc.Object;
+import misc.Archive;
 import misc.LeaderBoardPane;
-import misc.shootTest;
 
 @SuppressWarnings("serial")
 public class Game extends GraphicsApplication {
@@ -37,8 +37,8 @@ public class Game extends GraphicsApplication {
 	private MenuPane menu;
 	private BetweenPane betweenPane;
 	private EndPane endPane;
+	private Archive archive;
 	private LeaderBoardPane leaderboard;
-	private shootTest shootTest;
 	public boolean mute;
 	public boolean musicMute;
 	
@@ -80,17 +80,17 @@ public class Game extends GraphicsApplication {
 
 	public void run() {
 		enemies = new ArrayList<Ship>();
+		projectiles = new ArrayList<Projectile>();
 		gamePane = new GamePane(this);
 		menu = new MenuPane(this);
 		endPane = new EndPane(this);
 		betweenPane = new BetweenPane(this);
+		archive = new Archive(this);
 		try {
 			leaderboard = new LeaderBoardPane(this);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		shootTest = new shootTest(this);
 		mute = false;
 		audio = AudioPlayer.getInstance();
 		switchToMenu();							// Then switch to the menu screen
@@ -106,8 +106,8 @@ public class Game extends GraphicsApplication {
 		switchToScreen(leaderboard);
 	}
 	
-	public void switchToShoottest() {
-		switchToScreen(shootTest);
+	public void switchToArchive() {
+		switchToScreen(archive);
 	}
 	
 	public void switchToBetween() {
@@ -233,7 +233,7 @@ public class Game extends GraphicsApplication {
 				audio.stopSound("music", "level" + currLevel + ".mp3");
 				switchToScreen(endPane);						// Switch to the endPane for the lose screen
 				timer.stop();	
-				System.out.println(score);// Stop the game timer
+				System.out.println(score);
 				try {
 					saveToLeaderBoard();
 				}catch(IOException e1) {
