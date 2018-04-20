@@ -148,7 +148,7 @@ public class Archive extends GraphicsPane implements ActionListener {
 			program.add(descriptions.get(selected));
 		}
 		if (obj == enemyFire) {
-			ships.get(selected).shoot();
+			ships.get(selected).setCanShoot(true);
 		}
 	}
 
