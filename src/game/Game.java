@@ -19,6 +19,7 @@ import projectiles.Projectile;
 import ships.PlayerShip;
 import ships.Ship;
 import misc.Object;
+import misc.shootTest;
 
 @SuppressWarnings("serial")
 public class Game extends GraphicsApplication {
@@ -29,6 +30,7 @@ public class Game extends GraphicsApplication {
 	private MenuPane menu;
 	private BetweenPane betweenPane;
 	private EndPane endPane;
+	private shootTest shootTest;
 	public boolean mute;
 	public boolean musicMute;
 	
@@ -73,6 +75,7 @@ public class Game extends GraphicsApplication {
 		menu = new MenuPane(this);
 		endPane = new EndPane(this);
 		betweenPane = new BetweenPane(this);
+		shootTest = new shootTest(this);
 		mute = false;
 		audio = AudioPlayer.getInstance();
 		switchToMenu();							// Then switch to the menu screen
@@ -83,6 +86,10 @@ public class Game extends GraphicsApplication {
 			audio.playSound("music", "menu.mp3", true);
 		}
 		switchToScreen(menu);
+	}
+	
+	public void switchToShoottest() {
+		switchToScreen(shootTest);
 	}
 	
 	public void switchToBetween() {
@@ -205,4 +212,5 @@ public class Game extends GraphicsApplication {
 	public Level getLevel() {
 		return level;
 	}
+
 }

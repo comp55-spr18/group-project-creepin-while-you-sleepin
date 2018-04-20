@@ -16,8 +16,6 @@ public class shootTest extends GraphicsPane {
 	private GImage spaceBackground;
 	public ArrayList<Ship> ships;
 	private int selected;
-	double i = 400;
-	double j = 400;
 	
 	public shootTest(Game app) {
 		super();
@@ -52,7 +50,7 @@ public class shootTest extends GraphicsPane {
 		program.remove(spaceBackground);
 	}
 	
-	public void setShips() {
+	public void setShips() {  //sets the ships into the array list
 		ships.add(new Asteroid(program,0));
 		ships.add(new BasicEnemy(program, 0));
 		ships.add(new Boomerang(program, 0));
@@ -71,17 +69,10 @@ public class shootTest extends GraphicsPane {
 			ships.get(i).getSprite().setLocation(program.WINDOW_WIDTH/2, program.WINDOW_HEIGHT/2);
 			program.remove(ships.get(i).getSprite());
 		}
-		//sets the ships into the array list
 	}
 	
-	public void enemySpawn() {
-		
-		//has enemy spawn on screen
-	}
-	
-	public void enemyBlaster(){
+	public void enemyBlaster(){  //has enemy fire when shoot button is pressed
 		ships.get(selected).shoot();
-		//has enemy fire when shoot button is pressed
 	}
 	
 	public void mousePressed(MouseEvent e) {
@@ -90,16 +81,20 @@ public class shootTest extends GraphicsPane {
 			program.switchToMenu();
 		}
 		if (obj == previous) {
-			//goes to last enmy in list? (better way to organize enemy types then list???)
+			selected--;
+			if (selected == 0) {
+				System.out.println("You are at the beginning of the ships list!");
+			}
 		}
 		if (obj == next) {
-			//goes to next enemy in list? (better way to organize enemy types then list???)
+			selected++;
+			if (selected > 13) {
+				System.out.println("You are at the end of the ships list!");
+			}
 		}
 		if (obj == enemyFire) {
-			//enemyBlaster();
+			enemyBlaster();
 		}
 	}
-	
-	
 	
 }
