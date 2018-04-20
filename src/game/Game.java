@@ -175,16 +175,23 @@ public class Game extends GraphicsApplication {
 		scoreBoard.setLabel("SCORE: " + score);
 	}
 	public void saveToLeaderBoard() throws IOException{
-		if(lose) {
+		if(lose || win) {
 			FileOutputStream newScore = new FileOutputStream(highScores,true);
 			try (Writer write = new BufferedWriter(new OutputStreamWriter(newScore, "utf-8"))) {
 				write.write(String.valueOf((score+"\n")));
 				write.close();
-				
 			}
 		}
 	}
-	
+
+	public void saveScore() {
+		System.out.println(score);
+		try {
+			saveToLeaderBoard();
+		}catch(IOException e1) {
+			e1.printStackTrace();
+		}
+	}
 
 	// Main game loop
 	public void actionPerformed(ActionEvent e) {
@@ -218,6 +225,7 @@ public class Game extends GraphicsApplication {
 					music.stopSound("music", "level" + currLevel + ".mp3");		// Stop the music for the level
 					if(currLevel == maxLevel) {					// If this was the last level
 						win = true;								// Set win to true
+						saveScore();
 						switchToScreen(endPane);				// Switch to endPane for the win screen
 						timer.stop();							// Stop the game timer
 						return;									// Exit
@@ -233,14 +241,9 @@ public class Game extends GraphicsApplication {
 			}
 			if(lose) {											// If lose = true (which happens when PlayerShip is destroyed)
 				music.stopSound("music", "level" + currLevel + ".mp3");
+				saveScore();
 				switchToScreen(endPane);						// Switch to the endPane for the lose screen
 				timer.stop();	
-				System.out.println(score);
-				try {
-					saveToLeaderBoard();
-				}catch(IOException e1) {
-					e1.printStackTrace();
-				}
 				return;											// Exit
 			}
 		}

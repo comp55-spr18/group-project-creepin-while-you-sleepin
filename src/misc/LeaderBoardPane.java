@@ -39,15 +39,12 @@ public class LeaderBoardPane extends GraphicsPane {
 		}
 		catch(IOException e){
 			e.printStackTrace();
-			
 		}
 		program.add(background);
 		program.add(leaderBoard);
 		for(GLabel labels: scoreList) {
 			program.add(labels);
 		}
-		
-
 	}
 
 	@Override
@@ -57,7 +54,6 @@ public class LeaderBoardPane extends GraphicsPane {
 		for(GLabel labels: scoreList) {
 		program.remove(labels);
 		}
-
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {
@@ -75,17 +71,15 @@ public class LeaderBoardPane extends GraphicsPane {
 			}
 			catch(NumberFormatException e) {
 				e.printStackTrace();
-				
 			}
-			
 		}
 	}
 	public void fileSort() throws IOException {
 		Scanner scan = new Scanner(scores);
 		while(scan.hasNextLine()) {
-		String nextLine = scan.nextLine();
-		allScores.add(Integer.parseInt(nextLine));
-	}
+			String nextLine = scan.nextLine();
+			allScores.add(Integer.parseInt(nextLine));
+		}
 		scan.close();
 		Collections.sort(allScores);
 		Collections.reverse(allScores);
