@@ -31,8 +31,8 @@ public class GamePane extends GraphicsPane {
 		background = new GImage("levels/background.gif");
 		background.setSize(program.getWidth()+ 500, program.getHeight());
 		konami = new GLabel("KONAMI CODE ACTIVATED: INVINCIBILITY"+"\n"+" PRESS ENTER");
-		konami.setLocation(program.WINDOW_WIDTH/2 - konami.getWidth() ,program.WINDOW_HEIGHT/2 - konami.getHeight());
 		konami.setFont("Arial-Bold-30");
+		konami.setLocation(program.WINDOW_WIDTH/2 - konami.getWidth()/2 ,program.WINDOW_HEIGHT/2 - konami.getHeight()/2);
 		konami.setColor(Color.green);
 	}
 	@Override
@@ -146,11 +146,11 @@ public class GamePane extends GraphicsPane {
 				program.switchToMenu();
 			}
 		}
-		if(checkKonami(e.getKeyCode())) {
+		if(program.paused && checkKonami(e.getKeyCode())) {
 			program.add(konami);
 			program.playSound("KonamiSound",1);
 			program.player.setInvincible(true);
-			program.player.setIframe(1000000000);
+			program.player.setMaxIframe(-1);
 		}
 		if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 			program.remove(konami);
