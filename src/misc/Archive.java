@@ -100,26 +100,27 @@ public class Archive extends GraphicsPane implements ActionListener {
 	}
 	
 	public void setGlabels() {
-		descriptions.add(new GLabel("Asteroids: A field of asteroids that will damage anything it touches."));
+		descriptions.add(new GLabel("Asteroids: Asteroid field that will damage anything it touches. (NO FIRE)"));
 		descriptions.add(new GLabel("Basic Enemy: Moves up and down and its shot tracks the player."));
 		descriptions.add(new GLabel("Boomerang: Enemy that shoot bullets which reverse direction."));
 		descriptions.add(new GLabel("Bouncer: Enemy type that pinballs on the vertical axis of the screen."));
-		descriptions.add(new GLabel("Drone: A drone that follows a curved path on and off the screen. Fires a tracking bullet."));
+		descriptions.add(new GLabel("Drone: Follows a curved path on and off the screen. Fires tracking bullets."));
 		descriptions.add(new GLabel("Heavy Weight Enemy: Enemy that shoots a massive bullet at the player."));
 		descriptions.add(new GLabel("Homing Enemy: Enemy that fires homing bullets."));
-		descriptions.add(new GLabel("Kamikaze: Enemy type that will suicidally collide with the player."));
+		descriptions.add(new GLabel("Kamikaze: Enemy type that will suicidally collide with the player. (NO FIRE)"));
 		descriptions.add(new GLabel("Sawed-Off: Enemy type that has more bullets after it is damaged."));
 		descriptions.add(new GLabel("Seeker: Enemy that periodically flies towards the player's location."));
 		descriptions.add(new GLabel("Simple Enemy: Moves only from right to left. Fires a tracking bullet."));
 		descriptions.add(new GLabel("Squeeze: An enemy type that restricts player movement through lasers."));
 		descriptions.add(new GLabel("Trishot: Enemy that has a bullet with a triple spread. Hovers at the edge of the screen."));
 		descriptions.add(new GLabel("Sprayball: An enemy that fires a spiraling barrage of bullets."));
-		descriptions.add(new GLabel("Tank: Bigger enemy that has a large amount of health but can't shoot."));
+		descriptions.add(new GLabel("Tank: Bigger enemy that has a large amount of health but can't shoot. (NO FIRE)"));
 		descriptions.add(new GLabel("Swarmcaller: An enemy that spawns Swarmbots continuously until it dies."));
 		descriptions.add(new GLabel("Swarmbot: A DNA shaped sequence of enemies that attacks the player."));
 		descriptions.add(new GLabel("???: ?????????"));
 		for(int i = 0;i < descriptions.size();i++) {
 			descriptions.get(i).setFont("arial-40-bold");
+			descriptions.get(i).setColor(Color.white);
 			descriptions.get(i).setLocation(program.WINDOW_WIDTH/2 - descriptions.get(i).getWidth()/2, 4*program.WINDOW_HEIGHT/5);
 		}
 	}
