@@ -46,7 +46,7 @@ public class MenuPane extends GraphicsPane {
 		leaderBoardButton.setFillColor(Color.MAGENTA);
 		background = new GImage("newmainmenu.jpg");
 		background.setSize(program.getWidth(), program.getHeight());
-		instructions = new GImage("instructionspage.jpg");
+		instructions = new GImage("finalized instructions page.jpg");
 		instructions.setSize(program.getWidth(), program.getHeight());
 		
 	}
