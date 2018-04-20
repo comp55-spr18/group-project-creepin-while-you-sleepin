@@ -55,6 +55,7 @@ public class EndPane extends GraphicsPane {
 	public void mousePressed(MouseEvent e) {
 		GObject obj = program.getElementAt(e.getX(), e.getY());
 		if (obj == rect) {
+			program.player = null;
 			program.switchToMenu();
 		}
 		if (obj == rect2) {

@@ -88,6 +88,7 @@ public class Archive extends GraphicsPane implements ActionListener {
 		ships.add(new Trishot(program, 0)); 
 		ships.add(new SprayBall(program, 0, 0));
 		ships.add(new Tank(program, 0));
+		ships.add(new SwarmCaller(program, 0));
 		ships.add(new SwarmBot(program, 0, 0));
 		ships.add(new Boss(program,0));
 		for(int i = 0;i < ships.size();i++) {
@@ -114,6 +115,7 @@ public class Archive extends GraphicsPane implements ActionListener {
 		descriptions.add(new GLabel("Trishot: Enemy that has a bullet with a triple spread. Hovers at the edge of the screen."));
 		descriptions.add(new GLabel("Sprayball: An enemy that fires a spiraling barrage of bullets."));
 		descriptions.add(new GLabel("Tank: Bigger enemy that has a large amount of health but can't shoot."));
+		descriptions.add(new GLabel("Swarmcaller: An enemy that spawns Swarmbots continuously until it dies."));
 		descriptions.add(new GLabel("Swarmbot: A DNA shaped sequence of enemies that attacks the player."));
 		descriptions.add(new GLabel("???: ?????????"));
 		for(int i = 0;i < descriptions.size();i++) {
@@ -132,7 +134,7 @@ public class Archive extends GraphicsPane implements ActionListener {
 			program.remove(descriptions.get(selected));
 			selected--;
 			if (selected < 0) {
-			selected = 15;
+			selected = ships.size() - 1;
 			}
 			program.add(ships.get(selected).getSprite());
 			program.add(descriptions.get(selected));
@@ -145,7 +147,7 @@ public class Archive extends GraphicsPane implements ActionListener {
 			program.remove(ships.get(selected).getSprite());
 			program.remove(descriptions.get(selected));
 			selected++;
-			if (selected > 15) {
+			if (selected > ships.size() - 1) {
 			selected = 0;
 			}
 			program.add(ships.get(selected).getSprite());

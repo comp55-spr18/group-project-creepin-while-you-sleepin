@@ -7,6 +7,7 @@ import acm.graphics.GImage;
 import acm.graphics.GLabel;
 import game.Game;
 import game.PowerUp;
+import projectiles.Projectile;
 import ships.Ship;
 
 public class GamePane extends GraphicsPane {
@@ -58,8 +59,11 @@ public class GamePane extends GraphicsPane {
 				program.remove(enemy.getShield());
 			}
 		}
-		for(Object proj : program.projectiles) {			// Remove all projectile sprites
+		for(Projectile proj : program.projectiles) {			// Remove all projectile sprites
 			program.remove(proj.getSprite());
+		}
+		for(Object obj : program.objects) {
+			program.remove(obj.getSprite());
 		}
 		program.remove(program.player.getSprite());	// Remove the playership sprite
 		program.remove(program.player.getExplosion());
