@@ -9,10 +9,8 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.Timer;
-
 import java.awt.Dimension;
 import java.awt.Toolkit;
-
 import acm.graphics.GImage;
 import acm.graphics.GLabel;
 import misc.AudioPlayer;
