@@ -31,6 +31,7 @@ public class Kamikaze extends Ship {
 		}
 
 		if(game.currLevel >= 3) {
+			setCollisionDamage(3);
 			setMaxHealth(8);
 			setSpeed(10);
 		}
