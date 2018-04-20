@@ -30,7 +30,7 @@ public class GamePane extends GraphicsPane {
 		program.alreadyHave.setLocation(program.WINDOW_WIDTH/2 - program.alreadyHave.getWidth()/2, program.WINDOW_HEIGHT/2 - program.getHeight()/2);
 		background = new GImage("levels/background.gif");
 		background.setSize(program.getWidth()+ 500, program.getHeight());
-		konami = new GLabel("KONAMI CODE ACTIVATED: INVINCIBILITY"+"\n"+" PRESS ENTER");
+		konami = new GLabel("KONAMI CODE ACTIVATED: INVINCIBILITY");
 		konami.setFont("Arial-Bold-30");
 		konami.setLocation(program.WINDOW_WIDTH/2 - konami.getWidth()/2 ,program.WINDOW_HEIGHT/2 - konami.getHeight()/2);
 		konami.setColor(Color.green);
@@ -100,6 +100,7 @@ public class GamePane extends GraphicsPane {
 			GImage playerSprite = program.player.getSprite();
 			if(e.getX() >= playerSprite.getX() && e.getX() <= playerSprite.getX() + playerSprite.getWidth() && e.getY() >= playerSprite.getY() && e.getY() <= playerSprite.getY() + playerSprite.getHeight()) {
 				program.paused = false;
+				program.remove(konami);
 				if(!program.musicMute) {
 					program.music.playSound("music", "level" + program.currLevel + ".mp3");
 				}
@@ -143,6 +144,7 @@ public class GamePane extends GraphicsPane {
 		if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 			if(program.paused) {
 				program.remove(pauseLabel);
+				program.remove(konami);
 				program.switchToMenu();
 			}
 		}
@@ -151,9 +153,6 @@ public class GamePane extends GraphicsPane {
 			program.playSound("KonamiSound",1);
 			program.player.setInvincible(true);
 			program.player.setMaxIframe(-1);
-		}
-		if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-			program.remove(konami);
 		}
 	}
 	
