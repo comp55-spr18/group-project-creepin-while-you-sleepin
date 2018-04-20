@@ -14,7 +14,7 @@ public class Boomerang extends Ship {
 		setMaxCooldown(75);
 		setCanShoot(false);
 		setGunLocation(new GPoint[] { new GPoint(50, 15) });
-		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT / (1080 / y)));
+		setSprite(new GImage("sprites/enemy1-4.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT / (1080 / y)));
 		setSize(50, 50);
 		setxDir(-1);
 		setyDir(0);

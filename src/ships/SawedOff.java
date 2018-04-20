@@ -18,7 +18,7 @@ public class SawedOff extends Ship {
 		setMaxCooldown(70);
 		setCanShoot(false);
 		setGunLocation(new GPoint[] {new GPoint()});
-		setSprite(new GImage("sprites/enemy1.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
+		setSprite(new GImage("sprites/enemy1-8.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
 		setBulletColor(Color.yellow);
 		setSize(50, 50);
 		setxDir(-1);
