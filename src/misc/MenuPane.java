@@ -48,7 +48,6 @@ public class MenuPane extends GraphicsPane {
 		background.setSize(program.getWidth(), program.getHeight());
 		instructions = new GImage("finalized instructions page.jpg");
 		instructions.setSize(program.getWidth(), program.getHeight());
-		
 	}
 
 	@Override
