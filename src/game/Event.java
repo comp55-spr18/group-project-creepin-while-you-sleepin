@@ -13,7 +13,7 @@ public class Event {
 	public Event(Wave w) {
 		wave = w;
 		game = wave.getGame();
-		selectedEvent = game.rgen.nextInt(1);		// Randomly select one of the events
+		selectedEvent = game.rgen.nextInt(2);		// Randomly select one of the events
 		counter = 0;
 		getNext();									// Initialize the event (or if it a one time event, this just triggers it)
 	}
@@ -30,18 +30,10 @@ public class Event {
 		}
 	}
 
-//	public void HeartEvent() {
-//		switch (eventTrigger) {
-//		case 0:
-//			eventSize = 1;
-//			eventDelay = 50;
-//			break;
-//		default:
-//			new Heart(game, game.rgen.nextInt()%500 +1500);
-//			break;
-//		}
-//	}
-
+	public void HeartEvent() {
+			new Heart(game, game.rgen.nextInt()%500 +1500);
+		}
+	
 	public void update() {
 		if(counter%eventDelay == 0 && eventTrigger < eventSize && !wave.onlyEvent()) {		// If the counter meets the delay and there are more events to be triggered and there are not only event enemies left in the wave
 			getNext();																		// Trigger the next event
@@ -53,6 +45,9 @@ public class Event {
 		switch(selectedEvent) {
 			case 0:
 				AsteroidEvent();
+				break;
+			case 1:
+				HeartEvent();
 				break;
 		}
 		eventTrigger++;

@@ -15,6 +15,7 @@ public class MenuPane extends GraphicsPane {
 	private GButton musicMuteButton;
 	private GButton musicUnmuteButton;
 	private GButton archiveButton;
+	private GButton leaderBoardButton;
 	private GImage background;
 	private GImage instructions;
 	
@@ -32,6 +33,7 @@ public class MenuPane extends GraphicsPane {
 		musicMuteButton = new GButton("MUTE MUSIC", 8.5*scaleX, muteButton.getY() + 2*scaleY/3, 2*scaleX, 2*scaleY/3);
 		musicUnmuteButton = new GButton("UNMUTE MUSIC", musicMuteButton.getX(), musicMuteButton.getY(), musicMuteButton.getWidth(), musicMuteButton.getHeight());
 		archiveButton = new GButton("ARCHIVES", 17.5*scaleX, .5*scaleY, scaleX, scaleY);
+		leaderBoardButton = new GButton("LEADER BOARD", 8.5*scaleX, musicMuteButton.getY()+ 2*scaleY/3,2*scaleX,2*scaleY/3);
 		easyButton.setFillColor(Color.GREEN);
 		hardButton.setFillColor(Color.RED);
 		exitButton.setFillColor(Color.WHITE);
@@ -41,10 +43,12 @@ public class MenuPane extends GraphicsPane {
 		musicMuteButton.setFillColor(Color.LIGHT_GRAY);
 		musicUnmuteButton.setFillColor(Color.LIGHT_GRAY);
 		archiveButton.setFillColor(Color.PINK);
+		leaderBoardButton.setFillColor(Color.MAGENTA);
 		background = new GImage("newmainmenu.jpg");
 		background.setSize(program.getWidth(), program.getHeight());
 		instructions = new GImage("instructionspage.jpg");
 		instructions.setSize(program.getWidth(), program.getHeight());
+		
 	}
 
 	@Override
@@ -55,6 +59,7 @@ public class MenuPane extends GraphicsPane {
 		program.add(exitButton);
 		program.add(infoButton);
 		program.add(archiveButton);
+		program.add(leaderBoardButton);
 		if(!program.mute) {
 			program.add(unmuteButton);
 			program.add(muteButton);
@@ -83,6 +88,7 @@ public class MenuPane extends GraphicsPane {
 		program.remove(musicMuteButton);
 		program.remove(musicUnmuteButton);
 		program.remove(archiveButton);
+		program.remove(leaderBoardButton);
 	}
 	
 	@Override
@@ -131,6 +137,9 @@ public class MenuPane extends GraphicsPane {
 		}
 		if (obj == archiveButton) {
 			program.switchToArchive();
+		}
+		if (obj == leaderBoardButton) {
+			program.switchToLeaderBoard();
 		}
 	}
 }

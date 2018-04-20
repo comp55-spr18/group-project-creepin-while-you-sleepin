@@ -1,5 +1,11 @@
 package game;
 import java.awt.event.ActionEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.Timer;
@@ -20,6 +26,7 @@ import ships.PlayerShip;
 import ships.Ship;
 import misc.Object;
 import misc.Archive;
+import misc.LeaderBoardPane;
 
 @SuppressWarnings("serial")
 public class Game extends GraphicsApplication {
@@ -31,6 +38,7 @@ public class Game extends GraphicsApplication {
 	private BetweenPane betweenPane;
 	private EndPane endPane;
 	private Archive archive;
+	private LeaderBoardPane leaderboard;
 	public boolean mute;
 	public boolean musicMute;
 	
@@ -65,7 +73,7 @@ public class Game extends GraphicsApplication {
 	public Level level;									// The level object the game uses
 	public int currLevel;								// The current level
 	public int maxLevel = 3;							// The maximum number of levels
-
+	private File highScores = new File("scores.txt");
 	public void init() {
 		setSize(WINDOW_WIDTH, WINDOW_HEIGHT - WINDOW_HEIGHT/10);
 	}
@@ -78,6 +86,11 @@ public class Game extends GraphicsApplication {
 		endPane = new EndPane(this);
 		betweenPane = new BetweenPane(this);
 		archive = new Archive(this);
+		try {
+			leaderboard = new LeaderBoardPane(this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		mute = false;
 		audio = AudioPlayer.getInstance();
 		switchToMenu();							// Then switch to the menu screen
@@ -88,6 +101,9 @@ public class Game extends GraphicsApplication {
 			audio.playSound("music", "menu.mp3", true);
 		}
 		switchToScreen(menu);
+	}
+	public void switchToLeaderBoard() {
+		switchToScreen(leaderboard);
 	}
 	
 	public void switchToArchive() {
@@ -156,6 +172,17 @@ public class Game extends GraphicsApplication {
 		score += toAdd;
 		scoreBoard.setLabel("SCORE: " + score);
 	}
+	public void saveToLeaderBoard() throws IOException{
+		if(lose) {
+			FileOutputStream newScore = new FileOutputStream(highScores,true);
+			try (Writer write = new BufferedWriter(new OutputStreamWriter(newScore, "utf-8"))) {
+				write.write(String.valueOf((score+"\n")));
+				write.close();
+				
+			}
+		}
+	}
+	
 
 	// Main game loop
 	public void actionPerformed(ActionEvent e) {
@@ -205,7 +232,13 @@ public class Game extends GraphicsApplication {
 			if(lose) {											// If lose = true (which happens when PlayerShip is destroyed)
 				audio.stopSound("music", "level" + currLevel + ".mp3");
 				switchToScreen(endPane);						// Switch to the endPane for the lose screen
-				timer.stop();									// Stop the game timer
+				timer.stop();	
+				System.out.println(score);
+				try {
+					saveToLeaderBoard();
+				}catch(IOException e1) {
+					e1.printStackTrace();
+				}
 				return;											// Exit
 			}
 		}
