@@ -30,7 +30,7 @@ public class shootTest extends GraphicsPane {
 		next.setFillColor(Color.LIGHT_GRAY);
 		enemyFire.setFillColor(Color.RED);
 		returnToMenu.setFillColor(Color.WHITE);
-		spaceBackground = new GImage("boss level.png");
+		spaceBackground = new GImage("starry_sky_milky_way_stars_glitter_space_118653_1920x1080.jpg");
 		spaceBackground.setSize(program.getWidth(), program.getHeight());
 		selected = 0;
 	}
