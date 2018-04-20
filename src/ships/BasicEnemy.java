@@ -32,6 +32,7 @@ public class BasicEnemy extends Ship {
 
 		if(game.currLevel >= 2) {
 			setMaxHealth(4);
+			setBulletDamage(2);
 			setCooldown(300);
 			setMaxCooldown(375);
 			setSpeed(6);
@@ -39,6 +40,7 @@ public class BasicEnemy extends Ship {
 		}
 
 		if(game.currLevel >= 3) {
+			setBulletDamage(3);
 			setMaxHealth(8);
 			setCooldown(100);
 			setMaxCooldown(175);

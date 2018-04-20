@@ -28,10 +28,12 @@ public class Seeker extends Ship {
 			setShielded(true);
 			setShieldCooldown(0);
 			setShieldMaxCooldown(200);
+			setCollisionDamage(2);
 		}
 
 		if(game.currLevel >= 3) {
 			setMaxHealth(24);
+			setCollisionDamage(3);
 		}
 	}
 	// tweaked bullet speed

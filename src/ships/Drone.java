@@ -41,6 +41,7 @@ public class Drone extends Ship {
 		setxDir(-1);
 
 		if(game.currLevel >= 2) {
+			setBulletDamage(2);
 			setShielded(true);
 		}
 
