@@ -56,6 +56,7 @@ public class Game extends GraphicsApplication {
 	public boolean lose = false;		// this means we need to be explicit and can't assume that because win = false that the player lost
 	public boolean easy = false;
 	public boolean paused = false;		// Initialize the game as unpaused
+	public boolean canPause = false;
 	public Random rgen = new Random();
 	public AudioPlayer audio;
 	public AudioPlayer music;
@@ -119,6 +120,7 @@ public class Game extends GraphicsApplication {
 			music.stopSound("music", "menu.mp3");
 			music.playSound("music", "level" + currLevel + ".mp3", true);
 		}
+		canPause = true;
 		switchToScreen(gamePane);
 	}
 
@@ -216,6 +218,7 @@ public class Game extends GraphicsApplication {
 			if(!level.isFinished()) {							// If the level is not finished
 				level.update();									// Update the level
 			} else {											// If the level is finished
+				canPause = false;
 				player.setShooting(false);						// Prevent the player from shooting
 				player.setShootingAlt(false);
 				player.move();									// Call the player's move() function (they fly to the right)

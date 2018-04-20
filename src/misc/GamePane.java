@@ -132,7 +132,7 @@ public class GamePane extends GraphicsPane {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_SPACE) {
-			if(!program.paused) {
+			if(!program.paused && program.canPause) {
 				program.paused = true;
 				if(!program.musicMute) {
 					program.music.pauseSound("music", "level" + program.currLevel + ".mp3");
@@ -148,7 +148,7 @@ public class GamePane extends GraphicsPane {
 		}
 		if(program.paused && checkKonami(e.getKeyCode())) {
 			program.add(konami);
-			program.playSound("KonamiSound",1);
+			program.playSound("KonamiSound", 1);
 			program.player.setInvincible(true);
 			program.player.setMaxIframe(-1);
 		}
