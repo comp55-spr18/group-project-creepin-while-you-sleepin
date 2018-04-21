@@ -10,10 +10,11 @@ public class SwarmBot extends Ship {
 		super(game);
 		setMaxHealth(1);		// They're weak enemies, but its a swarm so it doesn't matter
 		setSprite(new GImage("sprites/enemy3.png", getGame().WINDOW_WIDTH, y));
-		setSize(40, 40);
+		setSize(40, 40);		//small
 		setSpeed(30);			//fast
 		setTrail(new FireTrail(this));
-		setPoints(0);			//worth no points
+		setPoints(0);			//worth no points because they're infinitely spawned by swarmCaller
+		//Makes them go up or down when they're spawned so they enter into their DNA movement pattern properly
 		if (spawnPos == 1) {
 			setyDir(.25);
 		}
@@ -23,9 +24,8 @@ public class SwarmBot extends Ship {
 		upDown = spawnPos;							
 		setCanShoot(false);		
 		setxDir(-1);
-		getGame().add(getSprite());
-		
-
+		getGame().add(getSprite());		
+		//level buffs
 		if(game.currLevel >= 2) {
 			setMaxHealth(2);
 			setCollisionDamage(2);
@@ -41,7 +41,7 @@ public class SwarmBot extends Ship {
 	@Override
 	public void shoot() {}
 
-	//DNA helix movement with other SwarmBots
+	//DNA helix movement with other SwarmBots. Movement is reversed once they moved far enough to make the pattern
 	@Override
 	public void move() {		
 		if ((getyDir() == 1) || getyDir() == -1) {

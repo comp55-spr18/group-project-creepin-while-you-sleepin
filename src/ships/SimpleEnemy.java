@@ -5,13 +5,13 @@ import game.Game;
 import projectiles.Bullet;
 import projectiles.FireTrail;
 
-//Very similar to BasicEnemy, except I can tweak it without breaking other premade waves
+//A generic enemy that moves in a straight line and fires targeted bullets
 public class SimpleEnemy extends Ship {
 	public SimpleEnemy(Game game, double y) {
 		super(game);
 		setCooldown(50);
 		setMaxCooldown(125);
-		setSpeed(4); //A little slower than normal		
+		setSpeed(4); 			//A little slower than normal		
 		setMaxHealth(2);
 		setCanShoot(false);
 		setGunLocation(new GPoint[] {new GPoint()});
@@ -19,13 +19,13 @@ public class SimpleEnemy extends Ship {
 		setSize(50, 50);
 		setxDir(-1);
 		setyDir(0);
-		setPoints(100);
+		setPoints(50);			//Not a big enough threat to be worth more points
 		setBulletDamage(1);
 		setBulletSpeed(10);
 		setBulletSize(15);
 		getGame().add(getSprite());
 		setTrail(new FireTrail(this));
-
+		//level buffs
 		if(game.currLevel >= 2) {
 			setMaxHealth(4);
 			setShielded(true);

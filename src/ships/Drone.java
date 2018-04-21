@@ -9,37 +9,40 @@ public class Drone extends Ship {
 	private int lifetime = 0;	//They get removed based on lifetime being incremented
 	private double topBot;		//Decides if it's curving up or down
 	private double droneCurve;	//Set in constructor to determine curve amount
-	private double curveLimit;
+	private double curveLimit;	//Used to determine the curve peak
 	
 	public Drone(Game game, double y, double curvy) {
 		super(game);
-		setMaxHealth(1);				// They're weak enemies
-		setCooldown(920);			// I want them to fire once then never again, dealt with by long cd
+		setMaxHealth(1);				//They're weak enemies
+		setCooldown(920);				//I want them to fire once then never again, dealt with by long cd
 		setSprite(new GImage("sprites/enemy2.png", getGame().WINDOW_WIDTH, y));
-		setSize(40, 40);
-		setSpeed(10);
+		setSize(40, 40);				//small
+		setSpeed(10);					//kinda speedy
 		setGunLocation(new GPoint[] {new GPoint()});
 		setTrail(new FireTrail(this));
 		setMaxCooldown(1000);
-		setPoints(25);
+		setPoints(25);					//Not worth many points since they come in swarms
 		setBulletSize(20);
 		setBulletSpeed(12);
 		setBulletDamage(1);
 		getGame().add(getSprite());
 		//sets where the drone will start to curve back at
 		curveLimit = curvy;
-		//This sets the arc of the drones based on the height of the player's screen. Can also be altered to change the drone's curve
+		//This sets the arc of the drones based on the height of the player's screen.
+		//Can also be altered to change the drone's curve (specifically the 43.2)
 		droneCurve = 43.2/getGame().WINDOW_HEIGHT;
+		//Sets the initial y direction of the drone based on whether it's in the top
+		//or bottom half of the screen. Also scaled to screen size
 		if (y <= getGame().WINDOW_HEIGHT/2) {
-			setyDir(.3);
+			setyDir(droneCurve*7.5);
 		}
 		else {
-			setyDir(-.3);
+			setyDir(-droneCurve*7.5);
 		}
 		topBot = y;						
 		setCanShoot(false);		
 		setxDir(-1);
-
+		//Buffs based on the level the player is on
 		if(game.currLevel >= 2) {
 			setBulletDamage(2);
 			setShielded(true);
@@ -50,7 +53,7 @@ public class Drone extends Ship {
 			setMaxCooldown(50);
 		}
 	}
-	// tweaked bullet speed
+	// Shoots at player's location
 	@Override
 	public void shoot() {
 		if(canShoot()) {
@@ -67,7 +70,8 @@ public class Drone extends Ship {
 		}
 	}
 
-	//moves the drone until part-way down the screen, where it curves back the way it came
+	//moves the drone until part-way down the screen, where it curves back the way it came.
+	//Removes drone if it's been alive for long enough.
 	@Override
 	public void move() {
 		if(getSprite().getLocation().getX() < curveLimit) {

@@ -6,25 +6,25 @@ import projectiles.FireTrail;
 
 public class SwarmCaller extends Ship {
 	
-	private int waveCall;
-	private double playery;
-	
+	private int waveCall;		//Determines when the next swarmBot wave will be spawned
+	private double playery;		//Used to save player's position when a wave is spawned so it doesn't track
+								//the player mid-spawn	
 	public SwarmCaller(Game game, double y) {
 		super(game);
 		setMaxHealth(20);		//very tough			
 		setCooldown(0);			
 		setSprite(new GImage("sprites/enemy5.png", getGame().WINDOW_WIDTH, getGame().WINDOW_HEIGHT/(1080/y)));
-		setSize(80, 80);
+		setSize(80, 80);		//kinda big
 		setTrail(new FireTrail(this));
 		setMaxCooldown(5);		//spawns two more swarmBots when called
 		waveCall = 0;			//Calls another swarm when big enough
-		setPoints(300);
+		setPoints(300);			//worth a fair amount as they're a rarer, harder enemy
 		setCanShoot(false);
 		setxDir(-1);
 		setyDir(0);
-		setSpeed(5);
+		setSpeed(5);			//not that fast
 		getGame().add(getSprite());
-
+		//level buffs
 		if(game.currLevel >= 2) {
 			setMaxHealth(40);
 		}
@@ -33,7 +33,8 @@ public class SwarmCaller extends Ship {
 			setMaxHealth(80);
 		}
 	}
-	
+	//Waits for waveCall to get big enough, then makes two more swarmBots where the player was
+	//at the time waveCall triggered every 5 delay until waveCall is large enough. Then resets waveCall
 	@Override
 	public void shoot() {
 		if(canShoot() && getGame().player != null) {
