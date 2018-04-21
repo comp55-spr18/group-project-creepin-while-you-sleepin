@@ -48,7 +48,7 @@ public class Wave {
 			}
 		} else {												// If the difficulty is hard
 			while(selectedWave == level.getPrevWave()) {		// While the selected wave is equal to the previous wave played (to prevent getting the same wave twice)
-				selectedWave = Math.abs(game.rgen.nextInt(9));	// Randomly select one of the hard waves
+				selectedWave = Math.abs(game.rgen.nextInt(1)+9);	// Randomly select one of the hard waves
 			}
 		}
 	}
@@ -138,6 +138,9 @@ public class Wave {
 					break;
 				case 8:
 					hard9();
+					break;
+				case 9:
+					hard10();
 				}
 			}
 		} else if(bossWave) {					// If this wave is a boss wave
@@ -774,9 +777,40 @@ public class Wave {
 		public void hard10() {
 			switch(enemyToSpawn) {
 			case 0:
-				size = 5;
+				size = 6;
 				delay = 100;
 			case 1:
+				new Boomerang(game, 100);
+				new Boomerang(game, 240);
+				new Boomerang(game, 380);
+				new Boomerang(game, 520);
+				new Boomerang(game, 660);
+				new Boomerang(game, 800);
+				new Boomerang(game, 920);
+				break;
+			case 2:
+				new Squeeze(game,300);
+				new Squeeze(game,600);
+				break;
+			case 3:
+				new HeavyWeightEnemy(game, 200);
+				new HeavyWeightEnemy(game,700);
+				break;
+			case 4:
+				new SwarmCaller(game,400);
+				break;
+			case 5:
+				new SawedOff(game, 100);
+				new SawedOff(game, 240);
+				new SawedOff(game, 380);
+				new SawedOff(game, 520);
+				new SawedOff(game, 660);
+				new SawedOff(game, 800);
+				new SawedOff(game, 920);
+			case 6:
+				new Kamikaze(game, 200);
+				new Kamikaze(game,400);
+				new Kamikaze(game,600);
 			}
 		}
 
